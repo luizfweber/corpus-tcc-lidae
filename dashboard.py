@@ -15,6 +15,15 @@ import plotly.graph_objects as go
 from rapidfuzz import fuzz  # wheels pré-compilados (substitui fuzzywuzzy+Levenshtein)
 import re, unicodedata, json
 from streamlit_option_menu import option_menu
+import plotly.io as pio
+
+# ─────────────────────────────────────────────────────────────────────────────
+# FONTE PADRÃO — Source Sans Pro (padrão do Streamlit), aplicada à interface
+# (CSS) e aos gráficos (Plotly). Mantém o mesmo tipo em todo o dashboard.
+# (No Google Fonts a família atual chama-se "Source Sans 3".)
+# ─────────────────────────────────────────────────────────────────────────────
+FONTE = "'Source Sans Pro', 'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif"
+# (o template "necpf" definido após a PALETA aplica a fonte aos gráficos)
 
 # ─────────────────────────────────────────────────────────────────────────────
 BASE = Path(__file__).parent
@@ -32,6 +41,38 @@ PALETA = ["#1B5E3B",   # Verde-floresta (1)
           "#5FA9B5",   # Teal claro (6)
           "#88660E",   # Âmbar profundo (7)
           "#DF7B53"]   # Terracota clara (8)
+
+# ─────────────────────────────────────────────────────────────────────────────
+# TEMPLATE PLOTLY "NECPF" — aplica a identidade visual aos gráficos:
+# paleta categórica (§5.1), escala sequencial verde (§5.2), divergente (§5.3),
+# fundo transparente, grades/eixos em neutros, títulos em verde-floresta, fonte.
+# Combinado com o template base ("plotly+necpf") p/ herdar bons padrões.
+# ─────────────────────────────────────────────────────────────────────────────
+SEQ_NECPF = ["#E8F1EC", "#9FC6AE", "#468A66", "#1B5E3B", "#103A25"]   # sequencial §5.2
+DIV_NECPF = ["#7C2C09", "#D45D2E", "#FBEAE3", "#93C6CE", "#114E5A"]   # divergente §5.3
+CINZA_NEUTRO = "#DEE1DB"   # neutro-200 (ex.: categoria "sem menção")
+
+def _escala(cores):
+    n = len(cores)
+    return [[i / (n - 1), c] for i, c in enumerate(cores)]
+
+_necpf = go.layout.Template()
+_necpf.layout = go.Layout(
+    font=dict(family=FONTE, color="#363A33", size=13),       # neutro-700
+    title=dict(font=dict(family=FONTE, color="#1B5E3B")),    # verde-floresta
+    paper_bgcolor="rgba(0,0,0,0)",
+    plot_bgcolor="rgba(0,0,0,0)",
+    colorway=PALETA,                                         # categórica §5.1
+    xaxis=dict(gridcolor=CINZA_NEUTRO, linecolor="#C2C7BE",
+               zerolinecolor=CINZA_NEUTRO, tickfont=dict(color="#4E534A")),
+    yaxis=dict(gridcolor=CINZA_NEUTRO, linecolor="#C2C7BE",
+               zerolinecolor=CINZA_NEUTRO, tickfont=dict(color="#4E534A")),
+    legend=dict(font=dict(family=FONTE, color="#363A33")),
+    colorscale=dict(sequential=_escala(SEQ_NECPF),
+                    diverging=_escala(DIV_NECPF)),
+)
+pio.templates["necpf"] = _necpf
+pio.templates.default = "plotly+necpf"
 
 # ─────────────────────────────────────────────────────────────────────────────
 # HABILITAÇÕES — só os cursos AGREGADOS em grupo_tcc (Insikiran, Letras) têm
@@ -149,6 +190,20 @@ TOPICOS = {
 st.set_page_config(page_title="TCCs Licenciaturas UFRR — LIDAE",
                    page_icon="📚", layout="wide")
 
+# Fonte única (Source Sans Pro) em toda a interface — títulos, textos, tabelas,
+# sidebar, menu de navegação, widgets. Os gráficos Plotly usam a mesma via template.
+st.markdown("""
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap');
+html, body, [class*="css"], [class*="st-"], .stApp, .stMarkdown,
+.stDataFrame, .stMetric, button, input, select, textarea,
+[data-testid="stSidebar"], [data-testid="stMetricValue"],
+[data-testid="stMetricLabel"] {
+    font-family: 'Source Sans Pro', 'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
 
 @st.cache_data
 def carregar():
@@ -198,7 +253,8 @@ ORDEM_CURSOS_DET = df["curso_det"].value_counts().index.tolist()  # nível habil
 
 # rótulos de coluna para as listagens
 ROTULOS_COLS = {
-    "id": "id", "grupo_tcc": "Curso", "titulo": "Título", "autor": "Autor",
+    "id": "id", "grupo_tcc": "Curso", "curso_det": "Curso",
+    "titulo": "Título", "autor": "Autor",
     "orientador": "Orientador", "pesquisador": "Pesquisador",
     "ano_num": "Ano", "pag_num": "Páginas", "topico_rotulo": "Tópico",
     "tem_indigena": "Menção indígena",
@@ -222,8 +278,9 @@ def lista_tccs(dados, key, cols):
                              format_func=lambda c: ROTULOS_COLS.get(c, c)) or cset
 
     d = dados.copy()
-    if ordenar == "grupo_tcc":
-        d["_o"] = pd.Categorical(d["grupo_tcc"], categories=ORDEM_CURSOS, ordered=True)
+    if ordenar in ("grupo_tcc", "curso_det"):
+        ordem = ORDEM_CURSOS_DET if ordenar == "curso_det" else ORDEM_CURSOS
+        d["_o"] = pd.Categorical(d[ordenar], categories=ordem, ordered=True)
         d = d.sort_values(["_o", "id"], ascending=[asc, True]).drop(columns="_o")
     else:
         d = d.sort_values(ordenar, ascending=asc, na_position="last")
@@ -246,8 +303,8 @@ st.info("⚠️ **Análise exploratória, não censitária.** Cada número é in
         "poucos TCCs (LEDUCAR, Letras) têm estatísticas instáveis.", icon="⚠️")
 
 # ── Navegação (menu lateral com ícones) ──
-SECOES = ["📊 Distribuição", "🧩 Tópicos (LDA)", "🎓 Por curso", "🪶 Menção indígena",
-          "👥 Orientadores", "🔍 Explorar TCCs", "📈 Cobertura de Coleta"]
+SECOES = ["Distribuição", "Tópicos (LDA)", "Por curso", "Menção indígena",
+          "Orientadores", "Explorar TCCs", "Cobertura de Coleta"]
 with st.sidebar:
     secao = option_menu(
         "Navegação", SECOES,
@@ -349,13 +406,14 @@ if secao == SECOES[0]:
     anos = f.dropna(subset=["ano_num"])
     n_sem = f["ano_num"].isna().sum()
     if not anos.empty:
+        ano_ini = 2015                       # piso do eixo (janela 2015–atual, CLAUDE.md §4)
         ano_atual = pd.Timestamp.now().year
         anos_int = anos["ano_num"].astype(int)
-        n_fora = int(((anos_int < 1991) | (anos_int > ano_atual)).sum())
-        # eixo FIXO de 1991 ao ano atual; anos sem TCC = 0
-        serie = (anos_int[(anos_int >= 1991) & (anos_int <= ano_atual)]
+        n_fora = int(((anos_int < ano_ini) | (anos_int > ano_atual)).sum())
+        # eixo FIXO de ano_ini ao ano atual; anos sem TCC = 0
+        serie = (anos_int[(anos_int >= ano_ini) & (anos_int <= ano_atual)]
                  .value_counts().sort_index()
-                 .reindex(range(1991, ano_atual + 1), fill_value=0))
+                 .reindex(range(ano_ini, ano_atual + 1), fill_value=0))
         va = serie.reset_index()
         va.columns = ["ano", "n"]
         va["rotulo"] = va["n"].apply(lambda x: str(int(x)) if x > 0 else "")
@@ -363,10 +421,10 @@ if secao == SECOES[0]:
                      color_discrete_sequence=[PALETA[0]])
         fig.update_layout(xaxis_title="Ano", yaxis_title="Nº de TCCs",
                           height=380)
-        fig.update_xaxes(tickmode="linear", tick0=1991, dtick=1, tickangle=-45)
+        fig.update_xaxes(tickmode="linear", tick0=ano_ini, dtick=1, tickangle=-45)
         st.plotly_chart(fig, use_container_width=True)
         if n_fora:
-            st.caption(f"⚠️ {n_fora} TCC(s) com ano fora de 1991–{ano_atual} "
+            st.caption(f"⚠️ {n_fora} TCC(s) com ano fora de {ano_ini}–{ano_atual} "
                        "(provável erro de registro) — excluído(s) do gráfico; verificar.")
     st.caption(f"⚠️ {n_sem} TCCs sem ano informado — excluídos deste gráfico "
                "(não imputados).")
@@ -391,7 +449,7 @@ if secao == SECOES[0]:
     st.markdown("---")
     st.markdown("#### 📋 Lista de TCCs (por curso)")
     lista_tccs(f, key="dist",
-               cols=["id", "grupo_tcc", "titulo", "autor", "ano_num",
+               cols=["id", "curso_det", "titulo", "autor", "ano_num",
                      "pag_num", "pesquisador"])
 
 # Aba 2 — Tópicos LDA
@@ -415,7 +473,7 @@ if secao == SECOES[1]:
         st.markdown("**Tópico dominante × grupo de curso**")
         ct = pd.crosstab(fdt["topico_rotulo"], fdt["grupo_tcc"])
         ct = ct[[c for c in ORDEM_CURSOS if c in ct.columns]]  # ordem canônica
-        fig = px.imshow(ct, text_auto=True, color_continuous_scale="YlOrRd",
+        fig = px.imshow(ct, text_auto=True, color_continuous_scale=SEQ_NECPF,
                         aspect="auto")
         fig.update_layout(height=380, xaxis_title="", yaxis_title="")
         st.plotly_chart(fig, use_container_width=True)
@@ -433,7 +491,7 @@ if secao == SECOES[1]:
     sel_topico = st.selectbox("Filtrar por tópico dominante", topos, key="lda_filtro")
     flt = fdt if sel_topico == "(todos)" else fdt[fdt["topico_rotulo"] == sel_topico]
     lista_tccs(flt, key="lda",
-               cols=["id", "grupo_tcc", "topico_rotulo", "titulo", "autor", "ano_num"])
+               cols=["id", "curso_det", "topico_rotulo", "titulo", "autor", "ano_num"])
 
     # ── Metodologia (integrada à aba de Tópicos)
     st.markdown("---")
@@ -566,7 +624,7 @@ if secao == SECOES[3]:
     fig.add_bar(y=g["grupo_tcc"], x=g["com"], orientation="h",
                 name="Com menção", marker_color=PALETA[4])
     fig.add_bar(y=g["grupo_tcc"], x=g["sem"], orientation="h",
-                name="Sem menção", marker_color="#D9D9D9")
+                name="Sem menção", marker_color=CINZA_NEUTRO)
     fig.update_layout(barmode="stack", height=380, xaxis_title="Nº de TCCs",
                       yaxis_title="", legend_title="",
                       yaxis={"categoryorder": "array",
@@ -588,7 +646,7 @@ if secao == SECOES[3]:
     elif op == "Só sem menção":
         flt = f[~f["tem_indigena"]]
     lista_tccs(flt, key="ind",
-               cols=["id", "grupo_tcc", "tem_indigena", "titulo", "autor", "ano_num"])
+               cols=["id", "curso_det", "tem_indigena", "titulo", "autor", "ano_num"])
 
 # Aba 5 — Orientadores
 if secao == SECOES[4]:
@@ -618,7 +676,7 @@ if secao == SECOES[4]:
     sel_o = st.selectbox("Filtrar por orientador", orientadores, key="ori_filtro")
     flt = f if sel_o == "(todos)" else f[f["orientador"] == sel_o]
     lista_tccs(flt, key="ori",
-               cols=["id", "grupo_tcc", "orientador", "titulo", "autor", "ano_num"])
+               cols=["id", "curso_det", "orientador", "titulo", "autor", "ano_num"])
 
 # Aba 6 — Explorar
 if secao == SECOES[5]:
@@ -632,14 +690,14 @@ if secao == SECOES[5]:
                 fe["palavras_chave"].str.lower().str.contains(b, na=False))
         fe = fe[mask]
     lista_tccs(fe, key="expl",
-               cols=["id", "grupo_tcc", "titulo", "autor", "orientador",
+               cols=["id", "curso_det", "titulo", "autor", "orientador",
                      "pesquisador", "ano_num", "pag_num"])
     with st.expander("Ver resumo completo de um TCC"):
         if not fe.empty:
             tid = st.selectbox("Selecione o id", fe["id"].tolist())
             row = fe[fe["id"] == tid].iloc[0]
             st.markdown(f"**{row['titulo']}**")
-            st.write(f"*{row['autor']} · {row['grupo_tcc']} · {row['ano_defesa']}*")
+            st.write(f"*{row['autor']} · {row['curso_det']} · {row['ano_defesa']}*")
             st.write(row["resumo"] if str(row["resumo"]).strip() else
                      "_(sem resumo na fonte)_")
 
@@ -770,7 +828,7 @@ if secao == SECOES[6]:
         sel_c = st.selectbox("Filtrar por curso", cursos_cob, key="cob_filtro")
         flt = df if sel_c == "(todos)" else df[df["grupo_tcc"] == sel_c]
         lista_tccs(flt, key="cob",
-                   cols=["id", "grupo_tcc", "titulo", "autor", "ano_num", "pag_num"])
+                   cols=["id", "curso_det", "titulo", "autor", "ano_num", "pag_num"])
 
         st.markdown("---")
         st.subheader("TCCs catalogados por pesquisador")
