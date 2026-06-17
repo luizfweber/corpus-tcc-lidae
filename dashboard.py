@@ -224,9 +224,9 @@ c6.metric("Pesquisadores", n_pesq,
 st.markdown("---")
 
 # ── Abas ─────────────────────────────────────────────────────────────────────
-t1, t2, t3, t4, t5, t6 = st.tabs(
+t1, t2, t3, t4, t5, t6, t7 = st.tabs(
     ["📊 Distribuição", "🧩 Tópicos (LDA)", "🪶 Menção indígena",
-     "👥 Orientadores", "🔍 Explorar TCCs", "📖 Metodologia"])
+     "👥 Orientadores", "🔍 Explorar TCCs", "📖 Metodologia", "📈 Cobertura de Coleta"])
 
 # Aba 1 — Distribuição
 with t1:
@@ -440,6 +440,84 @@ with t6:
     - [CLAUDE.md](https://github.com/luizfweber/corpus-tcc-lidae) — Princípios metodológicos completos
     """)
 
+# Aba 7 — Cobertura de Coleta
+with t7:
+    st.subheader("Cobertura de Coleta: TCCs × Egressos")
+
+    # carregar dados de egressos
+    try:
+        egressos = pd.read_csv(BASE / "dados" / "egressos_por_curso.csv")
+        egressos_serie = pd.read_csv(BASE / "dados" / "egressos_serie_historica.csv")
+
+        # cruzar dados
+        tccs_por_grupo = df.groupby("grupo_tcc").size().reset_index(name="tccs_coletados")
+        cobertura = tccs_por_grupo.merge(egressos[["grupo_tcc", "egressos_total"]],
+                                          on="grupo_tcc", how="right")
+        cobertura["cobertura_pct"] = (cobertura["tccs_coletados"] / cobertura["egressos_total"] * 100).fillna(0)
+        cobertura = cobertura.sort_values("cobertura_pct", ascending=False)
+
+        # exibir tabela
+        st.markdown("#### Cobertura por Curso")
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.dataframe(cobertura[["grupo_tcc", "tccs_coletados", "egressos_total", "cobertura_pct"]].rename(
+                columns={"grupo_tcc": "Curso", "tccs_coletados": "TCCs",
+                        "egressos_total": "Egressos", "cobertura_pct": "Cobertura %"}
+            ).style.format({"Cobertura %": "{:.1f}%"}), use_container_width=True, hide_index=True)
+
+        with col2:
+            # gráfico de cobertura
+            fig = px.bar(cobertura.sort_values("cobertura_pct"),
+                        x="cobertura_pct", y="grupo_tcc",
+                        text="cobertura_pct",
+                        color_discrete_sequence=[PALETA[0]],
+                        labels={"cobertura_pct": "Cobertura (%)", "grupo_tcc": "Curso"})
+            fig.update_layout(showlegend=False, height=400, xaxis_title="Cobertura (%)")
+            st.plotly_chart(fig, use_container_width=True)
+
+        # gráfico temporal
+        st.markdown("#### Cobertura Temporal (Série Histórica)")
+
+        # cruzar com série histórica
+        egressos_serie["grupo_tcc"] = egressos_serie["grupo_tcc"].apply(lambda x: grupo_canonico(x) if pd.notna(x) else x)
+        tccs_por_ano = df.dropna(subset=["ano_num"]).groupby(["ano_num", "grupo_tcc"]).size().reset_index(name="tccs")
+
+        # calcular cobertura por período
+        coberturas_periodo = []
+        for periodo in egressos_serie["periodo"].unique():
+            periodo_data = egressos_serie[egressos_serie["periodo"] == periodo]
+            for _, row in periodo_data.iterrows():
+                grupo = row["grupo_tcc"]
+                egressos = row["egressos_acumulado"]
+                tccs = df[df["grupo_tcc"] == grupo].shape[0]
+                coberturas_periodo.append({
+                    "periodo": periodo,
+                    "grupo_tcc": grupo,
+                    "tccs": tccs,
+                    "egressos": egressos,
+                    "cobertura": (tccs / egressos * 100) if egressos > 0 else 0
+                })
+
+        if coberturas_periodo:
+            cob_df = pd.DataFrame(coberturas_periodo)
+            fig2 = px.bar(cob_df, x="periodo", y="cobertura", color="grupo_tcc",
+                         text="cobertura", barmode="group",
+                         color_discrete_sequence=PALETA,
+                         labels={"cobertura": "Cobertura (%)", "periodo": "Período"})
+            fig2.update_layout(height=400)
+            st.plotly_chart(fig2, use_container_width=True)
+
+        st.info("""
+        **Nota sobre interpretação:**
+        - Cobertura = TCCs coletados ÷ egressos do período
+        - A janela 2015–2025 é padrão pois o acervo digitalizado concentra defesas recentes
+        - Dados exploratórios — não censitários — ver relatório metodológico LIDAE
+        """)
+
+    except Exception as e:
+        st.error(f"Erro ao carregar dados de egressos: {e}")
+
 st.markdown("---")
 st.caption("Fonte: 2 formulários de catalogação (Google Forms), consolidados em "
-           "147 TCCs. Dados exploratórios — ver relatório metodológico LIDAE.")
+           "147 TCCs + série histórica de egressos LIDAE. Dados exploratórios — ver relatório metodológico LIDAE.")
