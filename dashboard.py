@@ -13,7 +13,7 @@ import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
 from fuzzywuzzy import fuzz
-import re, unicodedata
+import re, unicodedata, json
 
 # ─────────────────────────────────────────────────────────────────────────────
 BASE = Path(__file__).parent
@@ -157,6 +157,15 @@ def carregar():
     return df
 
 
+@st.cache_data
+def carregar_por_curso():
+    """Lê o JSON gerado por analise_por_curso.py (fonte única). None se ausente."""
+    p = BASE / "outputs" / "analise" / "analise_por_curso.json"
+    if not p.exists():
+        return None
+    return json.loads(p.read_text(encoding="utf-8"))
+
+
 df = carregar()
 N_TOTAL = len(df)
 
@@ -229,8 +238,8 @@ c6.metric("Pesquisadores", n_pesq,
 st.markdown("---")
 
 # ── Abas ─────────────────────────────────────────────────────────────────────
-t1, t2, t3, t4, t5, t6 = st.tabs(
-    ["📊 Distribuição", "🧩 Tópicos (LDA)", "🪶 Menção indígena",
+t1, t2, t3, t4, t5, t6, t7 = st.tabs(
+    ["📊 Distribuição", "🧩 Tópicos (LDA)", "🎓 Por curso", "🪶 Menção indígena",
      "👥 Orientadores", "🔍 Explorar TCCs", "📈 Cobertura de Coleta"])
 
 # Aba 1 — Distribuição
@@ -374,8 +383,74 @@ with t2:
     - [CLAUDE.md](https://github.com/luizfweber/corpus-tcc-lidae) — Princípios metodológicos completos
     """)
 
-# Aba 3 — Menção indígena
+# Aba 3 — Por curso (análise temática em camadas)
 with t3:
+    st.subheader("Análise temática por curso (em camadas)")
+    st.caption("O LDA global apenas separa os cursos entre si; aqui olhamos "
+               "DENTRO de cada curso. O método se ajusta ao Nº de TCCs: "
+               "🟢 LDA (sub-temas) · 🟠 descritivo (termos + leitura) · "
+               "🔴 listagem. Exploratório, não censitário (CLAUDE.md §1, §4).")
+
+    PC = carregar_por_curso()
+    if PC is None:
+        st.warning("Análise por curso ainda não gerada. "
+                   "Rode no terminal: `python3 analise_por_curso.py`")
+    else:
+        cursos = PC["cursos"]
+        rotulo = {"lda": "🟢 LDA — sub-temas",
+                  "descritivo": "🟠 Descritivo — termos + leitura",
+                  "listagem": "🔴 Listagem — sem modelagem"}
+        nomes = [f"{c['curso']} · {c['n']} TCCs · {c['camada']}" for c in cursos]
+        idx = st.selectbox("Selecione o curso", range(len(cursos)),
+                           format_func=lambda i: nomes[i])
+        c = cursos[idx]
+
+        st.markdown(f"#### {c['curso']} — {c['n']} TCCs · {rotulo[c['camada']]}")
+
+        if c["camada"] == "lda":
+            K, ari = c["lda"]["K"], c["lda"]["ari"]
+            st.caption(f"LDA dentro do curso · K={K} escolhido por estabilidade "
+                       f"(ARI={ari:.2f} entre 8 seeds).")
+            if ari < 0.4:
+                st.warning(f"⚠️ Estabilidade baixa (ARI={ari:.2f}): os sub-temas "
+                           "são INDÍCIO frágil — fronteiras porosas entre eles, "
+                           "não categorias fechadas. Confirmar por leitura.")
+            for n, sub in enumerate(c["lda"]["subtemas"], 1):
+                st.markdown(
+                    f"**Sub-tema {n}** ({sub['n']} TCCs)  \n"
+                    f"<span style='color:gray;font-size:0.9em'>"
+                    f"{', '.join(sub['termos'])}</span>",
+                    unsafe_allow_html=True)
+                for e in sub["exemplos"]:
+                    st.markdown(f"&nbsp;&nbsp;◦ *id {e['id']}* ({e['ano']}): "
+                                f"{e['titulo']}", unsafe_allow_html=True)
+            st.markdown("---")
+        elif c["camada"] == "descritivo":
+            st.caption("N insuficiente para LDA confiável. Mostram-se os termos "
+                       "mais recorrentes (em nº de TCCs) e a lista de trabalhos — "
+                       "modelar tópicos aqui seria ruído.")
+        elif c["camada"] == "listagem":
+            st.caption(f"N ínfimo ({c['n']}): qualquer modelagem seria artefato "
+                       "(CLAUDE.md §1). Apenas identificação dos trabalhos.")
+
+        # termos recorrentes (camadas LDA e descritiva)
+        if c["top_termos"]:
+            td = pd.DataFrame(c["top_termos"], columns=["termo", "n"])
+            fig = px.bar(td.sort_values("n"), x="n", y="termo", orientation="h",
+                         text="n", color_discrete_sequence=[PALETA[1]])
+            fig.update_layout(showlegend=False, height=max(280, len(td) * 26),
+                              xaxis_title="Nº de TCCs em que o termo aparece",
+                              yaxis_title="")
+            st.plotly_chart(fig, use_container_width=True)
+
+        # lista de trabalhos do curso
+        st.markdown("**Trabalhos do curso:**")
+        tdf = pd.DataFrame(c["tccs"]).rename(
+            columns={"id": "id", "ano": "Ano", "titulo": "Título"})
+        st.dataframe(tdf, use_container_width=True, hide_index=True, height=260)
+
+# Aba 4 — Menção indígena
+with t4:
     st.subheader("Presença de menção indígena por grupo")
     st.caption("CRITÉRIO: lista de 26 termos (indígena, intercultural, macuxi, "
                "wapichana, wai wai, terra indígena…) buscada em título + resumo "
@@ -399,8 +474,8 @@ with t3:
                      "count": "Total", "pct": "% menção"}),
         use_container_width=True, hide_index=True)
 
-# Aba 4 — Orientadores
-with t4:
+# Aba 5 — Orientadores
+with t5:
     st.subheader("Orientadores recorrentes")
     st.caption("Nomes consolidados por fuzzy matching (similitude ≥85%). "
                "Variações de grafia foram agrupadas sob o nome mais completo.")
@@ -420,8 +495,8 @@ with t4:
     else:
         st.write("Nenhum orientador com 2+ TCCs no filtro atual.")
 
-# Aba 5 — Explorar
-with t5:
+# Aba 6 — Explorar
+with t6:
     st.subheader("Explorador de TCCs")
     busca = st.text_input("Buscar em título / resumo / palavras-chave")
     cols_show = ["id", "grupo_tcc", "titulo", "autor", "orientador",
@@ -445,8 +520,8 @@ with t5:
             st.write(row["resumo"] if str(row["resumo"]).strip() else
                      "_(sem resumo na fonte)_")
 
-# Aba 6 — Cobertura de Coleta
-with t6:
+# Aba 7 — Cobertura de Coleta
+with t7:
     st.subheader("Cobertura de Coleta: TCCs × Egressos")
 
     # carregar dados de egressos

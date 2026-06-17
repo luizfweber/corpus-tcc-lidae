@@ -1,0 +1,1195 @@
+{
+  "gerado_em": "2026-06-17",
+  "n_total": 147,
+  "cursos": [
+    {
+      "curso": "Insikiran",
+      "n": 72,
+      "camada": "lda",
+      "top_termos": [
+        [
+          "indigena",
+          68
+        ],
+        [
+          "comunidade",
+          60
+        ],
+        [
+          "estadual",
+          47
+        ],
+        [
+          "indigenas",
+          46
+        ],
+        [
+          "educacao",
+          37
+        ],
+        [
+          "roraima",
+          31
+        ],
+        [
+          "importancia",
+          30
+        ],
+        [
+          "proposta",
+          30
+        ],
+        [
+          "tambem",
+          28
+        ],
+        [
+          "escolar",
+          28
+        ],
+        [
+          "conhecimentos",
+          28
+        ],
+        [
+          "cultura",
+          26
+        ],
+        [
+          "atividades",
+          26
+        ],
+        [
+          "fundamental",
+          26
+        ],
+        [
+          "atraves",
+          26
+        ]
+      ],
+      "tccs": [
+        {
+          "id": "5",
+          "ano": "2024",
+          "titulo": "APRENDENDO MATEMÁTICA DE FORMA LÚDICA NA ESCOLA ESTADUAL INDÍGENA JOSÉ JOAQUIM EM RORAIMA"
+        },
+        {
+          "id": "6",
+          "ano": "2024",
+          "titulo": "[link — sem título textual]"
+        },
+        {
+          "id": "7",
+          "ano": "2024",
+          "titulo": "ELEMENTOS QUÍMICOS DA TABELA PERIÓDICA EM LÍNGUA INDÍGENA COMO MATERIAL DIDÁTICO CONTEXTUALIZADO PARA O ENSINO DE QUÍMICA/CIÊNCIAS"
+        },
+        {
+          "id": "8",
+          "ano": "2024",
+          "titulo": "GRAFISMO INDÍGENA: UM RECURSO DIDÁTICO PARA O ENSINO DE GEOMETRIA PLANA"
+        },
+        {
+          "id": "9",
+          "ano": "2024",
+          "titulo": "YUTUHAMƗ THËXO, TEMI PƗRƗOTIMA THËXO, HIRAMAYOTIMA THËXO HISTÓRIA, EDUCAÇÃO E SAÚDE NO PAPIU/YANOMAMA/RR"
+        },
+        {
+          "id": "10",
+          "ano": "2024",
+          "titulo": "PRODUÇÃO DE SABÃO ARTESANAL COMO RECURSO DIDÁTICO PARA O ENSINO DE CIÊNCIAS E EDUCAÇÃO AMBIENTAL EM CURSO DE FORMAÇÃO DE PROFESSORES INDÍGENAS"
+        },
+        {
+          "id": "11",
+          "ano": "2024",
+          "titulo": "RELATO DE EXPERIÊNCIA: LEITURA E PRODUÇÃO DE JOGOS PEDAGÓGICOS NO ENSINO FUNDAMENTAL I NA ESCOLA MUNICIPAL VOVÓ MARIA DO CARMO"
+        },
+        {
+          "id": "24",
+          "ano": "2024",
+          "titulo": "‘FAZER CUMAGI’ E ‘PESCAR COM TIMBÓ’: duas atividades sociais para o trabalho pedagógico com estudantes Macuxi da Comunidade Serrinha na Terra Indígena Raposa Serra do Sol"
+        },
+        {
+          "id": "25",
+          "ano": "2024",
+          "titulo": "LENDAS WAPICHANA EM HISTÓRIAS EM QUADRINHOS: VALORIZANDO A CULTURA E ESTIMULANDO A LEITURA"
+        },
+        {
+          "id": "26",
+          "ano": "2024",
+          "titulo": "MIGRANTES INDÍGENAS OU INDÍGENAS MIGRANTES? Estratégias de acolhimento e integração de alunos migrantes na escola Estadual Indígena Sarakayna"
+        },
+        {
+          "id": "27",
+          "ano": "2024",
+          "titulo": "CONSTRUINDO UMA PROPOSTA PEDAGÓGICAS A PARTIR DA ATIVIDADE SOCIAL “CULTIVAR MANIVAS (Manihot esculenta Crantz)"
+        },
+        {
+          "id": "28",
+          "ano": "2024",
+          "titulo": "O ESTUDO DA LÍNGUA E DA CULTURA WAIWAI A PARTIR DA ATIVIDADE SOCIAL PLANTAR MILHO NA ESCOLA ESTADUAL INDÍGENA WAIWAI"
+        },
+        {
+          "id": "50",
+          "ano": "2022",
+          "titulo": "A FORMAÇÃO DE LEITORES NA ESCOLA ESTADUAL INDÍGENA MARECHAL DEODORO DA FONSECA"
+        },
+        {
+          "id": "51",
+          "ano": "2023",
+          "titulo": "CANTOS PARIXARA: CONTRIBUIÇÕES PARA O LETRAMENTO DE ALUNOS INDÍGENAS DO 6o ANO NA ESCOLA ESTADUAL INDÍGENA VOVÔ LEONARDO GOMES NA COMUNIDADE ALTO ARRAIA, MUNICÍPIO DE BONFIM – RR."
+        },
+        {
+          "id": "52",
+          "ano": "2024",
+          "titulo": "ELABORAÇÃO DE MATERIAL DIDÁTICO: HISTÓRIAS, MITOS E LENDAS DO POVO INGARICÓ"
+        },
+        {
+          "id": "53",
+          "ano": "2022",
+          "titulo": "A IMPORTANCIA DO PRODUÇÃO DE TEXTO SOBRE AS HISTÓRIAS TRADICIONAIS DO POVO WAI WAI NA PARA LECIONAR OS ALUNOS NA ESCOLA."
+        },
+        {
+          "id": "54",
+          "ano": "2024",
+          "titulo": "ESTRATÉGIAS DE LEITURA E ESCRITA DOS ALUNOS DO 50 ANO DO ENSINO FUNDAMENTAL I DA ESCOLA ESTADUAL INDÍGENA WAI WAI NA COMUNIDADE INDÍGENA JATAPUZINHO.CAROEBE- RR"
+        },
+        {
+          "id": "55",
+          "ano": "2024",
+          "titulo": "JOGOS LÚDICOS E BRINCADEIRAS NO ENSINO-APRENDIZAGEM DE ALUNOS DOS ANOS INICIAIS DA EDUCAÇÃO BÁSICA: UM RELATO DE EXPERIÊNCIA NA COMUNIDADE INDÍGENA BARRO"
+        },
+        {
+          "id": "56",
+          "ano": "2024",
+          "titulo": "Jogos Pedagógicos no ensino de língua Wapichana na Malacacheta"
+        },
+        {
+          "id": "57",
+          "ano": "2024",
+          "titulo": "KYWAI DUKUZYYNAU KUADNIIKID HISTÓRIAS CONTADAS PELOS NOSSOS AVÓS"
+        },
+        {
+          "id": "58",
+          "ano": "2024",
+          "titulo": "Material didático como instrumento pedagógico para o ensino da leitura e da escrita da língua Wapichana"
+        },
+        {
+          "id": "59",
+          "ano": "2024",
+          "titulo": "O JOGOS DE FUTEBOL COMO RECURSO PEDAGÓGICO PARA O ENSINO DE LÍNGUA MAKUXI NA COMUNIDADE INDÍGENA ROÇA"
+        },
+        {
+          "id": "60",
+          "ano": "2023",
+          "titulo": "PRÁTICAS DE LEITURAS PARA FORMAÇÃO DE LEITORES INDÍGENAS:EXPERIÊNCIAS PEDAGÓGICAS NA ESCOLA ESTADUAL INDÍGENA VOVÔ EMILIANO WAPICHANA"
+        },
+        {
+          "id": "61",
+          "ano": "2024",
+          "titulo": "RELATO DE EXPERIÊNCIA NA ESCOLA ESTADUAL INDÍGENA TUXAUA EVARISTO:SOLETRANDO NA ESCOLA"
+        },
+        {
+          "id": "62",
+          "ano": "2019",
+          "titulo": "ARTESANATO INDIGENA NA ESCOLA JOSÉ ALAMANO, COMUNIDADE MATURUCA"
+        },
+        {
+          "id": "63",
+          "ano": "2020",
+          "titulo": "LENDAS E MITOS INDÍGENAS DA COMUNIDADE JABUTI"
+        },
+        {
+          "id": "64",
+          "ano": "2021",
+          "titulo": "MAKUUXI YAMÎ’ PANTONI NA COMUNIDADE MANOÁ/ RORAIMA"
+        },
+        {
+          "id": "65",
+          "ano": "2020",
+          "titulo": "POR UMA EDUCAÇÃO INCLUSIVA: UMA EXPERIÊNCIA NA ESCOLA ESTADUAL INDÍGENA JOSÉ ALAMANO"
+        },
+        {
+          "id": "66",
+          "ano": "2021",
+          "titulo": "A ELABORAÇÃO COLETIVA DO PROJETO POLÍTICO PEDAGÓGICO DA ESCOLA ESTADUAL INDÍGENA ANTÔNIO SAYMÃ."
+        },
+        {
+          "id": "67",
+          "ano": "2022",
+          "titulo": "A IMPORTÂNCIA DO USO DAS PLANTAS MEDICINAIS"
+        },
+        {
+          "id": "68",
+          "ano": "2022",
+          "titulo": "ESTUDO E ENSINO DE HISTÓRIA NA COMUNIDADE INDÍGENA SÃO MIGUEL DA CACHOEIRA - PANTON"
+        },
+        {
+          "id": "69",
+          "ano": "2022",
+          "titulo": "Novas Propostas Para A Educação Escolar Indígena: Fazer Caxiri Com Os Alunos Do 1o Ao 3o Ano Do Ensino Médio Da Comunidade Indígena Maturuca, Uiramutã - RR"
+        },
+        {
+          "id": "70",
+          "ano": "2022",
+          "titulo": "EDUCAÇÃO PATRIMONIAL, CULTURA MATERIAL E ARTESANATO NO JATAPUZINHO"
+        },
+        {
+          "id": "71",
+          "ano": "2022",
+          "titulo": "PROPOSTA PEDAGÓGICA COLHER MILHO NA ROÇA: atividade social indígena como proposta de intervenção pedagógica no ensino/aprendizagem dos desafios da Escola Estadual Indígena Jose Antônio de Souza"
+        },
+        {
+          "id": "72",
+          "ano": "2022",
+          "titulo": "EDUCAÇÃO PATRIMONIAL NA COMUNIDADE BARRO / SURUMU – TERRA INDÍGENA RAPOSA SERRA DO SOL"
+        },
+        {
+          "id": "73",
+          "ano": "2023",
+          "titulo": "A MATEMÁTICA NOS ARTESANATOS DA COMUNIDADE MARUPÁ"
+        },
+        {
+          "id": "74",
+          "ano": "2023",
+          "titulo": "ALIMENTAÇÃO TRADICIONAL INDÍGENA NA COMUNIDADE ANTA II COMO FORMA DE VALORIZAÇÃO DA CULTURA E IDENTIDADE"
+        },
+        {
+          "id": "75",
+          "ano": "2023",
+          "titulo": "ARTESANATO E ETNOMÁTICA NA ESCOLA DO ANAUÁ, TERRA INDÍGENA WAI WAI - RORAIMA"
+        },
+        {
+          "id": "76",
+          "ano": "2023",
+          "titulo": "CATALOGAÇÃO DOS PEIXES NA COMUNIDADE MANALAI EM RORAIMA,VALORIZANDO A CULTURA DO POVO INGARICÓ"
+        },
+        {
+          "id": "77",
+          "ano": "2023",
+          "titulo": "FIGURAS GEOMÉTRICAS NO ENSINO DA MATEMÁTICA PARA A 1a SÉRIE DO ENSINO MÉDIO DA ESCOLA ESTADUAL INDÍGENA BERNARDO SAYÃO DA COMUNIDADE MARACANÃ I"
+        },
+        {
+          "id": "78",
+          "ano": "2023",
+          "titulo": "HISTÓRIAS EM QUADRINHOS COMO RECURSO PARA ENSINO DE MATEMÁTICA NO CONTEXTO INDÍGENA NA ESCOLA ESTADUAL INDÍGENA TOBIAS BARRETO, COMUNIDADE MANGUEIRA, AMAJARI-RR"
+        },
+        {
+          "id": "79",
+          "ano": "2023",
+          "titulo": "NUTRIÇÃO ESCOLAR: O PAPEL DO ENSINO DA BIOLOGIA NA CONSCIENTIZAÇÃO ALIMENTAR DOS ALUNOS NA ESCOLA ESTADUAL INDÍGENA EURICO MANDULÃO EM RORAIMA"
+        },
+        {
+          "id": "80",
+          "ano": "2023",
+          "titulo": "O ENSINO DA BIOLOGIA ATRAVÉS DA NATUREZA: IDENTIFICANDO A FLORA DO AMBIENTE ESCOLAR E RESIDENCIAL DA COMUNIDADE INDÍGENA CANAVIAL EM RORAIMA"
+        },
+        {
+          "id": "81",
+          "ano": "2022",
+          "titulo": "RECURSO DIDÁTICO DE BAIXO CUSTO EM AULAS EXPERIMENTAIS DE QUÍMICA NA ESCOLA ESTADUAL INDÍGENA TUXAUA PEDRO TERÊNCIO"
+        },
+        {
+          "id": "88",
+          "ano": "2022",
+          "titulo": "REZA PARA CRIANÇA NO INÍCIO DO INVERNO / COMUNIDADE SÃO PEDRO"
+        },
+        {
+          "id": "100",
+          "ano": "2022",
+          "titulo": "ALGORITMOS ALTERNATIVOS PARA AS OPERAÇÕES ARITMÉTICAS FUNDAMENTAIS"
+        },
+        {
+          "id": "101",
+          "ano": "2022",
+          "titulo": "ALIMENTAÇÃO, SAÚDE E EDUCAÇÃO NA COMUNIDADEINDÍGENAMURIRU – TERRA INDÍGENA MURIRU EMRORAIMA."
+        },
+        {
+          "id": "102",
+          "ano": "2022",
+          "titulo": "APLICAÇÃO DA MODELAGEM MATEMÁTICA NA CONSTRUÇÃO DE UMA HORTA ESCOLAR NA ESCOLA ESTADUAL INDÍGENA NOVA MONTE MORIÁ II"
+        },
+        {
+          "id": "103",
+          "ano": "2022",
+          "titulo": "DADOS POPULACIONAIS DA COMUNIDADE INDÍGENA ÁGUA FRIA, UIRAMUTÃ-RR, NA CONSTRUÇÃO E INTERPRETAÇÃO DE TABELAS E GRÁFICOS"
+        },
+        {
+          "id": "104",
+          "ano": "2022",
+          "titulo": "HORTA ESCOLAR NO ENSINO DE CIÊNCIAS E EDUCAÇÃO ALIMENTAR NA ESCOLA ESTADUAL INDÍGENA JOSÉ ALAMANO, COMUNIDADE INDÍGENA MATURUCA, UIRAMUTÃ-RR"
+        },
+        {
+          "id": "105",
+          "ano": "2022",
+          "titulo": "JOGO LÚDICO NO ENSINO DE QUÍMICA NA ESCOLA ESTADUAL INDÍGENA VOVÔ LEONARDO GOMES, COMUNIDADE INDÍGENA ALTO ARRAIA, BONFIM RR"
+        },
+        {
+          "id": "106",
+          "ano": "2022",
+          "titulo": "PLANTAS NATIVAS COMO MEDICINA TRADICIONAL INDÍGENA DA COMUNIDADE OLHO D’ÁGUA"
+        },
+        {
+          "id": "107",
+          "ano": "2022",
+          "titulo": "USO E DIVERSIDADE DE PIMENTAS ARDOSAS NACOMUNIDADE ALTO ARRAIA: TRAÇANDO NOVOS CAMINHOS INTERCULTURAIS"
+        },
+        {
+          "id": "115",
+          "ano": "2025",
+          "titulo": "O USO DE MAPAS CONCEITUAIS NA APRENDIZAGEM SIGNIFICATIVA SOBREAS INFECÇÕES SEXUALMENTE TRANSMISSÍVEIS POR EDUCANDOS DO8ºANO DE UMA ESCOLA INDÍGENA EM ALTO ALEGRE– RR"
+        },
+        {
+          "id": "116",
+          "ano": "2025",
+          "titulo": "SABERES TRADICIONAIS NO USO DAS PLANTAS MEDICINAISPELACOMUNIDADE SERRA DO SOL, UIRAMUTÃ – RORAIMA"
+        },
+        {
+          "id": "117",
+          "ano": "2025",
+          "titulo": "A LUDICIDADE NO ENSINO DA MATEMÁTICANOENSINOFUNDAMEMTAL I"
+        },
+        {
+          "id": "118",
+          "ano": "2025",
+          "titulo": "O uso de um aplicativo usando as 4 operações matemática com alunos da Escola Estadual Indígena Manelino Germano Salvador"
+        },
+        {
+          "id": "130",
+          "ano": "2023",
+          "titulo": "A TANAJURA NA COMUNIDADE RAPOSA I : O ESTUDO DA TANAJURA COMO POSSIBILIDADE PARA O ENSINO DE HISTÓRIA LOCAL"
+        },
+        {
+          "id": "131",
+          "ano": "2023",
+          "titulo": "TAPAN PANIBEZUT: A ATIVIDADE CUIDAR DO QUINTAL COMO PROPOSTA PEDAGÓGICA PARA A EDUCAÇÃO ESCOLAR WAPICHANA"
+        },
+        {
+          "id": "132",
+          "ano": "2023",
+          "titulo": "A IMPORTÂNCIA DAS TRANÇAS INGARICÓ E MACUXI NA COMUDADE INDÍGENA PEDRA PRETA – RR"
+        },
+        {
+          "id": "133",
+          "ano": "2023",
+          "titulo": "CULTURA INDÍGENA, PASSADO E PRESENTE: UMA PROPOSTA PEDAGÓGICA PARA ESCOLA ESTADUAL INDÍGENA TUXAUA OTAVIO MANDUCA – COMUNIDADE JACAMIM, BONFIM - RORAIMA"
+        },
+        {
+          "id": "134",
+          "ano": "2023",
+          "titulo": "SAÚDE MENTAL, EDUCAÇÃO E POVOS INDÍGENAS: UMA EXPERIÊNCIA NA COMUNIDADE LAJE, TERRA INDÍGENA TABALASCADA – CANTÁ, RORAIMA"
+        },
+        {
+          "id": "135",
+          "ano": "2023",
+          "titulo": "HORTA MEDICINAL COMO FERRAMENTA PARA APRENDER CIÊNCIAS SOCIAIS: PROJETO DE DISCIPLINA PARA A ESCOLA ESTADUAL INDÍGENA CORONEL MOTA COMUNIDADE OLHO D ÁGUA"
+        },
+        {
+          "id": "136",
+          "ano": "2023",
+          "titulo": "A SITUAÇÃO DOS ARTEFATOS DOS POVOS MACUXI E WAPICHANA DA COMUNIDADE MANOÁ"
+        },
+        {
+          "id": "137",
+          "ano": "2022",
+          "titulo": "TRANÇAS INDÍGENAS DO POVO MACUXI NA COMUNIDADE CARAPARU I"
+        },
+        {
+          "id": "138",
+          "ano": "2022",
+          "titulo": "FAZENDO BALADEIRA: UMA PROPOSTA EDUCATIVA INTERCULTURAL BASEADA NO CALENDÁRIO SOCIONATURAL DA COMUNIDADE ANTA I"
+        },
+        {
+          "id": "139",
+          "ano": "2019",
+          "titulo": "JOGOS PEDAGÓGICOS PARA O ENSINO DA MATEMÁTICA"
+        },
+        {
+          "id": "140",
+          "ano": "2021",
+          "titulo": "O USO DOS ALIMENTOS INDÍGENAS WAPICHANA COMO PRÁTICA PEDAGÓGICA EDUCATIVA NA COMUNIDADE INDÍGENA JACAMINHO"
+        },
+        {
+          "id": "141",
+          "ano": "2021",
+          "titulo": "O LÚDICO E O ENSINO DE MATEMÁTICA NA ESCOLA MUNICIPAL INDÍGENA CALIXTO ABELARDO NO MUNICIPIO DE UIRAMUTÃ EM RORAIMA"
+        },
+        {
+          "id": "142",
+          "ano": "2021",
+          "titulo": "PLANTAS MEDICINAIS: UM ESTUDO EXPLORATÓRIO DOS USOS E PRÁTICAS NA ESCOLA ESTADUAL INDÍGENA GERALDO JULIÃO DA COMUNIDADE INDÍGENA ANTA II – RR"
+        },
+        {
+          "id": "143",
+          "ano": "2021",
+          "titulo": "USO DO PEIXE COMO REMÉDIOS TRADICIONAIS: UMA CONTRIBUIÇÃO DIDÁTICO PEDAGÓGICA DA ESCOLA ESTADUAL INDÍGENA DAVI DE SOUZA PARA A COMUNIDADE INDÍGENA VISTA NOVA"
+        },
+        {
+          "id": "144",
+          "ano": "2021",
+          "titulo": "USO POPULAR DAS PLANTAS MEDICINAIS NA COMUNIDADE INDÍGENA LIVRAMENTO, RORAIMA"
+        }
+      ],
+      "lda": {
+        "K": 2,
+        "ari": 0.205,
+        "diag": {
+          "2": 0.20506019340489362,
+          "3": 0.1705809734304106,
+          "4": 0.1569761759552022
+        },
+        "subtemas": [
+          {
+            "termos": [
+              "educacao",
+              "indigenas",
+              "estadual",
+              "escolar",
+              "conhecimentos",
+              "cultura",
+              "matematica",
+              "proposta",
+              "atividades",
+              "pedagogica"
+            ],
+            "n": 50,
+            "exemplos": [
+              {
+                "id": "140",
+                "ano": "2021",
+                "titulo": "O USO DOS ALIMENTOS INDÍGENAS WAPICHANA COMO PRÁTICA PEDAGÓGICA EDUCATIVA NA COMUNIDADE INDÍGENA JACAMINHO"
+              },
+              {
+                "id": "71",
+                "ano": "2022",
+                "titulo": "PROPOSTA PEDAGÓGICA COLHER MILHO NA ROÇA: atividade social indígena como proposta de intervenção pedagógica no ensino/aprendizagem dos desafios da Escola Estadual Indígena Jose Antônio de Souza"
+              },
+              {
+                "id": "27",
+                "ano": "2024",
+                "titulo": "CONSTRUINDO UMA PROPOSTA PEDAGÓGICAS A PARTIR DA ATIVIDADE SOCIAL “CULTIVAR MANIVAS (Manihot esculenta Crantz)"
+              }
+            ]
+          },
+          {
+            "termos": [
+              "leitura",
+              "lingua",
+              "jogos",
+              "plantas",
+              "projeto",
+              "conhecimento",
+              "escrita",
+              "medicinais",
+              "material",
+              "estadual"
+            ],
+            "n": 22,
+            "exemplos": [
+              {
+                "id": "11",
+                "ano": "2024",
+                "titulo": "RELATO DE EXPERIÊNCIA: LEITURA E PRODUÇÃO DE JOGOS PEDAGÓGICOS NO ENSINO FUNDAMENTAL I NA ESCOLA MUNICIPAL VOVÓ MARIA DO CARMO"
+              },
+              {
+                "id": "61",
+                "ano": "2024",
+                "titulo": "RELATO DE EXPERIÊNCIA NA ESCOLA ESTADUAL INDÍGENA TUXAUA EVARISTO:SOLETRANDO NA ESCOLA"
+              },
+              {
+                "id": "54",
+                "ano": "2024",
+                "titulo": "ESTRATÉGIAS DE LEITURA E ESCRITA DOS ALUNOS DO 50 ANO DO ENSINO FUNDAMENTAL I DA ESCOLA ESTADUAL INDÍGENA WAI WAI NA COMUNIDADE INDÍGENA JATAPUZINHO.CAROEBE- RR"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "curso": "Pedagogia",
+      "n": 30,
+      "camada": "lda",
+      "top_termos": [
+        [
+          "roraima",
+          22
+        ],
+        [
+          "educacao",
+          17
+        ],
+        [
+          "pedagogia",
+          17
+        ],
+        [
+          "federal",
+          13
+        ],
+        [
+          "contexto",
+          13
+        ],
+        [
+          "processo",
+          13
+        ],
+        [
+          "experiencia",
+          13
+        ],
+        [
+          "formacao",
+          13
+        ],
+        [
+          "ufrr",
+          12
+        ],
+        [
+          "escolar",
+          12
+        ],
+        [
+          "analisar",
+          11
+        ],
+        [
+          "resultados",
+          11
+        ],
+        [
+          "pedagogica",
+          11
+        ],
+        [
+          "vista",
+          11
+        ],
+        [
+          "pedagogico",
+          10
+        ]
+      ],
+      "tccs": [
+        {
+          "id": "20",
+          "ano": "2023",
+          "titulo": "A PRODUÇÃO CIENTÍFICA DOS PERIÓDICOS NACIONAIS DE EDUCAÇÃO ESPECIAL SOBRE O TRANSTORNO DO ESPECTRO AUTISTA NA EDUCAÇÃO INFANTIL"
+        },
+        {
+          "id": "21",
+          "ano": "2023",
+          "titulo": "RLATO DE VIVÊNCIAS DE UM PIBIDIANO DO SUBPROJETO DE PEDAGOGIA DURANTE A PANDEMIA DA COVID-19"
+        },
+        {
+          "id": "22",
+          "ano": "2023",
+          "titulo": "RELAÇÃO PÚBLICO-PRIVADO: INSTITUTO ALFA E BETO E SUA PROPOSTA DE EDUCAÇÃO NA REDE PÚBLICA MUNICIPAL DE BOA VISTA/RR"
+        },
+        {
+          "id": "23",
+          "ano": "2023",
+          "titulo": "RELATO DE EXPERIÊNCIA AUTOBIOGRÁFICO DE UMA ESTUDANTE MIGRANTE NA LICENCIATURA DE PEDAGOGIA NA UNIVERSIDADE FEDERAL DE RORAIMA, BRASIL"
+        },
+        {
+          "id": "29",
+          "ano": "2018",
+          "titulo": "[link — sem título textual]"
+        },
+        {
+          "id": "30",
+          "ano": "2018",
+          "titulo": "RELATO DE EXPERIÊNCIA COM CRIANÇAS INDÍGENAS WARAO DA ESCOLA CASA DE LOS NIÑOS"
+        },
+        {
+          "id": "31",
+          "ano": "0000",
+          "titulo": "DESAFIOS E POSSIBILIDADES DA COORDENAÇÃO PEDAGÓGICA EM RORAIMA: UM OLHAR A PARTIR DOS TRABALHOS PRODUZIDOS NA ESPECIALIZAÇÃO EM COORDENAÇÃO PEDAGÓGICA DA UFRR"
+        },
+        {
+          "id": "32",
+          "ano": "2018",
+          "titulo": "JOGOS E BRINCADEIRAS NO PROCESSO DE APRENDIZAGEM NA PRÉ- ESCOLA"
+        },
+        {
+          "id": "33",
+          "ano": "2018",
+          "titulo": "EXPERIÊNCIA FORMADORA: CONTRIBUIÇÕES DO ESTÁGIO SUPERVISIONADO DO CURSO DE LICENCIATURA EM PEDAGOGIA DA UNIVERSIDADE FEDERAL DE RORAIMA"
+        },
+        {
+          "id": "34",
+          "ano": "2022",
+          "titulo": "REFLEXÕES SOBRE AS EXPERIÊNCIAS NO ESTÁGIO CURRICULAR DO CURSO DE PEDAGOGIA NAS MODALIDADES PRESENCIAL E ON-LINE"
+        },
+        {
+          "id": "35",
+          "ano": "2021",
+          "titulo": "PROGRAMA RESIDÊNCIA PEDAGÓGICA: RELATO DE UMA EXPERIÊNCIA NOS ANOS INICIAIS DO ENSINO FUNDAMENTAL NO CONTEXTO DA PANDEMIA DE COVID-19."
+        },
+        {
+          "id": "36",
+          "ano": "2019",
+          "titulo": "ATRIBUIÇÕES DO COORDENADOR PEDAGÓGICO NAS ESCOLAS MUNICIPAIS DE BOA VISTA-RR: UMA ANÁLISE A PARTIR DO MANUAL DA ESCOLA DO IAB"
+        },
+        {
+          "id": "37",
+          "ano": "2023",
+          "titulo": "EDUCAÇÃO ESCOLAR INDÍGENA: DISCUSSÃO E RELATO DE VIVÊNCIA"
+        },
+        {
+          "id": "38",
+          "ano": "2022",
+          "titulo": "COORDENAÇÃO PEDAGÓGICA: DESAFIOS E SUPERAÇÃO NO ENSINO REMOTO EM TEMPOS DE PANDEMIA DA COVID-19"
+        },
+        {
+          "id": "39",
+          "ano": "2021",
+          "titulo": "O ESTÁGIO CURRICULAR NA GESTÃO E COORDENAÇÃO PEDAGÓGICA NO CONTEXTO DA PANDEMIA DE COVID-19: REFLEXÕES SOBRE POSSIBILIDADES E DIFICULDADES"
+        },
+        {
+          "id": "40",
+          "ano": "2022",
+          "titulo": "UMA REFLEXÃO SOBRE O TRABALHO DAS CUIDADORAS POR MEIO DO OLHAR DA CUIDADORA-PEDAGOGA NA CASA MÃE"
+        },
+        {
+          "id": "41",
+          "ano": "2022",
+          "titulo": "FORMAÇÃO DE PROFESSORES NA RESOLUÇÃO CNE/CP No 02/2019 DO MEC"
+        },
+        {
+          "id": "42",
+          "ano": "2022",
+          "titulo": "PEDAGOGO NO JUDICIÁRIO: RELATO DE EXPERIÊNCIA DE ESTÁGIO DE UM PEDAGOGO NA ESCOLA DO PODER JUDICIÁRIO DE RORAIMA"
+        },
+        {
+          "id": "43",
+          "ano": "2023",
+          "titulo": "A CONFIGURAÇÃO DOCENTE: SER PROFESSORA E LIDERANÇA EM UMA COMUNIDADE INDÍGENA DE AMAJARI - RORAIMA"
+        },
+        {
+          "id": "44",
+          "ano": "2022",
+          "titulo": "RELATO DE EXPERIÊNCIA DE ALFABETIZAÇÃO E ENSINO DE MATEMÁTICA NO PROGRAMA RESIDÊNCIA PEDAGÓGICA"
+        },
+        {
+          "id": "45",
+          "ano": "Não se aplica",
+          "titulo": "UMA EXPERIÊNCIA DE CONTAÇÃO DE HISTÓRIAS NO ESTÁGIO CURRICULAR SUPERVISIONADO COM FOCO NA DIVERSIDADE"
+        },
+        {
+          "id": "46",
+          "ano": "Não informado",
+          "titulo": "JOGOS E BRINCADEIRAS NO PROCESSO DE APRENDIZAGEM NA PRÉESCOLA"
+        },
+        {
+          "id": "47",
+          "ano": "Não informado",
+          "titulo": "O ESTÁGIO CURRICULAR COMO MOMENTO DE APRENDIZAGEM SOBRE A ATUAÇÃO DO PEDAGOGO EM CONTEXTO DE DIVERSIDADE"
+        },
+        {
+          "id": "48",
+          "ano": "Não informado",
+          "titulo": "A CRIANÇA E O BRINCAR: CONTEXTOS, DESENVOLVIMENTO E APRENDIZAGEM"
+        },
+        {
+          "id": "49",
+          "ano": "Não informado",
+          "titulo": "O PERFIL DA COORDENAÇÃO PEDAGÓGICA E SUA ATUAÇÃO NO CONTEXTO ATUAL NA REDE MUNICIPAL ENSINO DE BOA VISTA"
+        },
+        {
+          "id": "110",
+          "ano": "2019",
+          "titulo": "O TRABALHO DO PEDAGOGO HOSPITALAR: UMA EXPERIÊNCIA NO HOSPITAL DA CRIANÇA SANTO ANTONIO, EM BOA VISTA-RR"
+        },
+        {
+          "id": "111",
+          "ano": "2019",
+          "titulo": "EDUCAÇÃO DE JOVENS E ADULTOS NO BRASIL: PANORAMA SOBRE FUNCIONAMENTO E ORGANIZAÇÃO NO TRIÊNIO DE 2016-2018 E SUGESTÕES AO APRIMORAMENTO DO PROGRAMA"
+        },
+        {
+          "id": "112",
+          "ano": "2019",
+          "titulo": "PEDAGOGIA HOSPITALAR: CLASSE HOSPITALAR NAS UNIDADES PÚBLICAS DE SAÚDE DE ALTA COMPLEXIDADE EM UM MUNICÍPIO DA REGIÃO NORTE DO BRASIL"
+        },
+        {
+          "id": "113",
+          "ano": "2019",
+          "titulo": "PERFIL DOS ESTAGIÁRIOS DO CURSO DE PEDAGOGIA DA UFRR QUE ACOMPANHAM ALUNOS COM AUTISMO EM SALAS REGULARES"
+        },
+        {
+          "id": "114",
+          "ano": "2019",
+          "titulo": "O ENSINO DA EDUCAÇÃO ESPECIAL NOS CURSOS DE LICENCIATURA DA UNIVERSIDADE FEDERAL DE RORAIMA"
+        }
+      ],
+      "lda": {
+        "K": 2,
+        "ari": 0.137,
+        "diag": {
+          "2": 0.1367161070705788,
+          "3": 0.08563896901030743
+        },
+        "subtemas": [
+          {
+            "termos": [
+              "educacao",
+              "formacao",
+              "pedagogia",
+              "infantil",
+              "processo",
+              "estagio",
+              "especial",
+              "ufrr",
+              "experiencia",
+              "federal"
+            ],
+            "n": 18,
+            "exemplos": [
+              {
+                "id": "46",
+                "ano": "Não informado",
+                "titulo": "JOGOS E BRINCADEIRAS NO PROCESSO DE APRENDIZAGEM NA PRÉESCOLA"
+              },
+              {
+                "id": "32",
+                "ano": "2018",
+                "titulo": "JOGOS E BRINCADEIRAS NO PROCESSO DE APRENDIZAGEM NA PRÉ- ESCOLA"
+              },
+              {
+                "id": "113",
+                "ano": "2019",
+                "titulo": "PERFIL DOS ESTAGIÁRIOS DO CURSO DE PEDAGOGIA DA UFRR QUE ACOMPANHAM ALUNOS COM AUTISMO EM SALAS REGULARES"
+              }
+            ]
+          },
+          {
+            "termos": [
+              "estagio",
+              "pedagogica",
+              "coordenacao",
+              "vista",
+              "pedagogia",
+              "hospitalar",
+              "experiencia",
+              "diversidade",
+              "pedagogico",
+              "foco"
+            ],
+            "n": 12,
+            "exemplos": [
+              {
+                "id": "45",
+                "ano": "Não se aplica",
+                "titulo": "UMA EXPERIÊNCIA DE CONTAÇÃO DE HISTÓRIAS NO ESTÁGIO CURRICULAR SUPERVISIONADO COM FOCO NA DIVERSIDADE"
+              },
+              {
+                "id": "29",
+                "ano": "2018",
+                "titulo": "[link — sem título textual]"
+              },
+              {
+                "id": "31",
+                "ano": "0000",
+                "titulo": "DESAFIOS E POSSIBILIDADES DA COORDENAÇÃO PEDAGÓGICA EM RORAIMA: UM OLHAR A PARTIR DOS TRABALHOS PRODUZIDOS NA ESPECIALIZAÇÃO EM COORDENAÇÃO PEDAGÓGICA DA UFRR"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "curso": "Música",
+      "n": 19,
+      "camada": "descritivo",
+      "top_termos": [
+        [
+          "musica",
+          17
+        ],
+        [
+          "musical",
+          13
+        ],
+        [
+          "analise",
+          12
+        ],
+        [
+          "vista",
+          12
+        ],
+        [
+          "educacao",
+          12
+        ],
+        [
+          "pratica",
+          11
+        ],
+        [
+          "contexto",
+          10
+        ],
+        [
+          "roraima",
+          10
+        ],
+        [
+          "musicais",
+          9
+        ],
+        [
+          "dados",
+          9
+        ],
+        [
+          "praticas",
+          9
+        ],
+        [
+          "resultados",
+          9
+        ],
+        [
+          "bibliografica",
+          8
+        ],
+        [
+          "alem",
+          8
+        ],
+        [
+          "atraves",
+          8
+        ]
+      ],
+      "tccs": [
+        {
+          "id": "82",
+          "ano": "2025",
+          "titulo": "ESCOLAS DE SAMBA EM BOA VISTA (RR): UM ESTUDO A PARTIR DAS MEMÓRIAS DE PRATICANTES DE DUAS ESCOLAS"
+        },
+        {
+          "id": "83",
+          "ano": "2020",
+          "titulo": "CONTRABAIXO ELÉTRICO: UM ESTUDO DAS LEVADAS EM QUATRO GÊNEROS MUSICAIS DA REGIÃO NORTE"
+        },
+        {
+          "id": "84",
+          "ano": "2019",
+          "titulo": "FESTIVAL FOLCLÓRICO DE CARACARAÍ"
+        },
+        {
+          "id": "85",
+          "ano": "2021",
+          "titulo": "PRÁTICAS INFORMAIS DE APRENDIZAGEM MUSICAL NA FORMAÇÃO DISCENTE DO CURSO DE LICENCIATURA EM MÚSICA DA UFRR"
+        },
+        {
+          "id": "86",
+          "ano": "2025",
+          "titulo": "PRÁTICAS DE ENSINO DE MÚSICA: EXPERIÊNCIA DE FORMAÇÃO DOCENTE NO PROGRAMA RESIDÊNCIA PEDAGÓGICA COM ALUNOS DO 6o ANO DO ENSINO FUNDAMENTAL"
+        },
+        {
+          "id": "87",
+          "ano": "2021",
+          "titulo": "MÚSICA E MOVIMENTO: \"O PASSO\" COMO POSSIBILIDADE INTERDISCIPLINAR ENTRE MÚSICA E EDUCAÇÃO FÍSICA"
+        },
+        {
+          "id": "89",
+          "ano": "2019",
+          "titulo": "AULAS DE PIANO EM GRUPO NO MÉTODO SUZUKI: UMA ANÁLISE NO ESTÚDIO SUZUKI DE EDUCAÇÃO MUSICAL EM BOA VISTA"
+        },
+        {
+          "id": "90",
+          "ano": "2024",
+          "titulo": "ENSINO E APRENDIZAGEM DE MÚSICA ATRAVÉS DE PRÁTICAS DE CANTO CORAL NA IGREJA BATISTA REGULAR DE BOA VISTA (RR): UM ESTUDO ETNOGRÁFICO"
+        },
+        {
+          "id": "91",
+          "ano": "2019",
+          "titulo": "\"IMPORTA SIM QUE PENSEMOS JUNTOS SOBRE EDUCAÇÃO MUSICAL”: REFLEXÕES SOBRE AULAS DE MÚSICA NA EDUCAÇÃO INFANTIL"
+        },
+        {
+          "id": "92",
+          "ano": "2017",
+          "titulo": "O EMPRÉSTIMO MODAL RECORRENTE NO POP ROCK DOS ANOS 1980"
+        },
+        {
+          "id": "93",
+          "ano": "2019",
+          "titulo": "A PRODUÇÃO CIENTÍFICA DE EDUCAÇÃO MUSICAL SOB O ENFOQUE DAS POLÍTICAS PÚBLICAS DE INCLUSÃO"
+        },
+        {
+          "id": "94",
+          "ano": "2019",
+          "titulo": "Práticas de canto no Curso de Licenciatura em Música da UFRR: impactos na atuação do licenciado"
+        },
+        {
+          "id": "95",
+          "ano": "2021",
+          "titulo": "MÚSICAS REGIONALISTAS DO FESTIVAL CANTO FORTE: ATIVIDADES PARA O ENSINO DE MÚSICA NA EDUCAÇÃO BÁSICA"
+        },
+        {
+          "id": "96",
+          "ano": "2025",
+          "titulo": "ENSINO COLETIVO DE VIOLÃO NA ORQUESTRA DE VIOLÕES DO INSTITUTO BOA VISTA DE MÚSICA (IBVM): UM ESTUDO DE CASO"
+        },
+        {
+          "id": "97",
+          "ano": "2021",
+          "titulo": "FESTIVAL FOLCLÓRICO DE CARACARAÍ: A PERCUSSÃO NOS GRUPOS COBRA MARIANA E GAVIÃO CARACARÁ"
+        },
+        {
+          "id": "98",
+          "ano": "2019",
+          "titulo": "A IMPORTÂNCIA DA REGÊNCIA NAS AULAS DE MÚSICA NA EDUCAÇÃO BÁSICA"
+        },
+        {
+          "id": "99",
+          "ano": "2025",
+          "titulo": "CONSIDERAÇÕES SOBRE A MÚSICA RITUAL NO TERREIRO DE UMBANDA OGUM MATINATA EM BOA VISTA – RR"
+        },
+        {
+          "id": "108",
+          "ano": "2019",
+          "titulo": "A COLABORAÇÃO PIANÍSTICA NO CORO DA IGREJA BATISTA REGULAR DE BOA VISTA: COMPETÊNCIAS EXERCIDAS NO DIA A DIA"
+        },
+        {
+          "id": "109",
+          "ano": "2022",
+          "titulo": "MÚSICA INDÍGENA PARA FLAUTA DOCE: POSSIBILIDADES DIDÁTICAS COM MUSICALIDADES DE QUATRO ESTILOS RORAIMENSES"
+        }
+      ],
+      "lda": null
+    },
+    {
+      "curso": "Matemática",
+      "n": 15,
+      "camada": "descritivo",
+      "top_termos": [
+        [
+          "problema",
+          14
+        ],
+        [
+          "teoria",
+          14
+        ],
+        [
+          "situacoes",
+          14
+        ],
+        [
+          "atividade",
+          14
+        ],
+        [
+          "acoes",
+          14
+        ],
+        [
+          "galperin",
+          13
+        ],
+        [
+          "estudantes",
+          13
+        ],
+        [
+          "resolucao",
+          13
+        ],
+        [
+          "processo",
+          11
+        ],
+        [
+          "fundamental",
+          11
+        ],
+        [
+          "matematica",
+          11
+        ],
+        [
+          "conteudo",
+          10
+        ],
+        [
+          "mentais",
+          10
+        ],
+        [
+          "analisar",
+          10
+        ],
+        [
+          "formacao",
+          10
+        ]
+      ],
+      "tccs": [
+        {
+          "id": "1",
+          "ano": "2018",
+          "titulo": "Contribuições da teoria histórico-cultural para aprendizagem desenvolvimental em expressões algébricas e valor numérico nos estudantes do 8° ano do Ensino Fundamental no Colégio de Aplicação da Universidade Federal de Roraima (CAp-UFRR)."
+        },
+        {
+          "id": "2",
+          "ano": "2017",
+          "titulo": "Contribuições da Teoria Histórico – Cultural para uma aprendizagem desenvolvimental na resolução de equações de 1º grau nos estudantes de 8° ano de Ensino Fundamental na Escola Estadual Monteiro Lobato."
+        },
+        {
+          "id": "3",
+          "ano": "2017",
+          "titulo": "RELATO DE UMA EXPERIÊNCIA DA APRENDIZAGEM NAS OPERAÇÕES MATEMÁTICAS UTILIZANDO A LINGUAGEM LIBRAS PARA UM ESTUDANTE COM DEFICIÊNCIAS AUDITIVAS DO 7º ANO"
+        },
+        {
+          "id": "4",
+          "ano": "2016",
+          "titulo": "A APRENDIZAGEM DA ATIVIDADE DE SITUAÇÕES PRO-BLEMA EM SISTEMA DE EQUAÇÕES LINEARES FUNDA-MENTADO NA TEORIA DE FORMAÇÃO POR ETAPAS DAS AÇÕES MENTAIS DE GALPERIN NOS ESTUDANTES DO 2º ANO DE ENSINO MÉDIO DA ESCOLA ESTADUAL MARIA DAS DORES BRASIL"
+        },
+        {
+          "id": "18",
+          "ano": "2016",
+          "titulo": "Resolução de problemas como metodologia de ensino no conteúdo de estatística fundamentado na teoria de Galperin nos estudantes do terceiro ano do ensino médio na escola Presidente Tancredo Neves"
+        },
+        {
+          "id": "119",
+          "ano": "2026",
+          "titulo": "CONTRIBUIÇÕES DA TEORIA HISTÓRICO-CULTURAL DA ATIVIDADE NA APRENDIZAGEM DA MATEMÁTICA: UM ESTUDO BIBLIOGRÁFICO UTILIZANDO TRABALHOS DE CONCLUSÃO DE CURSO APRESENTADOS NA UFRR"
+        },
+        {
+          "id": "120",
+          "ano": "2024",
+          "titulo": "A ATIVIDADE SITUAÇÕES PROBLEMA DISCENTE EM EXPRESSÕES ALGÉBRICAS EM ESTUDANTES DO 7° ANO NO COLÉGIO DE APLICAÇÃO DA UNIVERSIDADE FEDERAL DE RORAIMA"
+        },
+        {
+          "id": "121",
+          "ano": "2023",
+          "titulo": "DIAGNÓSTICO DA APRENDIZAGEM EM EXPRESSÕES ALGÉBRICAS FUNDAMENTADA NA TEORIA DA ATIVIDADE EM ESTUDANTES DO 7° ANO NO COLÉGIO DE APLICAÇÃO DA UNIVERSIDADE FEDERAL DE RORAIMA"
+        },
+        {
+          "id": "122",
+          "ano": "2022",
+          "titulo": "ATIVIDADE DE SITUAÇÕES PROBLEMA DISCENTE NA APRENDIZAGEM DE PROPORCIONALIDADE PARA ESTUDANTES DO 7º ANO DO ENSINO FUNDAMENTA"
+        },
+        {
+          "id": "123",
+          "ano": "2022",
+          "titulo": "O PENSAMENTO ALGÉBRICO POR MEIO DA ATIVIDADE DE SITUAÇÕES PROBLEMA DISCENTE NA RESOLUÇÃO DE EQUAÇÕES PARA ESTUDANTES DO 7º ANO DE ENSINO FUNDAMENTAL"
+        },
+        {
+          "id": "124",
+          "ano": "2021",
+          "titulo": "ATIVIDADE DE SITUAÇÕES PROBLEMA DISCENTE NA APRENDIZAGEM DE FRAÇÕES FUNDAMENTADA EM GALPERIN, TALÍZINA E MAJMUTOV PARA ESTUDANTES DO 6° ANO DO ENSINO FUNDAMENTAL"
+        },
+        {
+          "id": "125",
+          "ano": "2021",
+          "titulo": "ATIVIDADE DE SITUAÇÕES PROBLEMA DISCENTE NA APRENDIZAGEM NO CONCEITO DE MEDIR FUNDAMENTADO NO SISTEMA DIDÁTICO GALPERIN, TALÍZINA E MAJMUTOV NO 6º ANO DO ENSINO FUNDAMENTAL"
+        },
+        {
+          "id": "126",
+          "ano": "2019",
+          "titulo": "DIAGNÓSTICO DO NÍVEL DE APRENDIZAGEM POR MEIO DA ATIVIDADE DE SITUAÇÕES PROBLEMA DOCENTE NO CONTEÚDO DE ADIÇÃO E SUBTRAÇÃO NOS ESTUDANTES DO 3º ANO DO ENSINO FUNDAMENTAL DO COLÉGIO DE APLICAÇÃO/UFRR"
+        },
+        {
+          "id": "127",
+          "ano": "2018",
+          "titulo": "UM INSTRUMENTO QUANTITATIVO DA ATIVIDADE DE SITUAÇÕES PROBLEMA EM MATEMÁTICA"
+        },
+        {
+          "id": "128",
+          "ano": "2018",
+          "titulo": "A Atividade de Situações Problema em aprendizagem na resolução de Operações com os Números Inteiros fundamentado em Galperin nos estudantes de 7° ano de Ensino Fundamental na Escola Estadual Professor Voltaire Pinto Ribeiro."
+        }
+      ],
+      "lda": null
+    },
+    {
+      "curso": "Letras",
+      "n": 6,
+      "camada": "listagem",
+      "top_termos": [],
+      "tccs": [
+        {
+          "id": "12",
+          "ano": "2022",
+          "titulo": "O LÉXICO RORAIMENSE NAS REDES SOCIAIS LOCAIS – KABOCANDO1"
+        },
+        {
+          "id": "13",
+          "ano": "2022",
+          "titulo": "O QUE É UM VERBO? GRAMÁTICA, CONCORDÂNCIA VERBAL E FUNCIONALISMO LINGUÍSTICO: UM OLHAR SOBRE O ENSINO DA LÍNGUA PORTUGUESA EM BOA VISTA (RR)"
+        },
+        {
+          "id": "14",
+          "ano": "2023",
+          "titulo": "PAPÉIS SOCIAIS DE GÊNERO NO LIVRO MULHERZINHAS, DE LOUISA MAY ALCOTT"
+        },
+        {
+          "id": "15",
+          "ano": "2022",
+          "titulo": "TENTATIVAS DE SUICÍDIO ENTRE INGRESSOS E EGRESSOS DOS CURSOS DE LETRAS DA UNIVERSIDADE FEDERAL DE RORAIMA: FATORES DE RISCO ASSOCIADOS E BOAS PRÁTICAS DE PREVENÇÃO"
+        },
+        {
+          "id": "16",
+          "ano": "2022",
+          "titulo": "THE CREOLE AND THE STANDARD LANGUAGE SPOKEN AT ELEMENTARY SCHOOLS IN ENGLISH GUYANA"
+        },
+        {
+          "id": "17",
+          "ano": "2022",
+          "titulo": "THE HONEST TRUTH: TRANSLATION METHODS OVERVIEW"
+        }
+      ],
+      "lda": null
+    },
+    {
+      "curso": "História",
+      "n": 3,
+      "camada": "listagem",
+      "top_termos": [],
+      "tccs": [
+        {
+          "id": "145",
+          "ano": "2023",
+          "titulo": "UM SONHO EM DAR RECADOS DE LONGE: A CHEGADA DA COMPANHIA TELEFÔNICA RORAIMENSE – CTR (DE 1966 A 1973)"
+        },
+        {
+          "id": "146",
+          "ano": "2023",
+          "titulo": "OPERAÇÃO ACOLHIDA: A ESTRATÉGIA DE INTERIORIZAÇÃO E AS DIFICULDADES DE ACESSO E IMPLEMENTAÇÃO PARA OS INDÍGENAS WARAO."
+        },
+        {
+          "id": "147",
+          "ano": "2023",
+          "titulo": "O SERVIÇO NACIONAL DE INFORMAÇÕES E A ESPIONAGEM À IGREJA CATÓLICA EM RORAIMA: DA DITADURA À REDEMOCRATIZAÇÃO"
+        }
+      ],
+      "lda": null
+    },
+    {
+      "curso": "LEDUCAR",
+      "n": 2,
+      "camada": "listagem",
+      "top_termos": [],
+      "tccs": [
+        {
+          "id": "19",
+          "ano": "2023",
+          "titulo": "AS CONTRIBUIÇÕES DO PROGRAMA INSTITUCIONAL DE BOLSA DE INICIAÇÃO À DOCÊNCIA-PIBID PARA A FORMAÇÃO DOCENTE DOS ACADÊMICOS DA LICENCIATURA EM EDUCAÇÃO DO CAMPO"
+        },
+        {
+          "id": "129",
+          "ano": "2024",
+          "titulo": "DA TERRA AO CONHECIMENTO: UMA PROPOSTA INTERDISCIPLINAR PARA A FORMAÇÃO CONTINUADA DE PROFESSORES DA EDUCAÇÃO DE JOVENS E ADULTOS (EJA) O CONTEXTO DA EDUCAÇÃO DO CAMPO"
+        }
+      ],
+      "lda": null
+    }
+  ]
+}
