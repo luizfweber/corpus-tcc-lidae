@@ -449,20 +449,38 @@ with t7:
         egressos = pd.read_csv(BASE / "dados" / "egressos_por_curso.csv")
         egressos_serie = pd.read_csv(BASE / "dados" / "egressos_serie_historica.csv")
 
-        # cruzar dados — DESAGREGADO POR HABILITAÇÃO/CURSO
-        # criar mapa de grupo_tcc → quantidade de TCCs
-        tccs_map = df.groupby("grupo_tcc").size().to_dict()
+        # MAPEAMENTO: curso_fonte (TCCs) → curso (egressos) — OPÇÃO A
+        mapeamento_curso_fonte = {
+            "História": "História (L)",
+            "Insikiran – Ciências Sociais": "Insikiran — Ciências Sociais",
+            "Insikiran – Ciências da Natureza": "Insikiran — Ciências da Natureza",
+            "Insikiran – Comunicação e Artes": "Insikiran — Comunicação e Artes",
+            "LEDUCAR – Ciências Humanas e Sociais": "LEDUCAR — Ciências Humanas e Sociais",
+            "Pedagogia": "Pedagogia",
+            "Música": "Música",
+            "Matemática": "Matemática (L)",
+            "Letras – Inglês": "Letras — Inglês (nova estrutura)",
+            "Letras – Português": "Letras — Português (nova estrutura)",
+            "Letras – Curso anterior": "Letras — Hab. Literatura/Português (antiga)",
+        }
 
-        # usar egressos como base (mantém todas as habilitações/variações)
+        # Contar TCCs por curso_fonte (desagregado)
+        tccs_por_fonte = df.groupby("curso_fonte").size().reset_index(name="tccs_coletados")
+        # Mapear curso_fonte para curso (egressos)
+        tccs_por_fonte["curso"] = tccs_por_fonte["curso_fonte"].map(mapeamento_curso_fonte)
+        # Agrupar por curso mapeado para consolidar
+        tccs_map = tccs_por_fonte.groupby("curso")["tccs_coletados"].sum().to_dict()
+
+        # Usar egressos como base (mantém todas as habilitações/variações)
         cobertura = egressos.copy()
 
-        # adicionar coluna de TCCs usando o mapa (mostra 0 para cursos sem TCCs)
-        cobertura["tccs_coletados"] = cobertura["grupo_tcc"].map(tccs_map).fillna(0).astype(int)
+        # Adicionar coluna de TCCs usando o mapa (mostra 0 para cursos sem TCCs)
+        cobertura["tccs_coletados"] = cobertura["curso"].map(tccs_map).fillna(0).astype(int)
 
-        # calcular cobertura
+        # Calcular cobertura
         cobertura["cobertura_pct"] = (cobertura["tccs_coletados"] / cobertura["egressos_total"] * 100)
 
-        # ordenar por cobertura
+        # Ordenar por cobertura
         cobertura = cobertura.sort_values("cobertura_pct", ascending=False)
 
         # exibir tabela
@@ -492,19 +510,28 @@ with t7:
         # gráfico temporal
         st.markdown("#### Cobertura Temporal (Série Histórica)")
 
+        # Mapa de curso_fonte para contar TCCs por período
+        tccs_por_curso_fonte = df.groupby("curso_fonte").size().to_dict()
+
         # calcular cobertura por período — DESAGREGADO POR CURSO
         coberturas_periodo = []
         for periodo in egressos_serie["periodo"].unique():
             periodo_data = egressos_serie[egressos_serie["periodo"] == periodo]
             for _, row in periodo_data.iterrows():
-                grupo = row["grupo_tcc"]
                 curso = row["curso"]
                 egressos_acum = row["egressos_acumulado"]
-                tccs = tccs_map.get(grupo, 0)  # usar mapa de TCCs por grupo
+
+                # Encontrar curso_fonte que mapeia para este curso
+                curso_fonte_match = None
+                for cf, c_mapeado in mapeamento_curso_fonte.items():
+                    if c_mapeado == curso:
+                        curso_fonte_match = cf
+                        break
+
+                tccs = tccs_por_curso_fonte.get(curso_fonte_match, 0) if curso_fonte_match else 0
                 cobertura_pct = (tccs / egressos_acum * 100) if egressos_acum > 0 else 0
                 coberturas_periodo.append({
                     "periodo": periodo,
-                    "grupo_tcc": grupo,
                     "curso": curso,
                     "tccs": tccs,
                     "egressos": egressos_acum,
@@ -513,12 +540,12 @@ with t7:
 
         if coberturas_periodo:
             cob_df = pd.DataFrame(coberturas_periodo)
-            # agrupar por período e grupo_tcc para evitar duplicação
-            cob_agg = cob_df.groupby(["periodo", "grupo_tcc"]).first().reset_index()
-            fig2 = px.bar(cob_agg, x="periodo", y="cobertura", color="grupo_tcc",
+            # agrupar por período e curso para evitar duplicação
+            cob_agg = cob_df.groupby(["periodo", "curso"]).first().reset_index()
+            fig2 = px.bar(cob_agg, x="periodo", y="cobertura", color="curso",
                          text="cobertura", barmode="group",
                          color_discrete_sequence=PALETA,
-                         labels={"cobertura": "Cobertura (%)", "periodo": "Período", "grupo_tcc": "Grupo"})
+                         labels={"cobertura": "Cobertura (%)", "periodo": "Período", "curso": "Curso"})
             fig2.update_layout(height=400, hovermode="x unified")
             st.plotly_chart(fig2, use_container_width=True)
 
