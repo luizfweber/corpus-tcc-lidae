@@ -433,6 +433,9 @@ def menciona_indigena(r):
     campos = " ".join([
         r.get("titulo",""), r.get("resumo",""), r.get("palavras_chave","")
     ]).lower()
+    # normaliza acentos: 'indígena' passa a casar com o termo 'indigena'
+    campos = unicodedata.normalize("NFKD", campos)
+    campos = "".join(c for c in campos if not unicodedata.combining(c))
     return any(t in campos for t in TERMOS_INDIGENA)
 
 for r in rows:
