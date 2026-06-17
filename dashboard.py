@@ -229,8 +229,8 @@ c6.metric("Pesquisadores", n_pesq,
 st.markdown("---")
 
 # ── Abas ─────────────────────────────────────────────────────────────────────
-t1, t2, t3, t4, t5, t6, t7 = st.tabs(
-    ["📊 Distribuição", "🧩 Tópicos (LDA)", "📖 Metodologia", "🪶 Menção indígena",
+t1, t2, t3, t4, t5, t6 = st.tabs(
+    ["📊 Distribuição", "🧩 Tópicos (LDA)", "🪶 Menção indígena",
      "👥 Orientadores", "🔍 Explorar TCCs", "📈 Cobertura de Coleta"])
 
 # Aba 1 — Distribuição
@@ -319,9 +319,9 @@ with t2:
                     f"  <span style='color:gray;font-size:0.85em'>{info['termos']}</span>",
                     unsafe_allow_html=True)
 
-# Aba 3 — Metodologia
-with t3:
-    st.subheader("Como descubrimos os 'assuntos' dos TCCs: a técnica LDA")
+    # ── Metodologia (integrada à aba de Tópicos)
+    st.markdown("---")
+    st.subheader("📖 Como descubrimos os 'assuntos' dos TCCs: a técnica LDA")
     st.markdown("""
     #### A pergunta de partida
     Temos mais de uma centena de trabalhos de conclusão de curso (TCCs) das licenciaturas da UFRR.
@@ -374,8 +374,8 @@ with t3:
     - [CLAUDE.md](https://github.com/luizfweber/corpus-tcc-lidae) — Princípios metodológicos completos
     """)
 
-# Aba 4 — Menção indígena
-with t4:
+# Aba 3 — Menção indígena
+with t3:
     st.subheader("Presença de menção indígena por grupo")
     st.caption("CRITÉRIO: lista de 26 termos (indígena, intercultural, macuxi, "
                "wapichana, wai wai, terra indígena…) buscada em título + resumo "
@@ -399,8 +399,8 @@ with t4:
                      "count": "Total", "pct": "% menção"}),
         use_container_width=True, hide_index=True)
 
-# Aba 5 — Orientadores
-with t5:
+# Aba 4 — Orientadores
+with t4:
     st.subheader("Orientadores recorrentes")
     st.caption("Nomes consolidados por fuzzy matching (similitude ≥85%). "
                "Variações de grafia foram agrupadas sob o nome mais completo.")
@@ -420,8 +420,8 @@ with t5:
     else:
         st.write("Nenhum orientador com 2+ TCCs no filtro atual.")
 
-# Aba 6 — Explorar
-with t6:
+# Aba 5 — Explorar
+with t5:
     st.subheader("Explorador de TCCs")
     busca = st.text_input("Buscar em título / resumo / palavras-chave")
     cols_show = ["id", "grupo_tcc", "titulo", "autor", "orientador",
@@ -445,8 +445,8 @@ with t6:
             st.write(row["resumo"] if str(row["resumo"]).strip() else
                      "_(sem resumo na fonte)_")
 
-# Aba 7 — Cobertura de Coleta
-with t7:
+# Aba 6 — Cobertura de Coleta
+with t6:
     st.subheader("Cobertura de Coleta: TCCs × Egressos")
 
     # carregar dados de egressos
