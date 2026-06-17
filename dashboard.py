@@ -230,8 +230,8 @@ st.markdown("---")
 
 # ── Abas ─────────────────────────────────────────────────────────────────────
 t1, t2, t3, t4, t5, t6, t7 = st.tabs(
-    ["📊 Distribuição", "🧩 Tópicos (LDA)", "🪶 Menção indígena",
-     "👥 Orientadores", "🔍 Explorar TCCs", "📖 Metodologia", "📈 Cobertura de Coleta"])
+    ["📊 Distribuição", "🧩 Tópicos (LDA)", "📖 Metodologia", "🪶 Menção indígena",
+     "👥 Orientadores", "🔍 Explorar TCCs", "📈 Cobertura de Coleta"])
 
 # Aba 1 — Distribuição
 with t1:
@@ -319,79 +319,8 @@ with t2:
                     f"  <span style='color:gray;font-size:0.85em'>{info['termos']}</span>",
                     unsafe_allow_html=True)
 
-# Aba 3 — Menção indígena
+# Aba 3 — Metodologia
 with t3:
-    st.subheader("Presença de menção indígena por grupo")
-    st.caption("CRITÉRIO: lista de 26 termos (indígena, intercultural, macuxi, "
-               "wapichana, wai wai, terra indígena…) buscada em título + resumo "
-               "+ palavras-chave. Capta MENÇÃO, não centralidade. Sujeito a "
-               "falsos positivos/negativos.")
-    g = f.groupby("grupo_tcc")["tem_indigena"].agg(["sum", "count"]).reset_index()
-    g["com"] = g["sum"].astype(int)
-    g["sem"] = g["count"] - g["com"]
-    g["pct"] = (g["com"] / g["count"] * 100).round(0)
-    fig = go.Figure()
-    fig.add_bar(y=g["grupo_tcc"], x=g["com"], orientation="h",
-                name="Com menção", marker_color=PALETA[4])
-    fig.add_bar(y=g["grupo_tcc"], x=g["sem"], orientation="h",
-                name="Sem menção", marker_color="#D9D9D9")
-    fig.update_layout(barmode="stack", height=380, xaxis_title="Nº de TCCs",
-                      yaxis_title="", legend_title="")
-    st.plotly_chart(fig, use_container_width=True)
-    st.dataframe(
-        g[["grupo_tcc", "com", "count", "pct"]].rename(
-            columns={"grupo_tcc": "Grupo", "com": "Com menção",
-                     "count": "Total", "pct": "% menção"}),
-        use_container_width=True, hide_index=True)
-
-# Aba 4 — Orientadores
-with t4:
-    st.subheader("Orientadores recorrentes")
-    st.caption("Nomes consolidados por fuzzy matching (similitude ≥85%). "
-               "Variações de grafia foram agrupadas sob o nome mais completo.")
-    vo = f[f["orientador"].str.len() > 4]["orientador"].value_counts()
-    vo = vo[vo >= 2].reset_index()
-    vo.columns = ["orientador", "n"]
-    if not vo.empty:
-        pct = vo["n"].sum() / len(f) * 100
-        st.metric("Concentração", f"{pct:.0f}% dos TCCs",
-                  help="% de TCCs sob orientadores com 2+ trabalhos no filtro.")
-        fig = px.bar(vo, x="n", y="orientador", orientation="h", text="n",
-                     color_discrete_sequence=[PALETA[1]])
-        fig.update_layout(showlegend=False, height=max(300, len(vo)*32),
-                          yaxis={"categoryorder": "total ascending"},
-                          xaxis_title="TCCs orientados", yaxis_title="")
-        st.plotly_chart(fig, use_container_width=True)
-    else:
-        st.write("Nenhum orientador com 2+ TCCs no filtro atual.")
-
-# Aba 5 — Explorar
-with t5:
-    st.subheader("Explorador de TCCs")
-    busca = st.text_input("Buscar em título / resumo / palavras-chave")
-    cols_show = ["id", "grupo_tcc", "titulo", "autor", "orientador",
-                 "pesquisador", "ano_defesa", "paginas", "palavras_chave"]
-    fe = f.copy()
-    if busca:
-        b = busca.lower()
-        mask = (fe["titulo"].str.lower().str.contains(b, na=False) |
-                fe["resumo"].str.lower().str.contains(b, na=False) |
-                fe["palavras_chave"].str.lower().str.contains(b, na=False))
-        fe = fe[mask]
-    st.caption(f"{len(fe)} TCCs.")
-    st.dataframe(fe[cols_show], use_container_width=True, hide_index=True,
-                 height=400)
-    with st.expander("Ver resumo completo de um TCC"):
-        if not fe.empty:
-            tid = st.selectbox("Selecione o id", fe["id"].tolist())
-            row = fe[fe["id"] == tid].iloc[0]
-            st.markdown(f"**{row['titulo']}**")
-            st.write(f"*{row['autor']} · {row['grupo_tcc']} · {row['ano_defesa']}*")
-            st.write(row["resumo"] if str(row["resumo"]).strip() else
-                     "_(sem resumo na fonte)_")
-
-# Aba 6 — Metodologia
-with t6:
     st.subheader("Como descubrimos os 'assuntos' dos TCCs: a técnica LDA")
     st.markdown("""
     #### A pergunta de partida
@@ -444,6 +373,77 @@ with t6:
     - [IDENTIDADE_VISUAL_NECPF.md](https://github.com/luizfweber/corpus-tcc-lidae) — Sistema de design e cores NECPF
     - [CLAUDE.md](https://github.com/luizfweber/corpus-tcc-lidae) — Princípios metodológicos completos
     """)
+
+# Aba 4 — Menção indígena
+with t4:
+    st.subheader("Presença de menção indígena por grupo")
+    st.caption("CRITÉRIO: lista de 26 termos (indígena, intercultural, macuxi, "
+               "wapichana, wai wai, terra indígena…) buscada em título + resumo "
+               "+ palavras-chave. Capta MENÇÃO, não centralidade. Sujeito a "
+               "falsos positivos/negativos.")
+    g = f.groupby("grupo_tcc")["tem_indigena"].agg(["sum", "count"]).reset_index()
+    g["com"] = g["sum"].astype(int)
+    g["sem"] = g["count"] - g["com"]
+    g["pct"] = (g["com"] / g["count"] * 100).round(0)
+    fig = go.Figure()
+    fig.add_bar(y=g["grupo_tcc"], x=g["com"], orientation="h",
+                name="Com menção", marker_color=PALETA[4])
+    fig.add_bar(y=g["grupo_tcc"], x=g["sem"], orientation="h",
+                name="Sem menção", marker_color="#D9D9D9")
+    fig.update_layout(barmode="stack", height=380, xaxis_title="Nº de TCCs",
+                      yaxis_title="", legend_title="")
+    st.plotly_chart(fig, use_container_width=True)
+    st.dataframe(
+        g[["grupo_tcc", "com", "count", "pct"]].rename(
+            columns={"grupo_tcc": "Grupo", "com": "Com menção",
+                     "count": "Total", "pct": "% menção"}),
+        use_container_width=True, hide_index=True)
+
+# Aba 5 — Orientadores
+with t5:
+    st.subheader("Orientadores recorrentes")
+    st.caption("Nomes consolidados por fuzzy matching (similitude ≥85%). "
+               "Variações de grafia foram agrupadas sob o nome mais completo.")
+    vo = f[f["orientador"].str.len() > 4]["orientador"].value_counts()
+    vo = vo[vo >= 2].reset_index()
+    vo.columns = ["orientador", "n"]
+    if not vo.empty:
+        pct = vo["n"].sum() / len(f) * 100
+        st.metric("Concentração", f"{pct:.0f}% dos TCCs",
+                  help="% de TCCs sob orientadores com 2+ trabalhos no filtro.")
+        fig = px.bar(vo, x="n", y="orientador", orientation="h", text="n",
+                     color_discrete_sequence=[PALETA[1]])
+        fig.update_layout(showlegend=False, height=max(300, len(vo)*32),
+                          yaxis={"categoryorder": "total ascending"},
+                          xaxis_title="TCCs orientados", yaxis_title="")
+        st.plotly_chart(fig, use_container_width=True)
+    else:
+        st.write("Nenhum orientador com 2+ TCCs no filtro atual.")
+
+# Aba 6 — Explorar
+with t6:
+    st.subheader("Explorador de TCCs")
+    busca = st.text_input("Buscar em título / resumo / palavras-chave")
+    cols_show = ["id", "grupo_tcc", "titulo", "autor", "orientador",
+                 "pesquisador", "ano_defesa", "paginas", "palavras_chave"]
+    fe = f.copy()
+    if busca:
+        b = busca.lower()
+        mask = (fe["titulo"].str.lower().str.contains(b, na=False) |
+                fe["resumo"].str.lower().str.contains(b, na=False) |
+                fe["palavras_chave"].str.lower().str.contains(b, na=False))
+        fe = fe[mask]
+    st.caption(f"{len(fe)} TCCs.")
+    st.dataframe(fe[cols_show], use_container_width=True, hide_index=True,
+                 height=400)
+    with st.expander("Ver resumo completo de um TCC"):
+        if not fe.empty:
+            tid = st.selectbox("Selecione o id", fe["id"].tolist())
+            row = fe[fe["id"] == tid].iloc[0]
+            st.markdown(f"**{row['titulo']}**")
+            st.write(f"*{row['autor']} · {row['grupo_tcc']} · {row['ano_defesa']}*")
+            st.write(row["resumo"] if str(row["resumo"]).strip() else
+                     "_(sem resumo na fonte)_")
 
 # Aba 7 — Cobertura de Coleta
 with t7:
