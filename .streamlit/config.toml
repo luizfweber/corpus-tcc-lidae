@@ -1,24 +1,21 @@
 # Configuração de tema e layout — Streamlit
-# Edite conforme seus interesses
+# Identidade visual: NECPF (Verde-floresta, Azul-teal, Âmbar, Terracota)
 
 [theme]
-# Cores do tema
-primaryColor = "#2C6E91"      # azul principal (botões, links, etc.)
-backgroundColor = "#FFFFFF"    # fundo principal
-secondaryBackgroundColor = "#F0F2F6"  # fundo das caixas/widgets
-textColor = "#262730"          # cor do texto
-font = "sans serif"            # fonte: sans serif, monospace, serif
-
-# Modo escuro
-darkMode = false               # true para tema escuro
+# Cores — Identidade Visual NECPF
+primaryColor = "#1A7A8A"            # Azul-teal (links, botões, destaques)
+backgroundColor = "#F7F8F6"         # Neutro-50 (fundo claro)
+secondaryBackgroundColor = "#FFFFFF" # Neutro-0 (cards, widgets)
+textColor = "#363A33"               # Neutro-700 (texto principal)
+font = "sans serif"                 # Inter ou Open Sans (corpo)
 
 [client]
 # Layout padrão
-showErrorDetails = true        # mostrar erros detalhados
-toolbarMode = "viewer"         # modo da toolbar: viewer, developer
+showErrorDetails = true
+toolbarMode = "viewer"
 
 [logger]
-level = "info"                 # nível de log: debug, info, warning, error, critical
+level = "info"
 
 # ───────────────────────────────────────────────────────────────────────────
 # PERSONALIZAÇÕES COMUNS

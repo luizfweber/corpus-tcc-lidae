@@ -19,8 +19,18 @@ import re, unicodedata
 BASE = Path(__file__).parent
 CSV = BASE / "outputs" / "analise" / "corpus_tccs_analisado.csv"
 
-PALETA = ["#2C6E91", "#4AABDB", "#E07B39", "#57A773",
-          "#A94063", "#8E6BBF", "#C4963A", "#5C6BC0"]
+# ─────────────────────────────────────────────────────────────────────────────
+# PALETA DE CORES — Identidade Visual NECPF
+# ─────────────────────────────────────────────────────────────────────────────
+# Verde-floresta (institucional), Azul-teal, Âmbar, Terracota
+PALETA = ["#1B5E3B",   # Verde-floresta (1)
+          "#1A7A8A",   # Azul-teal (2)
+          "#D4A017",   # Âmbar (3)
+          "#C1440E",   # Terracota (4)
+          "#468A66",   # Verde médio (5)
+          "#5FA9B5",   # Teal claro (6)
+          "#88660E",   # Âmbar profundo (7)
+          "#DF7B53"]   # Terracota clara (8)
 
 # ─────────────────────────────────────────────────────────────────────────────
 # NORMALIZAÇÃO DE NOMES (orientadores e pesquisadores)
@@ -214,9 +224,9 @@ c6.metric("Pesquisadores", n_pesq,
 st.markdown("---")
 
 # ── Abas ─────────────────────────────────────────────────────────────────────
-t1, t2, t3, t4, t5 = st.tabs(
+t1, t2, t3, t4, t5, t6 = st.tabs(
     ["📊 Distribuição", "🧩 Tópicos (LDA)", "🪶 Menção indígena",
-     "👥 Orientadores", "🔍 Explorar TCCs"])
+     "👥 Orientadores", "🔍 Explorar TCCs", "📖 Metodologia"])
 
 # Aba 1 — Distribuição
 with t1:
@@ -375,6 +385,61 @@ with t5:
             st.write(row["resumo"] if str(row["resumo"]).strip() else
                      "_(sem resumo na fonte)_")
 
+# Aba 6 — Metodologia
+with t6:
+    st.subheader("Como descubrimos os 'assuntos' dos TCCs: a técnica LDA")
+    st.markdown("""
+    #### A pergunta de partida
+    Temos mais de uma centena de trabalhos de conclusão de curso (TCCs) das licenciaturas da UFRR.
+    Lê-los um a um, classificando seus temas à mão, seria lento e sujeito ao olhar de quem classifica.
+    Existe uma forma de o computador sugerir, sozinho, sobre quais assuntos esses trabalhos falam?
+    **Existe — e uma das técnicas mais usadas para isso chama-se LDA.**
+
+    #### A ideia, em uma frase
+    A LDA parte de uma suposição simples e intuitiva:
+    **todo texto fala de mais de um assunto ao mesmo tempo, em proporções diferentes**.
+    Um TCC pode ser, digamos, 70% sobre cultura e saberes tradicionais e 30% sobre material didático;
+    outro pode misturar esses mesmos temas em proporção inversa.
+
+    A partir das palavras que efetivamente aparecem nos trabalhos, o algoritmo faz duas coisas ao mesmo tempo:
+
+    - Agrupa palavras que costumam aparecer juntas, formando **temas** (por exemplo, um conjunto onde
+    *língua, cultura, comunidade e escola* têm peso alto).
+    - Estima a **proporção de cada tema** dentro de cada TCC.
+
+    É como observar muitas receitas sem conhecer os pratos e, só pelos ingredientes que se repetem,
+    deduzir que existem "receitas de bolo", "de sopa" e "de salada" — e depois dizer quanto de cada
+    estilo há em cada prato.
+
+    #### Um cuidado essencial
+    O computador entrega **listas de palavras**, não rótulos prontos. Quem dá o nome "cultura e
+    interculturalidade" a um conjunto de palavras é o pesquisador, depois de olhar o resultado.
+    Mais importante: a técnica identifica **quais palavras aparecem com frequência**, e não necessariamente
+    qual é o foco central do trabalho. Um TCC pode citar "indígena" de passagem sem que esse seja seu tema principal.
+
+    Por isso, no LIDAE, o resultado da LDA é tratado como **indício, um ponto de partida para a leitura** —
+    nunca como conclusão definitiva. A interpretação final exige a leitura cuidadosa dos textos pelos pesquisadores.
+
+    #### Em resumo
+    A LDA não substitui o olhar humano: ela organiza o material e aponta padrões que mereceriam,
+    de outro modo, semanas de leitura manual. O computador sugere os caminhos; a interpretação
+    continua sendo nossa.
+
+    ---
+
+    **Princípio metodológico:**
+    *Métodos computacionais como instrumentos de leitura, não como veredito.*
+
+    *Observatório Roraimense da Formação Docente — LIDAE/NECPF–UFRR*
+    """)
+
+    st.info("""
+    **Documentação técnica completa:**
+    - [EXPLICACAO_LDA.md](https://github.com/luizfweber/corpus-tcc-lidae) — Explicação pública da metodologia LDA
+    - [IDENTIDADE_VISUAL_NECPF.md](https://github.com/luizfweber/corpus-tcc-lidae) — Sistema de design e cores NECPF
+    - [CLAUDE.md](https://github.com/luizfweber/corpus-tcc-lidae) — Princípios metodológicos completos
+    """)
+
 st.markdown("---")
 st.caption("Fonte: 2 formulários de catalogação (Google Forms), consolidados em "
-           "128 TCCs únicos. Dados exploratórios — ver relatório metodológico LIDAE.")
+           "147 TCCs. Dados exploratórios — ver relatório metodológico LIDAE.")
