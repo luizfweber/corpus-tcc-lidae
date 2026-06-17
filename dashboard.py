@@ -376,13 +376,6 @@ with t2:
     *Laboratório de Indicadores, Dados e Analítica Educacional — LIDAE/NECPF–UFRR*
     """)
 
-    st.info("""
-    **Documentação técnica completa:**
-    - [EXPLICACAO_LDA.md](https://github.com/luizfweber/corpus-tcc-lidae) — Explicação pública da metodologia LDA
-    - [IDENTIDADE_VISUAL_NECPF.md](https://github.com/luizfweber/corpus-tcc-lidae) — Sistema de design e cores NECPF
-    - [CLAUDE.md](https://github.com/luizfweber/corpus-tcc-lidae) — Princípios metodológicos completos
-    """)
-
 # Aba 3 — Por curso (análise temática em camadas)
 with t3:
     st.subheader("Análise temática por curso (em camadas)")
