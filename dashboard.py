@@ -33,6 +33,26 @@ PALETA = ["#1B5E3B",   # Verde-floresta (1)
           "#DF7B53"]   # Terracota clara (8)
 
 # ─────────────────────────────────────────────────────────────────────────────
+# HABILITAÇÕES — só os cursos AGREGADOS em grupo_tcc (Insikiran, Letras) têm
+# sub-habilitação distinta nos TCCs (CLAUDE.md §5). Mapeia curso_fonte → rótulo;
+# os demais cursos permanecem pelo grupo_tcc.
+# ─────────────────────────────────────────────────────────────────────────────
+SPLIT_HABILITACAO = {
+    "Insikiran – Ciências da Natureza": "Insikiran — Ciências da Natureza",
+    "Insikiran – Ciências Sociais":     "Insikiran — Ciências Sociais",
+    "Insikiran – Comunicação e Artes":  "Insikiran — Comunicação e Artes",
+    "Letras – Inglês":                  "Letras — Inglês (nova estrutura)",
+    "Letras – Português":               "Letras — Português (nova estrutura)",
+    "Letras – Curso anterior":          "Letras — Hab. Literatura/Português (antiga)",
+}
+
+def curso_habilitacao(row):
+    """Rótulo de curso desagregado por habilitação (só Insikiran e Letras)."""
+    if row["grupo_tcc"] in ("Insikiran", "Letras"):
+        return SPLIT_HABILITACAO.get(row["curso_fonte"], row["grupo_tcc"])
+    return row["grupo_tcc"]
+
+# ─────────────────────────────────────────────────────────────────────────────
 # NORMALIZAÇÃO DE NOMES (orientadores e pesquisadores)
 # ─────────────────────────────────────────────────────────────────────────────
 def limpa_nome(s):
@@ -246,14 +266,19 @@ t1, t2, t3, t4, t5, t6, t7 = st.tabs(
 with t1:
     cc1, cc2 = st.columns(2)
     with cc1:
-        st.subheader("TCCs por grupo de curso")
-        vc = f["grupo_tcc"].value_counts().reset_index()
+        st.subheader("TCCs por curso (com habilitações)")
+        st.caption("Insikiran e Letras aparecem desagregados por habilitação; "
+                   "os demais cursos não têm sub-habilitação no corpus.")
+        fcd = f.copy()
+        fcd["curso_det"] = fcd.apply(curso_habilitacao, axis=1)
+        vc = fcd["curso_det"].value_counts().reset_index()
         vc.columns = ["grupo", "n"]
         fig = px.bar(vc, x="n", y="grupo", orientation="h",
                      text="n", color="grupo",
                      color_discrete_sequence=PALETA)
         fig.update_layout(showlegend=False, yaxis={"categoryorder": "total ascending"},
-                          xaxis_title="Nº de TCCs", yaxis_title="", height=380)
+                          xaxis_title="Nº de TCCs", yaxis_title="",
+                          height=max(380, len(vc) * 36))
         st.plotly_chart(fig, use_container_width=True)
 
     with cc2:
