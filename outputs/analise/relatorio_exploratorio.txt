@@ -33,7 +33,7 @@ Data: 2026-06-16 | Piloto: 128 TCCs | Natureza: exploratória, não censitária
    C3 (n=44): {'Música': 20, 'Pedagogia': 15, 'Letras': 6}
 
 5. REDES
-   Orientadores com 2+ TCCs: 17 (45% dos TCCs).
+   Orientadores com 2+ TCCs: 17 (54% dos TCCs).
    TCCs sem banca registrada: 34/128 — campo não preenchido na fonte.
    Nomes normalizados (títulos removidos); variações residuais podem subsistir.
 
