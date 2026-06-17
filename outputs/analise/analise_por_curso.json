@@ -1,6 +1,6 @@
 {
   "gerado_em": "2026-06-17",
-  "n_total": 147,
+  "n_total": 145,
   "cursos": [
     {
       "curso": "Insikiran",
@@ -52,11 +52,11 @@
           28
         ],
         [
-          "cultura",
+          "atividades",
           26
         ],
         [
-          "atividades",
+          "cultura",
           26
         ],
         [
@@ -508,35 +508,23 @@
     },
     {
       "curso": "Pedagogia",
-      "n": 30,
+      "n": 28,
       "camada": "lda",
       "top_termos": [
         [
           "roraima",
-          22
-        ],
-        [
-          "educacao",
-          17
+          21
         ],
         [
           "pedagogia",
-          17
+          16
         ],
         [
-          "federal",
-          13
+          "educacao",
+          16
         ],
         [
           "contexto",
-          13
-        ],
-        [
-          "processo",
-          13
-        ],
-        [
-          "experiencia",
           13
         ],
         [
@@ -544,31 +532,43 @@
           13
         ],
         [
-          "ufrr",
+          "federal",
           12
         ],
         [
-          "escolar",
+          "experiencia",
           12
+        ],
+        [
+          "processo",
+          12
+        ],
+        [
+          "ufrr",
+          11
         ],
         [
           "analisar",
-          11
+          10
         ],
         [
           "resultados",
-          11
-        ],
-        [
-          "pedagogica",
-          11
+          10
         ],
         [
           "vista",
-          11
+          10
+        ],
+        [
+          "pedagogica",
+          10
         ],
         [
           "pedagogico",
+          10
+        ],
+        [
+          "escolar",
           10
         ]
       ],
@@ -594,11 +594,6 @@
           "titulo": "RELATO DE EXPERIÊNCIA AUTOBIOGRÁFICO DE UMA ESTUDANTE MIGRANTE NA LICENCIATURA DE PEDAGOGIA NA UNIVERSIDADE FEDERAL DE RORAIMA, BRASIL"
         },
         {
-          "id": "29",
-          "ano": "2018",
-          "titulo": "[link — sem título textual]"
-        },
-        {
           "id": "30",
           "ano": "2018",
           "titulo": "RELATO DE EXPERIÊNCIA COM CRIANÇAS INDÍGENAS WARAO DA ESCOLA CASA DE LOS NIÑOS"
@@ -611,7 +606,7 @@
         {
           "id": "32",
           "ano": "2018",
-          "titulo": "JOGOS E BRINCADEIRAS NO PROCESSO DE APRENDIZAGEM NA PRÉ- ESCOLA"
+          "titulo": "JOGOS E BRINCADEIRAS NO PROCESSO DE APRENDIZAGEM NA PRÉ-ESCOLA"
         },
         {
           "id": "33",
@@ -675,13 +670,8 @@
         },
         {
           "id": "45",
-          "ano": "Não se aplica",
+          "ano": "2018",
           "titulo": "UMA EXPERIÊNCIA DE CONTAÇÃO DE HISTÓRIAS NO ESTÁGIO CURRICULAR SUPERVISIONADO COM FOCO NA DIVERSIDADE"
-        },
-        {
-          "id": "46",
-          "ano": "Não informado",
-          "titulo": "JOGOS E BRINCADEIRAS NO PROCESSO DE APRENDIZAGEM NA PRÉESCOLA"
         },
         {
           "id": "47",
@@ -725,74 +715,106 @@
         }
       ],
       "lda": {
-        "K": 2,
-        "ari": 0.137,
+        "K": 3,
+        "ari": 0.176,
         "diag": {
-          "2": 0.1367161070705788,
-          "3": 0.08563896901030743
+          "2": 0.12401281657864441,
+          "3": 0.17570130214399687
         },
         "subtemas": [
           {
             "termos": [
               "educacao",
-              "formacao",
-              "pedagogia",
-              "infantil",
-              "processo",
-              "estagio",
+              "pedagogica",
+              "coordenacao",
               "especial",
-              "ufrr",
-              "experiencia",
-              "federal"
+              "pedagogico",
+              "vista",
+              "pandemia",
+              "covid",
+              "municipal",
+              "programa"
             ],
-            "n": 18,
+            "n": 13,
             "exemplos": [
               {
-                "id": "46",
-                "ano": "Não informado",
-                "titulo": "JOGOS E BRINCADEIRAS NO PROCESSO DE APRENDIZAGEM NA PRÉESCOLA"
+                "id": "31",
+                "ano": "0000",
+                "titulo": "DESAFIOS E POSSIBILIDADES DA COORDENAÇÃO PEDAGÓGICA EM RORAIMA: UM OLHAR A PARTIR DOS TRABALHOS PRODUZIDOS NA ESPECIALIZAÇÃO EM COORDENAÇÃO PEDAGÓGICA DA UFRR"
               },
               {
-                "id": "32",
-                "ano": "2018",
-                "titulo": "JOGOS E BRINCADEIRAS NO PROCESSO DE APRENDIZAGEM NA PRÉ- ESCOLA"
+                "id": "22",
+                "ano": "2023",
+                "titulo": "RELAÇÃO PÚBLICO-PRIVADO: INSTITUTO ALFA E BETO E SUA PROPOSTA DE EDUCAÇÃO NA REDE PÚBLICA MUNICIPAL DE BOA VISTA/RR"
+              },
+              {
+                "id": "36",
+                "ano": "2019",
+                "titulo": "ATRIBUIÇÕES DO COORDENADOR PEDAGÓGICO NAS ESCOLAS MUNICIPAIS DE BOA VISTA-RR: UMA ANÁLISE A PARTIR DO MANUAL DA ESCOLA DO IAB"
+              }
+            ]
+          },
+          {
+            "termos": [
+              "educacao",
+              "hospitalar",
+              "pedagogia",
+              "crianca",
+              "educacional",
+              "autismo",
+              "atividades",
+              "pedagogo",
+              "tambem",
+              "infantil"
+            ],
+            "n": 7,
+            "exemplos": [
+              {
+                "id": "112",
+                "ano": "2019",
+                "titulo": "PEDAGOGIA HOSPITALAR: CLASSE HOSPITALAR NAS UNIDADES PÚBLICAS DE SAÚDE DE ALTA COMPLEXIDADE EM UM MUNICÍPIO DA REGIÃO NORTE DO BRASIL"
               },
               {
                 "id": "113",
                 "ano": "2019",
                 "titulo": "PERFIL DOS ESTAGIÁRIOS DO CURSO DE PEDAGOGIA DA UFRR QUE ACOMPANHAM ALUNOS COM AUTISMO EM SALAS REGULARES"
+              },
+              {
+                "id": "32",
+                "ano": "2018",
+                "titulo": "JOGOS E BRINCADEIRAS NO PROCESSO DE APRENDIZAGEM NA PRÉ-ESCOLA"
               }
             ]
           },
           {
             "termos": [
               "estagio",
-              "pedagogica",
-              "coordenacao",
-              "vista",
+              "formacao",
               "pedagogia",
-              "hospitalar",
+              "supervisionado",
               "experiencia",
+              "experiencias",
+              "curricular",
+              "ufrr",
               "diversidade",
-              "pedagogico",
-              "foco"
+              "processo"
             ],
-            "n": 12,
+            "n": 8,
             "exemplos": [
               {
+                "id": "47",
+                "ano": "Não informado",
+                "titulo": "O ESTÁGIO CURRICULAR COMO MOMENTO DE APRENDIZAGEM SOBRE A ATUAÇÃO DO PEDAGOGO EM CONTEXTO DE DIVERSIDADE"
+              },
+              {
                 "id": "45",
-                "ano": "Não se aplica",
+                "ano": "2018",
                 "titulo": "UMA EXPERIÊNCIA DE CONTAÇÃO DE HISTÓRIAS NO ESTÁGIO CURRICULAR SUPERVISIONADO COM FOCO NA DIVERSIDADE"
               },
               {
-                "id": "29",
-                "ano": "2018",
-                "titulo": "[link — sem título textual]"
-              },
-              {
-                "id": "31",
-                "ano": "0000",
-                "titulo": "DESAFIOS E POSSIBILIDADES DA COORDENAÇÃO PEDAGÓGICA EM RORAIMA: UM OLHAR A PARTIR DOS TRABALHOS PRODUZIDOS NA ESPECIALIZAÇÃO EM COORDENAÇÃO PEDAGÓGICA DA UFRR"
+                "id": "34",
+                "ano": "2022",
+                "titulo": "REFLEXÕES SOBRE AS EXPERIÊNCIAS NO ESTÁGIO CURRICULAR DO CURSO DE PEDAGOGIA NAS MODALIDADES PRESENCIAL E ON-LINE"
               }
             ]
           }
@@ -829,19 +851,19 @@
           11
         ],
         [
-          "contexto",
-          10
-        ],
-        [
           "roraima",
           10
         ],
         [
-          "musicais",
-          9
+          "contexto",
+          10
         ],
         [
           "dados",
+          9
+        ],
+        [
+          "musicais",
           9
         ],
         [
@@ -853,11 +875,11 @@
           9
         ],
         [
-          "bibliografica",
+          "alem",
           8
         ],
         [
-          "alem",
+          "bibliografica",
           8
         ],
         [
@@ -970,19 +992,7 @@
       "camada": "descritivo",
       "top_termos": [
         [
-          "problema",
-          14
-        ],
-        [
           "teoria",
-          14
-        ],
-        [
-          "situacoes",
-          14
-        ],
-        [
-          "atividade",
           14
         ],
         [
@@ -990,20 +1000,28 @@
           14
         ],
         [
-          "galperin",
-          13
+          "problema",
+          14
+        ],
+        [
+          "atividade",
+          14
+        ],
+        [
+          "situacoes",
+          14
         ],
         [
           "estudantes",
           13
         ],
         [
-          "resolucao",
+          "galperin",
           13
         ],
         [
-          "processo",
-          11
+          "resolucao",
+          13
         ],
         [
           "fundamental",
@@ -1014,12 +1032,8 @@
           11
         ],
         [
-          "conteudo",
-          10
-        ],
-        [
-          "mentais",
-          10
+          "processo",
+          11
         ],
         [
           "analisar",
@@ -1027,6 +1041,14 @@
         ],
         [
           "formacao",
+          10
+        ],
+        [
+          "conteudo",
+          10
+        ],
+        [
+          "mentais",
           10
         ]
       ],

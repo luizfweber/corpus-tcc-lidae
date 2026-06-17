@@ -124,28 +124,24 @@ def consolida_nomes(nomes_list, threshold=85):
 
 # Rótulos LDA — APROXIMADOS, derivados dos 10 termos mais prováveis.
 # Edite as leituras conforme revisão qualitativa.
-# Atualizado com K=5 (147 TCCs)
+# Atualizado com K=4 (145 TCCs, após consolidar 2 duplicatas) — rótulos PROVISÓRIOS.
 TOPICOS = {
-    0: {"rotulo": "Educação & Música",
-        "leitura": "práticas pedagógicas, música, formação, coordenação",
-        "termos": "educacao, musica, musical, vista, roraima, coordenacao, "
-                  "contexto, pratica, pedagogica, especial"},
-    1: {"rotulo": "Indígena & Comunidade",
-        "leitura": "cultura, saberes tradicionais, educação escolar indígena",
-        "termos": "indigena, comunidade, indigenas, educacao, cultura, estadual, "
-                  "escolar, conhecimentos, proposta, saude"},
-    2: {"rotulo": "Estágio & Formação",
-        "leitura": "estágio supervisionado, pedagogia, plantas medicinais",
-        "termos": "estagio, pedagogia, formacao, roraima, experiencia, pedagogica, "
-                  "plantas, curricular, educacao, medicinais"},
-    3: {"rotulo": "Leitura & Língua",
-        "leitura": "alfabetização, processos de leitura e escrita, jogos pedagógicos",
-        "termos": "leitura, lingua, indigena, jogos, matematica, aluno, escrita, "
-                  "comunidade, praticas, processo"},
-    4: {"rotulo": "Atividade & Resolução de Problemas",
-        "leitura": "Teoria Histórico-Cultural, atividade, resolução de problemas",
-        "termos": "atividade, problema, situacoes, teoria, resolucao, acoes, "
-                  "estudantes, discente, matematica, galperin"},
+    0: {"rotulo": "Música, estágio e prática pedagógica (provisório)",
+        "leitura": "educação musical, estágio, experiência e prática docente",
+        "termos": "educacao, pedagogica, estagio, musica, roraima, musical, "
+                  "pratica, experiencia, coordenacao, vista"},
+    1: {"rotulo": "Educação e contextos escolares — difuso (provisório)",
+        "leitura": "tópico heterogêneo (música, escolas, dados/contexto)",
+        "termos": "educacao, contexto, vista, tambem, dados, musica, roraima, "
+                  "alem, importancia, escolas"},
+    2: {"rotulo": "Matemática — Teoria Histórico-Cultural (provisório)",
+        "leitura": "atividade de situações-problema, Galperin, resolução",
+        "termos": "atividade, problema, matematica, educacao, situacoes, "
+                  "formacao, teoria, estudantes, resolucao, acoes"},
+    3: {"rotulo": "Educação escolar indígena (provisório)",
+        "leitura": "comunidade, cultura, língua, leitura, saberes indígenas",
+        "termos": "indigena, comunidade, indigenas, estadual, proposta, leitura, "
+                  "lingua, conhecimentos, cultura, educacao"},
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -324,7 +320,7 @@ with t1:
 
 # Aba 2 — Tópicos LDA
 with t2:
-    st.subheader("Distribuição de tópicos (modelagem LDA, K=5)")
+    st.subheader("Distribuição de tópicos (modelagem LDA, K=4)")
     st.caption("⚠️ Rótulos APROXIMADOS, derivados dos termos mais prováveis. "
                "Tópico ≠ categoria sociológica; requer revisão qualitativa.")
     fdt = f.dropna(subset=["topico_dom"]).copy()
@@ -659,4 +655,5 @@ with t7:
 
 st.markdown("---")
 st.caption("Fonte: 2 formulários de catalogação (Google Forms), consolidados em "
-           "147 TCCs + série histórica de egressos LIDAE. Dados exploratórios — ver relatório metodológico LIDAE.")
+           "145 TCCs únicos (2 duplicatas removidas) + série histórica de egressos "
+           "LIDAE. Dados exploratórios — ver relatório metodológico LIDAE.")

@@ -1,6 +1,6 @@
 # Análise temática por curso, em camadas — LIDAE/UFRR
 
-Corpus: 147 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · listagem). Exploratório, não censitário.
+Corpus: 145 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · listagem). Exploratório, não censitário.
 
 
 ## 🟢 Camada LDA (N suficiente para sub-temas)
@@ -20,19 +20,24 @@ Corpus: 147 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
    - id 54 (2024): ESTRATÉGIAS DE LEITURA E ESCRITA DOS ALUNOS DO 50 ANO DO ENSINO FUNDAMENTAL I DA ESCOLA ES
 
 
-### Pedagogia — 30 TCCs · LDA intra-curso (K=2)
-*Seleção de K por estabilidade entre 8 seeds — K2: ARI=0.14 · K3: ARI=0.09. Escolhido K=2 (ARI=0.14).*
-> ⚠️ Estabilidade baixa (ARI=0.14): sub-temas FRÁGEIS, indício a confirmar por leitura — não conclusão.
+### Pedagogia — 28 TCCs · LDA intra-curso (K=3)
+*Seleção de K por estabilidade entre 8 seeds — K2: ARI=0.12 · K3: ARI=0.18. Escolhido K=3 (ARI=0.18).*
+> ⚠️ Estabilidade baixa (ARI=0.18): sub-temas FRÁGEIS, indício a confirmar por leitura — não conclusão.
 
-**Sub-tema 1** (18 TCCs) — educacao, formacao, pedagogia, infantil, processo, estagio, especial, ufrr, experiencia, federal
-   - id 46 (Não informado): JOGOS E BRINCADEIRAS NO PROCESSO DE APRENDIZAGEM NA PRÉESCOLA
-   - id 32 (2018): JOGOS E BRINCADEIRAS NO PROCESSO DE APRENDIZAGEM NA PRÉ- ESCOLA
-   - id 113 (2019): PERFIL DOS ESTAGIÁRIOS DO CURSO DE PEDAGOGIA DA UFRR QUE ACOMPANHAM ALUNOS COM AUTISMO EM 
-
-**Sub-tema 2** (12 TCCs) — estagio, pedagogica, coordenacao, vista, pedagogia, hospitalar, experiencia, diversidade, pedagogico, foco
-   - id 45 (Não se aplica): UMA EXPERIÊNCIA DE CONTAÇÃO DE HISTÓRIAS NO ESTÁGIO CURRICULAR SUPERVISIONADO COM FOCO NA 
-   - id 29 (2018): [link — sem título textual]
+**Sub-tema 1** (13 TCCs) — educacao, pedagogica, coordenacao, especial, pedagogico, vista, pandemia, covid, municipal, programa
    - id 31 (0000): DESAFIOS E POSSIBILIDADES DA COORDENAÇÃO PEDAGÓGICA EM RORAIMA: UM OLHAR A PARTIR DOS TRAB
+   - id 22 (2023): RELAÇÃO PÚBLICO-PRIVADO: INSTITUTO ALFA E BETO E SUA PROPOSTA DE EDUCAÇÃO NA REDE PÚBLICA 
+   - id 36 (2019): ATRIBUIÇÕES DO COORDENADOR PEDAGÓGICO NAS ESCOLAS MUNICIPAIS DE BOA VISTA-RR: UMA ANÁLISE 
+
+**Sub-tema 2** (7 TCCs) — educacao, hospitalar, pedagogia, crianca, educacional, autismo, atividades, pedagogo, tambem, infantil
+   - id 112 (2019): PEDAGOGIA HOSPITALAR: CLASSE HOSPITALAR NAS UNIDADES PÚBLICAS DE SAÚDE DE ALTA COMPLEXIDAD
+   - id 113 (2019): PERFIL DOS ESTAGIÁRIOS DO CURSO DE PEDAGOGIA DA UFRR QUE ACOMPANHAM ALUNOS COM AUTISMO EM 
+   - id 32 (2018): JOGOS E BRINCADEIRAS NO PROCESSO DE APRENDIZAGEM NA PRÉ-ESCOLA
+
+**Sub-tema 3** (8 TCCs) — estagio, formacao, pedagogia, supervisionado, experiencia, experiencias, curricular, ufrr, diversidade, processo
+   - id 47 (Não informado): O ESTÁGIO CURRICULAR COMO MOMENTO DE APRENDIZAGEM SOBRE A ATUAÇÃO DO PEDAGOGO EM CONTEXTO 
+   - id 45 (2018): UMA EXPERIÊNCIA DE CONTAÇÃO DE HISTÓRIAS NO ESTÁGIO CURRICULAR SUPERVISIONADO COM FOCO NA 
+   - id 34 (2022): REFLEXÕES SOBRE AS EXPERIÊNCIAS NO ESTÁGIO CURRICULAR DO CURSO DE PEDAGOGIA NAS MODALIDADE
 
 
 
@@ -41,7 +46,7 @@ Corpus: 147 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
 ### Música — 19 TCCs · descritivo (sem LDA)
 *N insuficiente para modelagem de tópicos; reporta-se a frequência documental dos termos e a lista de trabalhos.*
 
-**Termos mais recorrentes (nº de TCCs):** musica (17), musical (13), analise (12), vista (12), educacao (12), pratica (11), contexto (10), roraima (10), musicais (9), dados (9), praticas (9), resultados (9), bibliografica (8), alem (8), atraves (8)
+**Termos mais recorrentes (nº de TCCs):** musica (17), musical (13), analise (12), vista (12), educacao (12), pratica (11), roraima (10), contexto (10), dados (9), musicais (9), praticas (9), resultados (9), alem (8), bibliografica (8), atraves (8)
 
 **Trabalhos:**
    - id 92 (2017): O EMPRÉSTIMO MODAL RECORRENTE NO POP ROCK DOS ANOS 1980
@@ -67,7 +72,7 @@ Corpus: 147 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
 ### Matemática — 15 TCCs · descritivo (sem LDA)
 *N insuficiente para modelagem de tópicos; reporta-se a frequência documental dos termos e a lista de trabalhos.*
 
-**Termos mais recorrentes (nº de TCCs):** problema (14), teoria (14), situacoes (14), atividade (14), acoes (14), galperin (13), estudantes (13), resolucao (13), processo (11), fundamental (11), matematica (11), conteudo (10), mentais (10), analisar (10), formacao (10)
+**Termos mais recorrentes (nº de TCCs):** teoria (14), acoes (14), problema (14), atividade (14), situacoes (14), estudantes (13), galperin (13), resolucao (13), fundamental (11), matematica (11), processo (11), analisar (10), formacao (10), conteudo (10), mentais (10)
 
 **Trabalhos:**
    - id 4 (2016): A APRENDIZAGEM DA ATIVIDADE DE SITUAÇÕES PRO-BLEMA EM SISTEMA DE EQUAÇÕES LINEARES FUNDA-M

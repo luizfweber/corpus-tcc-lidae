@@ -91,7 +91,7 @@ for r in rows:
 # 2. ANÁLISE DESCRITIVA
 # ============================================================================
 fig, axes = plt.subplots(1, 3, figsize=(16, 5))
-fig.suptitle("Corpus de TCCs — LIDAE/UFRR  (n=128, piloto exploratório)",
+fig.suptitle(f"Corpus de TCCs — LIDAE/UFRR  (n={N}, piloto exploratório)",
              fontsize=13, fontweight="bold", y=1.01)
 
 # 2a. TCCs por grupo

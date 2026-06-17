@@ -1,49 +1,49 @@
 RELATÓRIO EXPLORATÓRIO — CORPUS TCCs LIDAE/UFRR
 ================================================
-Data: 2026-06-16 | Piloto: 147 TCCs | Natureza: exploratória, não censitária
+Data: 2026-06-16 | Piloto: 145 TCCs | Natureza: exploratória, não censitária
 
 1. CORPUS
-   - 147 TCCs únicos consolidados a partir de 2 formulários Google Forms.
-   - Grupos: Insikiran (72), Pedagogia (30), Música (19), Matemática (15), Letras (6), História (3), LEDUCAR (2).
+   - 145 TCCs únicos consolidados a partir de 2 formulários Google Forms.
+   - Grupos: Insikiran (72), Pedagogia (28), Música (19), Matemática (15), Letras (6), História (3), LEDUCAR (2).
    - Anos com registro: 2016–2026
-     (6 TCCs sem ano informado — excluídos desta contagem).
+     (4 TCCs sem ano informado — excluídos desta contagem).
 
 2. PÁGINAS (mediana por grupo — assimetria justifica mediana)
    Insikiran: mediana=40 | min=18 | max=104 | n=72
-   Pedagogia: mediana=24 | min=15 | max=49 | n=30
+   Pedagogia: mediana=24 | min=15 | max=49 | n=28
    Música: mediana=66 | min=36 | max=171 | n=19
    Matemática: mediana=50 | min=41 | max=93 | n=15
    Letras: mediana=44 | min=14 | max=61 | n=6
    História: mediana=51 | min=48 | max=105 | n=3
    LEDUCAR: mediana=40 | min=24 | max=55 | n=2
 
-3. LDA (K=5 tópicos, menor perplexidade)
-   Perplexidades testadas: {4: 467.3, 5: 462.6, 6: 473.7, 7: 474.4, 8: 482.4}
+3. LDA (K=4 tópicos, menor perplexidade)
+   Perplexidades testadas: {4: 492.1, 5: 494.1, 6: 500.6, 7: 506.9, 8: 508.3}
    ATENÇÃO: rótulos abaixo são aproximados e requerem revisão qualitativa.
-   [Tópico A]: educacao, musica, musical, vista, roraima, coordenacao, contexto, pratica, pedagogica, especial
-   [Tópico B]: indigena, comunidade, indigenas, educacao, cultura, estadual, escolar, conhecimentos, proposta, saude
-   [Tópico C]: estagio, pedagogia, formacao, roraima, experiencia, pedagogica, plantas, curricular, educacao, medicinais
-   [Tópico D]: leitura, lingua, indigena, jogos, matematica, aluno, escrita, comunidade, praticas, processo
-   [Tópico E]: atividade, problema, situacoes, teoria, resolucao, acoes, estudantes, discente, matematica, galperin
+   [Tópico A]: educacao, pedagogica, estagio, musica, roraima, musical, pratica, experiencia, coordenacao, vista
+   [Tópico B]: educacao, contexto, vista, tambem, dados, musica, roraima, alem, importancia, escolas
+   [Tópico C]: atividade, problema, matematica, educacao, situacoes, formacao, teoria, estudantes, resolucao, acoes
+   [Tópico D]: indigena, comunidade, indigenas, estadual, proposta, leitura, lingua, conhecimentos, cultura, educacao
 
-4. CLUSTERING (k=7, silhueta=0.055)
+4. CLUSTERING (k=8, silhueta=0.050)
    Silhueta baixa é esperada em corpus pequeno e texto curto — indica
    fronteiras temáticas porosas, não falha metodológica.
-   C0 (n=15): {'Pedagogia': 9, 'LEDUCAR': 2, 'Matemática': 1}
-   C1 (n=30): {'Música': 18, 'Pedagogia': 6, 'Letras': 4}
-   C2 (n=23): {'Insikiran': 19, 'Pedagogia': 3, 'História': 1}
-   C3 (n=12): {'Pedagogia': 11, 'Letras': 1}
-   C4 (n=46): {'Insikiran': 45, 'Pedagogia': 1}
-   C5 (n=7): {'Insikiran': 6, 'História': 1}
-   C6 (n=14): {'Matemática': 14}
+   C0 (n=11): {'Insikiran': 9, 'Letras': 2}
+   C1 (n=14): {'Matemática': 14}
+   C2 (n=44): {'Insikiran': 36, 'Pedagogia': 6, 'Letras': 1}
+   C3 (n=21): {'Pedagogia': 18, 'LEDUCAR': 1, 'Música': 1}
+   C4 (n=24): {'Música': 18, 'Insikiran': 2, 'Pedagogia': 2}
+   C5 (n=10): {'Insikiran': 7, 'Pedagogia': 2, 'Letras': 1}
+   C6 (n=9): {'Insikiran': 7, 'Letras': 2}
+   C7 (n=12): {'Insikiran': 11, 'Matemática': 1}
 
 5. REDES
    Orientadores com 2+ TCCs: 30 (86% dos TCCs).
-   TCCs sem banca registrada: 34/147 — campo não preenchido na fonte.
+   TCCs sem banca registrada: 34/145 — campo não preenchido na fonte.
    Nomes normalizados (títulos removidos); variações residuais podem subsistir.
 
 6. MENÇÃO INDÍGENA
-   48/147 TCCs (33%) mencionam termos indígenas.
+   48/145 TCCs (33%) mencionam termos indígenas.
    Critério: lista de 26 termos em título + resumo + palavras-chave.
    LIMITE: capta MENÇÃO, não centralidade. Falsos positivos/negativos possíveis.
    Lista completa de termos: indigena, indigenas, indigeno, indigenos, indio, indios, indigenismo, indigenista, intercultur, wapichana, macuxi, yanomami, waiwai, wai wai, insikiran, tuxaua, comunidade indigena, escola indigena, educacao indigena, territorio indigeno, terra indigena, povo indigena, povos indigenas, etnia, etnologia, etnografico.
