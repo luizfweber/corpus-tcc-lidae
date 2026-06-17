@@ -4,7 +4,8 @@
 
 1. [Reimportação de tipo_tcc](#1-reimportação-de-tipo_tcc)
 2. [Publicação na Nuvem (Streamlit Community Cloud)](#2-publicação-na-nuvem-streamlit-community-cloud)
-3. [Troubleshooting](#3-troubleshooting)
+3. [Atualizando dados no dashboard](#3-atualizando-dados-no-dashboard)
+4. [Troubleshooting](#4-troubleshooting)
 
 ---
 
@@ -327,7 +328,141 @@ No painel do Streamlit Cloud:
 
 ---
 
-## 3. Troubleshooting
+## 3. Atualizando dados no dashboard
+
+Quando novos TCCs forem coletados, siga este fluxo para atualizar o dashboard automáticamente:
+
+### 3.1 Passo a Passo
+
+#### Passo 1: Integrar novos TCCs
+
+Quando tiver novos dados (arquivo CSV com novos TCCs):
+
+```bash
+cd corpus_v2
+python3 integra_novos_tccs.py '/caminho/para/novo_arquivo.csv'
+```
+
+**Exemplo real:**
+```bash
+python3 integra_novos_tccs.py '/Users/lfernandojr/Downloads/Catalogação de TCCs – junho2026.csv'
+```
+
+**O script vai:**
+- ✅ Adicionar os novos TCCs à base consolidada
+- ✅ Detectar duplicatas automaticamente
+- ✅ Criar backup da versão anterior
+- ✅ Atualizar CSV e XLSX
+
+**Exemplo de saída:**
+```
+┌────────────────────────────────────────────┐
+│ INTEGRAÇÃO DE NOVOS TCCs                  │
+└────────────────────────────────────────────┘
+
+▶ Carregando novo arquivo...
+✓ 15 registros no arquivo novo
+✓ 147 registros na base atual
+✓ 15 registros novos (únicos)
+⚠️  0 duplicatas ignoradas
+
+✓ Base atualizada: outputs/analise/corpus_tccs_analisado.csv
+✓ Excel atualizado: outputs/analise/corpus_tccs_analisado.xlsx
+
+RESUMO DA INTEGRAÇÃO
+======================================================================
+Registros adicionados: 15
+Total na base agora: 162
+
+Novos por grupo:
+  - Insikiran: 8
+  - Pedagogia: 5
+  - Música: 2
+
+✅ INTEGRAÇÃO CONCLUÍDA COM SUCESSO!
+```
+
+#### Passo 2: Regenerar análise
+
+Após integrar, regenere as análises e gráficos:
+
+```bash
+python3 analise_corpus.py
+```
+
+**O script vai:**
+- ✅ Executar LDA (tópicos)
+- ✅ Gerar clustering
+- ✅ Atualizar gráficos PNG
+- ✅ Atualizar dados do dashboard
+
+#### Passo 3: Fazer commit e push para GitHub
+
+Sincronize com GitHub:
+
+```bash
+git add .
+git commit -m "Atualizar corpus: +15 novos TCCs, junho 2026"
+git push
+```
+
+#### Passo 4: Dashboard atualiza automaticamente ✨
+
+**Pronto!** O Streamlit Cloud detecta a mudança e refaz o deploy em ~30-60 segundos.
+
+Ninguém precisa fazer nada — a URL continua a mesma:
+```
+https://seu-app-name.streamlit.app
+```
+
+### 3.2 Exemplo completo (simulado)
+
+```bash
+# 1. Integrar novos TCCs
+python3 integra_novos_tccs.py '../novos_tccs.csv'
+# Output: ✓ 15 novos, 147 → 162 total
+
+# 2. Analisar e regenerar gráficos
+python3 analise_corpus.py
+# Output: ✓ LDA regenerado, ✓ Gráficos atualizados
+
+# 3. Fazer commit e push
+git add .
+git commit -m "Corpus: 162 TCCs (jun 2026)"
+git push
+# Output: ✓ Enviado para GitHub
+
+# Dashboard atualiza automaticamente em ~1 min ✨
+```
+
+### 3.3 Atalho (uma linha)
+
+Para fazer tudo de uma vez:
+
+```bash
+python3 integra_novos_tccs.py <arquivo.csv> && python3 analise_corpus.py && git add . && git commit -m "Atualizar corpus" && git push
+```
+
+### 3.4 Monitoramento do deploy
+
+Após fazer push, você pode acompanhar o redeploy:
+
+1. Acesse: https://share.streamlit.io
+2. Clique no seu app (`corpus-tcc-lidae`)
+3. Abra a aba **"Logs"**
+4. Veja o progresso em tempo real:
+   ```
+   Building...
+   ✓ Installing dependencies
+   ✓ Running dashboard.py
+   ✓ App is ready to go
+   ```
+
+Quando ver "App is ready", recarregue o dashboard e os novos dados aparecem! 🎉
+
+---
+
+## 4. Troubleshooting
 
 ### 3.1 Script de reimportação não funciona
 
@@ -385,7 +520,7 @@ git remote add origin https://seu_repo
 
 ---
 
-## 4. Checklist Final
+## 5. Checklist Final
 
 Antes de considerar tudo pronto:
 
@@ -411,7 +546,7 @@ Antes de considerar tudo pronto:
 
 ---
 
-## 5. Manutenção Futura
+## 6. Manutenção Futura
 
 ### Atualizar dados periodicamente
 
@@ -437,7 +572,7 @@ Mantenha `outputs/backups/` no GitHub para ter histórico.
 
 ---
 
-## 6. Dúvidas Frequentes
+## 7. Dúvidas Frequentes
 
 **P: Qual é a segurança dos dados?**
 A: Todos em repositório GitHub (privado recomendado se tiver dados sensíveis). Dashboard é read-only, ninguém edita via web.
