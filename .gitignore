@@ -1,0 +1,17 @@
+# Sistema operacional
+.DS_Store
+*.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Planilhas de revisão manual (artefatos temporários)
+*_REVISAO.xlsx
+*_CORRECOES.xlsx
