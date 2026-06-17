@@ -157,7 +157,7 @@ N_TOTAL = len(df)
 
 # ── Cabeçalho ────────────────────────────────────────────────────────────────
 st.title("📚 Corpus de TCCs — Licenciaturas UFRR")
-st.caption("Observatório Roraimense da Formação Docente · LIDAE/NECPF · "
+st.caption("Laboratório de Indicadores, Dados e Analítica Educacional · LIDAE/NECPF · "
            "Piloto exploratório")
 st.info("⚠️ **Análise exploratória, não censitária.** Cada número é indício a "
         "interpretar, não conclusão. Corpus-piloto desbalanceado — grupos com "
@@ -430,7 +430,7 @@ with t6:
     **Princípio metodológico:**
     *Métodos computacionais como instrumentos de leitura, não como veredito.*
 
-    *Observatório Roraimense da Formação Docente — LIDAE/NECPF–UFRR*
+    *Laboratório de Indicadores, Dados e Analítica Educacional — LIDAE/NECPF–UFRR*
     """)
 
     st.info("""
