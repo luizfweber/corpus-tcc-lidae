@@ -12,7 +12,7 @@ import pandas as pd
 import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
-from fuzzywuzzy import fuzz
+from rapidfuzz import fuzz  # wheels pré-compilados (substitui fuzzywuzzy+Levenshtein)
 import re, unicodedata, json
 
 # ─────────────────────────────────────────────────────────────────────────────
