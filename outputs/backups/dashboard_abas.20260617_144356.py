@@ -14,7 +14,6 @@ import plotly.express as px
 import plotly.graph_objects as go
 from rapidfuzz import fuzz  # wheels pré-compilados (substitui fuzzywuzzy+Levenshtein)
 import re, unicodedata, json
-from streamlit_option_menu import option_menu
 
 # ─────────────────────────────────────────────────────────────────────────────
 BASE = Path(__file__).parent
@@ -186,15 +185,11 @@ def carregar_por_curso():
 df = carregar()
 N_TOTAL = len(df)
 
-# curso desagregado por habilitação (Insikiran e Letras); usado em filtros e gráficos
-df["curso_det"] = df.apply(curso_habilitacao, axis=1)
-
 # ─────────────────────────────────────────────────────────────────────────────
 # ORDEM CANÔNICA DE CURSOS — fixa em TODO o dashboard: por nº de TCCs (desc).
 # Evita que cada gráfico/lista organize os cursos de forma diferente.
 # ─────────────────────────────────────────────────────────────────────────────
 ORDEM_CURSOS = df["grupo_tcc"].value_counts().index.tolist()
-ORDEM_CURSOS_DET = df["curso_det"].value_counts().index.tolist()  # nível habilitação
 
 # rótulos de coluna para as listagens
 ROTULOS_COLS = {
@@ -228,10 +223,9 @@ def lista_tccs(dados, key, cols):
     else:
         d = d.sort_values(ordenar, ascending=asc, na_position="last")
 
-    # Ano/páginas como texto puro → sem separador de milhar (ex.: 2023, não 2.023)
     for c in ("ano_num", "pag_num"):
         if c in d.columns:
-            d[c] = d[c].apply(lambda x: "" if pd.isna(x) else str(int(x)))
+            d[c] = d[c].astype("Int64")
     st.caption(f"{len(d)} TCCs.")
     st.dataframe(d[mostrar].rename(columns=ROTULOS_COLS),
                  use_container_width=True, hide_index=True, height=340)
@@ -245,30 +239,10 @@ st.info("⚠️ **Análise exploratória, não censitária.** Cada número é in
         "interpretar, não conclusão. Corpus-piloto desbalanceado — grupos com "
         "poucos TCCs (LEDUCAR, Letras) têm estatísticas instáveis.", icon="⚠️")
 
-# ── Navegação (menu lateral com ícones) ──
-SECOES = ["📊 Distribuição", "🧩 Tópicos (LDA)", "🎓 Por curso", "🪶 Menção indígena",
-          "👥 Orientadores", "🔍 Explorar TCCs", "📈 Cobertura de Coleta"]
-with st.sidebar:
-    secao = option_menu(
-        "Navegação", SECOES,
-        icons=["bar-chart-line", "diagram-3", "mortarboard", "feather",
-               "people", "search", "graph-up-arrow"],
-        menu_icon="compass", default_index=0,
-        styles={
-            # Identidade NECPF: fundo neutro, ícone âmbar (contrasta no claro e no
-            # verde selecionado), item selecionado verde-floresta c/ texto branco.
-            "container": {"padding": "5px", "background-color": "#F7F8F6"},
-            "icon": {"color": "#D4A017", "font-size": "16px"},
-            "menu-title": {"color": "#1B5E3B", "font-weight": "600"},
-            "nav-link": {"font-size": "14px", "color": "#363A33",
-                         "text-align": "left", "--hover-color": "#E3ECE6"},
-            "nav-link-selected": {"background-color": "#1B5E3B", "color": "white"},
-        })
-
 # ── Sidebar: filtros ─────────────────────────────────────────────────────────
 st.sidebar.header("Filtros")
-sel_grupos = st.sidebar.multiselect("Curso (com habilitações)", ORDEM_CURSOS_DET,
-                                    default=ORDEM_CURSOS_DET)
+grupos = sorted(df["grupo_tcc"].dropna().unique())
+sel_grupos = st.sidebar.multiselect("Grupo de curso", grupos, default=grupos)
 
 anos_validos = df["ano_num"].dropna()
 if not anos_validos.empty:
@@ -281,8 +255,8 @@ so_indigena = st.sidebar.checkbox("Apenas com menção indígena")
 incluir_sem_ano = st.sidebar.checkbox("Incluir TCCs sem ano informado",
                                       value=True)
 
-# aplica filtros (curso desagregado por habilitação)
-f = df[df["curso_det"].isin(sel_grupos)].copy()
+# aplica filtros
+f = df[df["grupo_tcc"].isin(sel_grupos)].copy()
 if sel_anos:
     mask_ano = f["ano_num"].between(*sel_anos)
     if incluir_sem_ano:
@@ -326,67 +300,70 @@ c6.metric("Pesquisadores", n_pesq,
 st.markdown("---")
 
 # ── Abas ─────────────────────────────────────────────────────────────────────
-# Conteúdo de cada seção é escolhido pelo menu lateral (secao)
+t1, t2, t3, t4, t5, t6, t7 = st.tabs(
+    ["📊 Distribuição", "🧩 Tópicos (LDA)", "🎓 Por curso", "🪶 Menção indígena",
+     "👥 Orientadores", "🔍 Explorar TCCs", "📈 Cobertura de Coleta"])
 
 # Aba 1 — Distribuição
-if secao == SECOES[0]:
-    st.subheader("TCCs por curso (com habilitações)")
-    st.caption("Insikiran e Letras aparecem desagregados por habilitação; "
-               "os demais cursos não têm sub-habilitação no corpus.")
-    fcd = f.copy()
-    fcd["curso_det"] = fcd.apply(curso_habilitacao, axis=1)
-    vc = fcd["curso_det"].value_counts().reset_index()
-    vc.columns = ["grupo", "n"]
-    fig = px.bar(vc, x="n", y="grupo", orientation="h",
-                 text="n", color="grupo",
-                 color_discrete_sequence=PALETA)
-    fig.update_layout(showlegend=False, yaxis={"categoryorder": "total ascending"},
-                      xaxis_title="Nº de TCCs", yaxis_title="",
-                      height=max(380, len(vc) * 36))
-    st.plotly_chart(fig, use_container_width=True)
-
-    st.subheader("TCCs por ano de defesa")
-    anos = f.dropna(subset=["ano_num"])
-    n_sem = f["ano_num"].isna().sum()
-    if not anos.empty:
-        ano_atual = pd.Timestamp.now().year
-        anos_int = anos["ano_num"].astype(int)
-        n_fora = int(((anos_int < 1991) | (anos_int > ano_atual)).sum())
-        # eixo FIXO de 1991 ao ano atual; anos sem TCC = 0
-        serie = (anos_int[(anos_int >= 1991) & (anos_int <= ano_atual)]
-                 .value_counts().sort_index()
-                 .reindex(range(1991, ano_atual + 1), fill_value=0))
-        va = serie.reset_index()
-        va.columns = ["ano", "n"]
-        va["rotulo"] = va["n"].apply(lambda x: str(int(x)) if x > 0 else "")
-        fig = px.bar(va, x="ano", y="n", text="rotulo",
-                     color_discrete_sequence=[PALETA[0]])
-        fig.update_layout(xaxis_title="Ano", yaxis_title="Nº de TCCs",
-                          height=380)
-        fig.update_xaxes(tickmode="linear", tick0=1991, dtick=1, tickangle=-45)
+with t1:
+    cc1, cc2 = st.columns(2)
+    with cc1:
+        st.subheader("TCCs por curso (com habilitações)")
+        st.caption("Insikiran e Letras aparecem desagregados por habilitação; "
+                   "os demais cursos não têm sub-habilitação no corpus.")
+        fcd = f.copy()
+        fcd["curso_det"] = fcd.apply(curso_habilitacao, axis=1)
+        vc = fcd["curso_det"].value_counts().reset_index()
+        vc.columns = ["grupo", "n"]
+        fig = px.bar(vc, x="n", y="grupo", orientation="h",
+                     text="n", color="grupo",
+                     color_discrete_sequence=PALETA)
+        fig.update_layout(showlegend=False, yaxis={"categoryorder": "total ascending"},
+                          xaxis_title="Nº de TCCs", yaxis_title="",
+                          height=max(380, len(vc) * 36))
         st.plotly_chart(fig, use_container_width=True)
-        if n_fora:
-            st.caption(f"⚠️ {n_fora} TCC(s) com ano fora de 1991–{ano_atual} "
-                       "(provável erro de registro) — excluído(s) do gráfico; verificar.")
-    st.caption(f"⚠️ {n_sem} TCCs sem ano informado — excluídos deste gráfico "
-               "(não imputados).")
-    st.caption("A curva NÃO deve ser lida como 'aumento de produção docente' "
-               "— reflete disponibilidade do acervo digitalizado.")
 
-    st.subheader("Páginas por curso (mediana)")
-    st.caption("Agrupado por curso/habilitação — fonte: coluna `curso_fonte` "
-               "(Insikiran e Letras desagregados). Mediana, não média (CLAUDE.md §7).")
-    pgd = fcd.dropna(subset=["pag_num"])
-    if not pgd.empty:
-        ordem_det = pgd["curso_det"].value_counts().index.tolist()
-        fig = px.box(pgd, x="pag_num", y="curso_det", color="curso_det",
+    with cc2:
+        st.subheader("TCCs por ano de defesa")
+        anos = f.dropna(subset=["ano_num"])
+        n_sem = f["ano_num"].isna().sum()
+        if not anos.empty:
+            va = anos["ano_num"].astype(int).value_counts().sort_index().reset_index()
+            va.columns = ["ano", "n"]
+            fig = px.bar(va, x="ano", y="n", text="n",
+                         color_discrete_sequence=[PALETA[0]])
+            fig.update_layout(xaxis_title="Ano", yaxis_title="Nº de TCCs",
+                              height=380)
+            st.plotly_chart(fig, use_container_width=True)
+        st.caption(f"⚠️ {n_sem} TCCs sem ano informado — excluídos deste gráfico "
+                   "(não imputados).")
+        st.caption("A curva NÃO deve ser lida como 'aumento de produção docente' "
+                   "— reflete disponibilidade do acervo digitalizado.")
+
+    st.subheader("Páginas por grupo (mediana)")
+    pg = f.dropna(subset=["pag_num"])
+    if not pg.empty:
+        fig = px.box(pg, x="grupo_tcc", y="pag_num", color="grupo_tcc",
                      color_discrete_sequence=PALETA, points="all",
-                     category_orders={"curso_det": ordem_det[::-1]})
-        fig.update_layout(showlegend=False, xaxis_title="Páginas", yaxis_title="",
-                          height=max(400, len(ordem_det) * 42))
+                     category_orders={"grupo_tcc": ORDEM_CURSOS})
+        fig.update_layout(showlegend=False, xaxis_title="", yaxis_title="Páginas",
+                          height=400)
         st.plotly_chart(fig, use_container_width=True)
-        st.caption(f"Exclui {f['pag_num'].isna().sum()} TCCs sem nº de páginas. "
-                   "Habilitações de Letras têm poucos TCCs (n=1–3) — leitura cautelosa.")
+        st.caption(f"Boxplot mostra mediana e dispersão. "
+                   f"Exclui {f['pag_num'].isna().sum()} TCCs sem nº de páginas.")
+
+    st.subheader("TCCs catalogados por pesquisador")
+    vp = f[f["pesquisador"].notna() & (f["pesquisador"] != "")]["pesquisador"].value_counts().reset_index()
+    vp.columns = ["pesquisador", "n"]
+    if not vp.empty:
+        fig = px.bar(vp, x="n", y="pesquisador", orientation="h", text="n",
+                     color_discrete_sequence=[PALETA[2]])
+        fig.update_layout(showlegend=False, height=max(250, len(vp)*30),
+                          yaxis={"categoryorder": "total ascending"},
+                          xaxis_title="TCCs catalogados", yaxis_title="")
+        st.plotly_chart(fig, use_container_width=True)
+    else:
+        st.write("Nenhum pesquisador registrado no filtro atual.")
 
     st.markdown("---")
     st.markdown("#### 📋 Lista de TCCs (por curso)")
@@ -395,7 +372,7 @@ if secao == SECOES[0]:
                      "pag_num", "pesquisador"])
 
 # Aba 2 — Tópicos LDA
-if secao == SECOES[1]:
+with t2:
     st.subheader("Distribuição de tópicos (modelagem LDA, K=4)")
     st.caption("⚠️ Rótulos APROXIMADOS, derivados dos termos mais prováveis. "
                "Tópico ≠ categoria sociológica; requer revisão qualitativa.")
@@ -484,7 +461,7 @@ if secao == SECOES[1]:
     """)
 
 # Aba 3 — Por curso (análise temática em camadas)
-if secao == SECOES[2]:
+with t3:
     st.subheader("Análise temática por curso (em camadas)")
     st.caption("O LDA global apenas separa os cursos entre si; aqui olhamos "
                "DENTRO de cada curso. O método se ajusta ao Nº de TCCs: "
@@ -550,7 +527,7 @@ if secao == SECOES[2]:
         st.dataframe(tdf, use_container_width=True, hide_index=True, height=260)
 
 # Aba 4 — Menção indígena
-if secao == SECOES[3]:
+with t4:
     st.subheader("Presença de menção indígena por grupo")
     st.caption("CRITÉRIO: lista de 26 termos (indígena, intercultural, macuxi, "
                "wapichana, wai wai, terra indígena…) buscada em título + resumo "
@@ -591,7 +568,7 @@ if secao == SECOES[3]:
                cols=["id", "grupo_tcc", "tem_indigena", "titulo", "autor", "ano_num"])
 
 # Aba 5 — Orientadores
-if secao == SECOES[4]:
+with t5:
     st.subheader("Orientadores recorrentes")
     st.caption("Nomes consolidados por fuzzy matching (similitude ≥85%). "
                "Variações de grafia foram agrupadas sob o nome mais completo.")
@@ -621,7 +598,7 @@ if secao == SECOES[4]:
                cols=["id", "grupo_tcc", "orientador", "titulo", "autor", "ano_num"])
 
 # Aba 6 — Explorar
-if secao == SECOES[5]:
+with t6:
     st.subheader("Explorador de TCCs")
     busca = st.text_input("Buscar em título / resumo / palavras-chave")
     fe = f.copy()
@@ -644,7 +621,7 @@ if secao == SECOES[5]:
                      "_(sem resumo na fonte)_")
 
 # Aba 7 — Cobertura de Coleta
-if secao == SECOES[6]:
+with t7:
     st.subheader("Cobertura de Coleta: TCCs × Egressos")
 
     # carregar dados de egressos
@@ -766,22 +743,6 @@ if secao == SECOES[6]:
         flt = df if sel_c == "(todos)" else df[df["grupo_tcc"] == sel_c]
         lista_tccs(flt, key="cob",
                    cols=["id", "grupo_tcc", "titulo", "autor", "ano_num", "pag_num"])
-
-        st.markdown("---")
-        st.subheader("TCCs catalogados por pesquisador")
-        st.caption("Esforço de catalogação por pessoa (todo o corpus).")
-        vp = df[df["pesquisador"].notna() & (df["pesquisador"] != "")][
-            "pesquisador"].value_counts().reset_index()
-        vp.columns = ["pesquisador", "n"]
-        if not vp.empty:
-            fig = px.bar(vp, x="n", y="pesquisador", orientation="h", text="n",
-                         color_discrete_sequence=[PALETA[2]])
-            fig.update_layout(showlegend=False, height=max(250, len(vp) * 30),
-                              yaxis={"categoryorder": "total ascending"},
-                              xaxis_title="TCCs catalogados", yaxis_title="")
-            st.plotly_chart(fig, use_container_width=True)
-        else:
-            st.write("Nenhum pesquisador registrado.")
 
     except Exception as e:
         st.error(f"Erro ao carregar dados de egressos: {e}")
