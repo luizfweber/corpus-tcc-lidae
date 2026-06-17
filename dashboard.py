@@ -451,9 +451,10 @@ with t7:
 
         # cruzar dados
         tccs_por_grupo = df.groupby("grupo_tcc").size().reset_index(name="tccs_coletados")
-        cobertura = tccs_por_grupo.merge(egressos[["grupo_tcc", "egressos_total"]],
+        cobertura = tccs_por_grupo.merge(egressos[["curso", "grupo_tcc", "egressos_total"]],
                                           on="grupo_tcc", how="right")
         cobertura["cobertura_pct"] = (cobertura["tccs_coletados"] / cobertura["egressos_total"] * 100).fillna(0)
+        cobertura["tccs_coletados"] = cobertura["tccs_coletados"].fillna(0).astype(int)
         cobertura = cobertura.sort_values("cobertura_pct", ascending=False)
 
         # exibir tabela
@@ -461,27 +462,30 @@ with t7:
         col1, col2 = st.columns(2)
 
         with col1:
-            st.dataframe(cobertura[["grupo_tcc", "tccs_coletados", "egressos_total", "cobertura_pct"]].rename(
-                columns={"grupo_tcc": "Curso", "tccs_coletados": "TCCs",
-                        "egressos_total": "Egressos", "cobertura_pct": "Cobertura %"}
-            ).style.format({"Cobertura %": "{:.1f}%"}), use_container_width=True, hide_index=True)
+            # formatador customizado para vírgula
+            cobertura_display = cobertura[["curso", "tccs_coletados", "egressos_total", "cobertura_pct"]].copy()
+            cobertura_display["Cobertura %"] = cobertura_display["cobertura_pct"].apply(
+                lambda x: f"{x:.1f}".replace(".", ",") + "%"
+            )
+            st.dataframe(cobertura_display[["curso", "tccs_coletados", "egressos_total", "Cobertura %"]].rename(
+                columns={"curso": "Curso", "tccs_coletados": "TCCs", "egressos_total": "Egressos"}
+            ), use_container_width=True, hide_index=True)
 
         with col2:
             # gráfico de cobertura
             fig = px.bar(cobertura.sort_values("cobertura_pct"),
-                        x="cobertura_pct", y="grupo_tcc",
+                        x="cobertura_pct", y="curso",
                         text="cobertura_pct",
                         color_discrete_sequence=[PALETA[0]],
-                        labels={"cobertura_pct": "Cobertura (%)", "grupo_tcc": "Curso"})
+                        labels={"cobertura_pct": "Cobertura (%)", "curso": "Curso"})
             fig.update_layout(showlegend=False, height=400, xaxis_title="Cobertura (%)")
             st.plotly_chart(fig, use_container_width=True)
 
         # gráfico temporal
         st.markdown("#### Cobertura Temporal (Série Histórica)")
 
-        # cruzar com série histórica
-        egressos_serie["grupo_tcc"] = egressos_serie["grupo_tcc"].apply(lambda x: grupo_canonico(x) if pd.notna(x) else x)
-        tccs_por_ano = df.dropna(subset=["ano_num"]).groupby(["ano_num", "grupo_tcc"]).size().reset_index(name="tccs")
+        # criar mapa de grupo_tcc → curso para série histórica
+        mapa_grupo_curso = egressos[["grupo_tcc", "curso"]].drop_duplicates().set_index("grupo_tcc")["curso"].to_dict()
 
         # calcular cobertura por período
         coberturas_periodo = []
@@ -489,11 +493,13 @@ with t7:
             periodo_data = egressos_serie[egressos_serie["periodo"] == periodo]
             for _, row in periodo_data.iterrows():
                 grupo = row["grupo_tcc"]
+                curso = mapa_grupo_curso.get(grupo, grupo)  # usar nome completo se disponível
                 egressos = row["egressos_acumulado"]
                 tccs = df[df["grupo_tcc"] == grupo].shape[0]
                 coberturas_periodo.append({
                     "periodo": periodo,
                     "grupo_tcc": grupo,
+                    "curso": curso,
                     "tccs": tccs,
                     "egressos": egressos,
                     "cobertura": (tccs / egressos * 100) if egressos > 0 else 0
@@ -501,7 +507,7 @@ with t7:
 
         if coberturas_periodo:
             cob_df = pd.DataFrame(coberturas_periodo)
-            fig2 = px.bar(cob_df, x="periodo", y="cobertura", color="grupo_tcc",
+            fig2 = px.bar(cob_df, x="periodo", y="cobertura", color="curso",
                          text="cobertura", barmode="group",
                          color_discrete_sequence=PALETA,
                          labels={"cobertura": "Cobertura (%)", "periodo": "Período"})
