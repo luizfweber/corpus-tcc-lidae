@@ -1,0 +1,45 @@
+# Configuração de tema e layout — Streamlit
+# Edite conforme seus interesses
+
+[theme]
+# Cores do tema
+primaryColor = "#2C6E91"      # azul principal (botões, links, etc.)
+backgroundColor = "#FFFFFF"    # fundo principal
+secondaryBackgroundColor = "#F0F2F6"  # fundo das caixas/widgets
+textColor = "#262730"          # cor do texto
+font = "sans serif"            # fonte: sans serif, monospace, serif
+
+# Modo escuro
+darkMode = false               # true para tema escuro
+
+[client]
+# Layout padrão
+showErrorDetails = true        # mostrar erros detalhados
+toolbarMode = "viewer"         # modo da toolbar: viewer, developer
+
+[logger]
+level = "info"                 # nível de log: debug, info, warning, error, critical
+
+# ───────────────────────────────────────────────────────────────────────────
+# PERSONALIZAÇÕES COMUNS
+# ───────────────────────────────────────────────────────────────────────────
+# Para layout WIDE (aproveita toda a tela):
+#   Descomente a linha abaixo no arquivo dashboard.py:
+#   st.set_page_config(layout="wide")
+#
+# Para tema ESCURO:
+#   Descomente abaixo e defina darkMode = true:
+#   [theme]
+#   darkMode = true
+#   primaryColor = "#4AABDB"
+#
+# Para mudar a fonte (monospace para código):
+#   font = "monospace"
+#
+# Para mudar cor do título/cabeçalho:
+#   Adicione no topo do dashboard.py:
+#   st.markdown("""
+#   <style>
+#   .css-10trblm { color: #2C6E91; }  /* h1 */
+#   </style>
+#   """, unsafe_allow_html=True)

@@ -1,0 +1,45 @@
+RELATÓRIO DE CONSOLIDAÇÃO DO CORPUS DE TCCs — LIDAE/UFRR
+============================================================
+
+Fonte 1 (Licenciaturas UFRR):      33 registros
+Fonte 2 (PROSUL/CNPq):             108 registros
+Total bruto:                       141 registros
+Duplicatas (título em ambos forms): 13
+TCCs únicos consolidados:          128
+Reclassificações manuais (Outro→):  3
+
+Distribuição por grupo_tcc (TCCs coletados):
+  Insikiran                57
+  Pedagogia                30
+  Música                   20
+  Matemática               14
+  Letras                   6
+  LEDUCAR                  1
+
+Registros com resumo (>20 chars):  127/128
+Registros com banca examinadora:   101/128 (campo vindo das fontes originais; não imputado)
+Registros com conflito de campo:   11 (preservados na coluna 'conflitos')
+
+DETALHE DOS CONFLITOS PRESERVADOS:
+  [id 22] RELAÇÃO PÚBLICO-PRIVADO: INSTITUTO ALFA E BETO E SUA PROPOST
+      autor: F1='Adriane Karina Amin de Azevedo1' vs F2='Adriane Karina Amin de Azevedo' ; orientador: F1='Alessandra Peternella Doutora em Educação, Universidade Federal de Roraima, Brasil.' vs F2='Alessandra Peternella'
+  [id 24] ‘FAZER CUMAGI’ E ‘PESCAR COM TIMBÓ’: duas atividades sociais
+      paginas: F1='71' vs F2='69'
+  [id 25] LENDAS WAPICHANA EM HISTÓRIAS EM QUADRINHOS: VALORIZANDO A C
+      orientador: F1='Profa. Dra. Iana dos Santos Vasconcelos.' vs F2='Profa. Dra. Iana dos Santos Vasconcelos'
+  [id 27] CONSTRUINDO UMA PROPOSTA PEDAGÓGICAS A PARTIR DA ATIVIDADE S
+      paginas: F1='66' vs F2='65' ; orientador: F1='Prof. Dr. Maxim Repetto.' vs F2='Prof. Dr. Maxim Repetto'
+  [id 28] O ESTUDO DA LÍNGUA E DA CULTURA WAIWAI A PARTIR DA ATIVIDADE
+      autor: F1='PAULINHO ANTONIO WAIWAI' vs F2='PAULINHO ANTONIO WAI WAI'
+  [id 30] RELATO DE EXPERIÊNCIA COM CRIANÇAS INDÍGENAS WARAO DA ESCOLA
+      ano_defesa: F1='2018' vs F2='Não de informado' ; orientador: F1='Edlauva Oliveira dos Santos' vs F2='Profª Dr. Edlauva Oliveira dos Santos'
+  [id 31] DESAFIOS E POSSIBILIDADES DA COORDENAÇÃO PEDAGÓGICA EM RORAI
+      ano_defesa: F1='0000' vs F2='Não informado' ; orientador: F1='Edlauva Oliveira dos Santos' vs F2='Profª Dr. Edlauva Oliveira dos Santos'
+  [id 33] EXPERIÊNCIA FORMADORA: CONTRIBUIÇÕES DO ESTÁGIO SUPERVISIONA
+      ano_defesa: F1='2018' vs F2='Não informado'
+  [id 100] ALGORITMOS ALTERNATIVOS PARA AS OPERAÇÕES ARITMÉTICAS FUNDAM
+      reclassificado manualmente de 'Outro' para 'Insikiran – Ciências da Natureza' (decisão do coordenador, 2026-06-16)
+  [id 101] ALIMENTAÇÃO, SAÚDE E EDUCAÇÃO NA COMUNIDADEINDÍGENAMURIRU – 
+      reclassificado manualmente de 'Outro' para 'Insikiran – Ciências da Natureza' (decisão do coordenador, 2026-06-16)
+  [id 102] APLICAÇÃO DA MODELAGEM MATEMÁTICA NA CONSTRUÇÃO DE UMA HORTA
+      reclassificado manualmente de 'Outro' para 'Insikiran – Ciências da Natureza' (decisão do coordenador, 2026-06-16)
