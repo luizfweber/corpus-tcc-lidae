@@ -26,14 +26,16 @@ Data: 2026-06-16 | Piloto: 147 TCCs | Natureza: exploratória, não censitária
    [Tópico D]: leitura, lingua, indigena, jogos, matematica, aluno, escrita, comunidade, praticas, processo
    [Tópico E]: atividade, problema, situacoes, teoria, resolucao, acoes, estudantes, discente, matematica, galperin
 
-4. CLUSTERING (k=5, silhueta=0.049)
+4. CLUSTERING (k=7, silhueta=0.055)
    Silhueta baixa é esperada em corpus pequeno e texto curto — indica
    fronteiras temáticas porosas, não falha metodológica.
-   C0 (n=61): {'Insikiran': 56, 'Música': 2, 'Letras': 1}
-   C1 (n=25): {'Insikiran': 15, 'Pedagogia': 6, 'Letras': 3}
-   C2 (n=19): {'Pedagogia': 19}
-   C3 (n=14): {'Matemática': 14}
-   C4 (n=28): {'Música': 17, 'Pedagogia': 4, 'Letras': 2}
+   C0 (n=15): {'Pedagogia': 9, 'LEDUCAR': 2, 'Matemática': 1}
+   C1 (n=30): {'Música': 18, 'Pedagogia': 6, 'Letras': 4}
+   C2 (n=23): {'Insikiran': 19, 'Pedagogia': 3, 'História': 1}
+   C3 (n=12): {'Pedagogia': 11, 'Letras': 1}
+   C4 (n=46): {'Insikiran': 45, 'Pedagogia': 1}
+   C5 (n=7): {'Insikiran': 6, 'História': 1}
+   C6 (n=14): {'Matemática': 14}
 
 5. REDES
    Orientadores com 2+ TCCs: 30 (86% dos TCCs).
