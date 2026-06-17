@@ -104,23 +104,28 @@ def consolida_nomes(nomes_list, threshold=85):
 
 # Rótulos LDA — APROXIMADOS, derivados dos 10 termos mais prováveis.
 # Edite as leituras conforme revisão qualitativa.
+# Atualizado com K=5 (147 TCCs)
 TOPICOS = {
-    0: {"rotulo": "Didática da Matemática",
-        "leitura": "Teoria Histórico-Cultural / resolução de problemas",
-        "termos": "atividade, problema, situações, teoria, resolução, ações, "
-                  "estudantes, discente, matemática, galperin"},
-    1: {"rotulo": "Formação docente & Música",
-        "leitura": "práticas pedagógicas, música, formação geral",
-        "termos": "educação, música, pedagógica, vista, formação, musical, "
-                  "práticas, roraima, jogos, coordenação"},
-    2: {"rotulo": "Educação Escolar Indígena",
-        "leitura": "comunidade, língua, cultura, escola indígena",
-        "termos": "indígena, comunidade, indígenas, educação, língua, estadual, "
-                  "escolar, proposta, leitura, cultura"},
-    3: {"rotulo": "Estágio & formação inicial",
-        "leitura": "estágio supervisionado, pedagogia, educação especial",
-        "termos": "estágio, educação, pedagogia, experiência, roraima, ufrr, "
-                  "formação, especial, supervisionado, curricular"},
+    0: {"rotulo": "Educação & Música",
+        "leitura": "práticas pedagógicas, música, formação, coordenação",
+        "termos": "educacao, musica, musical, vista, roraima, coordenacao, "
+                  "contexto, pratica, pedagogica, especial"},
+    1: {"rotulo": "Indígena & Comunidade",
+        "leitura": "cultura, saberes tradicionais, educação escolar indígena",
+        "termos": "indigena, comunidade, indigenas, educacao, cultura, estadual, "
+                  "escolar, conhecimentos, proposta, saude"},
+    2: {"rotulo": "Estágio & Formação",
+        "leitura": "estágio supervisionado, pedagogia, plantas medicinais",
+        "termos": "estagio, pedagogia, formacao, roraima, experiencia, pedagogica, "
+                  "plantas, curricular, educacao, medicinais"},
+    3: {"rotulo": "Leitura & Língua",
+        "leitura": "alfabetização, processos de leitura e escrita, jogos pedagógicos",
+        "termos": "leitura, lingua, indigena, jogos, matematica, aluno, escrita, "
+                  "comunidade, praticas, processo"},
+    4: {"rotulo": "Atividade & Resolução de Problemas",
+        "leitura": "Teoria Histórico-Cultural, atividade, resolução de problemas",
+        "termos": "atividade, problema, situacoes, teoria, resolucao, acoes, "
+                  "estudantes, discente, matematica, galperin"},
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -285,7 +290,7 @@ with t1:
 
 # Aba 2 — Tópicos LDA
 with t2:
-    st.subheader("Distribuição de tópicos (modelagem LDA, K=4)")
+    st.subheader("Distribuição de tópicos (modelagem LDA, K=5)")
     st.caption("⚠️ Rótulos APROXIMADOS, derivados dos termos mais prováveis. "
                "Tópico ≠ categoria sociológica; requer revisão qualitativa.")
     fdt = f.dropna(subset=["topico_dom"]).copy()
