@@ -686,29 +686,31 @@ if secao == SECOES[6]:
         # Ordenar por cobertura
         cobertura = cobertura.sort_values("cobertura_pct", ascending=False)
 
-        # exibir tabela
+        # exibir tabela (linha própria)
         st.markdown("#### Cobertura por Curso")
-        col1, col2 = st.columns(2)
+        # formatador customizado para vírgula (2 casas decimais)
+        cobertura_display = cobertura[["curso", "tccs_coletados", "egressos_total", "cobertura_pct"]].copy()
+        cobertura_display["Cobertura %"] = cobertura_display["cobertura_pct"].apply(
+            lambda x: f"{x:.2f}".replace(".", ",") + "%"
+        )
+        st.dataframe(cobertura_display[["curso", "tccs_coletados", "egressos_total", "Cobertura %"]].rename(
+            columns={"curso": "Curso", "tccs_coletados": "TCCs", "egressos_total": "Egressos"}
+        ), use_container_width=True, hide_index=True)
 
-        with col1:
-            # formatador customizado para vírgula
-            cobertura_display = cobertura[["curso", "tccs_coletados", "egressos_total", "cobertura_pct"]].copy()
-            cobertura_display["Cobertura %"] = cobertura_display["cobertura_pct"].apply(
-                lambda x: f"{x:.1f}".replace(".", ",") + "%"
-            )
-            st.dataframe(cobertura_display[["curso", "tccs_coletados", "egressos_total", "Cobertura %"]].rename(
-                columns={"curso": "Curso", "tccs_coletados": "TCCs", "egressos_total": "Egressos"}
-            ), use_container_width=True, hide_index=True)
-
-        with col2:
-            # gráfico de cobertura
-            fig = px.bar(cobertura.sort_values("cobertura_pct"),
-                        x="cobertura_pct", y="curso",
-                        text="cobertura_pct",
-                        color_discrete_sequence=[PALETA[0]],
-                        labels={"cobertura_pct": "Cobertura (%)", "curso": "Curso"})
-            fig.update_layout(showlegend=False, height=400, xaxis_title="Cobertura (%)")
-            st.plotly_chart(fig, use_container_width=True)
+        # gráfico de cobertura (linha própria)
+        st.markdown("#### Cobertura por Curso (gráfico)")
+        cob_graf = cobertura.sort_values("cobertura_pct").copy()
+        cob_graf["cobertura_txt"] = cob_graf["cobertura_pct"].apply(
+            lambda x: f"{x:.2f}".replace(".", ",") + "%")
+        fig = px.bar(cob_graf,
+                    x="cobertura_pct", y="curso",
+                    text="cobertura_txt",
+                    color_discrete_sequence=[PALETA[0]],
+                    labels={"cobertura_pct": "Cobertura (%)", "curso": "Curso"})
+        fig.update_traces(textposition="outside")
+        fig.update_layout(showlegend=False, height=max(400, len(cob_graf) * 26),
+                          xaxis_title="Cobertura (%)", yaxis_title="")
+        st.plotly_chart(fig, use_container_width=True)
 
         # gráfico temporal
         st.markdown("#### Cobertura Temporal (Série Histórica)")
@@ -745,11 +747,14 @@ if secao == SECOES[6]:
             cob_df = pd.DataFrame(coberturas_periodo)
             # agrupar por período e curso para evitar duplicação
             cob_agg = cob_df.groupby(["periodo", "curso"]).first().reset_index()
+            cob_agg["cobertura_txt"] = cob_agg["cobertura"].apply(
+                lambda x: f"{x:.2f}".replace(".", ",") + "%")
             fig2 = px.bar(cob_agg, x="periodo", y="cobertura", color="curso",
-                         text="cobertura", barmode="group",
+                         text="cobertura_txt", barmode="group",
                          color_discrete_sequence=PALETA,
                          labels={"cobertura": "Cobertura (%)", "periodo": "Período", "curso": "Curso"})
-            fig2.update_layout(height=400, hovermode="x unified")
+            fig2.update_traces(textposition="outside")
+            fig2.update_layout(height=450, hovermode="x unified")
             st.plotly_chart(fig2, use_container_width=True)
 
         st.info("""
