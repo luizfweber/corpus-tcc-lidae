@@ -26,7 +26,7 @@ Data: 2026-06-16 | Piloto: 147 TCCs | Natureza: exploratória, não censitária
    [Tópico D]: leitura, lingua, indigena, jogos, matematica, aluno, escrita, comunidade, praticas, processo
    [Tópico E]: atividade, problema, situacoes, teoria, resolucao, acoes, estudantes, discente, matematica, galperin
 
-4. CLUSTERING (k=6, silhueta=0.054)
+4. CLUSTERING (k=6, silhueta=0.053)
    Silhueta baixa é esperada em corpus pequeno e texto curto — indica
    fronteiras temáticas porosas, não falha metodológica.
    C0 (n=5): {'Insikiran': 5}
@@ -37,7 +37,7 @@ Data: 2026-06-16 | Piloto: 147 TCCs | Natureza: exploratória, não censitária
    C5 (n=14): {'Matemática': 14}
 
 5. REDES
-   Orientadores com 2+ TCCs: 29 (84% dos TCCs).
+   Orientadores com 2+ TCCs: 30 (86% dos TCCs).
    TCCs sem banca registrada: 34/147 — campo não preenchido na fonte.
    Nomes normalizados (títulos removidos); variações residuais podem subsistir.
 
