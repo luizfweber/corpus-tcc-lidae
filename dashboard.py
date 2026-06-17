@@ -185,6 +185,52 @@ def carregar_por_curso():
 df = carregar()
 N_TOTAL = len(df)
 
+# ─────────────────────────────────────────────────────────────────────────────
+# ORDEM CANÔNICA DE CURSOS — fixa em TODO o dashboard: por nº de TCCs (desc).
+# Evita que cada gráfico/lista organize os cursos de forma diferente.
+# ─────────────────────────────────────────────────────────────────────────────
+ORDEM_CURSOS = df["grupo_tcc"].value_counts().index.tolist()
+
+# rótulos de coluna para as listagens
+ROTULOS_COLS = {
+    "id": "id", "grupo_tcc": "Curso", "titulo": "Título", "autor": "Autor",
+    "orientador": "Orientador", "pesquisador": "Pesquisador",
+    "ano_num": "Ano", "pag_num": "Páginas", "topico_rotulo": "Tópico",
+    "tem_indigena": "Menção indígena",
+}
+
+
+def lista_tccs(dados, key, cols):
+    """Lista de TCCs com controles de ORDENAÇÃO e seleção de colunas.
+    Ordenar por 'Curso' respeita a ordem canônica (nº de TCCs desc)."""
+    if dados.empty:
+        st.info("Nenhum TCC para listar com os filtros atuais.")
+        return
+    cset = [c for c in cols if c in dados.columns]
+    c1, c2, c3 = st.columns([2, 1, 3])
+    ordenar = c1.selectbox("Ordenar por", cset, key=f"{key}_s",
+                           format_func=lambda c: ROTULOS_COLS.get(c, c))
+    asc = c2.radio("Direção", ["crescente", "decrescente"], key=f"{key}_d",
+                   horizontal=True) == "crescente"
+    mostrar = c3.multiselect("Colunas exibidas", cset, default=cset,
+                             key=f"{key}_c",
+                             format_func=lambda c: ROTULOS_COLS.get(c, c)) or cset
+
+    d = dados.copy()
+    if ordenar == "grupo_tcc":
+        d["_o"] = pd.Categorical(d["grupo_tcc"], categories=ORDEM_CURSOS, ordered=True)
+        d = d.sort_values(["_o", "id"], ascending=[asc, True]).drop(columns="_o")
+    else:
+        d = d.sort_values(ordenar, ascending=asc, na_position="last")
+
+    for c in ("ano_num", "pag_num"):
+        if c in d.columns:
+            d[c] = d[c].astype("Int64")
+    st.caption(f"{len(d)} TCCs.")
+    st.dataframe(d[mostrar].rename(columns=ROTULOS_COLS),
+                 use_container_width=True, hide_index=True, height=340)
+
+
 # ── Cabeçalho ────────────────────────────────────────────────────────────────
 st.title("📚 Corpus de TCCs — Licenciaturas UFRR")
 st.caption("Laboratório de Indicadores, Dados e Analítica Educacional · LIDAE/NECPF · "
@@ -298,7 +344,8 @@ with t1:
     pg = f.dropna(subset=["pag_num"])
     if not pg.empty:
         fig = px.box(pg, x="grupo_tcc", y="pag_num", color="grupo_tcc",
-                     color_discrete_sequence=PALETA, points="all")
+                     color_discrete_sequence=PALETA, points="all",
+                     category_orders={"grupo_tcc": ORDEM_CURSOS})
         fig.update_layout(showlegend=False, xaxis_title="", yaxis_title="Páginas",
                           height=400)
         st.plotly_chart(fig, use_container_width=True)
@@ -317,6 +364,12 @@ with t1:
         st.plotly_chart(fig, use_container_width=True)
     else:
         st.write("Nenhum pesquisador registrado no filtro atual.")
+
+    st.markdown("---")
+    st.markdown("#### 📋 Lista de TCCs (por curso)")
+    lista_tccs(f, key="dist",
+               cols=["id", "grupo_tcc", "titulo", "autor", "ano_num",
+                     "pag_num", "pesquisador"])
 
 # Aba 2 — Tópicos LDA
 with t2:
@@ -338,6 +391,7 @@ with t2:
     with cc2:
         st.markdown("**Tópico dominante × grupo de curso**")
         ct = pd.crosstab(fdt["topico_rotulo"], fdt["grupo_tcc"])
+        ct = ct[[c for c in ORDEM_CURSOS if c in ct.columns]]  # ordem canônica
         fig = px.imshow(ct, text_auto=True, color_continuous_scale="YlOrRd",
                         aspect="auto")
         fig.update_layout(height=380, xaxis_title="", yaxis_title="")
@@ -348,6 +402,15 @@ with t2:
         st.markdown(f"- **{info['rotulo']}** — _{info['leitura']}_  \n"
                     f"  <span style='color:gray;font-size:0.85em'>{info['termos']}</span>",
                     unsafe_allow_html=True)
+
+    st.markdown("---")
+    st.markdown("#### 📋 Lista de TCCs (por tópico)")
+    topos = ["(todos)"] + [TOPICOS.get(int(i), {}).get("rotulo", f"Tópico {int(i)}")
+                           for i in sorted(fdt["topico_dom"].dropna().unique())]
+    sel_topico = st.selectbox("Filtrar por tópico dominante", topos, key="lda_filtro")
+    flt = fdt if sel_topico == "(todos)" else fdt[fdt["topico_rotulo"] == sel_topico]
+    lista_tccs(flt, key="lda",
+               cols=["id", "grupo_tcc", "topico_rotulo", "titulo", "autor", "ano_num"])
 
     # ── Metodologia (integrada à aba de Tópicos)
     st.markdown("---")
@@ -471,6 +534,8 @@ with t4:
                "+ palavras-chave. Capta MENÇÃO, não centralidade. Sujeito a "
                "falsos positivos/negativos.")
     g = f.groupby("grupo_tcc")["tem_indigena"].agg(["sum", "count"]).reset_index()
+    g["_o"] = pd.Categorical(g["grupo_tcc"], categories=ORDEM_CURSOS, ordered=True)
+    g = g.sort_values("_o").drop(columns="_o")
     g["com"] = g["sum"].astype(int)
     g["sem"] = g["count"] - g["com"]
     g["pct"] = (g["com"] / g["count"] * 100).round(0)
@@ -480,13 +545,27 @@ with t4:
     fig.add_bar(y=g["grupo_tcc"], x=g["sem"], orientation="h",
                 name="Sem menção", marker_color="#D9D9D9")
     fig.update_layout(barmode="stack", height=380, xaxis_title="Nº de TCCs",
-                      yaxis_title="", legend_title="")
+                      yaxis_title="", legend_title="",
+                      yaxis={"categoryorder": "array",
+                             "categoryarray": ORDEM_CURSOS[::-1]})
     st.plotly_chart(fig, use_container_width=True)
     st.dataframe(
         g[["grupo_tcc", "com", "count", "pct"]].rename(
             columns={"grupo_tcc": "Grupo", "com": "Com menção",
                      "count": "Total", "pct": "% menção"}),
         use_container_width=True, hide_index=True)
+
+    st.markdown("---")
+    st.markdown("#### 📋 Lista de TCCs (por menção indígena)")
+    op = st.radio("Filtrar", ["Todos", "Só com menção", "Só sem menção"],
+                  horizontal=True, key="ind_filtro")
+    flt = f
+    if op == "Só com menção":
+        flt = f[f["tem_indigena"]]
+    elif op == "Só sem menção":
+        flt = f[~f["tem_indigena"]]
+    lista_tccs(flt, key="ind",
+               cols=["id", "grupo_tcc", "tem_indigena", "titulo", "autor", "ano_num"])
 
 # Aba 5 — Orientadores
 with t5:
@@ -509,12 +588,19 @@ with t5:
     else:
         st.write("Nenhum orientador com 2+ TCCs no filtro atual.")
 
+    st.markdown("---")
+    st.markdown("#### 📋 Lista de TCCs (por orientador)")
+    orientadores = ["(todos)"] + sorted(
+        f[f["orientador"].str.len() > 4]["orientador"].dropna().unique())
+    sel_o = st.selectbox("Filtrar por orientador", orientadores, key="ori_filtro")
+    flt = f if sel_o == "(todos)" else f[f["orientador"] == sel_o]
+    lista_tccs(flt, key="ori",
+               cols=["id", "grupo_tcc", "orientador", "titulo", "autor", "ano_num"])
+
 # Aba 6 — Explorar
 with t6:
     st.subheader("Explorador de TCCs")
     busca = st.text_input("Buscar em título / resumo / palavras-chave")
-    cols_show = ["id", "grupo_tcc", "titulo", "autor", "orientador",
-                 "pesquisador", "ano_defesa", "paginas", "palavras_chave"]
     fe = f.copy()
     if busca:
         b = busca.lower()
@@ -522,9 +608,9 @@ with t6:
                 fe["resumo"].str.lower().str.contains(b, na=False) |
                 fe["palavras_chave"].str.lower().str.contains(b, na=False))
         fe = fe[mask]
-    st.caption(f"{len(fe)} TCCs.")
-    st.dataframe(fe[cols_show], use_container_width=True, hide_index=True,
-                 height=400)
+    lista_tccs(fe, key="expl",
+               cols=["id", "grupo_tcc", "titulo", "autor", "orientador",
+                     "pesquisador", "ano_num", "pag_num"])
     with st.expander("Ver resumo completo de um TCC"):
         if not fe.empty:
             tid = st.selectbox("Selecione o id", fe["id"].tolist())
@@ -649,6 +735,14 @@ with t7:
         - A janela 2015–2025 é padrão pois o acervo digitalizado concentra defesas recentes
         - Dados exploratórios — não censitários — ver relatório metodológico LIDAE
         """)
+
+        st.markdown("---")
+        st.markdown("#### 📋 Lista de TCCs coletados (por curso)")
+        cursos_cob = ["(todos)"] + ORDEM_CURSOS
+        sel_c = st.selectbox("Filtrar por curso", cursos_cob, key="cob_filtro")
+        flt = df if sel_c == "(todos)" else df[df["grupo_tcc"] == sel_c]
+        lista_tccs(flt, key="cob",
+                   cols=["id", "grupo_tcc", "titulo", "autor", "ano_num", "pag_num"])
 
     except Exception as e:
         st.error(f"Erro ao carregar dados de egressos: {e}")
