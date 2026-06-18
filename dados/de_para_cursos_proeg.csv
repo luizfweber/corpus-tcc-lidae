@@ -1,0 +1,30 @@
+nome_proeg,curso_det,grupo_tcc,incluir,observacao,chave_norm
+PEDAGOGIA,Pedagogia,Pedagogia,sim,,PEDAGOGIA
+FÍSICA,Física,Física,sim,,FÍSICA
+QUÍMICA,Química,Química,sim,,QUÍMICA
+MATEMÁTICA (L),Matemática,Matemática,sim,,MATEMÁTICA (L)
+MATEMÁTICA EAD,Matemática (EaD),Matemática,nao,EaD — fora do escopo presencial (Paricarana),MATEMÁTICA EAD
+MATEMÁTICA A DISTANCIA,Matemática (EaD),Matemática,nao,EaD — fora do escopo,MATEMÁTICA A DISTANCIA
+HISTÓRIA (L),História,História,sim,,HISTÓRIA (L)
+HISTÓRIA,História,História,sim,"registro antigo, antes da divisão L/B",HISTÓRIA
+GEOGRAFIA (L),Geografia,Geografia,sim,,GEOGRAFIA (L)
+GEOGRAFIA,Geografia,Geografia,sim,"registro antigo, antes da divisão L/B",GEOGRAFIA
+GEOGRAFIA EaD (L),Geografia (EaD),Geografia,nao,EaD — fora do escopo,GEOGRAFIA EAD (L)
+BIOLOGIA  (L),Ciências Biológicas,Ciências Biológicas,sim,nome antigo de Cs. Biológicas (L),BIOLOGIA (L)
+CIÊNCIAS BIOLOGICAS  (L),Ciências Biológicas,Ciências Biológicas,sim,,CIÊNCIAS BIOLOGICAS (L)
+MÚSICA,Música,Música,sim,,MÚSICA
+ARTES VISUAIS,Artes Visuais,Artes Visuais,sim,,ARTES VISUAIS
+LETRAS - PORTUGUES,Letras — Português,Letras,sim,,LETRAS - PORTUGUES
+LETRAS - PORTUGUES/INGLÊS,Letras — Português/Inglês,Letras,sim,,LETRAS - PORTUGUES/INGLÊS
+LETRAS - PORTUGUES/ESPANHOL,Letras — Português/Espanhol,Letras,sim,,LETRAS - PORTUGUES/ESPANHOL
+LETRAS - PORTUGUES/FRANCÊS,Letras — Português/Francês,Letras,sim,,LETRAS - PORTUGUES/FRANCÊS
+LETRAS - LIBRAS,Letras — Libras,Letras,nao,bacharelado — fora do escopo (só licenciaturas),LETRAS - LIBRAS
+LETRAS - ANTIGA ESTRUTURA CURRICULAR,Letras — Antiga estrutura curricular,Letras,sim,,LETRAS - ANTIGA ESTRUTURA CURRICULAR
+LETRAS,Letras — (habilitação não informada),Letras,sim,"registro antigo, único, sem habilitação na fonte",LETRAS
+EDUCAÇÃO DO CAMPO - CIÊNCIAS DA NATUREZA E MATEMÁTICA,LEDUCAR — Ciências da Natureza e Matemática,LEDUCAR,sim,,EDUCAÇÃO DO CAMPO - CIÊNCIAS DA NATUREZA E MATEMÁTICA
+EDUCAÇÃO DO CAMPO - CIÊNCIAS HUMANAS E SOCIAIS,LEDUCAR — Ciências Humanas e Sociais,LEDUCAR,sim,,EDUCAÇÃO DO CAMPO - CIÊNCIAS HUMANAS E SOCIAIS
+LICENCIATURA INTERCULTURAL - CIÊNCIAS DA NATUREZA,Insikiran — Ciências da Natureza,Insikiran,sim,,LICENCIATURA INTERCULTURAL - CIÊNCIAS DA NATUREZA
+LICENCIATURA INTERCULTURAL - CIÊNCIAS SOCIAIS,Insikiran — Ciências Sociais,Insikiran,sim,,LICENCIATURA INTERCULTURAL - CIÊNCIAS SOCIAIS
+LICENCIATURA INTERCULTURAL - COMUNICAÇÃO E ARTES,Insikiran — Comunicação e Artes,Insikiran,sim,,LICENCIATURA INTERCULTURAL - COMUNICAÇÃO E ARTES
+INTERCULTURAL,Insikiran — (habilitação não informada),Insikiran,sim,"registro antigo, sem habilitação na fonte",INTERCULTURAL
+LICENCIATURA INTERCULTURAL,Insikiran — (habilitação não informada),Insikiran,sim,"registro 2015–2020, sem habilitação na fonte",LICENCIATURA INTERCULTURAL
