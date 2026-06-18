@@ -422,9 +422,9 @@ def lista_tccs(dados, key, cols):
 st.title("📚 Corpus de TCCs — Licenciaturas UFRR")
 st.caption("Laboratório de Indicadores, Dados e Analítica Educacional · LIDAE/NECPF · "
            "Piloto exploratório")
-st.info("⚠️ **Análise exploratória, não censitária.** Cada número é indício a "
+st.info("**Análise exploratória, não censitária.** Cada número é indício a "
         "interpretar, não conclusão. Corpus-piloto desbalanceado — grupos com "
-        "poucos TCCs (LEDUCAR, Letras) têm estatísticas instáveis.", icon="⚠️")
+        "poucos TCCs (LEDUCAR, Letras) têm estatísticas instáveis.")
 
 # ── Navegação (menu lateral com ícones) ──
 SECOES = ["Distribuição", "Tópicos (LDA)", "Por curso", "Menção indígena",
