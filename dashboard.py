@@ -16,6 +16,8 @@ from rapidfuzz import fuzz  # wheels pré-compilados (substitui fuzzywuzzy+Leven
 import re, unicodedata, json
 from streamlit_option_menu import option_menu
 import plotly.io as pio
+import networkx as nx
+from collections import Counter
 
 # ─────────────────────────────────────────────────────────────────────────────
 # FONTE PADRÃO — Source Sans Pro (padrão do Streamlit), aplicada à interface
@@ -187,6 +189,128 @@ TOPICOS = {
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
+# GAZETTEER REGIONAL (povos e territórios indígenas de Roraima) + utilitários
+# de texto/rede usados pelos relatórios novos. Variantes ortográficas agrupadas
+# sob um nome canônico (exibição). Detecção = MENÇÃO, não centralidade.
+# ─────────────────────────────────────────────────────────────────────────────
+GZ_POVOS = {
+    "Macuxi": ["macuxi", "makuxi"],
+    "Wapichana": ["wapichana", "wapixana"],
+    "Taurepang": ["taurepang", "taulipang"],
+    "Ingarikó": ["ingariko", "ingarico"],
+    "Patamona": ["patamona"],
+    "Yanomami": ["yanomami", "yanomame", "yanomam"],
+    "Ye'kwana": ["yekwana", "ye'kwana", "yekuana", "maiongong"],
+    "Wai-Wai": ["waiwai", "wai-wai", "wai wai"],
+    "Sapará": ["sapara", "zapara"],
+    "Pirititi": ["pirititi"],
+    "Waimiri-Atroari": ["waimiri", "atroari"],
+    "Warao": ["warao"],
+}
+GZ_TERRITORIOS = {
+    "Raposa Serra do Sol": ["raposa serra do sol", "raposa-serra do sol"],
+    "São Marcos": ["sao marcos"],
+    "Terra Indígena Yanomami": ["terra indigena yanomami"],
+    "Malacacheta": ["malacacheta"],
+    "Tabalascada": ["tabalascada"],
+    "Serra da Moça": ["serra da moca"],
+    "Waimiri-Atroari (TI)": ["waimiri-atroari"],
+    "Ananás": ["ananas"],
+    "Manoa-Pium": ["manoa-pium"],
+    "Ponta da Serra": ["ponta da serra"],
+    "Boqueirão": ["boqueirao"],
+}
+
+def _fold_gz(s):
+    """minúsculas, sem acento, só [a-z0-9'- ] — para casar termos do gazetteer."""
+    s = unicodedata.normalize("NFKD", str(s).lower())
+    s = "".join(c for c in s if not unicodedata.combining(c))
+    return re.sub(r"\s+", " ", re.sub(r"[^a-z0-9'\- ]", " ", s)).strip()
+
+def _pat_gz(variantes):
+    alt = "|".join(re.escape(_fold_gz(v)) for v in variantes)
+    return r"(?<![a-z0-9])(?:" + alt + r")(?![a-z0-9])"
+
+def conta_gazetteer(txt_serie, grupos):
+    rows = []
+    for nome, variantes in grupos.items():
+        n = int(txt_serie.str.contains(_pat_gz(variantes), regex=True).sum())
+        if n:
+            rows.append({"nome": nome, "n": n})
+    return (pd.DataFrame(rows).sort_values("n", ascending=False)
+            if rows else pd.DataFrame(columns=["nome", "n"]))
+
+def _tem_valor(x):
+    s = str(x).strip().lower()
+    return s not in ("", "nan", "não informado", "nao informado", "não se aplica",
+                     "nao se aplica", "não", "-", "—", "none")
+
+_STOP_KW = {"de", "da", "do", "e", "a", "o", "em", "na", "no", "para", "com",
+            "dos", "das", "as", "os"}
+
+def parse_keywords(s):
+    """Divide o campo palavras-chave em (grafia_original, chave_normalizada)."""
+    out = []
+    for p in re.split(r"[.;,\n/]| - ", str(s)):
+        original = p.strip(" .;,-")
+        if len(original) < 3:
+            continue
+        chave = unicodedata.normalize("NFKD", original.lower())
+        chave = "".join(c for c in chave if not unicodedata.combining(c)).strip()
+        if not chave or chave in _STOP_KW:
+            continue
+        out.append((original, chave))
+    return out
+
+_INST_KW = ("universidade", "federal", "instituto", "faculdade", "campus",
+            "departamento", "ufrr", "uerr", "ifrr", "secretaria", "colegiado")
+
+def parse_banca(val):
+    """Extrai nomes de examinadores do campo de banca (texto livre)."""
+    if not _tem_valor(val):
+        return []
+    seen, out = set(), []
+    for p in re.split(r"[;\n]|,| e ", str(val)):
+        nm = limpa_nome(p)
+        if not nm:
+            continue
+        low = _fold_gz(nm)
+        if any(w in low for w in _INST_KW):
+            continue
+        if len(nm.split()) >= 2 and len(nm) > 5 and nm not in seen:
+            seen.add(nm)
+            out.append(nm)
+    return out
+
+def fig_rede(G, cor_no=PALETA[1]):
+    """Grafo de rede em Plotly (layout spring). Nós dimensionados por 'size'."""
+    if G.number_of_nodes() == 0:
+        return None
+    pos = nx.spring_layout(G, seed=42, k=0.7)
+    ex, ey = [], []
+    for a, b in G.edges():
+        x0, y0 = pos[a]; x1, y1 = pos[b]
+        ex += [x0, x1, None]; ey += [y0, y1, None]
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=ex, y=ey, mode="lines",
+                             line=dict(width=0.6, color="#C2C7BE"), hoverinfo="none"))
+    xs, ys, sizes, hov = [], [], [], []
+    for n in G.nodes():
+        x, y = pos[n]; xs.append(x); ys.append(y)
+        s = G.nodes[n].get("size", 1); sizes.append(s)
+        hov.append(f"{n} ({s})")
+    fig.add_trace(go.Scatter(
+        x=xs, y=ys, mode="markers+text", text=list(G.nodes()),
+        textposition="top center", textfont=dict(size=10),
+        marker=dict(size=[9 + 3 * s for s in sizes], color=cor_no,
+                    line=dict(width=1, color="white")),
+        hovertext=hov, hoverinfo="text"))
+    fig.update_layout(showlegend=False, height=520,
+                      xaxis=dict(visible=False), yaxis=dict(visible=False),
+                      margin=dict(l=10, r=10, t=10, b=10))
+    return fig
+
+# ─────────────────────────────────────────────────────────────────────────────
 st.set_page_config(page_title="TCCs Licenciaturas UFRR — LIDAE",
                    page_icon="📚", layout="wide")
 
@@ -304,12 +428,14 @@ st.info("⚠️ **Análise exploratória, não censitária.** Cada número é in
 
 # ── Navegação (menu lateral com ícones) ──
 SECOES = ["Distribuição", "Tópicos (LDA)", "Por curso", "Menção indígena",
-          "Orientadores", "Explorar TCCs", "Cobertura de Coleta"]
+          "Orientadores", "Explorar TCCs", "Cobertura de Coleta",
+          "Povos & territórios", "Palavras-chave", "Bancas", "Orientador × tema"]
 with st.sidebar:
     secao = option_menu(
         "Navegação", SECOES,
         icons=["bar-chart-line", "diagram-3", "mortarboard", "feather",
-               "people", "search", "graph-up-arrow"],
+               "people", "search", "graph-up-arrow",
+               "geo-alt", "tags", "people-fill", "grid-3x3-gap"],
         menu_icon="compass", default_index=0,
         styles={
             # Identidade NECPF: fundo neutro, ícone âmbar (contrasta no claro e no
@@ -614,6 +740,92 @@ if secao == SECOES[3]:
                "wapichana, wai wai, terra indígena…) buscada em título + resumo "
                "+ palavras-chave. Capta MENÇÃO, não centralidade. Sujeito a "
                "falsos positivos/negativos.")
+
+    with st.expander("📖 Como identificamos a cultura indígena nos TCCs (metodologia)"):
+        st.markdown("""
+*Uma explicação para quem não é da área de dados.*
+
+#### O problema que queríamos resolver
+Reunimos os trabalhos de conclusão de curso (TCCs) das licenciaturas da UFRR e
+queríamos responder a uma pergunta aparentemente simples:
+
+> Quais desses trabalhos falam sobre cultura indígena — e quão central é esse tema em cada um?
+
+Ler todos os trabalhos inteiros, um por um, levaria muito tempo. Por isso, buscamos
+uma forma de o computador nos ajudar a **encontrar e organizar** esses trabalhos. Mas,
+como veremos, o computador ajuda a procurar — quem decide é sempre uma pessoa.
+
+#### A primeira ideia (e por que ela não basta)
+A solução óbvia seria: *peça ao computador para procurar a palavra "indígena"*. Onde
+ela aparecer, marque o trabalho. Isso funciona em parte, mas tem dois furos:
+
+1. **Palavras que parecem indicar o tema, mas nem sempre indicam.** Palavras como
+   *"povos"* ou *"tradicional"* aparecem em muitos contextos. "Família tradicional",
+   "métodos tradicionais de ensino", "os povos da Antiguidade" — nada disso é sobre
+   cultura indígena.
+2. **Trabalhos que falam do tema sem usar a palavra exata.** Um TCC pode tratar
+   profundamente da cultura Macuxi sem nunca escrever a palavra "indígena".
+
+Ou seja: a busca simples **erra para os dois lados** — marca trabalhos que não deveria
+e perde trabalhos que deveria encontrar.
+
+#### A ideia melhor: um "dicionário regional" (gazetteer)
+Pense num detetive tentando descobrir de qual cidade veio uma carta anônima. Ele não
+procura uma única palavra — procura **pistas locais**: o nome de uma rua, de um time
+pequeno, de uma comida típica. Foi isso que montamos: uma lista curada de **pistas da
+cultura indígena de Roraima** (no jargão técnico, um **gazetteer**). A nossa reúne:
+
+- **Nomes de povos** — Macuxi, Wapichana, Yanomami, Taurepang, Ye'kwana e outros.
+- **Nomes de lugares** — terras indígenas como Raposa Serra do Sol e São Marcos; "maloca".
+- **Línguas e famílias linguísticas** — Karib, Aruak, "língua macuxi".
+- **Instituições e temas da educação indígena** — Insikiran, escola indígena, magistério indígena.
+
+A grande vantagem: muitas dessas pistas são **inconfundíveis**. Ninguém escreve
+"Yanomami" ou "Macuxi" por acaso — diferente de "tradicional", que pode aparecer em
+qualquer assunto.
+
+#### A sacada principal: nem toda pista vale o mesmo
+Em vez de tratar todas as palavras como prova igual, nós as separamos por **nível de
+confiança**, como faria um detetive ao pesar evidências:
+
+| Nível de confiança | Exemplos | O que significa |
+|---|---|---|
+| **Pista forte** | Macuxi, Yanomami, Raposa Serra do Sol, Insikiran | Praticamente garante que o tema está presente. |
+| **Pista média** | interculturalidade, etnomatemática, tuxaua, pajé | Sugere o tema, mas vale conferir. |
+| **Pista fraca (ambígua)** | povos, tradicional, etnia | **Não conta sozinha.** Só vira indício com uma pista mais forte. |
+
+Um trabalho que menciona "Macuxi" é classificado com segurança. Já um que só diz
+"povos tradicionais" fica marcado como **"precisa de revisão humana"**.
+
+#### O computador procura, mas o ser humano decide
+O computador faz a parte cansativa: varre os trabalhos em segundos e separa três grupos
+— os de **pistas fortes** (alta confiança), os de só **pistas fracas** (zona cinzenta,
+para revisar) e os **sem pista alguma**. Mas a palavra final é sempre de uma pessoa, que
+lê os casos de fronteira. A máquina **estreita o trabalho**; não substitui o julgamento.
+
+#### O que descobrimos ao testar
+Tínhamos colocado a palavra *"indígena"* como **pista fraca**, por achá-la ambígua. Mas,
+ao revisar, percebemos que **neste conjunto específico** — TCCs de licenciatura de
+Roraima, boa parte do curso intercultural Insikiran — a palavra "indígena" quase sempre
+indica mesmo o tema. A lição: **a régua precisa ser ajustada ao material analisado.**
+
+Também notamos que faltavam na lista os **nomes das comunidades indígenas** (como
+Maturuca e Anta II). Incluí-los é o próximo passo — e gera um benefício extra: uma lista
+organizada de comunidades de Roraima, útil para futuras pesquisas do laboratório.
+
+> 💡 As **pistas fortes** (povos e territórios) estão mapeadas na aba **"Povos & territórios"**.
+
+#### Um aviso importante
+Encontrar a palavra **não é o mesmo** que provar que o trabalho gira em torno do tema.
+Um TCC pode citar "Macuxi" de passagem; outro pode ser inteiramente dedicado à cultura
+Macuxi. Por isso, tudo o que esse método produz são **indícios exploratórios** — um mapa
+para guiar a leitura, não uma conclusão pronta.
+
+---
+*Documento produzido no âmbito do LIDAE — Laboratório de Indicadores, Dados e Analítica
+Educacional (NECPF/UFRR).*
+""")
+
     g = f.groupby("grupo_tcc")["tem_indigena"].agg(["sum", "count"]).reset_index()
     g["_o"] = pd.Categorical(g["grupo_tcc"], categories=ORDEM_CURSOS, ordered=True)
     g = g.sort_values("_o").drop(columns="_o")
@@ -848,6 +1060,188 @@ if secao == SECOES[6]:
 
     except Exception as e:
         st.error(f"Erro ao carregar dados de egressos: {e}")
+
+# Aba 8 — Povos & territórios indígenas (gazetteer)
+if secao == SECOES[7]:
+    st.subheader("Povos e territórios indígenas citados")
+    st.caption("Detecção por gazetteer regional de Roraima (etnônimos, terras "
+               "indígenas, topônimos), em título + resumo + palavras-chave. "
+               "Variantes ortográficas agrupadas (ex.: Macuxi/Makuxi). Capta "
+               "MENÇÃO, não a centralidade do tema. Exploratório.")
+    txt_gz = (f["titulo"].fillna("") + " " + f["palavras_chave"].fillna("") + " "
+              + f["resumo"].fillna("")).map(_fold_gz)
+    cpov = conta_gazetteer(txt_gz, GZ_POVOS)
+    cter = conta_gazetteer(txt_gz, GZ_TERRITORIOS)
+
+    cc1, cc2 = st.columns(2)
+    with cc1:
+        st.markdown("**Povos (etnônimos) mais citados**")
+        if not cpov.empty:
+            fig = px.bar(cpov.sort_values("n"), x="n", y="nome", orientation="h",
+                         text="n", color_discrete_sequence=[PALETA[0]])
+            fig.update_layout(showlegend=False, height=max(300, len(cpov) * 34),
+                              xaxis_title="Nº de TCCs que citam", yaxis_title="")
+            st.plotly_chart(fig, use_container_width=True)
+        else:
+            st.info("Nenhum etnônimo citado no filtro atual.")
+    with cc2:
+        st.markdown("**Territórios / Terras Indígenas mais citados**")
+        if not cter.empty:
+            fig = px.bar(cter.sort_values("n"), x="n", y="nome", orientation="h",
+                         text="n", color_discrete_sequence=[PALETA[1]])
+            fig.update_layout(showlegend=False, height=max(300, len(cter) * 34),
+                              xaxis_title="Nº de TCCs que citam", yaxis_title="")
+            st.plotly_chart(fig, use_container_width=True)
+        else:
+            st.info("Nenhum território citado no filtro atual.")
+
+    st.markdown("**Povos citados × curso**")
+    linhas = []
+    for nome, variantes in GZ_POVOS.items():
+        mask = txt_gz.str.contains(_pat_gz(variantes), regex=True)
+        if mask.any():
+            sub = f[mask.values]
+            for curso, n in sub["curso_det"].value_counts().items():
+                linhas.append({"Povo": nome, "Curso": curso, "n": int(n)})
+    if linhas:
+        ct = (pd.DataFrame(linhas)
+              .pivot_table(index="Povo", columns="Curso", values="n",
+                           aggfunc="sum", fill_value=0))
+        fig = px.imshow(ct, text_auto=True, color_continuous_scale=SEQ_NECPF,
+                        aspect="auto")
+        fig.update_layout(height=max(300, len(ct) * 40), xaxis_title="",
+                          yaxis_title="")
+        st.plotly_chart(fig, use_container_width=True)
+    st.caption("⚠️ Menção ≠ centralidade: um TCC pode citar um povo de passagem.")
+
+# Aba 9 — Co-ocorrência de palavras-chave
+if secao == SECOES[8]:
+    st.subheader("Co-ocorrência de palavras-chave")
+    st.caption("Palavras-chave informadas pelos autores (não os tópicos do LDA). "
+               "Agrupadas por forma normalizada (sem acento/caixa); exibe a grafia "
+               "mais frequente.")
+    listas = [kw for kw in f["palavras_chave"].dropna().map(parse_keywords) if kw]
+    freq, grafia = Counter(), {}
+    for kws in listas:
+        for original, chave in {(o, c) for o, c in kws}:
+            freq[chave] += 1
+            grafia.setdefault(chave, Counter())[original] += 1
+    if not freq:
+        st.info("Sem palavras-chave no filtro atual.")
+    else:
+        disp = {k: grafia[k].most_common(1)[0][0] for k in freq}
+        topn = st.slider("Top N palavras-chave", 10, 40, 20, key="kw_n")
+        top = [k for k, _ in freq.most_common(topn)]
+        dfreq = pd.DataFrame({"kw": [disp[k] for k in top],
+                              "n": [freq[k] for k in top]})
+        fig = px.bar(dfreq.sort_values("n"), x="n", y="kw", orientation="h",
+                     text="n", color_discrete_sequence=[PALETA[2]])
+        fig.update_layout(showlegend=False, height=max(320, len(dfreq) * 26),
+                          xaxis_title="Nº de TCCs", yaxis_title="")
+        st.plotly_chart(fig, use_container_width=True)
+
+        st.markdown("**Rede de co-ocorrência** (palavras-chave que aparecem juntas)")
+        min_co = st.slider("Co-ocorrências mínimas para ligar", 1, 5, 2, key="kw_co")
+        topset = set(top)
+        co, nodefreq = Counter(), Counter()
+        for kws in listas:
+            chaves = sorted({c for _, c in kws if c in topset})
+            for c in chaves:
+                nodefreq[c] += 1
+            for i in range(len(chaves)):
+                for j in range(i + 1, len(chaves)):
+                    co[(chaves[i], chaves[j])] += 1
+        G = nx.Graph()
+        for (a, b), w in co.items():
+            if w >= min_co:
+                G.add_edge(a, b, weight=w)
+        for n in list(G.nodes()):
+            G.nodes[n]["size"] = nodefreq[n]
+        G = nx.relabel_nodes(G, {n: disp[n] for n in G.nodes()})
+        figr = fig_rede(G, cor_no=PALETA[2])
+        if figr:
+            st.plotly_chart(figr, use_container_width=True)
+        else:
+            st.info("Nenhuma co-ocorrência atinge o mínimo escolhido.")
+    st.caption(f"⚠️ {int(f['palavras_chave'].isna().sum())} TCCs sem palavras-chave "
+               "no filtro (excluídos).")
+
+# Aba 10 — Rede de bancas examinadoras
+if secao == SECOES[9]:
+    st.subheader("Rede de bancas examinadoras")
+    pct = f["banca_examinadora"].map(_tem_valor).mean() * 100 if len(f) else 0
+    st.caption(f"Co-participação: dois nomes se ligam quando avaliaram o mesmo TCC. "
+               f"Nomes extraídos do campo de banca (texto livre) e limpos (sem "
+               f"titulação/instituição). Preenchido em ~{pct:.0f}% dos TCCs no "
+               "filtro; ausência = lacuna de coleta, não inexistência de banca.")
+    membros_por_tcc, cont = [], Counter()
+    for val in f["banca_examinadora"]:
+        nomes = parse_banca(val)
+        if nomes:
+            membros_por_tcc.append(nomes)
+            for nm in nomes:
+                cont[nm] += 1
+    if not cont:
+        st.info("Sem dados de banca utilizáveis no filtro atual.")
+    else:
+        top = pd.DataFrame(cont.most_common(20), columns=["membro", "n"])
+        st.markdown("**Quem mais participou de bancas**")
+        fig = px.bar(top.sort_values("n"), x="n", y="membro", orientation="h",
+                     text="n", color_discrete_sequence=[PALETA[1]])
+        fig.update_layout(showlegend=False, height=max(320, len(top) * 26),
+                          xaxis_title="Nº de bancas", yaxis_title="")
+        st.plotly_chart(fig, use_container_width=True)
+
+        st.markdown("**Rede de co-participação**")
+        min_b = st.slider("Mínimo de bancas para incluir o membro", 1, 4, 2,
+                          key="bn_min")
+        G = nx.Graph()
+        for nomes in membros_por_tcc:
+            elig = [n for n in nomes if cont[n] >= min_b]
+            for n in elig:
+                G.add_node(n)
+            for i in range(len(elig)):
+                for j in range(i + 1, len(elig)):
+                    if G.has_edge(elig[i], elig[j]):
+                        G[elig[i]][elig[j]]["weight"] += 1
+                    else:
+                        G.add_edge(elig[i], elig[j], weight=1)
+        for n in list(G.nodes()):
+            G.nodes[n]["size"] = cont[n]
+        figr = fig_rede(G, cor_no=PALETA[1])
+        if figr:
+            st.plotly_chart(figr, use_container_width=True)
+        else:
+            st.info("Poucos membros atingem o mínimo escolhido para formar rede.")
+
+# Aba 11 — Orientador × tema (tópico LDA)
+if secao == SECOES[10]:
+    st.subheader("Orientador × tema (tópico LDA)")
+    st.caption("Distribuição dos TCCs de cada orientador recorrente (≥2 TCCs) "
+               "pelos 4 tópicos do LDA. ⚠️ Tópico é indício, não categoria; o N por "
+               "orientador é pequeno — leitura qualitativa.")
+    fo = f[f["orientador"].apply(_tem_valor) & f["topico_dom"].notna()].copy()
+    if fo.empty:
+        st.info("Sem orientador/tópico utilizável no filtro atual.")
+    else:
+        fo["topico_dom"] = fo["topico_dom"].astype(int)
+        rec = fo["orientador"].value_counts()
+        rec = rec[rec >= 2].index.tolist()
+        fo = fo[fo["orientador"].isin(rec)]
+        if fo.empty:
+            st.info("Nenhum orientador com 2+ TCCs (com tópico) no filtro atual.")
+        else:
+            fo["Tópico"] = fo["topico_dom"].map(lambda i: f"T{i}")
+            ct = pd.crosstab(fo["orientador"], fo["Tópico"])
+            ct = ct[[c for c in [f"T{i}" for i in range(4)] if c in ct.columns]]
+            fig = px.imshow(ct, text_auto=True, color_continuous_scale=SEQ_NECPF,
+                            aspect="auto")
+            fig.update_layout(height=max(320, len(ct) * 34), xaxis_title="Tópico",
+                              yaxis_title="")
+            st.plotly_chart(fig, use_container_width=True)
+            st.markdown("**Legenda dos tópicos:**")
+            for i, info in TOPICOS.items():
+                st.markdown(f"- **T{i}** — {info['rotulo']}")
 
 st.markdown("---")
 st.caption("Fonte: 2 formulários de catalogação (Google Forms), consolidados em "
