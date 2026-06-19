@@ -330,7 +330,7 @@ html, body, [class*="css"], [class*="st-"], .stApp, .stMarkdown,
 
 
 @st.cache_data
-def carregar():
+def carregar(_mtime: float = 0.0):
     df = pd.read_csv(CSV)
     df["ano_num"] = pd.to_numeric(df["ano_num"], errors="coerce")
     df["pag_num"] = pd.to_numeric(df["pag_num"], errors="coerce")
@@ -362,7 +362,7 @@ def carregar_por_curso():
     return json.loads(p.read_text(encoding="utf-8"))
 
 
-df = carregar()
+df = carregar(_mtime=CSV.stat().st_mtime)
 N_TOTAL = len(df)
 
 # curso desagregado por habilitação (Insikiran e Letras); usado em filtros e gráficos
@@ -687,7 +687,7 @@ if secao == SECOES[1]:
 
     # ── Metodologia (integrada à aba de Tópicos)
     st.markdown("---")
-    st.subheader("📖 Como descubrimos os 'assuntos' dos TCCs: a técnica LDA")
+    st.subheader("📖 Como descobrimos os 'assuntos' dos TCCs: a técnica LDA")
     st.markdown("""
     #### A pergunta de partida
     Temos mais de uma centena de trabalhos de conclusão de curso (TCCs) das licenciaturas da UFRR.
@@ -1179,6 +1179,28 @@ if secao == SECOES[7]:
                           yaxis_title="")
         st.plotly_chart(fig, use_container_width=True)
     st.caption("⚠️ Menção ≠ centralidade: um TCC pode citar um povo de passagem.")
+
+    # Lista de TCCs filtrada por povo/território
+    st.markdown("---")
+    st.markdown("#### TCCs por povo ou território citado")
+    opcoes_gz = {"Todos": None}
+    for nome in sorted(GZ_POVOS.keys()):
+        opcoes_gz[f"Povo — {nome}"] = ("pov", nome)
+    for nome in sorted(GZ_TERRITORIOS.keys()):
+        opcoes_gz[f"Território — {nome}"] = ("ter", nome)
+    sel_gz = st.selectbox("Filtrar por povo ou território",
+                          list(opcoes_gz.keys()), key="gz_sel")
+    val_gz = opcoes_gz[sel_gz]
+    if val_gz is None:
+        filt_gz = f
+    else:
+        tipo_gz, nome_gz = val_gz
+        variantes_gz = (GZ_POVOS if tipo_gz == "pov" else GZ_TERRITORIOS)[nome_gz]
+        mask_gz = txt_gz.str.contains(_pat_gz(variantes_gz), regex=True)
+        filt_gz = f[mask_gz.values]
+    st.caption(f"{len(filt_gz)} TCC(s) encontrado(s).")
+    lista_tccs(filt_gz, key="gz_tccs",
+               cols=["id", "curso_det", "titulo", "autor", "ano_num"])
 
 # Aba 9 — Co-ocorrência de palavras-chave
 if secao == SECOES[8]:
