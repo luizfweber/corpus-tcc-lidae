@@ -1,52 +1,52 @@
 RELATÓRIO EXPLORATÓRIO — CORPUS TCCs LIDAE/UFRR
 ================================================
-Data: 2026-06-16 | Piloto: 145 TCCs | Natureza: exploratória, não censitária
+Data: 2026-06-16 | Piloto: 211 TCCs | Natureza: exploratória, não censitária
 
 1. CORPUS
-   - 145 TCCs únicos consolidados a partir de 2 formulários Google Forms.
-   - Grupos: Insikiran (72), Pedagogia (28), Música (19), Matemática (15), Letras (6), História (3), LEDUCAR (2).
+   - 211 TCCs únicos consolidados a partir de 2 formulários Google Forms.
+   - Grupos: Insikiran (81), História (48), Pedagogia (29), Música (21), Matemática (15), LEDUCARR (10), Letras (7).
    - Anos com registro: 2016–2026
-     (4 TCCs sem ano informado — excluídos desta contagem).
+     (2 TCCs sem ano informado — excluídos desta contagem).
 
 2. PÁGINAS (mediana por grupo — assimetria justifica mediana)
-   Insikiran: mediana=40 | min=18 | max=104 | n=72
-   Pedagogia: mediana=24 | min=15 | max=49 | n=28
-   Música: mediana=66 | min=36 | max=171 | n=19
+   Insikiran: mediana=43 | min=18 | max=104 | n=81
+   História: mediana=53 | min=34 | max=107 | n=48
+   Pedagogia: mediana=24 | min=15 | max=49 | n=29
+   Música: mediana=62 | min=36 | max=171 | n=21
    Matemática: mediana=50 | min=41 | max=93 | n=15
-   Letras: mediana=44 | min=14 | max=61 | n=6
-   História: mediana=51 | min=48 | max=105 | n=3
-   LEDUCAR: mediana=40 | min=24 | max=55 | n=2
+   LEDUCARR: mediana=28 | min=21 | max=62 | n=10
+   Letras: mediana=42 | min=14 | max=61 | n=7
 
-3. LDA (K=4 tópicos, menor perplexidade)
-   Perplexidades testadas: {4: 492.1, 5: 494.1, 6: 500.6, 7: 506.9, 8: 508.3}
+3. LDA (K=8 tópicos, menor perplexidade)
+   Perplexidades testadas: {4: 491.4, 5: 503.3, 6: 506.6, 7: 518.0, 8: 497.6}
    ATENÇÃO: rótulos abaixo são aproximados e requerem revisão qualitativa.
-   [Tópico A]: educacao, pedagogica, estagio, musica, roraima, musical, pratica, experiencia, coordenacao, vista
-   [Tópico B]: educacao, contexto, vista, tambem, dados, musica, roraima, alem, importancia, escolas
-   [Tópico C]: atividade, problema, matematica, educacao, situacoes, formacao, teoria, estudantes, resolucao, acoes
-   [Tópico D]: indigena, comunidade, indigenas, estadual, proposta, leitura, lingua, conhecimentos, cultura, educacao
+   [Tópico A]: historia, mulheres, roraima, representacao, social, genero, sociais, operacoes, analise, politica
+   [Tópico B]: atividade, problema, situacoes, teoria, resolucao, acoes, estudantes, discente, matematica, galperin
+   [Tópico C]: vista, regiao, roraima, jogos, processo, estado, tambem, musica, amazonia, analise
+   [Tópico D]: pedagogica, coordenacao, indigenas, artesanato, vista, analise, roraima, artesanatos, migrantes, desafios
+   [Tópico E]: comunidade, plantas, medicinais, indigena, moradores, quimica, culturais, tradicional, vista, remedios
+   [Tópico F]: formacao, educacao, docente, contexto, pedagogica, programa, praticas, pratica, processo, residencia
+   [Tópico G]: educacao, estagio, roraima, pedagogia, formacao, experiencia, vista, musical, projeto, musica
+   [Tópico H]: indigena, comunidade, indigenas, estadual, educacao, escolar, lingua, proposta, matematica, conhecimentos
 
-4. CLUSTERING (k=8, silhueta=0.050)
+4. CLUSTERING (k=4, silhueta=0.047)
    Silhueta baixa é esperada em corpus pequeno e texto curto — indica
    fronteiras temáticas porosas, não falha metodológica.
-   C0 (n=11): {'Insikiran': 9, 'Letras': 2}
+   C0 (n=57): {'História': 39, 'Música': 8, 'Letras': 5}
    C1 (n=14): {'Matemática': 14}
-   C2 (n=44): {'Insikiran': 36, 'Pedagogia': 6, 'Letras': 1}
-   C3 (n=21): {'Pedagogia': 18, 'LEDUCAR': 1, 'Música': 1}
-   C4 (n=24): {'Música': 18, 'Insikiran': 2, 'Pedagogia': 2}
-   C5 (n=10): {'Insikiran': 7, 'Pedagogia': 2, 'Letras': 1}
-   C6 (n=9): {'Insikiran': 7, 'Letras': 2}
-   C7 (n=12): {'Insikiran': 11, 'Matemática': 1}
+   C2 (n=85): {'Insikiran': 78, 'História': 3, 'LEDUCARR': 2}
+   C3 (n=55): {'Pedagogia': 27, 'Música': 13, 'LEDUCARR': 6}
 
 5. REDES
-   Orientadores com 2+ TCCs: 30 (86% dos TCCs).
-   TCCs sem banca registrada: 34/145 — campo não preenchido na fonte.
+   Orientadores com 2+ TCCs: 39 (87% dos TCCs).
+   TCCs sem banca registrada: 0/211 — campo não preenchido na fonte.
    Nomes normalizados (títulos removidos); variações residuais podem subsistir.
 
 6. MENÇÃO INDÍGENA
-   48/145 TCCs (33%) mencionam termos indígenas.
-   Critério: lista de 26 termos em título + resumo + palavras-chave.
+   105/211 TCCs (50%) mencionam termos indígenas.
+   Critério: lista de 57 termos em título + resumo + palavras-chave.
    LIMITE: capta MENÇÃO, não centralidade. Falsos positivos/negativos possíveis.
-   Lista completa de termos: indigena, indigenas, indigeno, indigenos, indio, indios, indigenismo, indigenista, intercultur, wapichana, macuxi, yanomami, waiwai, wai wai, insikiran, tuxaua, comunidade indigena, escola indigena, educacao indigena, territorio indigeno, terra indigena, povo indigena, povos indigenas, etnia, etnologia, etnografico.
+   Lista completa de termos: indigena, indigenas, indigeno, indigenos, indio, indios, indigenismo, indigenista, intercultur, wapichana, macuxi, yanomami, waiwai, wai wai, insikiran, tuxaua, comunidade indigena, escola indigena, educacao indigena, territorio indigeno, terra indigena, povo indigena, povos indigenas, etnia, etnologia, etnografico, makuxi, wapixana, taurepang, taulipang, ingariko, ingarico, patamona, yanomame, yanomam, yekwana, ye'kwana, yekuana, maiongong, wai-wai, sapara, zapara, pirititi, waimiri, atroari, warao, raposa serra do sol, raposa-serra do sol, comunidade raposa, sao marcos, malacacheta, tabalascada, serra da moca, ananas, manoa-pium, ponta da serra, boqueirao.
 
 LIMITAÇÕES GERAIS
    - Corpus piloto (128 TCCs) — resultados não generalizáveis ao acervo completo.

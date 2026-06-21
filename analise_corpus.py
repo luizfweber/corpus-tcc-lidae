@@ -80,11 +80,28 @@ def limpa(texto):
     t = re.sub(r"[^a-z\s]", " ", t)
     return " ".join(w for w in t.split() if len(w) >= 4 and w not in STOP_ALL)
 
+_NAO_KW = re.compile(r'^\s*n[ãa]o\s*(info|se aplica)', re.I)
+
+def palavras_chave_limpas(val):
+    """Separa as palavras-chave (detecta o separador por entrada) e remove o
+    rótulo 'Palavras-chave:' embutido — evita injetar tokens 'palavras'/'chave'
+    no modelo. Devolve os termos separados por ' ; '."""
+    if not val or _NAO_KW.match(str(val).strip()):
+        return ""
+    s = re.sub(r'^\s*palavras?[\s-]*chave[\s]*[:\-–]?\s*', '', str(val).strip(),
+               flags=re.I)
+    if ";" in s:    partes = re.split(r"[;\n]", s)
+    elif "\n" in s: partes = s.split("\n")
+    elif "," in s:  partes = s.split(",")
+    else:           partes = s.split(".")
+    termos = [t for t in (p.strip().strip(".;,").strip() for p in partes) if t]
+    return " ; ".join(termos)
+
 for r in rows:
     r["texto"] = limpa(
         (r.get("titulo","") or "") + " " +
         (r.get("resumo","") or "") + " " +
-        (r.get("palavras_chave","") or "")
+        palavras_chave_limpas(r.get("palavras_chave",""))
     )
 
 # ============================================================================
@@ -179,7 +196,7 @@ vec = CountVectorizer(max_df=0.6, min_df=2, max_features=800)
 X = vec.fit_transform(textos)
 vocab = vec.get_feature_names_out()
 
-# testa K 4..8 (corpus pequeno → menos tópicos)
+# testa K 4..8 (perplexidade só para registro/comparação)
 perps = {}
 modelos = {}
 for k in range(4, 9):
@@ -189,9 +206,14 @@ for k in range(4, 9):
     perps[k] = lda.perplexity(X)
     modelos[k] = lda
 
-K_best = min(perps, key=perps.get)
+# K FIXADO em 8 por decisão de leitura (granularidade fina — revela nichos como
+# história/gênero e etnobotânica). Perplexidade é INDÍCIO, não veredito (§4):
+# K=8 (498) fica perto do mínimo K=4 (491). Rótulos exigem revisão qualitativa.
+K_LDA = 8
+K_best = K_LDA
 print(f"  Perplexidades LDA: { {k: round(v,1) for k,v in perps.items()} }")
-print(f"  K escolhido: {K_best}")
+print(f"  K escolhido (fixado por leitura): {K_best}  "
+      f"(perplexidade {perps[K_best]:.0f}; mínimo seria K={min(perps, key=perps.get)})")
 
 lda_final = modelos[K_best]
 termos_top = {}
@@ -427,6 +449,15 @@ TERMOS_INDIGENA = [
     "yanomami","waiwai","wai wai","insikiran","tuxaua","comunidade indigena",
     "escola indigena","educacao indigena","territorio indigeno","terra indigena",
     "povo indigena","povos indigenas","etnia","etnologia","etnografico",
+    # Gazetteer regional de Roraima (povos + territórios) — alinha a detecção
+    # ao gazetteer do dashboard. Nomes próprios inequívocos; "maloca" foi EXCLUÍDO
+    # por ser ambíguo (gerou falso positivo em projeto escolar não indígena).
+    "makuxi","wapixana","taurepang","taulipang","ingariko","ingarico","patamona",
+    "yanomame","yanomam","yekwana","ye'kwana","yekuana","maiongong","wai-wai",
+    "sapara","zapara","pirititi","waimiri","atroari","warao",
+    "raposa serra do sol","raposa-serra do sol","comunidade raposa","sao marcos",
+    "malacacheta","tabalascada","serra da moca","ananas","manoa-pium",
+    "ponta da serra","boqueirao",
 ]
 
 def menciona_indigena(r):

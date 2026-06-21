@@ -1,52 +1,67 @@
 # Análise temática por curso, em camadas — LIDAE/UFRR
 
-Corpus: 145 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · listagem). Exploratório, não censitário.
+Corpus: 211 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · listagem). Exploratório, não censitário.
 
 
 ## 🟢 Camada LDA (N suficiente para sub-temas)
 
-### Insikiran — 72 TCCs · LDA intra-curso (K=2)
-*Seleção de K por estabilidade entre 8 seeds — K2: ARI=0.21 · K3: ARI=0.17 · K4: ARI=0.16. Escolhido K=2 (ARI=0.21).*
-> ⚠️ Estabilidade baixa (ARI=0.21): sub-temas FRÁGEIS, indício a confirmar por leitura — não conclusão.
+### Insikiran — 81 TCCs · LDA intra-curso (K=2)
+*Seleção de K por estabilidade entre 8 seeds — K2: ARI=0.30 · K3: ARI=0.23 · K4: ARI=0.12. Escolhido K=2 (ARI=0.30).*
+> ⚠️ Estabilidade baixa (ARI=0.30): sub-temas FRÁGEIS, indício a confirmar por leitura — não conclusão.
 
-**Sub-tema 1** (50 TCCs) — educacao, indigenas, estadual, escolar, conhecimentos, cultura, matematica, proposta, atividades, pedagogica
+**Sub-tema 1** (40 TCCs) — indigenas, conhecimentos, tradicional, tradicionais, educacao, plantas, tambem, saude, cultura, povo
    - id 140 (2021): O USO DOS ALIMENTOS INDÍGENAS WAPICHANA COMO PRÁTICA PEDAGÓGICA EDUCATIVA NA COMUNIDADE IN
+   - id 106 (2022): PLANTAS NATIVAS COMO MEDICINA TRADICIONAL INDÍGENA DA COMUNIDADE OLHO D’ÁGUA
+   - id 144 (2021): USO POPULAR DAS PLANTAS MEDICINAIS NA COMUNIDADE INDÍGENA LIVRAMENTO, RORAIMA
+
+**Sub-tema 2** (41 TCCs) — matematica, estadual, educacao, proposta, leitura, escolar, indigenas, jogos, atividades, pedagogica
    - id 71 (2022): PROPOSTA PEDAGÓGICA COLHER MILHO NA ROÇA: atividade social indígena como proposta de inter
-   - id 27 (2024): CONSTRUINDO UMA PROPOSTA PEDAGÓGICAS A PARTIR DA ATIVIDADE SOCIAL “CULTIVAR MANIVAS (Manih
-
-**Sub-tema 2** (22 TCCs) — leitura, lingua, jogos, plantas, projeto, conhecimento, escrita, medicinais, material, estadual
    - id 11 (2024): RELATO DE EXPERIÊNCIA: LEITURA E PRODUÇÃO DE JOGOS PEDAGÓGICOS NO ENSINO FUNDAMENTAL I NA 
-   - id 61 (2024): RELATO DE EXPERIÊNCIA NA ESCOLA ESTADUAL INDÍGENA TUXAUA EVARISTO:SOLETRANDO NA ESCOLA
-   - id 54 (2024): ESTRATÉGIAS DE LEITURA E ESCRITA DOS ALUNOS DO 50 ANO DO ENSINO FUNDAMENTAL I DA ESCOLA ES
+   - id 117 (2025): A LUDICIDADE NO ENSINO DA MATEMÁTICANOENSINOFUNDAMEMTAL I
 
 
-### Pedagogia — 28 TCCs · LDA intra-curso (K=3)
-*Seleção de K por estabilidade entre 8 seeds — K2: ARI=0.12 · K3: ARI=0.18. Escolhido K=3 (ARI=0.18).*
-> ⚠️ Estabilidade baixa (ARI=0.18): sub-temas FRÁGEIS, indício a confirmar por leitura — não conclusão.
+### Pedagogia — 29 TCCs · LDA intra-curso (K=2)
+*Seleção de K por estabilidade entre 8 seeds — K2: ARI=0.31 · K3: ARI=0.19. Escolhido K=2 (ARI=0.31).*
+> ⚠️ Estabilidade baixa (ARI=0.31): sub-temas FRÁGEIS, indício a confirmar por leitura — não conclusão.
 
-**Sub-tema 1** (13 TCCs) — educacao, pedagogica, coordenacao, especial, pedagogico, vista, pandemia, covid, municipal, programa
+**Sub-tema 1** (15 TCCs) — pedagogia, educacao, formacao, estagio, processo, pedagogo, infantil, hospitalar, escolar, supervisionado
+   - id 149 (2018): JOGOS E BRINCADEIRAS NO PROCESSO DE APRENDIZAGEM NA PRÉ- ESCOLA
+   - id 32 (2018): JOGOS E BRINCADEIRAS NO PROCESSO DE APRENDIZAGEM NA PRÉ-ESCOLA
+   - id 112 (2019): PEDAGOGIA HOSPITALAR: CLASSE HOSPITALAR NAS UNIDADES PÚBLICAS DE SAÚDE DE ALTA COMPLEXIDAD
+
+**Sub-tema 2** (14 TCCs) — educacao, pedagogica, coordenacao, estagio, vista, experiencia, especial, pedagogico, pandemia, pedagogia
    - id 31 (0000): DESAFIOS E POSSIBILIDADES DA COORDENAÇÃO PEDAGÓGICA EM RORAIMA: UM OLHAR A PARTIR DOS TRAB
    - id 22 (2023): RELAÇÃO PÚBLICO-PRIVADO: INSTITUTO ALFA E BETO E SUA PROPOSTA DE EDUCAÇÃO NA REDE PÚBLICA 
    - id 36 (2019): ATRIBUIÇÕES DO COORDENADOR PEDAGÓGICO NAS ESCOLAS MUNICIPAIS DE BOA VISTA-RR: UMA ANÁLISE 
 
-**Sub-tema 2** (7 TCCs) — educacao, hospitalar, pedagogia, crianca, educacional, autismo, atividades, pedagogo, tambem, infantil
-   - id 112 (2019): PEDAGOGIA HOSPITALAR: CLASSE HOSPITALAR NAS UNIDADES PÚBLICAS DE SAÚDE DE ALTA COMPLEXIDAD
-   - id 113 (2019): PERFIL DOS ESTAGIÁRIOS DO CURSO DE PEDAGOGIA DA UFRR QUE ACOMPANHAM ALUNOS COM AUTISMO EM 
-   - id 32 (2018): JOGOS E BRINCADEIRAS NO PROCESSO DE APRENDIZAGEM NA PRÉ-ESCOLA
 
-**Sub-tema 3** (8 TCCs) — estagio, formacao, pedagogia, supervisionado, experiencia, experiencias, curricular, ufrr, diversidade, processo
-   - id 47 (Não informado): O ESTÁGIO CURRICULAR COMO MOMENTO DE APRENDIZAGEM SOBRE A ATUAÇÃO DO PEDAGOGO EM CONTEXTO 
-   - id 45 (2018): UMA EXPERIÊNCIA DE CONTAÇÃO DE HISTÓRIAS NO ESTÁGIO CURRICULAR SUPERVISIONADO COM FOCO NA 
-   - id 34 (2022): REFLEXÕES SOBRE AS EXPERIÊNCIAS NO ESTÁGIO CURRICULAR DO CURSO DE PEDAGOGIA NAS MODALIDADE
+### História — 48 TCCs · LDA intra-curso (K=3)
+*Seleção de K por estabilidade entre 8 seeds — K2: ARI=0.06 · K3: ARI=0.08 · K4: ARI=0.05. Escolhido K=3 (ARI=0.08).*
+> ⚠️ Estabilidade baixa (ARI=0.08): sub-temas FRÁGEIS, indício a confirmar por leitura — não conclusão.
+
+**Sub-tema 1** (15 TCCs) — roraima, identidade, estado, historia, vista, politica, cultura, social, violencia, cultural
+   - id 202 (2025): A PRECARIZAÇÃO DA VIDA FEMININA: UMA ANÁLISE HISTÓRICA E SOCIAL DE DOIS PROCESSOS-CRIMINAI
+   - id 180 (2022): FEMINICÍDIO NO ESTADO DE RORAIMA DURANTE O CONTEXTO DA PANDEMIA (COVID-19)
+   - id 205 (2025): A BOA E BELA SORTE DE UMA VIDA RORAIMENSE: A LITERATURA COMO MEIO DE DIVULGAR A HISTÓRIA D
+
+**Sub-tema 2** (21 TCCs) — historia, indigenas, educacao, indigena, analise, escolar, roraima, processo, formacao, vista
+   - id 185 (2022): A REPRESENTAÇÃO DOS POVOS INDÍGENAS NAS ICONOGRAFIAS DOS LIVROS DIDÁTICOS DE HISTÓRIA: UMA
+   - id 161 (2021): PATRIMÔNIO CULTURAL: A IMPORTÂNCIA DO FESTIVAL DO BEIJU (2005 - 2019) COMO VALORIZAÇÃO HIS
+   - id 208 (2025): MEMÓRIAS QUE RESISTEM: A REPRESENTAÇÃO DAS MULHERES INDÍGENAS NAS CARTAS DO PROJETO “MULHE
+
+**Sub-tema 3** (12 TCCs) — vista, processo, regiao, roraima, dentro, ocupacao, desintrusao, terra, desenvolvimento, amazonia
+   - id 156 (2021): DEVOÇÃO LEIGA NA AMAZÔNIA SETECENTISTA: A IRMANDADE DO SANTÍSSIMO SACRAMENTO DA VILA DE BA
+   - id 194 (2023): MAPEAMENTO PRELIMINAR DO PROCESSO DE DESINTRUSÃO DAS FRENTES DE GARIMPAGEM DAS TERRAS YANO
+   - id 176 (2022): DEVOÇÃO NEGRA NA AMAZÔNIA PORTUGUESA: A IRMANDADE DE SÃO BENEDITO DA VILA DE SANTARÉM, CAP
 
 
 
 ## 🟠 Camada descritiva (N médio — termos + leitura)
 
-### Música — 19 TCCs · descritivo (sem LDA)
+### Música — 21 TCCs · descritivo (sem LDA)
 *N insuficiente para modelagem de tópicos; reporta-se a frequência documental dos termos e a lista de trabalhos.*
 
-**Termos mais recorrentes (nº de TCCs):** musica (17), musical (13), analise (12), vista (12), educacao (12), pratica (11), roraima (10), contexto (10), dados (9), musicais (9), praticas (9), resultados (9), alem (8), bibliografica (8), atraves (8)
+**Termos mais recorrentes (nº de TCCs):** musica (19), musical (15), educacao (14), vista (13), analise (12), contexto (11), roraima (11), pratica (11), dados (10), praticas (10), resultados (10), musicais (9), alem (9), formacao (9), entrevistas (8)
 
 **Trabalhos:**
    - id 92 (2017): O EMPRÉSTIMO MODAL RECORRENTE NO POP ROCK DOS ANOS 1980
@@ -57,12 +72,14 @@ Corpus: 145 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
    - id 94 (2019): Práticas de canto no Curso de Licenciatura em Música da UFRR: impactos na atuação do licen
    - id 98 (2019): A IMPORTÂNCIA DA REGÊNCIA NAS AULAS DE MÚSICA NA EDUCAÇÃO BÁSICA
    - id 108 (2019): A COLABORAÇÃO PIANÍSTICA NO CORO DA IGREJA BATISTA REGULAR DE BOA VISTA: COMPETÊNCIAS EXER
+   - id 211 (2019): PRODUÇÕES CIENTÍFICAS ACERCA DA EDUCAÇÃO MUSICAL NO PROCESSO DE INCLUSÃO DE PESSOAS COM DE
    - id 83 (2020): CONTRABAIXO ELÉTRICO: UM ESTUDO DAS LEVADAS EM QUATRO GÊNEROS MUSICAIS DA REGIÃO NORTE
    - id 85 (2021): PRÁTICAS INFORMAIS DE APRENDIZAGEM MUSICAL NA FORMAÇÃO DISCENTE DO CURSO DE LICENCIATURA E
    - id 87 (2021): MÚSICA E MOVIMENTO: "O PASSO" COMO POSSIBILIDADE INTERDISCIPLINAR ENTRE MÚSICA E EDUCAÇÃO 
    - id 95 (2021): MÚSICAS REGIONALISTAS DO FESTIVAL CANTO FORTE: ATIVIDADES PARA O ENSINO DE MÚSICA NA EDUCA
    - id 97 (2021): FESTIVAL FOLCLÓRICO DE CARACARAÍ: A PERCUSSÃO NOS GRUPOS COBRA MARIANA E GAVIÃO CARACARÁ
    - id 109 (2022): MÚSICA INDÍGENA PARA FLAUTA DOCE: POSSIBILIDADES DIDÁTICAS COM MUSICALIDADES DE QUATRO EST
+   - id 212 (2022): COMPREENSSÕES ACERCA DO ENSINO REMOTO EMERGENCIAL DO CURSO DE LICENCIATURA EM MÚSICA DA UF
    - id 90 (2024): ENSINO E APRENDIZAGEM DE MÚSICA ATRAVÉS DE PRÁTICAS DE CANTO CORAL NA IGREJA BATISTA REGUL
    - id 82 (2025): ESCOLAS DE SAMBA EM BOA VISTA (RR): UM ESTUDO A PARTIR DAS MEMÓRIAS DE PRATICANTES DE DUAS
    - id 86 (2025): PRÁTICAS DE ENSINO DE MÚSICA: EXPERIÊNCIA DE FORMAÇÃO DOCENTE NO PROGRAMA RESIDÊNCIA PEDAG
@@ -72,7 +89,7 @@ Corpus: 145 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
 ### Matemática — 15 TCCs · descritivo (sem LDA)
 *N insuficiente para modelagem de tópicos; reporta-se a frequência documental dos termos e a lista de trabalhos.*
 
-**Termos mais recorrentes (nº de TCCs):** teoria (14), acoes (14), problema (14), atividade (14), situacoes (14), estudantes (13), galperin (13), resolucao (13), fundamental (11), matematica (11), processo (11), analisar (10), formacao (10), conteudo (10), mentais (10)
+**Termos mais recorrentes (nº de TCCs):** teoria (14), atividade (14), acoes (14), problema (14), situacoes (14), galperin (13), estudantes (13), resolucao (13), matematica (11), processo (11), fundamental (11), mentais (10), analisar (10), formacao (10), conteudo (10)
 
 **Trabalhos:**
    - id 4 (2016): A APRENDIZAGEM DA ATIVIDADE DE SITUAÇÕES PRO-BLEMA EM SISTEMA DE EQUAÇÕES LINEARES FUNDA-M
@@ -94,25 +111,27 @@ Corpus: 145 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
 
 ## 🔴 Camada listagem (N ínfimo — sem modelagem)
 
-### Letras — 6 TCCs · listagem (sem análise)
-*N ínfimo (6): qualquer modelagem seria artefato (CLAUDE.md §1). Apenas identificação.*
+### Letras — 7 TCCs · listagem (sem análise)
+*N ínfimo (7): qualquer modelagem seria artefato (CLAUDE.md §1). Apenas identificação.*
 
-   - id 12 (2022): O LÉXICO RORAIMENSE NAS REDES SOCIAIS LOCAIS – KABOCANDO1
+   - id 12 (2022): O LÉXICO RORAIMENSE NAS REDES SOCIAIS LOCAIS – KABOCANDO
    - id 13 (2022): O QUE É UM VERBO? GRAMÁTICA, CONCORDÂNCIA VERBAL E FUNCIONALISMO LINGUÍSTICO: UM OLHAR SOBRE O ENSINO DA LÍNGU
    - id 15 (2022): TENTATIVAS DE SUICÍDIO ENTRE INGRESSOS E EGRESSOS DOS CURSOS DE LETRAS DA UNIVERSIDADE FEDERAL DE RORAIMA: FAT
    - id 16 (2022): THE CREOLE AND THE STANDARD LANGUAGE SPOKEN AT ELEMENTARY SCHOOLS IN ENGLISH GUYANA
    - id 17 (2022): THE HONEST TRUTH: TRANSLATION METHODS OVERVIEW
+   - id 148 (2022): O LÉXICO RORAIMENSE NAS REDES SOCIAIS LOCAIS – KABOCANDO1
    - id 14 (2023): PAPÉIS SOCIAIS DE GÊNERO NO LIVRO MULHERZINHAS, DE LOUISA MAY ALCOTT
 
-### História — 3 TCCs · listagem (sem análise)
-*N ínfimo (3): qualquer modelagem seria artefato (CLAUDE.md §1). Apenas identificação.*
-
-   - id 145 (2023): UM SONHO EM DAR RECADOS DE LONGE: A CHEGADA DA COMPANHIA TELEFÔNICA RORAIMENSE – CTR (DE 1966 A 1973)
-   - id 146 (2023): OPERAÇÃO ACOLHIDA: A ESTRATÉGIA DE INTERIORIZAÇÃO E AS DIFICULDADES DE ACESSO E IMPLEMENTAÇÃO PARA OS INDÍGENA
-   - id 147 (2023): O SERVIÇO NACIONAL DE INFORMAÇÕES E A ESPIONAGEM À IGREJA CATÓLICA EM RORAIMA: DA DITADURA À REDEMOCRATIZAÇÃO
-
-### LEDUCAR — 2 TCCs · listagem (sem análise)
-*N ínfimo (2): qualquer modelagem seria artefato (CLAUDE.md §1). Apenas identificação.*
+### LEDUCARR — 10 TCCs · listagem (sem análise)
+*N ínfimo (10): qualquer modelagem seria artefato (CLAUDE.md §1). Apenas identificação.*
 
    - id 19 (2023): AS CONTRIBUIÇÕES DO PROGRAMA INSTITUCIONAL DE BOLSA DE INICIAÇÃO À DOCÊNCIA-PIBID PARA A FORMAÇÃO DOCENTE DOS 
+   - id 189 (2023): EDUCAÇÃO ESCOLAR INDÍGENA E A GARANTIA À INTERCULTURALIDADE: uma análise a partir da Escola Estadual Indígena 
    - id 129 (2024): DA TERRA AO CONHECIMENTO: UMA PROPOSTA INTERDISCIPLINAR PARA A FORMAÇÃO CONTINUADA DE PROFESSORES DA EDUCAÇÃO 
+   - id 186 (2024): DA TERRA AO CONHECIMENTO: UMA PROPOSTA INTERDISCIPLINAR PARA FORMAÇÃO CONTINUADA DE PROFESSORES DA EDUCAÇÃO DE
+   - id 191 (2024): LUDICIDADE E FORMAÇÃO DOCENTE: TEM JOGO NO RESIDÊNCIA PEDAGÓGICA?
+   - id 192 (2024): O uso dos mapas mentais no ensino de Geografia no IFRR- Campus Amajari/RR".
+   - id 193 (2024): OS DESAFIOS À PERMANÊNCIA E AS CAUSAS DA EVASÃO NO ENSINO MÉDIO EM UMA ESCOLA DO CAMPO EM IRACEMA/RR.
+   - id 187 (2025): DESIGUALDADES SOCIAIS, MACHISMO E OPRESSÃO EM QUARTO DE DESPEJO E ONDE ESTAES FELICIDADE?
+   - id 188 (2025): EDUCAÇÃO DO CAMPO EM RORAIMA: REFLEXÕES SOBRE OS DESAFIOS DA ESCOLA ESTADUAL ALBINO TAVARES
+   - id 190 (2026): HISTÓRIA DA ESCOLA ESTADUAL INDÍGENA SIMINIYO’ NA COMUNIDADE INDÍGENA CANTAGALO, MUNICÍPIO DE PACARAIMA-RR

@@ -7,12 +7,12 @@ Por que por curso: o LDA global apenas redescobria a divisão entre cursos
 (Tópico≈Música, Tópico≈Insikiran). Olhar DENTRO de cada curso revela sub-temas
 reais — mas só onde há documentos suficientes (CLAUDE.md §1, §2, §4).
 
-TRÊS CAMADAS, segundo o N de cada curso:
-  • LDA (N alto):        Insikiran (72) e Pedagogia (30, exploratório).
+TRÊS CAMADAS, segundo o N de cada curso (atualizado p/ 211 TCCs, 2026-06-19):
+  • LDA (N alto):        Insikiran (81), História (47) e Pedagogia (29).
                           K pequeno, escolhido por ESTABILIDADE (ARI entre seeds).
-  • Descritivo (N médio): Música (19), Matemática (15). Sem LDA — termos mais
+  • Descritivo (N médio): Música (21), Matemática (15). Sem LDA — termos mais
                           frequentes + listagem. Modelar tópicos aqui seria ruído.
-  • Listagem (N ínfimo):  Letras (6), História (3), LEDUCAR (2). Nenhuma
+  • Listagem (N ínfimo):  LEDUCARR (10), Letras (7). Nenhuma
                           modelagem — só identificação dos trabalhos.
 
 Gera DOIS artefatos (mesma fonte de verdade):
@@ -37,9 +37,9 @@ CSV  = BASE / "outputs" / "corpus_tccs_consolidado.csv"
 OUT_MD   = BASE / "outputs" / "analise" / "analise_por_curso.md"
 OUT_JSON = BASE / "outputs" / "analise" / "analise_por_curso.json"
 
-LDA_CURSOS = {"Insikiran": (2, 4), "Pedagogia": (2, 3)}
+LDA_CURSOS = {"Insikiran": (2, 4), "Pedagogia": (2, 3), "História": (2, 4)}
 DESCRITIVO = ["Música", "Matemática"]
-LISTAGEM   = ["Letras", "História", "LEDUCAR"]
+LISTAGEM   = ["Letras", "LEDUCARR"]
 
 SEEDS_EST = list(range(8))
 MAX_ITER  = 40
@@ -76,10 +76,25 @@ def limpa(texto):
     return " ".join(w for w in t.split() if len(w) >= 4 and w not in STOP_ALL)
 
 
+_NAO_KW = re.compile(r'^\s*n[ãa]o\s*(info|se aplica)', re.I)
+
+def palavras_chave_limpas(val):
+    """Separa as palavras-chave e remove o rótulo 'Palavras-chave:' embutido."""
+    if not val or _NAO_KW.match(str(val).strip()):
+        return ""
+    s = re.sub(r'^\s*palavras?[\s-]*chave[\s]*[:\-–]?\s*', '', str(val).strip(),
+               flags=re.I)
+    if ";" in s:    partes = re.split(r"[;\n]", s)
+    elif "\n" in s: partes = s.split("\n")
+    elif "," in s:  partes = s.split(",")
+    else:           partes = s.split(".")
+    return " ; ".join(t for t in (p.strip().strip(".;,").strip() for p in partes) if t)
+
+
 def texto_de(r):
     return limpa((r.get("titulo", "") or "") + " " +
                  (r.get("resumo", "") or "") + " " +
-                 (r.get("palavras_chave", "") or ""))
+                 palavras_chave_limpas(r.get("palavras_chave", "")))
 
 
 def titulo_limpo(r):

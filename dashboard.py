@@ -77,22 +77,24 @@ pio.templates["necpf"] = _necpf
 pio.templates.default = "plotly+necpf"
 
 # ─────────────────────────────────────────────────────────────────────────────
-# HABILITAÇÕES — só os cursos AGREGADOS em grupo_tcc (Insikiran, Letras) têm
-# sub-habilitação distinta nos TCCs (CLAUDE.md §5). Mapeia curso_fonte → rótulo;
+# HABILITAÇÕES — cursos AGREGADOS em grupo_tcc (Insikiran, LEDUCARR, Letras) têm
+# sub-habilitação distinta (CLAUDE.md §5). Mapeia curso_fonte → rótulo;
 # os demais cursos permanecem pelo grupo_tcc.
 # ─────────────────────────────────────────────────────────────────────────────
 SPLIT_HABILITACAO = {
     "Insikiran – Ciências da Natureza": "Insikiran — Ciências da Natureza",
     "Insikiran – Ciências Sociais":     "Insikiran — Ciências Sociais",
     "Insikiran – Comunicação e Artes":  "Insikiran — Comunicação e Artes",
+    "LEDUCARR – Ciências Humanas e Sociais":        "LEDUCARR — Ciências Humanas e Sociais",
+    "LEDUCARR – Ciências da Natureza e Matemática": "LEDUCARR — Ciências da Natureza e Matemática",
     "Letras – Inglês":                  "Letras — Inglês (nova estrutura)",
     "Letras – Português":               "Letras — Português (nova estrutura)",
     "Letras – Curso anterior":          "Letras — Hab. Literatura/Português (antiga)",
 }
 
 def curso_habilitacao(row):
-    """Rótulo de curso desagregado por habilitação (só Insikiran e Letras)."""
-    if row["grupo_tcc"] in ("Insikiran", "Letras"):
+    """Rótulo de curso desagregado por habilitação (Insikiran, LEDUCARR e Letras)."""
+    if row["grupo_tcc"] in ("Insikiran", "LEDUCARR", "Letras"):
         return SPLIT_HABILITACAO.get(row["curso_fonte"], row["grupo_tcc"])
     return row["grupo_tcc"]
 
@@ -114,18 +116,31 @@ def limpa_nome(s):
                 "", s, flags=re.I)
     # remove "em Educação" e similares no final
     s = re.sub(r"\s+(?:em|de Educação|de Educación|de Estudo).*$", "", s, flags=re.I)
-    # remove diacríticos
-    s = unicodedata.normalize("NFKD", s)
-    s = "".join(c for c in s if not unicodedata.combining(c))
+    # PRESERVA acentos na exibição (CLAUDE.md §6 — a grafia é mantida).
+    # A remoção de diacríticos ocorre apenas em norm_nome_agressiva (fuzzy matching).
     # remove TODOS os pontos (incluindo iniciais de nomes: J.C. → JC)
     s = s.replace(".", " ")
-    # remove pontuação exceto espaço
-    s = re.sub(r"[^\w\s]", " ", s)
+    # remove pontuação exceto espaço e apóstrofo (preserva d'Acampora, d'Ávila)
+    s = re.sub(r"[^\w\s'’]", " ", s)
     # colapsa espaços
     s = re.sub(r"\s+", " ", s).strip()
-    # capitaliza (Title Case)
-    s = " ".join(w.capitalize() for w in s.split() if w)
+    # Title Case com conectivos em minúscula (de, da, dos…) e apóstrofo correto
+    s = " ".join(_title_palavra(w, i == 0) for i, w in enumerate(s.split()) if w)
     return s
+
+# conectivos de nomes próprios em português — minúsculos (exceto se 1ª palavra)
+_CONECTIVOS_NOME = {"de", "da", "do", "das", "dos", "e"}
+
+def _title_palavra(w, primeira):
+    """Capitaliza uma palavra de nome; conectivos em minúscula; trata d'Acampora."""
+    wl = w.lower()
+    if not primeira and wl in _CONECTIVOS_NOME:
+        return wl
+    for ap in ("'", "’"):
+        if ap in w:
+            a, b = w.split(ap, 1)
+            return a.lower() + ap + (b[:1].upper() + b[1:].lower() if b else "")
+    return w[:1].upper() + w[1:].lower()
 
 def norm_nome_agressiva(s):
     """Normaliza para fuzzy matching (uppercase, sem diacríticos)."""
@@ -168,24 +183,41 @@ def consolida_nomes(nomes_list, threshold=85):
 
 # Rótulos LDA — APROXIMADOS, derivados dos 10 termos mais prováveis.
 # Edite as leituras conforme revisão qualitativa.
-# Atualizado com K=4 (145 TCCs, após consolidar 2 duplicatas) — rótulos PROVISÓRIOS.
+# Atualizado com K=8 (211 TCCs, re-treino 2026-06-20 com palavras-chave separadas
+# e limpas; K fixado por leitura) — rótulos PROVISÓRIOS.
 TOPICOS = {
-    0: {"rotulo": "Música, estágio e prática pedagógica (provisório)",
-        "leitura": "educação musical, estágio, experiência e prática docente",
-        "termos": "educacao, pedagogica, estagio, musica, roraima, musical, "
-                  "pratica, experiencia, coordenacao, vista"},
-    1: {"rotulo": "Educação e contextos escolares — difuso (provisório)",
-        "leitura": "tópico heterogêneo (música, escolas, dados/contexto)",
-        "termos": "educacao, contexto, vista, tambem, dados, musica, roraima, "
-                  "alem, importancia, escolas"},
-    2: {"rotulo": "Matemática — Teoria Histórico-Cultural (provisório)",
-        "leitura": "atividade de situações-problema, Galperin, resolução",
-        "termos": "atividade, problema, matematica, educacao, situacoes, "
-                  "formacao, teoria, estudantes, resolucao, acoes"},
-    3: {"rotulo": "Educação escolar indígena (provisório)",
-        "leitura": "comunidade, cultura, língua, leitura, saberes indígenas",
-        "termos": "indigena, comunidade, indigenas, estadual, proposta, leitura, "
-                  "lingua, conhecimentos, cultura, educacao"},
+    0: {"rotulo": "História, gênero e mulheres (provisório)",
+        "leitura": "história social/política de Roraima, gênero, representação das mulheres",
+        "termos": "historia, mulheres, roraima, representacao, social, genero, "
+                  "sociais, operacoes, analise, politica"},
+    1: {"rotulo": "Matemática — Teoria Histórico-Cultural (provisório)",
+        "leitura": "atividade de situações-problema, etapas de Galperin, resolução",
+        "termos": "atividade, problema, situacoes, teoria, resolucao, acoes, "
+                  "estudantes, discente, matematica, galperin"},
+    2: {"rotulo": "Boa Vista, região amazônica e jogos (provisório)",
+        "leitura": "contexto roraimense/amazônico, jogos e música — tópico difuso",
+        "termos": "vista, regiao, roraima, jogos, processo, estado, tambem, "
+                  "musica, amazonia, analise"},
+    3: {"rotulo": "Prática pedagógica, artesanato e migração (provisório)",
+        "leitura": "coordenação pedagógica, artesanato indígena, migrantes — tópico pequeno",
+        "termos": "pedagogica, coordenacao, indigenas, artesanato, vista, analise, "
+                  "roraima, artesanatos, migrantes, desafios"},
+    4: {"rotulo": "Plantas medicinais e saberes tradicionais (provisório)",
+        "leitura": "etnobotânica, plantas/remédios medicinais, química, conhecimento tradicional",
+        "termos": "comunidade, plantas, medicinais, indigena, moradores, quimica, "
+                  "culturais, tradicional, vista, remedios"},
+    5: {"rotulo": "Formação docente e residência pedagógica (provisório)",
+        "leitura": "formação de professores, programas (PIBID/residência), prática docente",
+        "termos": "formacao, educacao, docente, contexto, pedagogica, programa, "
+                  "praticas, pratica, processo, residencia"},
+    6: {"rotulo": "Pedagogia, estágio e educação musical (provisório)",
+        "leitura": "estágio supervisionado, experiência na pedagogia e na música",
+        "termos": "educacao, estagio, roraima, pedagogia, formacao, experiencia, "
+                  "vista, musical, projeto, musica"},
+    7: {"rotulo": "Educação escolar indígena (provisório)",
+        "leitura": "comunidade, escola e língua indígena (96% com menção indígena)",
+        "termos": "indigena, comunidade, indigenas, estadual, educacao, escolar, "
+                  "lingua, proposta, matematica, conhecimentos"},
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -208,7 +240,8 @@ GZ_POVOS = {
     "Warao": ["warao"],
 }
 GZ_TERRITORIOS = {
-    "Raposa Serra do Sol": ["raposa serra do sol", "raposa-serra do sol"],
+    "Raposa Serra do Sol": ["raposa serra do sol", "raposa-serra do sol",
+                            "comunidade raposa"],
     "São Marcos": ["sao marcos"],
     "Terra Indígena Yanomami": ["terra indigena yanomami"],
     "Malacacheta": ["malacacheta"],
@@ -262,16 +295,50 @@ def parse_keywords(s):
         out.append((original, chave))
     return out
 
+_NAO_KW = re.compile(r'^\s*n[ãa]o\s*(info|se aplica)', re.I)
+
+def split_palavras_chave(val):
+    """Separa as palavras-chave preservando a grafia, detectando o separador por
+    entrada (; , quebra de linha ou ponto). Espelha o relatorio_palavras_chave.xlsx."""
+    if not _tem_valor(val):
+        return []
+    s = str(val).strip()
+    if _NAO_KW.match(s):
+        return []
+    s = re.sub(r'^\s*palavras?[\s-]*chave[\s]*[:\-–]?\s*', '', s, flags=re.I)
+    if ";" in s:
+        partes = re.split(r"[;\n]", s)
+    elif "\n" in s:
+        partes = s.split("\n")
+    elif "," in s:
+        partes = s.split(",")
+    else:
+        partes = s.split(".")
+    return [t for t in (p.strip().strip(".;,").strip() for p in partes) if t]
+
 _INST_KW = ("universidade", "federal", "instituto", "faculdade", "campus",
             "departamento", "ufrr", "uerr", "ifrr", "secretaria", "colegiado")
+
+_TITULO_BANCA = re.compile(
+    r'^[\s,;\.ª°]*(?:Professor[a]?\s*(?:Dr\.?a?\.?\s*|Me\.?\s*|M\.?Sc\.?\s*)?'
+    r'|Prof\.?[ao]?\.?\s*(?:Dr\.?a?\.?\s*|Me\.?\s*|M\.?Sc\.?\s*|MSc\.?\s*|Mcs\.?\s*|Mc\.?\s*)?'
+    r'|Dr\.?[ao]?\.?\s*|Me\.?\s*|M\.?Sc\.?\s*|MSc\.?\s*|Mcs\.?\s*|Mc\.?\s*'
+    r'|Esp(?:ecialista)?\.?\s*|Mestre\s*|Doutor[a]?\s*)+',
+    re.IGNORECASE
+)
+_NAO_INFO = re.compile(r'^n[ãa]o\s*inform', re.IGNORECASE)
 
 def parse_banca(val):
     """Extrai nomes de examinadores do campo de banca (texto livre)."""
     if not _tem_valor(val):
         return []
     seen, out = set(), []
-    for p in re.split(r"[;\n]|,| e ", str(val)):
-        nm = limpa_nome(p)
+    for p in re.split(r"[;\n|]|,| e ", str(val)):
+        p = p.strip()
+        if not p or _NAO_INFO.match(p):
+            continue
+        nm = _TITULO_BANCA.sub('', p).strip()
+        nm = limpa_nome(nm)
         if not nm:
             continue
         low = _fold_gz(nm)
@@ -365,7 +432,7 @@ def carregar_por_curso():
 df = carregar(_mtime=CSV.stat().st_mtime)
 N_TOTAL = len(df)
 
-# curso desagregado por habilitação (Insikiran e Letras); usado em filtros e gráficos
+# curso desagregado por habilitação (Insikiran, LEDUCARR e Letras); usado em filtros e gráficos
 df["curso_det"] = df.apply(curso_habilitacao, axis=1)
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -381,7 +448,8 @@ ROTULOS_COLS = {
     "titulo": "Título", "autor": "Autor",
     "orientador": "Orientador", "pesquisador": "Pesquisador",
     "ano_num": "Ano", "pag_num": "Páginas", "topico_rotulo": "Tópico",
-    "tem_indigena": "Menção indígena",
+    "tem_indigena": "Menção indígena", "situacao_banca": "Situação banca",
+    "n_membros_banca": "Nº membros",
 }
 
 
@@ -418,13 +486,36 @@ def lista_tccs(dados, key, cols):
                  use_container_width=True, hide_index=True, height=340)
 
 
+def lista_faltando(dados, col, rotulo, key):
+    """Expander com os TCCs sem o campo `col` no cadastro do NECPF.
+    Ausência = lacuna de coleta, não inexistência (CLAUDE.md §2 — não imputar)."""
+    if col in ("ano_num", "pag_num"):
+        falta = dados[dados[col].isna()]
+    else:
+        falta = dados[~dados[col].apply(_tem_valor)]
+    n = len(falta)
+    with st.expander(f"🔎 TCCs sem {rotulo} cadastrado — {n}", expanded=False):
+        if n == 0:
+            st.success(f"Todos os TCCs do filtro têm {rotulo} cadastrado.")
+            return
+        st.caption("Lacuna no cadastro do NECPF — não inexistência. "
+                   "Excluídos das estatísticas do campo (CLAUDE.md §2).")
+        cols = [c for c in ["id", "curso_det", "titulo", "autor", "ano_num",
+                            "orientador"] if c in falta.columns]
+        d = falta[cols].copy()
+        if "ano_num" in d.columns:
+            d["ano_num"] = d["ano_num"].apply(lambda x: "" if pd.isna(x) else str(int(x)))
+        st.dataframe(d.rename(columns=ROTULOS_COLS),
+                     use_container_width=True, hide_index=True)
+
+
 # ── Cabeçalho ────────────────────────────────────────────────────────────────
 st.title("📚 Corpus de TCCs — Licenciaturas UFRR")
 st.caption("Laboratório de Indicadores, Dados e Analítica Educacional · LIDAE/NECPF · "
            "Piloto exploratório")
 st.info("**Análise exploratória, não censitária.** Cada número é indício a "
         "interpretar, não conclusão. Corpus-piloto desbalanceado — grupos com "
-        "poucos TCCs (LEDUCAR, Letras) têm estatísticas instáveis.")
+        "poucos TCCs (LEDUCARR, Letras) têm estatísticas instáveis.")
 
 # ── Navegação (menu lateral com ícones) ──
 SECOES = ["Distribuição", "Tópicos (LDA)", "Por curso", "Menção indígena",
@@ -461,6 +552,10 @@ else:
     sel_anos = None
 
 so_indigena = st.sidebar.checkbox("Apenas com menção indígena")
+so_com_banca = st.sidebar.checkbox("Apenas com banca cadastrada",
+                                   help="Mostra só TCCs cuja banca examinadora "
+                                        "foi registrada no cadastro do NECPF (exclui "
+                                        "vazios e 'não informado').")
 incluir_sem_ano = st.sidebar.checkbox("Incluir TCCs sem ano informado",
                                       value=True)
 
@@ -473,6 +568,8 @@ if sel_anos:
     f = f[mask_ano]
 if so_indigena:
     f = f[f["tem_indigena"]]
+if so_com_banca:
+    f = f[f["banca_examinadora"].apply(_tem_valor)]
 
 st.sidebar.markdown("---")
 st.sidebar.metric("TCCs no filtro", f"{len(f)} / {N_TOTAL}")
@@ -500,7 +597,7 @@ def tem_banca(s):
     return s not in ("", "nan", "Não informado", "Não se aplica", "Não")
 pct_banca = f["banca_examinadora"].apply(tem_banca).mean() * 100
 c5.metric("Com banca registrada", f"{pct_banca:.0f}%",
-          help="Campo vindo das fontes; ausência = lacuna de coleta, "
+          help="Campo do cadastro do NECPF; ausência = lacuna de coleta, "
                "não inexistência de banca.")
 n_pesq = f["pesquisador"].nunique()
 c6.metric("Pesquisadores", n_pesq,
@@ -514,7 +611,7 @@ st.markdown("---")
 # Aba 1 — Distribuição
 if secao == SECOES[0]:
     st.subheader("TCCs por curso (com habilitações)")
-    st.caption("Insikiran e Letras aparecem desagregados por habilitação; "
+    st.caption("Insikiran, LEDUCARR e Letras aparecem desagregados por habilitação; "
                "os demais cursos não têm sub-habilitação no corpus.")
     fcd = f.copy()
     fcd["curso_det"] = fcd.apply(curso_habilitacao, axis=1)
@@ -564,7 +661,10 @@ if secao == SECOES[0]:
                "filtros da barra lateral.")
 
     _ano = pd.read_csv(BASE / "dados" / "egressos_por_ano.csv")
-    _cursos = sorted(_ano["curso_det"].dropna().unique())
+    # exclui habilitações não informadas (egressos sem habilitação atribuível —
+    # não entram na cobertura por habilitação; CLAUDE.md §2: não imputar)
+    _cursos = sorted(c for c in _ano["curso_det"].dropna().unique()
+                     if "habilitação não informada" not in str(c).lower())
     sel_curso = st.selectbox("Curso (com habilitação)", _cursos, key="cob_curso_ano")
 
     # casa a nomenclatura dos TCCs (curso_fonte) com a dos egressos PROEG (curso_det)
@@ -575,8 +675,8 @@ if secao == SECOES[0]:
         "Letras – Inglês": "Letras — Português/Inglês",
         "Letras – Português": "Letras — Português",
         "Letras – Curso anterior": "Letras — Antiga estrutura curricular",
-        "LEDUCAR – Ciências Humanas e Sociais": "LEDUCAR — Ciências Humanas e Sociais",
-        "LEDUCAR – Ciências da Natureza e Matemática": "LEDUCAR — Ciências da Natureza e Matemática",
+        "LEDUCARR – Ciências Humanas e Sociais": "LEDUCARR — Ciências Humanas e Sociais",
+        "LEDUCARR – Ciências da Natureza e Matemática": "LEDUCARR — Ciências da Natureza e Matemática",
     }
     _dft = df.copy()
     _dft["_det"] = _dft.apply(
@@ -625,7 +725,7 @@ if secao == SECOES[0]:
 
     st.subheader("Páginas por curso (mediana)")
     st.caption("Agrupado por curso/habilitação — fonte: coluna `curso_fonte` "
-               "(Insikiran e Letras desagregados). Mediana, não média (CLAUDE.md §7).")
+               "(Insikiran, LEDUCARR e Letras desagregados). Mediana, não média (CLAUDE.md §7).")
     pgd = fcd.dropna(subset=["pag_num"])
     if not pgd.empty:
         ordem_det = pgd["curso_det"].value_counts().index.tolist()
@@ -644,31 +744,34 @@ if secao == SECOES[0]:
                cols=["id", "curso_det", "titulo", "autor", "ano_num",
                      "pag_num", "pesquisador"])
 
+    st.markdown("---")
+    lista_faltando(f, "ano_num", "ano de defesa", "falta_ano")
+    lista_faltando(f, "pag_num", "nº de páginas", "falta_pag")
+
 # Aba 2 — Tópicos LDA
 if secao == SECOES[1]:
-    st.subheader("Distribuição de tópicos (modelagem LDA, K=4)")
+    st.subheader("Distribuição de tópicos (modelagem LDA, K=8)")
     st.caption("⚠️ Rótulos APROXIMADOS, derivados dos termos mais prováveis. "
                "Tópico ≠ categoria sociológica; requer revisão qualitativa.")
     fdt = f.dropna(subset=["topico_dom"]).copy()
     fdt["topico_rotulo"] = fdt["topico_dom"].map(
         lambda i: TOPICOS.get(int(i), {}).get("rotulo", f"Tópico {int(i)}"))
 
-    cc1, cc2 = st.columns([2, 3])
-    with cc1:
-        vt = fdt["topico_rotulo"].value_counts().reset_index()
-        vt.columns = ["topico", "n"]
-        fig = px.pie(vt, names="topico", values="n", hole=0.45,
-                     color_discrete_sequence=PALETA)
-        fig.update_layout(height=380, legend_title="Tópico dominante")
-        st.plotly_chart(fig, use_container_width=True)
-    with cc2:
-        st.markdown("**Tópico dominante × grupo de curso**")
-        ct = pd.crosstab(fdt["topico_rotulo"], fdt["grupo_tcc"])
-        ct = ct[[c for c in ORDEM_CURSOS if c in ct.columns]]  # ordem canônica
-        fig = px.imshow(ct, text_auto=True, color_continuous_scale=SEQ_NECPF,
-                        aspect="auto")
-        fig.update_layout(height=380, xaxis_title="", yaxis_title="")
-        st.plotly_chart(fig, use_container_width=True)
+    st.markdown("**Proporção de TCCs por tópico dominante**")
+    vt = fdt["topico_rotulo"].value_counts().reset_index()
+    vt.columns = ["topico", "n"]
+    fig = px.pie(vt, names="topico", values="n", hole=0.45,
+                 color_discrete_sequence=PALETA)
+    fig.update_layout(height=420, legend_title="Tópico dominante")
+    st.plotly_chart(fig, use_container_width=True)
+
+    st.markdown("**Tópico dominante × grupo de curso**")
+    ct = pd.crosstab(fdt["topico_rotulo"], fdt["grupo_tcc"])
+    ct = ct[[c for c in ORDEM_CURSOS if c in ct.columns]]  # ordem canônica
+    fig = px.imshow(ct, text_auto=True, color_continuous_scale=SEQ_NECPF,
+                    aspect="auto")
+    fig.update_layout(height=460, xaxis_title="", yaxis_title="")
+    st.plotly_chart(fig, use_container_width=True)
 
     st.markdown("**Termos mais prováveis por tópico** (revisar leituras)")
     for i, info in TOPICOS.items():
@@ -801,7 +904,7 @@ if secao == SECOES[2]:
 
 # Aba 4 — Menção indígena
 if secao == SECOES[3]:
-    st.subheader("Presença de menção indígena por grupo")
+    st.subheader("Presença de menção indígena por curso (com habilitações)")
     st.caption("CRITÉRIO: lista de 26 termos (indígena, intercultural, macuxi, "
                "wapichana, wai wai, terra indígena…) buscada em título + resumo "
                "+ palavras-chave. Capta MENÇÃO, não centralidade. Sujeito a "
@@ -892,25 +995,25 @@ para guiar a leitura, não uma conclusão pronta.
 Educacional (NECPF/UFRR).*
 """)
 
-    g = f.groupby("grupo_tcc")["tem_indigena"].agg(["sum", "count"]).reset_index()
-    g["_o"] = pd.Categorical(g["grupo_tcc"], categories=ORDEM_CURSOS, ordered=True)
+    g = f.groupby("curso_det")["tem_indigena"].agg(["sum", "count"]).reset_index()
+    g["_o"] = pd.Categorical(g["curso_det"], categories=ORDEM_CURSOS_DET, ordered=True)
     g = g.sort_values("_o").drop(columns="_o")
     g["com"] = g["sum"].astype(int)
     g["sem"] = g["count"] - g["com"]
     g["pct"] = (g["com"] / g["count"] * 100).round(0)
     fig = go.Figure()
-    fig.add_bar(y=g["grupo_tcc"], x=g["com"], orientation="h",
+    fig.add_bar(y=g["curso_det"], x=g["com"], orientation="h",
                 name="Com menção", marker_color=PALETA[4])
-    fig.add_bar(y=g["grupo_tcc"], x=g["sem"], orientation="h",
+    fig.add_bar(y=g["curso_det"], x=g["sem"], orientation="h",
                 name="Sem menção", marker_color=CINZA_NEUTRO)
-    fig.update_layout(barmode="stack", height=380, xaxis_title="Nº de TCCs",
+    fig.update_layout(barmode="stack", height=420, xaxis_title="Nº de TCCs",
                       yaxis_title="", legend_title="",
                       yaxis={"categoryorder": "array",
-                             "categoryarray": ORDEM_CURSOS[::-1]})
+                             "categoryarray": ORDEM_CURSOS_DET[::-1]})
     st.plotly_chart(fig, use_container_width=True)
     st.dataframe(
-        g[["grupo_tcc", "com", "count", "pct"]].rename(
-            columns={"grupo_tcc": "Grupo", "com": "Com menção",
+        g[["curso_det", "com", "count", "pct"]].rename(
+            columns={"curso_det": "Curso", "com": "Com menção",
                      "count": "Total", "pct": "% menção"}),
         use_container_width=True, hide_index=True)
 
@@ -956,6 +1059,9 @@ if secao == SECOES[4]:
     lista_tccs(flt, key="ori",
                cols=["id", "curso_det", "orientador", "titulo", "autor", "ano_num"])
 
+    st.markdown("---")
+    lista_faltando(f, "orientador", "orientador", "falta_orient")
+
 # Aba 6 — Explorar
 if secao == SECOES[5]:
     st.subheader("Explorador de TCCs")
@@ -977,7 +1083,7 @@ if secao == SECOES[5]:
             st.markdown(f"**{row['titulo']}**")
             st.write(f"*{row['autor']} · {row['curso_det']} · {row['ano_defesa']}*")
             st.write(row["resumo"] if str(row["resumo"]).strip() else
-                     "_(sem resumo na fonte)_")
+                     "_(sem resumo no cadastro)_")
 
 # Aba 7 — Cobertura de Coleta
 if secao == SECOES[6]:
@@ -994,7 +1100,7 @@ if secao == SECOES[6]:
             "Insikiran – Ciências Sociais": "Insikiran — Ciências Sociais",
             "Insikiran – Ciências da Natureza": "Insikiran — Ciências da Natureza",
             "Insikiran – Comunicação e Artes": "Insikiran — Comunicação e Artes",
-            "LEDUCAR – Ciências Humanas e Sociais": "LEDUCAR — Ciências Humanas e Sociais",
+            "LEDUCARR – Ciências Humanas e Sociais": "LEDUCARR — Ciências Humanas e Sociais",
             "Pedagogia": "Pedagogia",
             "Música": "Música",
             "Matemática": "Matemática (L)",
@@ -1254,6 +1360,32 @@ if secao == SECOES[8]:
     st.caption(f"⚠️ {int(f['palavras_chave'].isna().sum())} TCCs sem palavras-chave "
                "no filtro (excluídos).")
 
+    # ── Palavras-chave separadas por TCC (cada termo em uma coluna) ──────────
+    st.markdown("---")
+    st.markdown("#### 📋 Palavras-chave separadas por TCC")
+    st.caption("Cada palavra-chave em sua própria coluna, preservando a grafia. "
+               "Separador detectado por entrada (`;`, vírgula, quebra de linha ou "
+               "ponto); rótulo 'Palavras-chave:' e pontuação final removidos.")
+    kw_listas = f["palavras_chave"].map(split_palavras_chave)
+    maxk = int(kw_listas.map(len).max() or 0)
+    if maxk == 0:
+        st.info("Sem palavras-chave separáveis no filtro atual.")
+    else:
+        reg = []
+        for (_, row), kws in zip(f.iterrows(), kw_listas):
+            d = {"id": row["id"], "Curso": row["curso_det"], "Título": row["titulo"],
+                 "Autor": row["autor"],
+                 "Ano": "" if pd.isna(row["ano_num"]) else str(int(row["ano_num"])),
+                 "Nº": len(kws)}
+            for i in range(maxk):
+                d[f"Palavra-chave {i+1}"] = kws[i] if i < len(kws) else ""
+            reg.append(d)
+        kdf = pd.DataFrame(reg)
+        st.dataframe(kdf, use_container_width=True, hide_index=True, height=360)
+
+    st.markdown("---")
+    lista_faltando(f, "palavras_chave", "palavras-chave", "falta_kw")
+
 # Aba 10 — Rede de bancas examinadoras
 if secao == SECOES[9]:
     st.subheader("Rede de bancas examinadoras")
@@ -1262,6 +1394,42 @@ if secao == SECOES[9]:
                f"Nomes extraídos do campo de banca (texto livre) e limpos (sem "
                f"titulação/instituição). Preenchido em ~{pct:.0f}% dos TCCs no "
                "filtro; ausência = lacuna de coleta, não inexistência de banca.")
+
+    with st.expander("📖 Como construímos a rede de bancas (metodologia)"):
+        st.markdown("""
+A rede mostra **quem avaliou TCCs junto com quem**. Ela é construída em quatro
+passos, a partir do campo *Membros da banca examinadora* do cadastro do NECPF —
+um texto livre, preenchido com grafias e formatos variados.
+
+**1. Leitura do campo.** Cada registro de banca é um texto único (ex.:
+*"Prof. Dr. Héctor José García Mendoza — UFRR; Profa. Dra. Edileusa do Socorro…"*).
+Separamos os nomes nos sinais usados pelos catalogadores: ponto-e-vírgula, barra
+`|`, quebra de linha, vírgula e a conjunção "e".
+
+**2. Limpeza de cada nome.** De cada trecho removemos:
+- **Titulação** — Prof./Profa., Dr./Dra., Me., Msc., Esp., Mestre, Doutor(a)…;
+- **Instituição e função** — UFRR, Universidade, Instituto, Curso de…, "membro",
+  "orientador", "presidente", e o que vem entre parênteses;
+- "não informado" e fragmentos com menos de duas palavras.
+
+  A **grafia com acentos é preservada** (ex.: *Héctor José García Mendoza*); a
+  remoção de acento serve só internamente, para agrupar variações do mesmo nome.
+
+**3. Montagem da rede (co-participação).** Para cada TCC, os examinadores
+formam um pequeno grupo totalmente ligado entre si — cada um se conecta a todos os
+outros daquela mesma banca. Quando duas pessoas avaliam **vários** TCCs juntas, a
+ligação entre elas fica **mais forte** (maior peso). O **tamanho de cada nó** é o
+número de bancas em que a pessoa participou; o orientador também conta como membro.
+
+**4. Filtro de recorrência.** O controle *"Mínimo de bancas para incluir o membro"*
+remove participantes esporádicos, deixando visível o núcleo recorrente.
+
+**Limites (leitura exploratória, CLAUDE.md §1, §4).** A extração de um texto livre
+é sujeita a falhas; nomes muito abreviados ou colados podem escapar. A rede
+retrata **a coleta atual**, não o universo de bancas — ausência de um vínculo
+significa lacuna de cadastro, não que a co-participação não existiu.
+""")
+
     membros_por_tcc, cont = [], Counter()
     for val in f["banca_examinadora"]:
         nomes = parse_banca(val)
@@ -1302,6 +1470,52 @@ if secao == SECOES[9]:
         else:
             st.info("Poucos membros atingem o mínimo escolhido para formar rede.")
 
+    # ── Lacunas no cadastro de bancas (filtrável por curso) ──────────────────
+    st.markdown("---")
+    st.markdown("#### 🔎 TCCs com cadastro de banca a completar")
+    st.caption("Lacunas no campo de banca examinadora — para preencher a partir "
+               "dos PDFs. 'Ausente' = campo vazio/'não informado'; "
+               "'Incompleta' = só 1 nome registrado (banca tem ≥ 2 membros + orientador).")
+
+    def _situacao_banca(v):
+        if not _tem_valor(v):
+            return "Ausente"
+        n = len(parse_banca(v))
+        if n == 0:
+            return "Ausente"
+        if n == 1:
+            return "Incompleta (1 membro)"
+        return "OK"
+
+    fb = f.copy()
+    fb["situacao_banca"] = fb["banca_examinadora"].map(_situacao_banca)
+    fb["n_membros_banca"] = fb["banca_examinadora"].map(lambda v: len(parse_banca(v)))
+    faltam = fb[fb["situacao_banca"] != "OK"]
+
+    if faltam.empty:
+        st.success("Todos os TCCs do filtro atual têm banca cadastrada (≥ 2 membros).")
+    else:
+        # resumo por curso (quantos faltam em cada)
+        resumo = (faltam.groupby("curso_det")["situacao_banca"]
+                  .value_counts().unstack(fill_value=0))
+        for col in ("Ausente", "Incompleta (1 membro)"):
+            if col not in resumo.columns:
+                resumo[col] = 0
+        resumo["Total a completar"] = resumo.sum(axis=1)
+        resumo = resumo.reindex([c for c in ORDEM_CURSOS_DET if c in resumo.index])
+        st.markdown("**Resumo por curso**")
+        st.dataframe(resumo.reset_index().rename(columns={"curso_det": "Curso"}),
+                     use_container_width=True, hide_index=True)
+
+        cursos_op = ["Todos os cursos"] + [c for c in ORDEM_CURSOS_DET
+                                           if c in faltam["curso_det"].unique()]
+        sel_cf = st.selectbox("Filtrar por curso", cursos_op, key="banca_falta_curso")
+        flt = faltam if sel_cf == "Todos os cursos" else faltam[faltam["curso_det"] == sel_cf]
+        st.caption(f"{len(flt)} TCC(s) com cadastro de banca a completar.")
+        lista_tccs(flt, key="banca_falta",
+                   cols=["id", "curso_det", "situacao_banca", "n_membros_banca",
+                         "titulo", "autor", "orientador", "ano_num"])
+
 # Aba 11 — Orientador × tema (tópico LDA)
 if secao == SECOES[10]:
     st.subheader("Orientador × tema (tópico LDA)")
@@ -1332,6 +1546,6 @@ if secao == SECOES[10]:
                 st.markdown(f"- **T{i}** — {info['rotulo']}")
 
 st.markdown("---")
-st.caption("Fonte: 2 formulários de catalogação (Google Forms), consolidados em "
-           "145 TCCs únicos (2 duplicatas removidas) + série histórica de egressos "
-           "LIDAE. Dados exploratórios — ver relatório metodológico LIDAE.")
+st.caption("Fonte: cadastro dos TCCs realizado pelos pesquisadores do NECPF "
+           "(211 TCCs únicos), com série histórica de egressos da PROEG. "
+           "Dados exploratórios — ver relatório metodológico LIDAE.")
