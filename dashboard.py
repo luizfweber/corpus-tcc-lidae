@@ -520,13 +520,15 @@ st.info("**Análise exploratória, não censitária.** Cada número é indício 
 # ── Navegação (menu lateral com ícones) ──
 SECOES = ["Distribuição", "Tópicos (LDA)", "Por curso", "Menção indígena",
           "Orientadores", "Explorar TCCs", "Cobertura de Coleta",
-          "Povos & territórios", "Palavras-chave", "Bancas", "Orientador × tema"]
+          "Povos & territórios", "Palavras-chave", "Bancas", "Orientador × tema",
+          "Análise temática por curso"]
 with st.sidebar:
     secao = option_menu(
         "Navegação", SECOES,
         icons=["bar-chart-line", "diagram-3", "mortarboard", "feather",
                "people", "search", "graph-up-arrow",
-               "geo-alt", "tags", "people-fill", "grid-3x3-gap"],
+               "geo-alt", "tags", "people-fill", "grid-3x3-gap",
+               "journal-text"],
         menu_icon="compass", default_index=0,
         styles={
             # Identidade NECPF: fundo neutro, ícone âmbar (contrasta no claro e no
@@ -1430,6 +1432,40 @@ retrata **a coleta atual**, não o universo de bancas — ausência de um víncu
 significa lacuna de cadastro, não que a co-participação não existiu.
 """)
 
+    with st.expander("🧭 Como interpretar a imagem (o que cada relação significa)"):
+        st.markdown("""
+**O que cada elemento da rede quer dizer:**
+
+- **Cada círculo é um professor.** Quanto **maior** o círculo, em **mais bancas**
+  a pessoa participou — passe o mouse para ver o número exato. Círculos grandes
+  são avaliadores recorrentes na formação daquele conjunto de cursos.
+- **Cada linha é uma co-participação:** os dois professores ligados **avaliaram
+  pelo menos um mesmo TCC juntos**.
+- **A proximidade conta uma história:** o desenho aproxima quem avalia junto com
+  **frequência**. Assim, professores que dividem muitas bancas acabam **vizinhos**,
+  formando **agrupamentos**.
+- **Os agrupamentos** costumam corresponder a um **curso ou área** — um núcleo de
+  docentes que se avaliam mutuamente (ex.: o núcleo do Insikiran, o de Matemática,
+  o de História aparecem como "ilhas" distintas).
+- **Nós nas pontas ou soltos** participam de poucas bancas ou têm poucos parceiros
+  recorrentes — costumam ser examinadores externos ou pontuais.
+- **Pontes entre agrupamentos** (uma pessoa ligando duas "ilhas") são docentes que
+  **circulam entre cursos/áreas**.
+
+**O que a relação NÃO diz:**
+
+- A **espessura da linha é sempre a mesma** — ela não mostra quantas vezes os dois
+  avaliaram juntos. Essa intensidade aparece na **proximidade** (vínculos repetidos
+  puxam os nós para perto) e no controle de "mínimo de bancas".
+- Estar na mesma banca **não implica** concordância, parceria de pesquisa ou
+  hierarquia — só que se encontraram numa avaliação.
+- A rede mostra **a coleta atual**, não o universo real de bancas.
+
+**Para ler na prática:** aumente o *"mínimo de bancas para incluir o membro"* para
+ver só o núcleo recorrente; observe quem são os **círculos grandes e centrais**
+(gargalos da orientação/avaliação) e quem faz **ponte** entre as ilhas.
+""")
+
     membros_por_tcc, cont = [], Counter()
     for val in f["banca_examinadora"]:
         nomes = parse_banca(val)
@@ -1519,9 +1555,9 @@ significa lacuna de cadastro, não que a co-participação não existiu.
 # Aba 11 — Orientador × tema (tópico LDA)
 if secao == SECOES[10]:
     st.subheader("Orientador × tema (tópico LDA)")
-    st.caption("Distribuição dos TCCs de cada orientador recorrente (≥2 TCCs) "
-               "pelos 4 tópicos do LDA. ⚠️ Tópico é indício, não categoria; o N por "
-               "orientador é pequeno — leitura qualitativa.")
+    st.caption(f"Distribuição dos TCCs de cada orientador recorrente (≥2 TCCs) "
+               f"pelos {len(TOPICOS)} tópicos do LDA. ⚠️ Tópico é indício, não "
+               "categoria; o N por orientador é pequeno — leitura qualitativa.")
     fo = f[f["orientador"].apply(_tem_valor) & f["topico_dom"].notna()].copy()
     if fo.empty:
         st.info("Sem orientador/tópico utilizável no filtro atual.")
@@ -1535,7 +1571,8 @@ if secao == SECOES[10]:
         else:
             fo["Tópico"] = fo["topico_dom"].map(lambda i: f"T{i}")
             ct = pd.crosstab(fo["orientador"], fo["Tópico"])
-            ct = ct[[c for c in [f"T{i}" for i in range(4)] if c in ct.columns]]
+            ct = ct[[c for c in [f"T{i}" for i in range(len(TOPICOS))]
+                     if c in ct.columns]]
             fig = px.imshow(ct, text_auto=True, color_continuous_scale=SEQ_NECPF,
                             aspect="auto")
             fig.update_layout(height=max(320, len(ct) * 34), xaxis_title="Tópico",
@@ -1544,6 +1581,127 @@ if secao == SECOES[10]:
             st.markdown("**Legenda dos tópicos:**")
             for i, info in TOPICOS.items():
                 st.markdown(f"- **T{i}** — {info['rotulo']}")
+
+# Aba 12 — Análise temática por curso (leitura qualitativa)
+def _secao_md(texto, titulo_contem):
+    """Extrai uma seção (## ...) do markdown pelo trecho do título."""
+    for bloco in re.split(r"(?m)^##\s+", texto):
+        primeira = bloco.split("\n", 1)[0].lower()
+        if titulo_contem.lower() in primeira:
+            return "## " + bloco.strip()
+    return ""
+
+# Curso → (arquivo .md, {eixo temático: [ids]}). Os eixos espelham o .md e
+# alimentam o gráfico-resumo; o texto integral vem do .md (fonte única).
+TEMATICAS = {
+    "Música": {
+        "arquivo": "analise_tematica_musica.md",
+        "eixos": {
+            "Educação básica e formação docente": [91, 94, 98, 85, 86, 212, 87, 95],
+            "Instrumentos e ensino coletivo": [89, 83, 96, 109],
+            "Cultura regional e identidade": [84, 97, 95, 82, 83],
+            "Religião e ritual": [108, 90, 99],
+            "Inclusão e políticas públicas": [93, 211],
+            "Pontuais (teoria, etnomusicologia)": [92, 109],
+        },
+    },
+    "Insikiran — Ciências da Natureza": {
+        "arquivo": "analise_tematica_insikiran_natureza.md",
+        "eixos": {
+            "Etnomatemática e ensino de matemática":
+                [5, 8, 73, 75, 77, 78, 100, 102, 103, 117, 118, 139, 141, 151, 203, 206, 207, 210],
+            "Ciências, química e educação ambiental":
+                [6, 7, 10, 79, 80, 81, 104, 105, 115, 209],
+            "Plantas medicinais, alimentação e saberes tradicionais":
+                [9, 74, 76, 101, 106, 107, 116, 140, 142, 143, 144, 150, 152, 153],
+        },
+    },
+    "Insikiran — Ciências Sociais": {
+        "arquivo": "analise_tematica_insikiran_sociais.md",
+        "eixos": {
+            "Atividades sociais e Método Indutivo Intercultural": [24, 27, 28, 69, 71, 131, 138],
+            "Cultura material, artesanato e patrimônio": [70, 72, 132, 136, 137],
+            "Narrativas, história e memória": [25, 68, 88, 133],
+            "Saúde, plantas medicinais e bem-estar": [67, 134, 135],
+            "Gestão escolar e migração (pontuais)": [26, 66],
+        },
+    },
+    "Insikiran — Comunicação e Artes": {
+        "arquivo": "analise_tematica_insikiran_comunicacao.md",
+        "eixos": {
+            "Leitura, escrita e formação de leitores": [50, 54, 60, 61],
+            "Ensino de línguas indígenas": [56, 57, 58, 59, 64],
+            "Narrativas orais, mitos e lendas": [52, 53, 63],
+            "Jogos pedagógicos e lúdico": [11, 55],
+            "Cantos, arte e cultura": [51, 62],
+            "Inclusão e etnociência (pontuais)": [65, 130],
+        },
+    },
+    "Pedagogia": {
+        "arquivo": "analise_tematica_pedagogia.md",
+        "eixos": {
+            "Estágio supervisionado e Residência Pedagógica": [21, 23, 33, 34, 35, 44, 45, 47],
+            "Coordenação e gestão pedagógica": [22, 31, 36, 38, 39, 49],
+            "Educação infantil, jogos e brincadeiras": [32, 40, 48, 149],
+            "Educação especial e inclusão": [20, 30, 113, 114],
+            "Pedagogia em contextos não-escolares": [42, 110, 111, 112],
+            "Formação docente e educação indígena (pontuais)": [37, 41, 43],
+        },
+    },
+    "História": {
+        "arquivo": "analise_tematica_historia.md",
+        "eixos": {
+            "Povos indígenas, terras e migração": [146, 154, 164, 168, 174, 175, 179, 184, 194],
+            "Gênero, mulheres e violência": [158, 159, 165, 173, 180, 197, 202, 208],
+            "Religião, religiosidade e patrimônio cultural": [147, 156, 157, 161, 169, 176, 177, 181, 182, 183],
+            "Política, Estado e poder": [145, 155, 163, 166, 171, 196, 200],
+            "Ensino de História e formação docente": [160, 167, 170, 172, 178, 185, 195, 198, 199, 201, 204],
+            "História regional, memória e identidade": [162, 205, 213],
+        },
+    },
+}
+
+if secao == SECOES[11]:
+    st.subheader("Análise temática por curso")
+    st.caption("Leitura temática **qualitativa** (por leitura, não por algoritmo) "
+               "dos TCCs de cada curso, a partir de título + resumo + palavras-chave. "
+               "Complementa a aba 'Por curso' (camadas LDA/descritivo).")
+
+    sel_tem = st.selectbox("Curso / habilitação", list(TEMATICAS.keys()),
+                           key="tematica_curso")
+    st.caption("Disponível para Música, Pedagogia, História e as três habilitações "
+               "do Insikiran. Outros cursos serão acrescentados conforme a leitura "
+               "for redigida.")
+    info = TEMATICAS[sel_tem]
+    _pt = BASE / "outputs" / "analise" / info["arquivo"]
+    texto = _pt.read_text(encoding="utf-8") if _pt.exists() else ""
+
+    # ── Gráfico-resumo dos eixos temáticos ──
+    eixos = info["eixos"]
+    de = pd.DataFrame({"Eixo temático": list(eixos.keys()),
+                       "TCCs": [len(v) for v in eixos.values()]}).sort_values("TCCs")
+    fig = px.bar(de, x="TCCs", y="Eixo temático", orientation="h", text="TCCs",
+                 color_discrete_sequence=[PALETA[3]])
+    fig.update_layout(showlegend=False, height=max(320, len(de) * 46),
+                      xaxis_title="Nº de TCCs", yaxis_title="")
+    st.plotly_chart(fig, use_container_width=True)
+    n_unicos = len({i for ids in eixos.values() for i in ids})
+    st.caption(f"{n_unicos} TCCs de Música; alguns pertencem a mais de um eixo "
+               "(sobreposição) — por isso a soma das barras excede o total.")
+
+    # ── Metodologia (logo abaixo do gráfico) ──
+    metodo = _secao_md(texto, "como esta análise foi feita")
+    if metodo:
+        st.markdown("---")
+        st.markdown(metodo)
+
+    # ── Análise completa (texto integral) ──
+    if texto:
+        with st.expander("📄 Ver análise completa (panorama, eixos detalhados, leitura)"):
+            st.markdown(texto)
+    else:
+        st.info(f"Análise temática de {sel_tem} ainda não gerada "
+                f"(esperado: outputs/analise/{info['arquivo']}).")
 
 st.markdown("---")
 st.caption("Fonte: cadastro dos TCCs realizado pelos pesquisadores do NECPF "
