@@ -366,10 +366,12 @@ def fig_rede(G, cor_no=PALETA[1]):
         x, y = pos[n]; xs.append(x); ys.append(y)
         s = G.nodes[n].get("size", 1); sizes.append(s)
         hov.append(f"{n} ({s})")
+    # cor por nó (atributo 'cor') ou cor única de fallback
+    cores = [G.nodes[n].get("cor", cor_no) for n in G.nodes()]
     fig.add_trace(go.Scatter(
         x=xs, y=ys, mode="markers+text", text=list(G.nodes()),
         textposition="top center", textfont=dict(size=10),
-        marker=dict(size=[9 + 3 * s for s in sizes], color=cor_no,
+        marker=dict(size=[9 + 3 * s for s in sizes], color=cores,
                     line=dict(width=1, color="white")),
         hovertext=hov, hoverinfo="text"))
     fig.update_layout(showlegend=False, height=520,
@@ -1399,10 +1401,11 @@ if secao == SECOES[8]:
 if secao == SECOES[9]:
     st.subheader("Rede de bancas examinadoras")
     pct = f["banca_examinadora"].map(_tem_valor).mean() * 100 if len(f) else 0
-    st.caption(f"Co-participação: dois nomes se ligam quando avaliaram o mesmo TCC. "
-               f"Nomes extraídos do campo de banca (texto livre) e limpos (sem "
-               f"titulação/instituição). Preenchido em ~{pct:.0f}% dos TCCs no "
-               "filtro; ausência = lacuna de coleta, não inexistência de banca.")
+    st.caption(f"Co-participação **entre membros avaliadores** (o presidente/"
+               f"orientador de cada banca é EXCLUÍDO aqui — ver análise própria "
+               f"abaixo). Dois nomes se ligam quando avaliaram o mesmo TCC. "
+               f"Preenchido em ~{pct:.0f}% dos TCCs no filtro; ausência = lacuna "
+               "de coleta, não inexistência de banca.")
 
     with st.expander("📖 Como construímos a rede de bancas (metodologia)"):
         st.markdown("""
@@ -1424,11 +1427,12 @@ Separamos os nomes nos sinais usados pelos catalogadores: ponto-e-vírgula, barr
   A **grafia com acentos é preservada** (ex.: *Héctor José García Mendoza*); a
   remoção de acento serve só internamente, para agrupar variações do mesmo nome.
 
-**3. Montagem da rede (co-participação).** Para cada TCC, os examinadores
+**3. Montagem da rede (co-participação).** Para cada TCC, os **membros avaliadores**
 formam um pequeno grupo totalmente ligado entre si — cada um se conecta a todos os
-outros daquela mesma banca. Quando duas pessoas avaliam **vários** TCCs juntas, a
-ligação entre elas fica **mais forte** (maior peso). O **tamanho de cada nó** é o
-número de bancas em que a pessoa participou; o orientador também conta como membro.
+outros daquela mesma banca. O **presidente/orientador é excluído** desta rede (ele
+tem uma análise própria — *Orientador × membros*, mais abaixo). Quando duas pessoas
+avaliam **vários** TCCs juntas, a ligação fica **mais forte** (maior peso). O
+**tamanho de cada nó** é o número de bancas em que a pessoa participou como membro.
 
 **4. Filtro de recorrência.** O controle *"Mínimo de bancas para incluir o membro"*
 remove participantes esporádicos, deixando visível o núcleo recorrente.
@@ -1470,28 +1474,36 @@ significa lacuna de cadastro, não que a co-participação não existiu.
 
 **Para ler na prática:** aumente o *"mínimo de bancas para incluir o membro"* para
 ver só o núcleo recorrente; observe quem são os **círculos grandes e centrais**
-(gargalos da orientação/avaliação) e quem faz **ponte** entre as ilhas.
+(avaliadores muito requisitados) e quem faz **ponte** entre as ilhas.
+
+> Aqui o **orientador de cada banca não entra** — esta rede é só entre os
+> **membros avaliadores**. A relação do orientador com quem ele convida está na
+> análise *Orientador × membros*, logo abaixo.
 """)
 
+    # membros AVALIADORES de cada banca (sem o orientador) — colunas banca_membro_*
+    _MCOLS = [c for c in ["banca_membro_1", "banca_membro_2", "banca_membro_3",
+                          "banca_membro_4"] if c in f.columns]
     membros_por_tcc, cont = [], Counter()
-    for val in f["banca_examinadora"]:
-        nomes = parse_banca(val)
+    for _, row in f.iterrows():
+        nomes = [str(row[c]).strip() for c in _MCOLS
+                 if pd.notna(row[c]) and str(row[c]).strip() not in ("", "nan")]
         if nomes:
             membros_por_tcc.append(nomes)
             for nm in nomes:
                 cont[nm] += 1
     if not cont:
-        st.info("Sem dados de banca utilizáveis no filtro atual.")
+        st.info("Sem membros de banca utilizáveis no filtro atual.")
     else:
         top = pd.DataFrame(cont.most_common(20), columns=["membro", "n"])
-        st.markdown("**Quem mais participou de bancas**")
+        st.markdown("**Quem mais participou como membro avaliador** (sem contar como orientador)")
         fig = px.bar(top.sort_values("n"), x="n", y="membro", orientation="h",
                      text="n", color_discrete_sequence=[PALETA[1]])
         fig.update_layout(showlegend=False, height=max(320, len(top) * 26),
-                          xaxis_title="Nº de bancas", yaxis_title="")
+                          xaxis_title="Nº de bancas (como membro)", yaxis_title="")
         st.plotly_chart(fig, use_container_width=True)
 
-        st.markdown("**Rede de co-participação**")
+        st.markdown("**Rede de co-participação entre membros** (sem o orientador)")
         min_b = st.slider("Mínimo de bancas para incluir o membro", 1, 4, 2,
                           key="bn_min")
         G = nx.Graph()
@@ -1512,6 +1524,68 @@ ver só o núcleo recorrente; observe quem são os **círculos grandes e centrai
             st.plotly_chart(figr, use_container_width=True)
         else:
             st.info("Poucos membros atingem o mínimo escolhido para formar rede.")
+
+    # ── NOVA ANÁLISE: Orientador × membros da banca ──────────────────────────
+    st.markdown("---")
+    st.markdown("### Orientador × membros da banca")
+    st.caption("Quem cada orientador costuma convidar para as bancas que preside. "
+               "Cada aresta liga um **orientador** (verde) a um **membro avaliador** "
+               "(âmbar); a espessura/proximidade reflete quantas vezes esse membro "
+               "participou de bancas daquele orientador. Revela 'círculos' de "
+               "avaliação por área/curso. Indício exploratório (CLAUDE.md §1, §4).")
+
+    # pares orientador → membro
+    par = Counter(); ori_cont = Counter(); mem_cont = Counter()
+    for _, row in f.iterrows():
+        ori = str(row["orientador"]).strip()
+        if not _tem_valor(ori):
+            continue
+        mems = [str(row[c]).strip() for c in _MCOLS
+                if pd.notna(row[c]) and str(row[c]).strip() not in ("", "nan")]
+        for m in mems:
+            par[(ori, m)] += 1
+            ori_cont[ori] += 1
+            mem_cont[m] += 1
+
+    if not par:
+        st.info("Sem pares orientador-membro no filtro atual.")
+    else:
+        cc1, cc2 = st.columns([1, 1])
+        with cc1:
+            min_par = st.slider("Mínimo de co-participações para ligar", 1, 4, 1,
+                                key="om_min")
+        with cc2:
+            min_ori = st.slider("Mínimo de bancas do orientador", 1, 6, 2,
+                                key="om_ori")
+        Gb = nx.Graph()
+        for (ori, m), w in par.items():
+            if w >= min_par and ori_cont[ori] >= min_ori:
+                no_o, no_m = f"🟢 {ori}", m
+                Gb.add_node(no_o, cor=PALETA[2], _tipo="ori")
+                Gb.add_node(no_m, cor=PALETA[4], _tipo="mem")
+                Gb.add_edge(no_o, no_m, weight=w)
+        for n in list(Gb.nodes()):
+            base = ori_cont if Gb.nodes[n]["_tipo"] == "ori" else mem_cont
+            Gb.nodes[n]["size"] = base.get(n.replace("🟢 ", ""), 1)
+        figb = fig_rede(Gb, cor_no=PALETA[2])
+        if figb:
+            st.caption("🟢 orientador · 🟡 membro avaliador")
+            st.plotly_chart(figb, use_container_width=True)
+        else:
+            st.info("Poucos pares atingem os mínimos escolhidos para formar rede.")
+
+        st.markdown("**Detalhe por orientador** — membros mais convidados")
+        oris_disp = sorted([o for o, c in ori_cont.items() if c >= 2])
+        if oris_disp:
+            sel_o = st.selectbox("Selecione o orientador", oris_disp, key="om_sel")
+            linhas_om = [(m, w) for (o, m), w in par.items() if o == sel_o]
+            dfo = (pd.DataFrame(linhas_om, columns=["Membro", "Bancas juntos"])
+                   .sort_values("Bancas juntos", ascending=True))
+            figo = px.bar(dfo, x="Bancas juntos", y="Membro", orientation="h",
+                          text="Bancas juntos", color_discrete_sequence=[PALETA[4]])
+            figo.update_layout(showlegend=False, height=max(260, len(dfo) * 30),
+                               xaxis_title="Nº de bancas juntos", yaxis_title="")
+            st.plotly_chart(figo, use_container_width=True)
 
     # ── Lacunas no cadastro de bancas (filtrável por curso) ──────────────────
     st.markdown("---")
