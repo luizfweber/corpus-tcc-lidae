@@ -397,7 +397,9 @@ html, body, [class*="css"], [class*="st-"], .stApp, .stMarkdown,
 
 
 @st.cache_data
-def carregar(_mtime: float = 0.0):
+def carregar(mtime: float = 0.0):
+    # 'mtime' SEM underscore: entra na chave do cache (com underscore o Streamlit
+    # ignora o argumento e o cache nunca invalida → dados velhos na nuvem).
     df = pd.read_csv(CSV)
     df["ano_num"] = pd.to_numeric(df["ano_num"], errors="coerce")
     df["pag_num"] = pd.to_numeric(df["pag_num"], errors="coerce")
@@ -421,15 +423,20 @@ def carregar(_mtime: float = 0.0):
 
 
 @st.cache_data
-def carregar_por_curso():
-    """Lê o JSON gerado por analise_por_curso.py (fonte única). None se ausente."""
+def carregar_por_curso(mtime: float = 0.0):
+    """Lê o JSON gerado por analise_por_curso.py (fonte única). None se ausente.
+    'mtime' (sem underscore) entra na chave do cache para invalidar quando o
+    JSON muda."""
     p = BASE / "outputs" / "analise" / "analise_por_curso.json"
     if not p.exists():
         return None
     return json.loads(p.read_text(encoding="utf-8"))
 
 
-df = carregar(_mtime=CSV.stat().st_mtime)
+_PC_JSON = BASE / "outputs" / "analise" / "analise_por_curso.json"
+
+
+df = carregar(mtime=CSV.stat().st_mtime)
 N_TOTAL = len(df)
 
 # curso desagregado por habilitação (Insikiran, LEDUCARR e Letras); usado em filtros e gráficos
@@ -846,7 +853,7 @@ if secao == SECOES[2]:
                "🟢 LDA (sub-temas) · 🟠 descritivo (termos + leitura) · "
                "🔴 listagem. Exploratório, não censitário (CLAUDE.md §1, §4).")
 
-    PC = carregar_por_curso()
+    PC = carregar_por_curso(mtime=_PC_JSON.stat().st_mtime if _PC_JSON.exists() else 0.0)
     if PC is None:
         st.warning("Análise por curso ainda não gerada. "
                    "Rode no terminal: `python3 analise_por_curso.py`")
