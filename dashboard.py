@@ -526,18 +526,27 @@ st.info("**Análise exploratória, não censitária.** Cada número é indício 
         "interpretar, não conclusão. Corpus-piloto desbalanceado — grupos com "
         "poucos TCCs (LEDUCARR, Letras) têm estatísticas instáveis.")
 
-# ── Navegação (menu lateral com ícones) ──
-SECOES = ["Distribuição", "Tópicos (LDA)", "Por curso", "Menção indígena",
-          "Orientadores", "Explorar TCCs", "Cobertura de Coleta",
-          "Povos & territórios", "Palavras-chave", "Bancas", "Orientador × tema",
-          "Análise temática por curso"]
+# ── Navegação (menu lateral agrupado, com ícones) ──
+# Seções reais, referenciadas por NOME nas abas (reordenar aqui é seguro).
+SECOES = ["Distribuição", "Cobertura de Coleta", "Explorar TCCs",
+          "Tópicos (LDA)", "Análise temática por curso", "Sub-temas por curso (LDA)",
+          "Palavras-chave", "Menção indígena", "Povos & territórios",
+          "Orientadores", "Bancas", "Orientador × tema"]
+# Itens exibidos no menu, com separadores "---" entre os 4 grupos temáticos.
+# (cada "---" recebe ícone "" para manter o alinhamento com a lista de ícones.)
+_MENU_ITENS = ["Distribuição", "Cobertura de Coleta", "Explorar TCCs", "---",
+               "Tópicos (LDA)", "Análise temática por curso",
+               "Sub-temas por curso (LDA)", "Palavras-chave", "---",
+               "Menção indígena", "Povos & territórios", "---",
+               "Orientadores", "Bancas", "Orientador × tema"]
+_MENU_ICONS = ["bar-chart-line", "graph-up-arrow", "search", "",
+               "diagram-3", "journal-text", "mortarboard", "tags", "",
+               "feather", "geo-alt", "",
+               "people", "people-fill", "grid-3x3-gap"]
 with st.sidebar:
     secao = option_menu(
-        "Navegação", SECOES,
-        icons=["bar-chart-line", "diagram-3", "mortarboard", "feather",
-               "people", "search", "graph-up-arrow",
-               "geo-alt", "tags", "people-fill", "grid-3x3-gap",
-               "journal-text"],
+        "Navegação", _MENU_ITENS,
+        icons=_MENU_ICONS,
         menu_icon="compass", default_index=0,
         styles={
             # Identidade NECPF: fundo neutro, ícone âmbar (contrasta no claro e no
@@ -549,6 +558,9 @@ with st.sidebar:
                          "text-align": "left", "--hover-color": "#E3ECE6"},
             "nav-link-selected": {"background-color": "#1B5E3B", "color": "white"},
         })
+# guarda: clique acidental num separador cai na primeira aba
+if secao not in SECOES:
+    secao = SECOES[0]
 
 # ── Sidebar: filtros ─────────────────────────────────────────────────────────
 st.sidebar.header("Filtros")
@@ -620,7 +632,7 @@ st.markdown("---")
 # Conteúdo de cada seção é escolhido pelo menu lateral (secao)
 
 # Aba 1 — Distribuição
-if secao == SECOES[0]:
+if secao == "Distribuição":
     st.subheader("TCCs por curso (com habilitações)")
     st.caption("Insikiran, LEDUCARR e Letras aparecem desagregados por habilitação; "
                "os demais cursos não têm sub-habilitação no corpus.")
@@ -760,7 +772,7 @@ if secao == SECOES[0]:
     lista_faltando(f, "pag_num", "nº de páginas", "falta_pag")
 
 # Aba 2 — Tópicos LDA
-if secao == SECOES[1]:
+if secao == "Tópicos (LDA)":
     st.subheader("Distribuição de tópicos (modelagem LDA, K=8)")
     st.caption("⚠️ Rótulos APROXIMADOS, derivados dos termos mais prováveis. "
                "Tópico ≠ categoria sociológica; requer revisão qualitativa.")
@@ -847,13 +859,14 @@ if secao == SECOES[1]:
     *Laboratório de Indicadores, Dados e Analítica Educacional — LIDAE/NECPF–UFRR*
     """)
 
-# Aba 3 — Por curso (análise temática em camadas)
-if secao == SECOES[2]:
-    st.subheader("Análise temática por curso (em camadas)")
-    st.caption("O LDA global apenas separa os cursos entre si; aqui olhamos "
-               "DENTRO de cada curso. O método se ajusta ao Nº de TCCs: "
-               "🟢 LDA (sub-temas) · 🟠 descritivo (termos + leitura) · "
-               "🔴 listagem. Exploratório, não censitário (CLAUDE.md §1, §4).")
+# Sub-temas por curso (modelagem LDA/descritivo em camadas, do JSON por curso)
+if secao == "Sub-temas por curso (LDA)":
+    st.subheader("Sub-temas por curso (modelagem por camadas)")
+    st.caption("Versão **algorítmica**, que olha DENTRO de cada curso (o LDA global "
+               "só separa os cursos entre si). O método se ajusta ao Nº de TCCs: "
+               "🟢 LDA (sub-temas) · 🟠 descritivo (termos + leitura) · 🔴 listagem. "
+               "Complementa a aba *Análise temática por curso* (leitura qualitativa). "
+               "Exploratório, não censitário (CLAUDE.md §1, §4).")
 
     PC = carregar_por_curso(mtime=_PC_JSON.stat().st_mtime if _PC_JSON.exists() else 0.0)
     if PC is None:
@@ -914,7 +927,7 @@ if secao == SECOES[2]:
         st.dataframe(tdf, use_container_width=True, hide_index=True, height=260)
 
 # Aba 4 — Menção indígena
-if secao == SECOES[3]:
+if secao == "Menção indígena":
     st.subheader("Presença de menção indígena por curso (com habilitações)")
     st.caption("CRITÉRIO: lista de 26 termos (indígena, intercultural, macuxi, "
                "wapichana, wai wai, terra indígena…) buscada em título + resumo "
@@ -1041,7 +1054,7 @@ Educacional (NECPF/UFRR).*
                cols=["id", "curso_det", "tem_indigena", "titulo", "autor", "ano_num"])
 
 # Aba 5 — Orientadores
-if secao == SECOES[4]:
+if secao == "Orientadores":
     st.subheader("Orientadores recorrentes")
     st.caption("Nomes consolidados por fuzzy matching (similitude ≥85%). "
                "Variações de grafia foram agrupadas sob o nome mais completo.")
@@ -1074,7 +1087,7 @@ if secao == SECOES[4]:
     lista_faltando(f, "orientador", "orientador", "falta_orient")
 
 # Aba 6 — Explorar
-if secao == SECOES[5]:
+if secao == "Explorar TCCs":
     st.subheader("Explorador de TCCs")
     busca = st.text_input("Buscar em título / resumo / palavras-chave")
     fe = f.copy()
@@ -1097,7 +1110,7 @@ if secao == SECOES[5]:
                      "_(sem resumo no cadastro)_")
 
 # Aba 7 — Cobertura de Coleta
-if secao == SECOES[6]:
+if secao == "Cobertura de Coleta":
     st.subheader("Cobertura de Coleta: TCCs × Egressos")
 
     # carregar dados de egressos
@@ -1245,7 +1258,7 @@ if secao == SECOES[6]:
         st.error(f"Erro ao carregar dados de egressos: {e}")
 
 # Aba 8 — Povos & territórios indígenas (gazetteer)
-if secao == SECOES[7]:
+if secao == "Povos & territórios":
     st.subheader("Povos e territórios indígenas citados")
     st.caption("Detecção por gazetteer regional de Roraima (etnônimos, terras "
                "indígenas, topônimos), em título + resumo + palavras-chave. "
@@ -1320,7 +1333,7 @@ if secao == SECOES[7]:
                cols=["id", "curso_det", "titulo", "autor", "ano_num"])
 
 # Aba 9 — Co-ocorrência de palavras-chave
-if secao == SECOES[8]:
+if secao == "Palavras-chave":
     st.subheader("Co-ocorrência de palavras-chave")
     st.caption("Palavras-chave informadas pelos autores (não os tópicos do LDA). "
                "Agrupadas por forma normalizada (sem acento/caixa); exibe a grafia "
@@ -1398,7 +1411,7 @@ if secao == SECOES[8]:
     lista_faltando(f, "palavras_chave", "palavras-chave", "falta_kw")
 
 # Aba 10 — Rede de bancas examinadoras
-if secao == SECOES[9]:
+if secao == "Bancas":
     st.subheader("Rede de bancas examinadoras")
     pct = f["banca_examinadora"].map(_tem_valor).mean() * 100 if len(f) else 0
     st.caption(f"Co-participação **entre membros avaliadores** (o presidente/"
@@ -1634,7 +1647,7 @@ ver só o núcleo recorrente; observe quem são os **círculos grandes e centrai
                          "titulo", "autor", "orientador", "ano_num"])
 
 # Aba 11 — Orientador × tema (tópico LDA)
-if secao == SECOES[10]:
+if secao == "Orientador × tema":
     st.subheader("Orientador × tema (tópico LDA)")
     st.caption(f"Distribuição dos TCCs de cada orientador recorrente (≥2 TCCs) "
                f"pelos {len(TOPICOS)} tópicos do LDA. ⚠️ Tópico é indício, não "
@@ -1742,11 +1755,11 @@ TEMATICAS = {
     },
 }
 
-if secao == SECOES[11]:
+if secao == "Análise temática por curso":
     st.subheader("Análise temática por curso")
     st.caption("Leitura temática **qualitativa** (por leitura, não por algoritmo) "
                "dos TCCs de cada curso, a partir de título + resumo + palavras-chave. "
-               "Complementa a aba 'Por curso' (camadas LDA/descritivo).")
+               "Complementa a aba *Sub-temas por curso (LDA)* (modelagem por camadas).")
 
     sel_tem = st.selectbox("Curso / habilitação", list(TEMATICAS.keys()),
                            key="tematica_curso")
