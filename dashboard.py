@@ -1240,17 +1240,31 @@ if secao == "Cobertura de Coleta":
 
         st.markdown("---")
         st.subheader("TCCs catalogados por pesquisador")
-        st.caption("Esforço de catalogação por pessoa (todo o corpus).")
+        st.caption("Esforço de catalogação por pessoa (todo o corpus). Cada retângulo "
+                   "é proporcional ao nº de TCCs que a pessoa catalogou; nomes "
+                   "consolidados por similaridade.")
         vp = df[df["pesquisador"].notna() & (df["pesquisador"] != "")][
             "pesquisador"].value_counts().reset_index()
         vp.columns = ["pesquisador", "n"]
         if not vp.empty:
-            fig = px.bar(vp, x="n", y="pesquisador", orientation="h", text="n",
-                         color_discrete_sequence=[PALETA[2]])
-            fig.update_layout(showlegend=False, height=max(250, len(vp) * 30),
-                              yaxis={"categoryorder": "total ascending"},
-                              xaxis_title="TCCs catalogados", yaxis_title="")
+            total_cat = int(vp["n"].sum())
+            vp["rotulo"] = vp.apply(
+                lambda r: f"{r['pesquisador']}<br>{r['n']} TCCs · "
+                          f"{r['n']/total_cat*100:.0f}%", axis=1)
+            fig = px.treemap(vp, path=[px.Constant("Catalogação"), "rotulo"],
+                             values="n", color="n",
+                             color_continuous_scale=SEQ_NECPF)
+            fig.update_traces(textfont_size=14, tiling=dict(pad=2),
+                              marker=dict(line=dict(width=1, color="white")),
+                              hovertemplate="<b>%{label}</b><extra></extra>")
+            fig.update_layout(height=480, margin=dict(l=8, r=8, t=24, b=8),
+                              coloraxis_showscale=False)
             st.plotly_chart(fig, use_container_width=True)
+            c_a, c_b = st.columns(2)
+            c_a.metric("Pesquisadores", len(vp))
+            c_b.metric("Maior contribuição",
+                       f"{vp['n'].iloc[0]/total_cat*100:.0f}%",
+                       help=f"{vp['pesquisador'].iloc[0]} catalogou {int(vp['n'].iloc[0])} TCCs.")
         else:
             st.write("Nenhum pesquisador registrado.")
 
