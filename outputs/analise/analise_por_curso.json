@@ -1,6 +1,6 @@
 {
-  "gerado_em": "2026-06-21",
-  "n_total": 211,
+  "gerado_em": "2026-06-26",
+  "n_total": 252,
   "cursos": [
     {
       "curso": "Insikiran",
@@ -569,11 +569,11 @@
           16
         ],
         [
-          "contexto",
+          "processo",
           13
         ],
         [
-          "processo",
+          "contexto",
           13
         ],
         [
@@ -589,11 +589,11 @@
           12
         ],
         [
-          "resultados",
+          "ufrr",
           11
         ],
         [
-          "ufrr",
+          "resultados",
           11
         ],
         [
@@ -605,15 +605,15 @@
           10
         ],
         [
-          "pedagogica",
-          10
-        ],
-        [
           "pedagogico",
           10
         ],
         [
           "vista",
+          10
+        ],
+        [
+          "pedagogica",
           10
         ]
       ],
@@ -841,68 +841,68 @@
     },
     {
       "curso": "História",
-      "n": 48,
+      "n": 69,
       "camada": "lda",
       "top_termos": [
         [
-          "roraima",
-          24
-        ],
-        [
           "historia",
-          24
+          37
         ],
         [
           "analise",
-          23
+          34
+        ],
+        [
+          "roraima",
+          32
         ],
         [
           "vista",
-          19
-        ],
-        [
-          "estado",
-          18
+          26
         ],
         [
           "processo",
-          17
+          26
         ],
         [
           "compreender",
-          16
+          23
+        ],
+        [
+          "social",
+          22
+        ],
+        [
+          "estado",
+          22
         ],
         [
           "analisar",
-          16
+          22
         ],
         [
-          "educacao",
-          14
-        ],
-        [
-          "busca",
-          13
+          "brasil",
+          21
         ],
         [
           "indigenas",
-          12
+          19
         ],
         [
-          "desenvolvimento",
-          12
+          "tambem",
+          19
         ],
         [
-          "alem",
-          12
+          "periodo",
+          16
+        ],
+        [
+          "federal",
+          16
         ],
         [
           "dessa",
-          12
-        ],
-        [
-          "sociais",
-          12
+          16
         ]
       ],
       "tccs": [
@@ -1145,68 +1145,173 @@
           "id": "213",
           "ano": "2022",
           "titulo": "MÚSICA, CIDADE E IDENTIDADE CULTURAL: Boa Vista e o Movimento Roraimeira de 1984 a 1991"
+        },
+        {
+          "id": "217",
+          "ano": "2017",
+          "titulo": "ENTRE ATORES E PALCOS: O Teatro Carlos Gomes da ascensão ao abandono"
+        },
+        {
+          "id": "219",
+          "ano": "2017",
+          "titulo": "HISTÓRIA E MEMÓRIA DO FUTEBOL DO ANTIGO TERRITÓRIO FEDERAL DO RIO BRANCO"
+        },
+        {
+          "id": "220",
+          "ano": "2017",
+          "titulo": "O(s) discurso(s) imagético(s) de Tiradentes presente(s) nos livros didáticos de História das Escolas Estaduais de Ensino Médio de Boa Vista-RR (2009 – 2011)"
+        },
+        {
+          "id": "221",
+          "ano": "2017",
+          "titulo": "BRASIL-GUYANA E O DESLOCAMENTO DE POVOS INDÍGENAS NA ÚLTIMA DÉCADA DO SÉCULO XX: O CASO DA MALOCA RAIMUNDÃO I, EM ALTO ALEGRE"
+        },
+        {
+          "id": "222",
+          "ano": "2017",
+          "titulo": "AS ORDENS RELIGIOSAS NA AMAZÔNIA: OS MISSIONÁRIOS BENEDITINOS E OS CONFLITOS POLÍTICOS NO VALE DO RIO BRANCO (1840-1948)."
+        },
+        {
+          "id": "223",
+          "ano": "2017",
+          "titulo": "PRECONCEITO E MÍDIA: a violência contra o indígena roraimense no jornal impresso Folha de Boa Vista (2003-2005)."
+        },
+        {
+          "id": "224",
+          "ano": "2017",
+          "titulo": "HISTÓRIA E IMAGEM: considerações introdutórias sobre a utilização de alguns tipos de imagens no âmbito da História"
+        },
+        {
+          "id": "225",
+          "ano": "2017",
+          "titulo": "A DEMARCAÇÃO E HOMOLOGAÇÃO DA TERRA INDÍGENA RAPOSA/SERRA DO SOL E O DISCURSO DO JORNAL FOLHA DE BOA VISTA (1998 a 2005)"
+        },
+        {
+          "id": "226",
+          "ano": "2016",
+          "titulo": "MISSÃO BENEDITINA: ANÁLISES DAS CARTAS DE DOM ALCUINO MEYER (1926-1948)"
+        },
+        {
+          "id": "227",
+          "ano": "2017",
+          "titulo": "AMAZÔNIA CARIBENHA: A PRESENÇA ESPANHOLA, HOLANDESA E PORTUGUESA NO RIO BRANCO, ENTRE OS SÉCULOS XVI AO XVIII"
+        },
+        {
+          "id": "228",
+          "ano": "2017",
+          "titulo": "DITADURA E A IGREJA CATÓLICA NO TERRITÓRIO FEDERAL DE RORAIMA: O Serviço Nacional de Informação (1977 – 1988)"
+        },
+        {
+          "id": "229",
+          "ano": "2017",
+          "titulo": "O PROCESSO DE DEMARCAÇÃO DA TERRA INDÍGENA YANOMAMI A PARTIR DO CONCEITO DE TERRITÓRIO (1988-1992)"
+        },
+        {
+          "id": "230",
+          "ano": "2025",
+          "titulo": "A REPRESENTAÇÃO DAS MULHERES NOS FILMES ANTINAZISTAS DA SEGUNDA GUERRA MUNDIAL (1939-1945)"
+        },
+        {
+          "id": "231",
+          "ano": "2025",
+          "titulo": "O Discurso sobre o Marco Temporal Materializado em Notícias da Folha de Boa Vista (2023): Tramitação, Mobilização e Decisão"
+        },
+        {
+          "id": "232",
+          "ano": "2026",
+          "titulo": "“ME VER POBRE, PRESO OU MORTO JÁ É CULTURAL”: A EMERGÊNCIA DO CINEMA NEGRO ENQUANTO PRÁTICA PEDAGÓGICA PARA A IMPLEMENTAÇÃO DA LEI FEDERAL 10.639/2003 NA EDUCAÇÃO BÁSICA"
+        },
+        {
+          "id": "233",
+          "ano": "2025",
+          "titulo": "CAIO JÚLIO CÉSAR E A CONSTRUÇÃO DE HISTÓRIA POR MEIO DO BELLVM CIVILE"
+        },
+        {
+          "id": "234",
+          "ano": "2025",
+          "titulo": "A ESCOLA DOS ANNALES: O MONOPÓLIO HISTORIOGRÁFICO SOBRE O BRASIL (1929-1970)"
+        },
+        {
+          "id": "235",
+          "ano": "2026",
+          "titulo": "EGISLAÇÃO E TRABALHO NA AMAZÔNIA: OS POVOS INDÍGENAS DO VALE DO RIO BRANCO NA CARTA RÉGIA DE 1798"
+        },
+        {
+          "id": "252",
+          "ano": "2012",
+          "titulo": "A CRIAÇÃO DO TERRITÓRIO FEDERAL DO RIO BRANCO, DE 1943 A 1964"
+        },
+        {
+          "id": "253",
+          "ano": "2012",
+          "titulo": "MUDANÇAS E PERMANÊNCIAS NOS LIVROS DIDÁTICOS DE HISTÓRIA NO BRASIL: 1989 A 2009."
+        },
+        {
+          "id": "254",
+          "ano": "2012",
+          "titulo": "O SURGIMENTO DO BAIRRO ASA BRANCA NA DÉCADA DE 1980, EM BOA VISTA/RR"
         }
       ],
       "lda": {
-        "K": 3,
-        "ari": 0.079,
+        "K": 2,
+        "ari": 0.291,
         "diag": {
-          "2": 0.057568989739240864,
-          "3": 0.0786610707230935,
-          "4": 0.04678243813947962
+          "2": 0.29124628275641673,
+          "3": 0.1313170245623908,
+          "4": 0.08813839854878432
         },
         "subtemas": [
           {
             "termos": [
-              "roraima",
-              "identidade",
-              "estado",
               "historia",
               "vista",
-              "politica",
-              "cultura",
-              "social",
-              "violencia",
-              "cultural"
+              "educacao",
+              "roraima",
+              "analise",
+              "formacao",
+              "mulheres",
+              "identidade",
+              "representacao",
+              "processo"
             ],
-            "n": 15,
+            "n": 37,
             "exemplos": [
               {
-                "id": "202",
-                "ano": "2025",
-                "titulo": "A PRECARIZAÇÃO DA VIDA FEMININA: UMA ANÁLISE HISTÓRICA E SOCIAL DE DOIS PROCESSOS-CRIMINAIS DE MORTE DE MULHERES EM RORAIMA (SÉCULOS XIX e XXI)"
+                "id": "232",
+                "ano": "2026",
+                "titulo": "“ME VER POBRE, PRESO OU MORTO JÁ É CULTURAL”: A EMERGÊNCIA DO CINEMA NEGRO ENQUANTO PRÁTICA PEDAGÓGICA PARA A IMPLEMENTAÇÃO DA LEI FEDERAL 10.639/2003 NA EDUCAÇÃO BÁSICA"
               },
               {
-                "id": "180",
-                "ano": "2022",
-                "titulo": "FEMINICÍDIO NO ESTADO DE RORAIMA DURANTE O CONTEXTO DA PANDEMIA (COVID-19)"
+                "id": "230",
+                "ano": "2025",
+                "titulo": "A REPRESENTAÇÃO DAS MULHERES NOS FILMES ANTINAZISTAS DA SEGUNDA GUERRA MUNDIAL (1939-1945)"
               },
               {
-                "id": "205",
+                "id": "167",
                 "ano": "2025",
-                "titulo": "A BOA E BELA SORTE DE UMA VIDA RORAIMENSE: A LITERATURA COMO MEIO DE DIVULGAR A HISTÓRIA DE RORAIMA"
+                "titulo": "Arquivo disponível de forma digital e sem restrições de acesso"
               }
             ]
           },
           {
             "termos": [
-              "historia",
               "indigenas",
-              "educacao",
-              "indigena",
-              "analise",
-              "escolar",
               "roraima",
+              "regiao",
+              "amazonia",
+              "branco",
               "processo",
-              "formacao",
-              "vista"
+              "indigena",
+              "estado",
+              "povos",
+              "cultura"
             ],
-            "n": 21,
+            "n": 32,
             "exemplos": [
               {
-                "id": "185",
-                "ano": "2022",
-                "titulo": "A REPRESENTAÇÃO DOS POVOS INDÍGENAS NAS ICONOGRAFIAS DOS LIVROS DIDÁTICOS DE HISTÓRIA: UMA ANÁLISE A PARTIR DA LEI No 11.645/2008"
+                "id": "228",
+                "ano": "2017",
+                "titulo": "DITADURA E A IGREJA CATÓLICA NO TERRITÓRIO FEDERAL DE RORAIMA: O Serviço Nacional de Informação (1977 – 1988)"
               },
               {
                 "id": "161",
@@ -1214,41 +1319,9 @@
                 "titulo": "PATRIMÔNIO CULTURAL: A IMPORTÂNCIA DO FESTIVAL DO BEIJU (2005 - 2019) COMO VALORIZAÇÃO HISTÓRICA E CULTURAL NA COMUNIDADE INDÍGENA TABALASCADA EM RORAIMA"
               },
               {
-                "id": "208",
-                "ano": "2025",
-                "titulo": "MEMÓRIAS QUE RESISTEM: A REPRESENTAÇÃO DAS MULHERES INDÍGENAS NAS CARTAS DO PROJETO “MULHERES QUE FAZEM HISTÓRIA, MAS NÃO ESTÃO NOS LIVROS DE HISTÓRIA” (PIBID/UFRR 2022-2024)"
-              }
-            ]
-          },
-          {
-            "termos": [
-              "vista",
-              "processo",
-              "regiao",
-              "roraima",
-              "dentro",
-              "ocupacao",
-              "desintrusao",
-              "terra",
-              "desenvolvimento",
-              "amazonia"
-            ],
-            "n": 12,
-            "exemplos": [
-              {
-                "id": "156",
-                "ano": "2021",
-                "titulo": "DEVOÇÃO LEIGA NA AMAZÔNIA SETECENTISTA: A IRMANDADE DO SANTÍSSIMO SACRAMENTO DA VILA DE BARCELOS, CAPITANIA DO RIO NEGRO"
-              },
-              {
-                "id": "194",
+                "id": "147",
                 "ano": "2023",
-                "titulo": "MAPEAMENTO PRELIMINAR DO PROCESSO DE DESINTRUSÃO DAS FRENTES DE GARIMPAGEM DAS TERRAS YANOMAMI E YE’KWANA (1985-1994)"
-              },
-              {
-                "id": "176",
-                "ano": "2022",
-                "titulo": "DEVOÇÃO NEGRA NA AMAZÔNIA PORTUGUESA: A IRMANDADE DE SÃO BENEDITO DA VILA DE SANTARÉM, CAPITANIA DO GRÃO-PARÁ, DO ANO DE 1800"
+                "titulo": "O SERVIÇO NACIONAL DE INFORMAÇÕES E A ESPIONAGEM À IGREJA CATÓLICA EM RORAIMA: DA DITADURA À REDEMOCRATIZAÇÃO"
               }
             ]
           }
@@ -1257,31 +1330,39 @@
     },
     {
       "curso": "Música",
-      "n": 21,
+      "n": 22,
       "camada": "descritivo",
       "top_termos": [
         [
           "musica",
-          19
+          20
         ],
         [
           "musical",
-          15
+          16
+        ],
+        [
+          "vista",
+          14
         ],
         [
           "educacao",
           14
         ],
         [
-          "vista",
+          "analise",
           13
         ],
         [
-          "analise",
+          "contexto",
           12
         ],
         [
-          "contexto",
+          "pratica",
+          12
+        ],
+        [
+          "praticas",
           11
         ],
         [
@@ -1289,35 +1370,27 @@
           11
         ],
         [
-          "pratica",
+          "resultados",
           11
+        ],
+        [
+          "musicais",
+          10
+        ],
+        [
+          "alem",
+          10
         ],
         [
           "dados",
           10
         ],
         [
-          "praticas",
-          10
-        ],
-        [
-          "resultados",
-          10
-        ],
-        [
-          "musicais",
-          9
-        ],
-        [
-          "alem",
-          9
-        ],
-        [
           "formacao",
           9
         ],
         [
-          "entrevistas",
+          "processo",
           8
         ]
       ],
@@ -1426,6 +1499,11 @@
           "id": "212",
           "ano": "2022",
           "titulo": "COMPREENSSÕES ACERCA DO ENSINO REMOTO EMERGENCIAL DO CURSO DE LICENCIATURA EM MÚSICA DA UFRR: O OLHAR DOCENTE"
+        },
+        {
+          "id": "245",
+          "ano": "2025",
+          "titulo": "CONSIDERAÇÕES SOBRE A MÚSICA RITUAL NO TERREIRO DE UMBANDA"
         }
       ],
       "lda": null
@@ -1436,15 +1514,7 @@
       "camada": "descritivo",
       "top_termos": [
         [
-          "teoria",
-          14
-        ],
-        [
           "atividade",
-          14
-        ],
-        [
-          "acoes",
           14
         ],
         [
@@ -1452,15 +1522,23 @@
           14
         ],
         [
+          "acoes",
+          14
+        ],
+        [
+          "teoria",
+          14
+        ],
+        [
           "situacoes",
           14
         ],
         [
-          "galperin",
+          "estudantes",
           13
         ],
         [
-          "estudantes",
+          "galperin",
           13
         ],
         [
@@ -1480,7 +1558,7 @@
           11
         ],
         [
-          "mentais",
+          "conteudo",
           10
         ],
         [
@@ -1488,11 +1566,11 @@
           10
         ],
         [
-          "formacao",
+          "mentais",
           10
         ],
         [
-          "conteudo",
+          "formacao",
           10
         ]
       ],
@@ -1576,8 +1654,128 @@
       "lda": null
     },
     {
+      "curso": "Ciências Biológicas",
+      "n": 10,
+      "camada": "descritivo",
+      "top_termos": [
+        [
+          "pode",
+          6
+        ],
+        [
+          "resultados",
+          6
+        ],
+        [
+          "roraima",
+          6
+        ],
+        [
+          "importancia",
+          6
+        ],
+        [
+          "genero",
+          5
+        ],
+        [
+          "analise",
+          5
+        ],
+        [
+          "amostras",
+          5
+        ],
+        [
+          "estudos",
+          4
+        ],
+        [
+          "diferentes",
+          4
+        ],
+        [
+          "podem",
+          4
+        ],
+        [
+          "dados",
+          4
+        ],
+        [
+          "doencas",
+          4
+        ],
+        [
+          "quatro",
+          4
+        ],
+        [
+          "vida",
+          4
+        ],
+        [
+          "revisao",
+          3
+        ]
+      ],
+      "tccs": [
+        {
+          "id": "241",
+          "ano": "2022",
+          "titulo": "USO TRADICIONAL DE PLANTAS MEDICINAIS EM RORAIMA: UMA REVISÃO SISTEMÁTICA"
+        },
+        {
+          "id": "242",
+          "ano": "2022",
+          "titulo": "A BOTÂNICA NO ENSINO MÉDIO: UMA ANÁLISE COMPARATIVA ENTRE TRÊS LIVROS DIDÁTICOS DE BIOLOGIA"
+        },
+        {
+          "id": "243",
+          "ano": "2022",
+          "titulo": "PERFIL EPIDEMIOLÓGICO E A DETECÇÃO DOS SOROTIPOS DE DENGUE CIRCULANTE EM RORAIMA ENTRE OS ANOS DE 2017 A 2020"
+        },
+        {
+          "id": "244",
+          "ano": "2022",
+          "titulo": "INVESTIGAÇÃO MOLECULAR DA RESISTÊNCIA À ARTEMISININA E SEUS DERIVADOS EM Plasmodium falciparum DE AMOSTRAS DE SANGUE COLETADAS EM UMA UNIDADE DE SAÚDE EM BOA VISTA, RR"
+        },
+        {
+          "id": "246",
+          "ano": "2023",
+          "titulo": "POTABILIDADE DA ÁGUA CONSUMIDA NO CAMPUS PARICARANA DA UNIVERSIDADE FEDERAL DE RORAIMA: 2015 A 2022"
+        },
+        {
+          "id": "247",
+          "ano": "2023",
+          "titulo": "QUE MARCAS OS ESTUDANTES DE BIOLOGIA DE UMA UNIVERSIDADE PÚBLICA NO NORTE DO BRASIL DEIXARÃO NO PLANETA? UMA ANÁLISE SOBRE A PEGADA ECOLÓGICA"
+        },
+        {
+          "id": "248",
+          "ano": "2023",
+          "titulo": "ESTUDO SOBRE A ATIVIDADE ANTIOXIDANTE E AÇÃO ANTIMICROBIANA DE EXTRATOS DA Mentha piperita L. (HORTELÃ PIMENTA)"
+        },
+        {
+          "id": "249",
+          "ano": "2023",
+          "titulo": "JOGO DA MEMÓRIA “MACRÓFITAS AQUÁTICAS”: CONSTRUÇÃO DE UM RECURSO DIDÁTICO PARA O ENSINO DE CIÊNCIAS"
+        },
+        {
+          "id": "250",
+          "ano": "2023",
+          "titulo": "CONTRIBUIÇÃO AO ENSINO-APRENDIZADO DA DENGUE EM TURMAS DE ENSINO MÉDIO DO COLÉGIO DE APLICAÇÃO DE BOA VISTA - RR"
+        },
+        {
+          "id": "251",
+          "ano": "2023",
+          "titulo": "FILOGENIA E TAXONOMIA DO GÊNERO BRACHYGALBA (AVES: GALBULIDAE)"
+        }
+      ],
+      "lda": null
+    },
+    {
       "curso": "Letras",
-      "n": 7,
+      "n": 10,
       "camada": "listagem",
       "top_termos": [],
       "tccs": [
@@ -1615,13 +1813,28 @@
           "id": "148",
           "ano": "2022",
           "titulo": "O LÉXICO RORAIMENSE NAS REDES SOCIAIS LOCAIS – KABOCANDO1"
+        },
+        {
+          "id": "238",
+          "ano": "2023",
+          "titulo": "PAPÉIS SOCIAIS DE GÊNERO NO LIVRO MULHERZINHAS DE LOUISA MAY ALCOTT"
+        },
+        {
+          "id": "239",
+          "ano": "2021",
+          "titulo": "DO LIMÃO À LIMONADA: REFLEXÕES ACERCA DA CONTRIBUIÇÃO DO ENSINO REMOTO PARA O ENSINO PRESENCIAL DE LÍNGUA INGLESA"
+        },
+        {
+          "id": "240",
+          "ano": "2022",
+          "titulo": "CONCEPTUALIZAÇÕES METAFÓRICAS EM CHARGES SOBRE A CONDUÇÃO DO GOVERNO BOLSONARO FRENTE À PANDEMIA DE COVID-19"
         }
       ],
       "lda": null
     },
     {
       "curso": "LEDUCARR",
-      "n": 10,
+      "n": 16,
       "camada": "listagem",
       "top_termos": [],
       "tccs": [
@@ -1674,6 +1887,36 @@
           "id": "193",
           "ano": "2024",
           "titulo": "OS DESAFIOS À PERMANÊNCIA E AS CAUSAS DA EVASÃO NO ENSINO MÉDIO EM UMA ESCOLA DO CAMPO EM IRACEMA/RR."
+        },
+        {
+          "id": "214",
+          "ano": "2025",
+          "titulo": "Literatura e Matemática: Uma Proposta Didática a partir de Aritmética da Emília de Monteiro Lobato"
+        },
+        {
+          "id": "215",
+          "ano": "2024",
+          "titulo": "LIVROS PARADIDÁTICOS COMO RECURSO PARA O ENSINO DE FÍSICA NAS ESCOLAS INDÍGENAS DE RORAIMA"
+        },
+        {
+          "id": "216",
+          "ano": "2024",
+          "titulo": "O LÚDICO NA APRENDIZAGEM DAS QUATRO OPERAÇÕES DE MATEMÁTICA PARA OS ALUNOS DO 6o ANO DA ESCOLA JOSÉ PEREIRA DE ARAÚJO DA VILA ROXINHO - RR"
+        },
+        {
+          "id": "218",
+          "ano": "20232",
+          "titulo": "PERFIL DOS RESÍDUOS SÓLIDOS PRODUZIDOS NA ESCOLA MUNICIPAL PROF. JOVACI MARÇAL DA SILVA (VILA DO APIAU, MUCAJAÍ, RR): CAMINHOS PARA A ESTRUTURAÇÃO DE UM PROGRAMA DE EDUCAÇÃO/SENSIBILIZAÇÃO AMBIENTAL."
+        },
+        {
+          "id": "236",
+          "ano": "2025",
+          "titulo": "RELATO DE EXPERIÊNCIA COMO BOLSISTA DO PIBID – SUBPROJETO EDUCAÇÃO DO CAMPO"
+        },
+        {
+          "id": "237",
+          "ano": "2025",
+          "titulo": "DEGRADAÇÃO DO IGARAPÉ ARRAIA NA COMUNIDADE INDÍGENA MANOÁ, MUNICÍPIO DE BONFIM-RR"
         }
       ],
       "lda": null

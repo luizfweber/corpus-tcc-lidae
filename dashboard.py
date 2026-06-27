@@ -183,41 +183,41 @@ def consolida_nomes(nomes_list, threshold=85):
 
 # Rótulos LDA — APROXIMADOS, derivados dos 10 termos mais prováveis.
 # Edite as leituras conforme revisão qualitativa.
-# Atualizado com K=8 (211 TCCs, re-treino 2026-06-20 com palavras-chave separadas
-# e limpas; K fixado por leitura) — rótulos PROVISÓRIOS.
+# Atualizado com K=8 (252 TCCs, re-treino 2026-06-26 após inclusão da catalogação
+# de 26/06; K fixado por leitura) — rótulos PROVISÓRIOS.
 TOPICOS = {
-    0: {"rotulo": "História, gênero e mulheres (provisório)",
-        "leitura": "história social/política de Roraima, gênero, representação das mulheres",
-        "termos": "historia, mulheres, roraima, representacao, social, genero, "
-                  "sociais, operacoes, analise, politica"},
-    1: {"rotulo": "Matemática — Teoria Histórico-Cultural (provisório)",
+    0: {"rotulo": "Matemática — Teoria Histórico-Cultural (provisório)",
         "leitura": "atividade de situações-problema, etapas de Galperin, resolução",
         "termos": "atividade, problema, situacoes, teoria, resolucao, acoes, "
-                  "estudantes, discente, matematica, galperin"},
-    2: {"rotulo": "Boa Vista, região amazônica e jogos (provisório)",
-        "leitura": "contexto roraimense/amazônico, jogos e música — tópico difuso",
-        "termos": "vista, regiao, roraima, jogos, processo, estado, tambem, "
-                  "musica, amazonia, analise"},
-    3: {"rotulo": "Prática pedagógica, artesanato e migração (provisório)",
-        "leitura": "coordenação pedagógica, artesanato indígena, migrantes — tópico pequeno",
-        "termos": "pedagogica, coordenacao, indigenas, artesanato, vista, analise, "
-                  "roraima, artesanatos, migrantes, desafios"},
-    4: {"rotulo": "Plantas medicinais e saberes tradicionais (provisório)",
-        "leitura": "etnobotânica, plantas/remédios medicinais, química, conhecimento tradicional",
-        "termos": "comunidade, plantas, medicinais, indigena, moradores, quimica, "
-                  "culturais, tradicional, vista, remedios"},
-    5: {"rotulo": "Formação docente e residência pedagógica (provisório)",
-        "leitura": "formação de professores, programas (PIBID/residência), prática docente",
-        "termos": "formacao, educacao, docente, contexto, pedagogica, programa, "
-                  "praticas, pratica, processo, residencia"},
-    6: {"rotulo": "Pedagogia, estágio e educação musical (provisório)",
-        "leitura": "estágio supervisionado, experiência na pedagogia e na música",
-        "termos": "educacao, estagio, roraima, pedagogia, formacao, experiencia, "
-                  "vista, musical, projeto, musica"},
+                  "estudantes, discente, galperin, matematica"},
+    1: {"rotulo": "Ensino com jogos e material didático na escola indígena (provisório)",
+        "leitura": "matemática e ciências com jogos, ensino fundamental, escola indígena",
+        "termos": "matematica, jogos, aluno, aulas, proposta, indigena, "
+                  "atividades, importancia, fundamental, construcao"},
+    2: {"rotulo": "Formação docente, estágio e coordenação (provisório)",
+        "leitura": "formação de professores, estágio, coordenação pedagógica, música",
+        "termos": "educacao, formacao, pedagogica, docente, estagio, musica, "
+                  "programa, contexto, roraima, coordenacao"},
+    3: {"rotulo": "História, gênero e identidade (provisório)",
+        "leitura": "história social de Roraima, gênero, representação e identidade",
+        "termos": "historia, analise, vista, roraima, genero, social, "
+                  "estado, representacao, periodo, identidade"},
+    4: {"rotulo": "Educação musical e infantil (provisório)",
+        "leitura": "práticas musicais, pedagogia, educação infantil e estágio",
+        "termos": "musical, educacao, infantil, musica, praticas, pedagogia, "
+                  "musicais, processo, estagio, experiencia"},
+    5: {"rotulo": "Saberes tradicionais, língua e plantas medicinais (provisório)",
+        "leitura": "comunidade e cultura indígena, língua, etnobotânica/plantas medicinais",
+        "termos": "comunidade, indigena, lingua, cultura, indigenas, plantas, "
+                  "tradicional, tambem, tradicionais, medicinais"},
+    6: {"rotulo": "História regional, Amazônia e povos indígenas (provisório)",
+        "leitura": "Roraima/Brasil, Amazônia, fronteira e povos indígenas na história",
+        "termos": "educacao, roraima, brasil, indigenas, regiao, estado, "
+                  "amazonia, processo, vista, branco"},
     7: {"rotulo": "Educação escolar indígena (provisório)",
-        "leitura": "comunidade, escola e língua indígena (96% com menção indígena)",
-        "termos": "indigena, comunidade, indigenas, estadual, educacao, escolar, "
-                  "lingua, proposta, matematica, conhecimentos"},
+        "leitura": "comunidade, escola, terra e projetos da educação escolar indígena",
+        "termos": "indigena, comunidade, educacao, estadual, indigenas, escolar, "
+                  "proposta, leitura, terra, projeto"},
 }
 
 # ─────────────────────────────────────────────────────────────────────────────

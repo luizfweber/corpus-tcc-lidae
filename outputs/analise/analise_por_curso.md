@@ -1,6 +1,6 @@
 # Análise temática por curso, em camadas — LIDAE/UFRR
 
-Corpus: 211 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · listagem). Exploratório, não censitário.
+Corpus: 252 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · listagem). Exploratório, não censitário.
 
 
 ## 🟢 Camada LDA (N suficiente para sub-temas)
@@ -35,33 +35,28 @@ Corpus: 211 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
    - id 36 (2019): ATRIBUIÇÕES DO COORDENADOR PEDAGÓGICO NAS ESCOLAS MUNICIPAIS DE BOA VISTA-RR: UMA ANÁLISE 
 
 
-### História — 48 TCCs · LDA intra-curso (K=3)
-*Seleção de K por estabilidade entre 8 seeds — K2: ARI=0.06 · K3: ARI=0.08 · K4: ARI=0.05. Escolhido K=3 (ARI=0.08).*
-> ⚠️ Estabilidade baixa (ARI=0.08): sub-temas FRÁGEIS, indício a confirmar por leitura — não conclusão.
+### História — 69 TCCs · LDA intra-curso (K=2)
+*Seleção de K por estabilidade entre 8 seeds — K2: ARI=0.29 · K3: ARI=0.13 · K4: ARI=0.09. Escolhido K=2 (ARI=0.29).*
+> ⚠️ Estabilidade baixa (ARI=0.29): sub-temas FRÁGEIS, indício a confirmar por leitura — não conclusão.
 
-**Sub-tema 1** (15 TCCs) — roraima, identidade, estado, historia, vista, politica, cultura, social, violencia, cultural
-   - id 202 (2025): A PRECARIZAÇÃO DA VIDA FEMININA: UMA ANÁLISE HISTÓRICA E SOCIAL DE DOIS PROCESSOS-CRIMINAI
-   - id 180 (2022): FEMINICÍDIO NO ESTADO DE RORAIMA DURANTE O CONTEXTO DA PANDEMIA (COVID-19)
-   - id 205 (2025): A BOA E BELA SORTE DE UMA VIDA RORAIMENSE: A LITERATURA COMO MEIO DE DIVULGAR A HISTÓRIA D
+**Sub-tema 1** (37 TCCs) — historia, vista, educacao, roraima, analise, formacao, mulheres, identidade, representacao, processo
+   - id 232 (2026): “ME VER POBRE, PRESO OU MORTO JÁ É CULTURAL”: A EMERGÊNCIA DO CINEMA NEGRO ENQUANTO PRÁTIC
+   - id 230 (2025): A REPRESENTAÇÃO DAS MULHERES NOS FILMES ANTINAZISTAS DA SEGUNDA GUERRA MUNDIAL (1939-1945)
+   - id 167 (2025): Arquivo disponível de forma digital e sem restrições de acesso
 
-**Sub-tema 2** (21 TCCs) — historia, indigenas, educacao, indigena, analise, escolar, roraima, processo, formacao, vista
-   - id 185 (2022): A REPRESENTAÇÃO DOS POVOS INDÍGENAS NAS ICONOGRAFIAS DOS LIVROS DIDÁTICOS DE HISTÓRIA: UMA
+**Sub-tema 2** (32 TCCs) — indigenas, roraima, regiao, amazonia, branco, processo, indigena, estado, povos, cultura
+   - id 228 (2017): DITADURA E A IGREJA CATÓLICA NO TERRITÓRIO FEDERAL DE RORAIMA: O Serviço Nacional de Infor
    - id 161 (2021): PATRIMÔNIO CULTURAL: A IMPORTÂNCIA DO FESTIVAL DO BEIJU (2005 - 2019) COMO VALORIZAÇÃO HIS
-   - id 208 (2025): MEMÓRIAS QUE RESISTEM: A REPRESENTAÇÃO DAS MULHERES INDÍGENAS NAS CARTAS DO PROJETO “MULHE
-
-**Sub-tema 3** (12 TCCs) — vista, processo, regiao, roraima, dentro, ocupacao, desintrusao, terra, desenvolvimento, amazonia
-   - id 156 (2021): DEVOÇÃO LEIGA NA AMAZÔNIA SETECENTISTA: A IRMANDADE DO SANTÍSSIMO SACRAMENTO DA VILA DE BA
-   - id 194 (2023): MAPEAMENTO PRELIMINAR DO PROCESSO DE DESINTRUSÃO DAS FRENTES DE GARIMPAGEM DAS TERRAS YANO
-   - id 176 (2022): DEVOÇÃO NEGRA NA AMAZÔNIA PORTUGUESA: A IRMANDADE DE SÃO BENEDITO DA VILA DE SANTARÉM, CAP
+   - id 147 (2023): O SERVIÇO NACIONAL DE INFORMAÇÕES E A ESPIONAGEM À IGREJA CATÓLICA EM RORAIMA: DA DITADURA
 
 
 
 ## 🟠 Camada descritiva (N médio — termos + leitura)
 
-### Música — 21 TCCs · descritivo (sem LDA)
+### Música — 22 TCCs · descritivo (sem LDA)
 *N insuficiente para modelagem de tópicos; reporta-se a frequência documental dos termos e a lista de trabalhos.*
 
-**Termos mais recorrentes (nº de TCCs):** musica (19), musical (15), educacao (14), vista (13), analise (12), contexto (11), roraima (11), pratica (11), dados (10), praticas (10), resultados (10), musicais (9), alem (9), formacao (9), entrevistas (8)
+**Termos mais recorrentes (nº de TCCs):** musica (20), musical (16), vista (14), educacao (14), analise (13), contexto (12), pratica (12), praticas (11), roraima (11), resultados (11), musicais (10), alem (10), dados (10), formacao (9), processo (8)
 
 **Trabalhos:**
    - id 92 (2017): O EMPRÉSTIMO MODAL RECORRENTE NO POP ROCK DOS ANOS 1980
@@ -85,11 +80,12 @@ Corpus: 211 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
    - id 86 (2025): PRÁTICAS DE ENSINO DE MÚSICA: EXPERIÊNCIA DE FORMAÇÃO DOCENTE NO PROGRAMA RESIDÊNCIA PEDAG
    - id 96 (2025): ENSINO COLETIVO DE VIOLÃO NA ORQUESTRA DE VIOLÕES DO INSTITUTO BOA VISTA DE MÚSICA (IBVM):
    - id 99 (2025): CONSIDERAÇÕES SOBRE A MÚSICA RITUAL NO TERREIRO DE UMBANDA OGUM MATINATA EM BOA VISTA – RR
+   - id 245 (2025): CONSIDERAÇÕES SOBRE A MÚSICA RITUAL NO TERREIRO DE UMBANDA
 
 ### Matemática — 15 TCCs · descritivo (sem LDA)
 *N insuficiente para modelagem de tópicos; reporta-se a frequência documental dos termos e a lista de trabalhos.*
 
-**Termos mais recorrentes (nº de TCCs):** teoria (14), atividade (14), acoes (14), problema (14), situacoes (14), galperin (13), estudantes (13), resolucao (13), matematica (11), processo (11), fundamental (11), mentais (10), analisar (10), formacao (10), conteudo (10)
+**Termos mais recorrentes (nº de TCCs):** atividade (14), problema (14), acoes (14), teoria (14), situacoes (14), estudantes (13), galperin (13), resolucao (13), matematica (11), processo (11), fundamental (11), conteudo (10), analisar (10), mentais (10), formacao (10)
 
 **Trabalhos:**
    - id 4 (2016): A APRENDIZAGEM DA ATIVIDADE DE SITUAÇÕES PRO-BLEMA EM SISTEMA DE EQUAÇÕES LINEARES FUNDA-M
@@ -108,30 +104,56 @@ Corpus: 211 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
    - id 120 (2024): A ATIVIDADE SITUAÇÕES PROBLEMA DISCENTE EM EXPRESSÕES ALGÉBRICAS EM ESTUDANTES DO 7° ANO N
    - id 119 (2026): CONTRIBUIÇÕES DA TEORIA HISTÓRICO-CULTURAL DA ATIVIDADE NA APRENDIZAGEM DA MATEMÁTICA: UM 
 
+### Ciências Biológicas — 10 TCCs · descritivo (sem LDA)
+*N insuficiente para modelagem de tópicos; reporta-se a frequência documental dos termos e a lista de trabalhos.*
+
+**Termos mais recorrentes (nº de TCCs):** pode (6), resultados (6), roraima (6), importancia (6), genero (5), analise (5), amostras (5), estudos (4), diferentes (4), podem (4), dados (4), doencas (4), quatro (4), vida (4), revisao (3)
+
+**Trabalhos:**
+   - id 241 (2022): USO TRADICIONAL DE PLANTAS MEDICINAIS EM RORAIMA: UMA REVISÃO SISTEMÁTICA
+   - id 242 (2022): A BOTÂNICA NO ENSINO MÉDIO: UMA ANÁLISE COMPARATIVA ENTRE TRÊS LIVROS DIDÁTICOS DE BIOLOGI
+   - id 243 (2022): PERFIL EPIDEMIOLÓGICO E A DETECÇÃO DOS SOROTIPOS DE DENGUE CIRCULANTE EM RORAIMA ENTRE OS 
+   - id 244 (2022): INVESTIGAÇÃO MOLECULAR DA RESISTÊNCIA À ARTEMISININA E SEUS DERIVADOS EM Plasmodium falcip
+   - id 246 (2023): POTABILIDADE DA ÁGUA CONSUMIDA NO CAMPUS PARICARANA DA UNIVERSIDADE FEDERAL DE RORAIMA: 20
+   - id 247 (2023): QUE MARCAS OS ESTUDANTES DE BIOLOGIA DE UMA UNIVERSIDADE PÚBLICA NO NORTE DO BRASIL DEIXAR
+   - id 248 (2023): ESTUDO SOBRE A ATIVIDADE ANTIOXIDANTE E AÇÃO ANTIMICROBIANA DE EXTRATOS DA Mentha piperita
+   - id 249 (2023): JOGO DA MEMÓRIA “MACRÓFITAS AQUÁTICAS”: CONSTRUÇÃO DE UM RECURSO DIDÁTICO PARA O ENSINO DE
+   - id 250 (2023): CONTRIBUIÇÃO AO ENSINO-APRENDIZADO DA DENGUE EM TURMAS DE ENSINO MÉDIO DO COLÉGIO DE APLIC
+   - id 251 (2023): FILOGENIA E TAXONOMIA DO GÊNERO BRACHYGALBA (AVES: GALBULIDAE)
+
 
 ## 🔴 Camada listagem (N ínfimo — sem modelagem)
 
-### Letras — 7 TCCs · listagem (sem análise)
-*N ínfimo (7): qualquer modelagem seria artefato (CLAUDE.md §1). Apenas identificação.*
+### Letras — 10 TCCs · listagem (sem análise)
+*N ínfimo (10): qualquer modelagem seria artefato (CLAUDE.md §1). Apenas identificação.*
 
+   - id 239 (2021): DO LIMÃO À LIMONADA: REFLEXÕES ACERCA DA CONTRIBUIÇÃO DO ENSINO REMOTO PARA O ENSINO PRESENCIAL DE LÍNGUA INGL
    - id 12 (2022): O LÉXICO RORAIMENSE NAS REDES SOCIAIS LOCAIS – KABOCANDO
    - id 13 (2022): O QUE É UM VERBO? GRAMÁTICA, CONCORDÂNCIA VERBAL E FUNCIONALISMO LINGUÍSTICO: UM OLHAR SOBRE O ENSINO DA LÍNGU
    - id 15 (2022): TENTATIVAS DE SUICÍDIO ENTRE INGRESSOS E EGRESSOS DOS CURSOS DE LETRAS DA UNIVERSIDADE FEDERAL DE RORAIMA: FAT
    - id 16 (2022): THE CREOLE AND THE STANDARD LANGUAGE SPOKEN AT ELEMENTARY SCHOOLS IN ENGLISH GUYANA
    - id 17 (2022): THE HONEST TRUTH: TRANSLATION METHODS OVERVIEW
    - id 148 (2022): O LÉXICO RORAIMENSE NAS REDES SOCIAIS LOCAIS – KABOCANDO1
+   - id 240 (2022): CONCEPTUALIZAÇÕES METAFÓRICAS EM CHARGES SOBRE A CONDUÇÃO DO GOVERNO BOLSONARO FRENTE À PANDEMIA DE COVID-19
    - id 14 (2023): PAPÉIS SOCIAIS DE GÊNERO NO LIVRO MULHERZINHAS, DE LOUISA MAY ALCOTT
+   - id 238 (2023): PAPÉIS SOCIAIS DE GÊNERO NO LIVRO MULHERZINHAS DE LOUISA MAY ALCOTT
 
-### LEDUCARR — 10 TCCs · listagem (sem análise)
-*N ínfimo (10): qualquer modelagem seria artefato (CLAUDE.md §1). Apenas identificação.*
+### LEDUCARR — 16 TCCs · listagem (sem análise)
+*N ínfimo (16): qualquer modelagem seria artefato (CLAUDE.md §1). Apenas identificação.*
 
    - id 19 (2023): AS CONTRIBUIÇÕES DO PROGRAMA INSTITUCIONAL DE BOLSA DE INICIAÇÃO À DOCÊNCIA-PIBID PARA A FORMAÇÃO DOCENTE DOS 
    - id 189 (2023): EDUCAÇÃO ESCOLAR INDÍGENA E A GARANTIA À INTERCULTURALIDADE: uma análise a partir da Escola Estadual Indígena 
+   - id 218 (20232): PERFIL DOS RESÍDUOS SÓLIDOS PRODUZIDOS NA ESCOLA MUNICIPAL PROF. JOVACI MARÇAL DA SILVA (VILA DO APIAU, MUCAJA
    - id 129 (2024): DA TERRA AO CONHECIMENTO: UMA PROPOSTA INTERDISCIPLINAR PARA A FORMAÇÃO CONTINUADA DE PROFESSORES DA EDUCAÇÃO 
    - id 186 (2024): DA TERRA AO CONHECIMENTO: UMA PROPOSTA INTERDISCIPLINAR PARA FORMAÇÃO CONTINUADA DE PROFESSORES DA EDUCAÇÃO DE
    - id 191 (2024): LUDICIDADE E FORMAÇÃO DOCENTE: TEM JOGO NO RESIDÊNCIA PEDAGÓGICA?
    - id 192 (2024): O uso dos mapas mentais no ensino de Geografia no IFRR- Campus Amajari/RR".
    - id 193 (2024): OS DESAFIOS À PERMANÊNCIA E AS CAUSAS DA EVASÃO NO ENSINO MÉDIO EM UMA ESCOLA DO CAMPO EM IRACEMA/RR.
+   - id 215 (2024): LIVROS PARADIDÁTICOS COMO RECURSO PARA O ENSINO DE FÍSICA NAS ESCOLAS INDÍGENAS DE RORAIMA
+   - id 216 (2024): O LÚDICO NA APRENDIZAGEM DAS QUATRO OPERAÇÕES DE MATEMÁTICA PARA OS ALUNOS DO 6o ANO DA ESCOLA JOSÉ PEREIRA DE
    - id 187 (2025): DESIGUALDADES SOCIAIS, MACHISMO E OPRESSÃO EM QUARTO DE DESPEJO E ONDE ESTAES FELICIDADE?
    - id 188 (2025): EDUCAÇÃO DO CAMPO EM RORAIMA: REFLEXÕES SOBRE OS DESAFIOS DA ESCOLA ESTADUAL ALBINO TAVARES
+   - id 214 (2025): Literatura e Matemática: Uma Proposta Didática a partir de Aritmética da Emília de Monteiro Lobato
+   - id 236 (2025): RELATO DE EXPERIÊNCIA COMO BOLSISTA DO PIBID – SUBPROJETO EDUCAÇÃO DO CAMPO
+   - id 237 (2025): DEGRADAÇÃO DO IGARAPÉ ARRAIA NA COMUNIDADE INDÍGENA MANOÁ, MUNICÍPIO DE BONFIM-RR
    - id 190 (2026): HISTÓRIA DA ESCOLA ESTADUAL INDÍGENA SIMINIYO’ NA COMUNIDADE INDÍGENA CANTAGALO, MUNICÍPIO DE PACARAIMA-RR

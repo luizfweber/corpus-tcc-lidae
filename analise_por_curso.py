@@ -38,7 +38,7 @@ OUT_MD   = BASE / "outputs" / "analise" / "analise_por_curso.md"
 OUT_JSON = BASE / "outputs" / "analise" / "analise_por_curso.json"
 
 LDA_CURSOS = {"Insikiran": (2, 4), "Pedagogia": (2, 3), "História": (2, 4)}
-DESCRITIVO = ["Música", "Matemática"]
+DESCRITIVO = ["Música", "Matemática", "Ciências Biológicas"]
 LISTAGEM   = ["Letras", "LEDUCARR"]
 
 SEEDS_EST = list(range(8))
