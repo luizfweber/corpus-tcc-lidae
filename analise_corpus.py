@@ -39,6 +39,10 @@ def num(v, default=None):
 
 for r in rows:
     r["ano_num"]  = num(r["ano_defesa"])
+    # guarda de plausibilidade: ano fora de 1990–2030 é erro de digitação da
+    # fonte (ex.: '0000', '20232') → tratado como ausente (CLAUDE.md §2)
+    if r["ano_num"] is not None and not (1990 <= r["ano_num"] <= 2030):
+        r["ano_num"] = None
     r["pag_num"]  = num(r["paginas"])
     # grupo canônico já está em grupo_tcc
     r["grupo"] = r["grupo_tcc"]
@@ -278,7 +282,10 @@ silhs = {}
 for k in range(3, 9):
     km = KMeans(n_clusters=k, random_state=42, n_init=10)
     labels = km.fit_predict(Xt)
-    try: silhs[k] = silhouette_score(Xt, labels, sample_size=min(N,128))
+    # random_state fixo: sem ele a amostragem da silhueta varia entre execuções
+    # e o K escolhido muda (não determinismo indesejado)
+    try: silhs[k] = silhouette_score(Xt, labels, sample_size=min(N,128),
+                                     random_state=42)
     except: silhs[k] = 0
 
 K_clust = max(silhs, key=silhs.get)

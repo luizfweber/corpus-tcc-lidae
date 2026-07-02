@@ -567,7 +567,10 @@ st.sidebar.header("Filtros")
 sel_grupos = st.sidebar.multiselect("Curso (com habilitações)", ORDEM_CURSOS_DET,
                                     default=ORDEM_CURSOS_DET)
 
+# anos plausíveis (1990–2030); valores fora são erro de digitação da fonte e
+# ficam de fora do filtro, tratados como ausentes (CLAUDE.md §2 — não imputar)
 anos_validos = df["ano_num"].dropna()
+anos_validos = anos_validos[anos_validos.between(1990, 2030)]
 if not anos_validos.empty:
     amin, amax = int(anos_validos.min()), int(anos_validos.max())
     sel_anos = st.sidebar.slider("Ano de defesa", amin, amax, (amin, amax))
@@ -780,17 +783,23 @@ if secao == "Tópicos (LDA)":
     fdt["topico_rotulo"] = fdt["topico_dom"].map(
         lambda i: TOPICOS.get(int(i), {}).get("rotulo", f"Tópico {int(i)}"))
 
-    st.markdown("**Proporção de TCCs por tópico dominante**")
+    st.markdown("**TCCs por tópico dominante**")
     vt = fdt["topico_rotulo"].value_counts().reset_index()
     vt.columns = ["topico", "n"]
-    fig = px.pie(vt, names="topico", values="n", hole=0.45,
-                 color_discrete_sequence=PALETA)
-    fig.update_layout(height=420, legend_title="Tópico dominante")
+    vt["pct"] = vt["n"] / vt["n"].sum() * 100
+    vt["rotulo"] = vt.apply(lambda r: f"{int(r['n'])} ({r['pct']:.0f}%)", axis=1)
+    fig = px.bar(vt.sort_values("n"), x="n", y="topico", orientation="h",
+                 text="rotulo", color_discrete_sequence=[PALETA[0]])
+    fig.update_traces(textposition="outside", cliponaxis=False)
+    fig.update_layout(showlegend=False, height=max(340, len(vt) * 42),
+                      xaxis_title="Nº de TCCs", yaxis_title="",
+                      margin=dict(r=70))
     st.plotly_chart(fig, use_container_width=True)
 
     st.markdown("**Tópico dominante × grupo de curso**")
     ct = pd.crosstab(fdt["topico_rotulo"], fdt["grupo_tcc"])
     ct = ct[[c for c in ORDEM_CURSOS if c in ct.columns]]  # ordem canônica
+    ct = ct.loc[ct.sum(axis=1).sort_values(ascending=False).index]  # maiores no topo
     fig = px.imshow(ct, text_auto=True, color_continuous_scale=SEQ_NECPF,
                     aspect="auto")
     fig.update_layout(height=460, xaxis_title="", yaxis_title="")
@@ -1058,26 +1067,55 @@ if secao == "Orientadores":
     st.subheader("Orientadores recorrentes")
     st.caption("Nomes consolidados por fuzzy matching (similitude ≥85%). "
                "Variações de grafia foram agrupadas sob o nome mais completo.")
-    vo = f[f["orientador"].str.len() > 4]["orientador"].value_counts()
+    fo_base = f[f["orientador"].str.len() > 4]
+
+    # ── Visão geral: quantos orientadores distintos tem cada curso ──────────
+    st.markdown("**Orientadores distintos por curso**")
+    resumo = (fo_base.groupby("curso_det")["orientador"]
+              .agg(distintos="nunique", tccs="count").reset_index())
+    resumo["media_tccs"] = (resumo["tccs"] / resumo["distintos"]).round(1)
+    resumo = resumo[resumo["curso_det"].isin(ORDEM_CURSOS_DET)]
+    resumo["_o"] = pd.Categorical(resumo["curso_det"], categories=ORDEM_CURSOS_DET,
+                                  ordered=True)
+    resumo = resumo.sort_values("_o")
+    fig = px.bar(resumo, x="distintos", y="curso_det", orientation="h",
+                 text="distintos", color_discrete_sequence=[PALETA[1]])
+    fig.update_layout(showlegend=False, height=max(280, len(resumo) * 34),
+                      xaxis_title="Nº de orientadores distintos", yaxis_title="",
+                      yaxis={"categoryorder": "array",
+                             "categoryarray": ORDEM_CURSOS_DET[::-1]})
+    st.plotly_chart(fig, use_container_width=True)
+    st.caption("'TCCs por orientador' varia por curso — cursos com poucos "
+               "orientadores distintos concentram mais a orientação.")
+
+    # ── Ranking dentro de um curso (ou de todos) ─────────────────────────────
+    st.markdown("---")
+    st.markdown("**Orientadores com 2+ TCCs**")
+    cursos_op = ["Todos os cursos"] + [c for c in ORDEM_CURSOS_DET
+                                       if c in fo_base["curso_det"].unique()]
+    sel_curso_o = st.selectbox("Curso (com habilitação)", cursos_op, key="ori_curso")
+    fo = fo_base if sel_curso_o == "Todos os cursos" else fo_base[fo_base["curso_det"] == sel_curso_o]
+
+    vo = fo["orientador"].value_counts()
     vo = vo[vo >= 2].reset_index()
     vo.columns = ["orientador", "n"]
     if not vo.empty:
-        pct = vo["n"].sum() / len(f) * 100
+        pct = vo["n"].sum() / len(fo) * 100 if len(fo) else 0
         st.metric("Concentração", f"{pct:.0f}% dos TCCs",
-                  help="% de TCCs sob orientadores com 2+ trabalhos no filtro.")
+                  help="% de TCCs (no curso selecionado) sob orientadores com "
+                       "2+ trabalhos.")
         fig = px.bar(vo, x="n", y="orientador", orientation="h", text="n",
                      color_discrete_sequence=[PALETA[1]])
-        fig.update_layout(showlegend=False, height=max(300, len(vo)*32),
+        fig.update_layout(showlegend=False, height=max(300, len(vo) * 32),
                           yaxis={"categoryorder": "total ascending"},
                           xaxis_title="TCCs orientados", yaxis_title="")
         st.plotly_chart(fig, use_container_width=True)
     else:
-        st.write("Nenhum orientador com 2+ TCCs no filtro atual.")
+        st.write("Nenhum orientador com 2+ TCCs neste curso/filtro.")
 
     st.markdown("---")
     st.markdown("#### 📋 Lista de TCCs (por orientador)")
-    orientadores = ["(todos)"] + sorted(
-        f[f["orientador"].str.len() > 4]["orientador"].dropna().unique())
+    orientadores = ["(todos)"] + sorted(fo_base["orientador"].dropna().unique())
     sel_o = st.selectbox("Filtrar por orientador", orientadores, key="ori_filtro")
     flt = f if sel_o == "(todos)" else f[f["orientador"] == sel_o]
     lista_tccs(flt, key="ori",
@@ -1511,8 +1549,15 @@ ver só o núcleo recorrente; observe quem são os **círculos grandes e centrai
     # membros AVALIADORES de cada banca (sem o orientador) — colunas banca_membro_*
     _MCOLS = [c for c in ["banca_membro_1", "banca_membro_2", "banca_membro_3",
                           "banca_membro_4"] if c in f.columns]
+
+    cursos_bn = ["Todos os cursos"] + [c for c in ORDEM_CURSOS_DET
+                                       if c in f["curso_det"].unique()]
+    sel_curso_bn = st.selectbox("Curso (com habilitação) para a rede de membros",
+                                cursos_bn, key="bn_curso")
+    fb = f if sel_curso_bn == "Todos os cursos" else f[f["curso_det"] == sel_curso_bn]
+
     membros_por_tcc, cont = [], Counter()
-    for _, row in f.iterrows():
+    for _, row in fb.iterrows():
         nomes = [str(row[c]).strip() for c in _MCOLS
                  if pd.notna(row[c]) and str(row[c]).strip() not in ("", "nan")]
         if nomes:
@@ -1530,7 +1575,9 @@ ver só o núcleo recorrente; observe quem são os **círculos grandes e centrai
                           xaxis_title="Nº de bancas (como membro)", yaxis_title="")
         st.plotly_chart(fig, use_container_width=True)
 
-        st.markdown("**Rede de co-participação entre membros** (sem o orientador)")
+        st.markdown("**Rede de co-participação entre membros** (sem o orientador)"
+                    + ("" if sel_curso_bn == "Todos os cursos"
+                       else f" — {sel_curso_bn}"))
         min_b = st.slider("Mínimo de bancas para incluir o membro", 1, 4, 2,
                           key="bn_min")
         G = nx.Graph()

@@ -6,7 +6,7 @@ Data: 2026-06-16 | Piloto: 252 TCCs | Natureza: exploratória, não censitária
    - 252 TCCs únicos consolidados a partir de 2 formulários Google Forms.
    - Grupos: Insikiran (81), História (69), Pedagogia (29), Música (22), LEDUCARR (16), Matemática (15), Letras (10), Ciências Biológicas (10).
    - Anos com registro: 2012–2026
-     (3 TCCs sem ano informado — excluídos desta contagem).
+     (2 TCCs sem ano informado — excluídos desta contagem).
 
 2. PÁGINAS (mediana por grupo — assimetria justifica mediana)
    Insikiran: mediana=43 | min=18 | max=104 | n=81
@@ -30,15 +30,16 @@ Data: 2026-06-16 | Piloto: 252 TCCs | Natureza: exploratória, não censitária
    [Tópico G]: educacao, roraima, brasil, indigenas, regiao, estado, amazonia, processo, vista, branco
    [Tópico H]: indigena, comunidade, educacao, estadual, indigenas, escolar, proposta, leitura, terra, projeto
 
-4. CLUSTERING (k=6, silhueta=0.047)
+4. CLUSTERING (k=7, silhueta=0.038)
    Silhueta baixa é esperada em corpus pequeno e texto curto — indica
    fronteiras temáticas porosas, não falha metodológica.
-   C0 (n=44): {'Insikiran': 14, 'Ciências Biológicas': 8, 'Pedagogia': 7}
-   C1 (n=14): {'Matemática': 14}
-   C2 (n=56): {'História': 43, 'Letras': 6, 'Música': 2}
-   C3 (n=36): {'Pedagogia': 17, 'História': 14, 'LEDUCARR': 3}
-   C4 (n=75): {'Insikiran': 65, 'LEDUCARR': 6, 'História': 3}
-   C5 (n=27): {'Música': 20, 'Pedagogia': 3, 'História': 3}
+   C0 (n=41): {'Insikiran': 15, 'Pedagogia': 8, 'LEDUCARR': 8}
+   C1 (n=28): {'Insikiran': 19, 'Letras': 4, 'História': 3}
+   C2 (n=22): {'Pedagogia': 17, 'História': 3, 'LEDUCARR': 2}
+   C3 (n=55): {'Insikiran': 46, 'LEDUCARR': 4, 'História': 4}
+   C4 (n=67): {'História': 53, 'Letras': 6, 'Ciências Biológicas': 5}
+   C5 (n=25): {'Música': 21, 'Pedagogia': 2, 'História': 2}
+   C6 (n=14): {'Matemática': 14}
 
 5. REDES
    Orientadores com 2+ TCCs: 47 (84% dos TCCs).
