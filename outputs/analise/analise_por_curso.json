@@ -1,47 +1,51 @@
 {
-  "gerado_em": "2026-06-26",
-  "n_total": 252,
+  "gerado_em": "2026-07-07",
+  "n_total": 319,
   "cursos": [
     {
       "curso": "Insikiran",
-      "n": 81,
+      "n": 85,
       "camada": "lda",
       "top_termos": [
         [
           "indigena",
-          77
+          81
         ],
         [
           "comunidade",
-          68
+          71
         ],
         [
           "estadual",
-          52
+          55
         ],
         [
           "indigenas",
-          48
+          50
         ],
         [
           "educacao",
-          42
+          44
         ],
         [
           "importancia",
-          37
+          39
         ],
         [
           "roraima",
-          36
+          38
         ],
         [
           "proposta",
-          35
+          36
         ],
         [
           "tambem",
-          34
+          35
+        ],
+        [
+          "escolar",
+          33
         ],
         [
           "conhecimentos",
@@ -49,23 +53,19 @@
         ],
         [
           "fundamental",
-          31
+          32
         ],
         [
           "atraves",
-          31
+          32
         ],
         [
-          "escolar",
-          30
+          "atividades",
+          31
         ],
         [
           "cultura",
           30
-        ],
-        [
-          "atividades",
-          29
         ]
       ],
       "tccs": [
@@ -473,63 +473,51 @@
           "id": "210",
           "ano": "2021",
           "titulo": "CONFECÇÃO DE JOGOS EDUCATIVOS PARA O ENSINO DA MATEMÁTICA NA ESCOLA INDÍGENA BENTO LUIS EM PACARAIMA"
+        },
+        {
+          "id": "318",
+          "ano": "2022",
+          "titulo": "USO E DIVERSIDADE DE PIMENTAS ARDOSAS NA COMUNIDADE ALTO: TRAÇANDO NOVOS CAMINHOS INTERCULTURAIS"
+        },
+        {
+          "id": "319",
+          "ano": "2022",
+          "titulo": "JOGO LÚDICO NO ENSINO DE QUÍMICA NA ESCOLA ESTADUAL INDÍGENA VOVÔ LEONARDO GOMES, COMUNIDADE INDÍGENA ALTO ARRAIA, BONFIM- RR"
+        },
+        {
+          "id": "320",
+          "ano": "2022",
+          "titulo": "ALIMENTAÇÃO, SAÚDE E EDUCAÇÃO NA COMUNIDADE INDÍGENA MURIRU – TERRA INDÍGENA MURIRU EM RORAIMA."
+        },
+        {
+          "id": "321",
+          "ano": "2022",
+          "titulo": "ALGORITMOS ALTERNATIVOS PARA AS OPERAÇÕES ARITMÉTICAS FUNDAMENTAL"
         }
       ],
       "lda": {
-        "K": 2,
-        "ari": 0.301,
+        "K": 4,
+        "ari": 0.147,
         "diag": {
-          "2": 0.30114746885603855,
-          "3": 0.22541163525786426,
-          "4": 0.12245110914130312
+          "2": 0.14358954047012415,
+          "3": 0.11412868322199507,
+          "4": 0.14741971864972434
         },
         "subtemas": [
           {
             "termos": [
-              "indigenas",
-              "conhecimentos",
-              "tradicional",
-              "tradicionais",
-              "educacao",
-              "plantas",
-              "tambem",
-              "saude",
-              "cultura",
-              "povo"
-            ],
-            "n": 40,
-            "exemplos": [
-              {
-                "id": "140",
-                "ano": "2021",
-                "titulo": "O USO DOS ALIMENTOS INDÍGENAS WAPICHANA COMO PRÁTICA PEDAGÓGICA EDUCATIVA NA COMUNIDADE INDÍGENA JACAMINHO"
-              },
-              {
-                "id": "106",
-                "ano": "2022",
-                "titulo": "PLANTAS NATIVAS COMO MEDICINA TRADICIONAL INDÍGENA DA COMUNIDADE OLHO D’ÁGUA"
-              },
-              {
-                "id": "144",
-                "ano": "2021",
-                "titulo": "USO POPULAR DAS PLANTAS MEDICINAIS NA COMUNIDADE INDÍGENA LIVRAMENTO, RORAIMA"
-              }
-            ]
-          },
-          {
-            "termos": [
-              "matematica",
-              "estadual",
-              "educacao",
               "proposta",
-              "leitura",
-              "escolar",
-              "indigenas",
-              "jogos",
+              "atividade",
+              "estadual",
               "atividades",
-              "pedagogica"
+              "pedagogica",
+              "quimica",
+              "milho",
+              "social",
+              "indigenas",
+              "jogo"
             ],
-            "n": 41,
+            "n": 12,
             "exemplos": [
               {
                 "id": "71",
@@ -537,14 +525,110 @@
                 "titulo": "PROPOSTA PEDAGÓGICA COLHER MILHO NA ROÇA: atividade social indígena como proposta de intervenção pedagógica no ensino/aprendizagem dos desafios da Escola Estadual Indígena Jose Antônio de Souza"
               },
               {
+                "id": "27",
+                "ano": "2024",
+                "titulo": "CONSTRUINDO UMA PROPOSTA PEDAGÓGICAS A PARTIR DA ATIVIDADE SOCIAL “CULTIVAR MANIVAS (Manihot esculenta Crantz)"
+              },
+              {
+                "id": "107",
+                "ano": "2022",
+                "titulo": "USO E DIVERSIDADE DE PIMENTAS ARDOSAS NACOMUNIDADE ALTO ARRAIA: TRAÇANDO NOVOS CAMINHOS INTERCULTURAIS"
+              }
+            ]
+          },
+          {
+            "termos": [
+              "educacao",
+              "indigenas",
+              "cultura",
+              "conhecimentos",
+              "escolar",
+              "estadual",
+              "wapichana",
+              "macuxi",
+              "artesanato",
+              "conhecimento"
+            ],
+            "n": 33,
+            "exemplos": [
+              {
+                "id": "151",
+                "ano": "2021",
+                "titulo": "GRAFISMO CORPORAL INDÍGENA MACUXI: UMA CONTRIBUIÇÃO COMO RECURSOS DIDÁTICO-PEDAGÓGICOS NA ESCOLA ESTADUAL INDÍGENA PRESIDENTE JOÃO PESSOA DA COMUNIDADE WILLIMON- RR."
+              },
+              {
+                "id": "25",
+                "ano": "2024",
+                "titulo": "LENDAS WAPICHANA EM HISTÓRIAS EM QUADRINHOS: VALORIZANDO A CULTURA E ESTIMULANDO A LEITURA"
+              },
+              {
+                "id": "70",
+                "ano": "2022",
+                "titulo": "EDUCAÇÃO PATRIMONIAL, CULTURA MATERIAL E ARTESANATO NO JATAPUZINHO"
+              }
+            ]
+          },
+          {
+            "termos": [
+              "matematica",
+              "jogos",
+              "leitura",
+              "lingua",
+              "projeto",
+              "aluno",
+              "estadual",
+              "fundamental",
+              "atraves",
+              "material"
+            ],
+            "n": 22,
+            "exemplos": [
+              {
+                "id": "117",
+                "ano": "2025",
+                "titulo": "A LUDICIDADE NO ENSINO DA MATEMÁTICANOENSINOFUNDAMEMTAL I"
+              },
+              {
                 "id": "11",
                 "ano": "2024",
                 "titulo": "RELATO DE EXPERIÊNCIA: LEITURA E PRODUÇÃO DE JOGOS PEDAGÓGICOS NO ENSINO FUNDAMENTAL I NA ESCOLA MUNICIPAL VOVÓ MARIA DO CARMO"
               },
               {
-                "id": "117",
-                "ano": "2025",
-                "titulo": "A LUDICIDADE NO ENSINO DA MATEMÁTICANOENSINOFUNDAMEMTAL I"
+                "id": "7",
+                "ano": "2024",
+                "titulo": "ELEMENTOS QUÍMICOS DA TABELA PERIÓDICA EM LÍNGUA INDÍGENA COMO MATERIAL DIDÁTICO CONTEXTUALIZADO PARA O ENSINO DE QUÍMICA/CIÊNCIAS"
+              }
+            ]
+          },
+          {
+            "termos": [
+              "saude",
+              "tradicional",
+              "plantas",
+              "indigenas",
+              "tradicionais",
+              "tambem",
+              "medicinais",
+              "conhecimentos",
+              "alimentacao",
+              "comunidades"
+            ],
+            "n": 18,
+            "exemplos": [
+              {
+                "id": "320",
+                "ano": "2022",
+                "titulo": "ALIMENTAÇÃO, SAÚDE E EDUCAÇÃO NA COMUNIDADE INDÍGENA MURIRU – TERRA INDÍGENA MURIRU EM RORAIMA."
+              },
+              {
+                "id": "101",
+                "ano": "2022",
+                "titulo": "ALIMENTAÇÃO, SAÚDE E EDUCAÇÃO NA COMUNIDADEINDÍGENAMURIRU – TERRA INDÍGENA MURIRU EMRORAIMA."
+              },
+              {
+                "id": "106",
+                "ano": "2022",
+                "titulo": "PLANTAS NATIVAS COMO MEDICINA TRADICIONAL INDÍGENA DA COMUNIDADE OLHO D’ÁGUA"
               }
             ]
           }
@@ -589,11 +673,11 @@
           12
         ],
         [
-          "ufrr",
+          "resultados",
           11
         ],
         [
-          "resultados",
+          "ufrr",
           11
         ],
         [
@@ -605,15 +689,15 @@
           10
         ],
         [
-          "pedagogico",
-          10
-        ],
-        [
           "vista",
           10
         ],
         [
           "pedagogica",
+          10
+        ],
+        [
+          "pedagogico",
           10
         ]
       ],
@@ -645,7 +729,7 @@
         },
         {
           "id": "31",
-          "ano": "0000",
+          "ano": "",
           "titulo": "DESAFIOS E POSSIBILIDADES DA COORDENAÇÃO PEDAGÓGICA EM RORAIMA: UM OLHAR A PARTIR DOS TRABALHOS PRODUZIDOS NA ESPECIALIZAÇÃO EM COORDENAÇÃO PEDAGÓGICA DA UFRR"
         },
         {
@@ -821,7 +905,7 @@
             "exemplos": [
               {
                 "id": "31",
-                "ano": "0000",
+                "ano": "",
                 "titulo": "DESAFIOS E POSSIBILIDADES DA COORDENAÇÃO PEDAGÓGICA EM RORAIMA: UM OLHAR A PARTIR DOS TRABALHOS PRODUZIDOS NA ESPECIALIZAÇÃO EM COORDENAÇÃO PEDAGÓGICA DA UFRR"
               },
               {
@@ -841,68 +925,68 @@
     },
     {
       "curso": "História",
-      "n": 69,
+      "n": 122,
       "camada": "lda",
       "top_termos": [
         [
-          "historia",
-          37
+          "roraima",
+          69
         ],
         [
           "analise",
-          34
+          61
         ],
         [
-          "roraima",
-          32
+          "historia",
+          60
         ],
         [
           "vista",
-          26
+          47
         ],
         [
           "processo",
-          26
+          43
         ],
         [
           "compreender",
-          23
-        ],
-        [
-          "social",
-          22
+          42
         ],
         [
           "estado",
-          22
+          39
         ],
         [
           "analisar",
-          22
+          36
         ],
         [
           "brasil",
-          21
-        ],
-        [
-          "indigenas",
-          19
-        ],
-        [
-          "tambem",
-          19
-        ],
-        [
-          "periodo",
-          16
+          35
         ],
         [
           "federal",
-          16
+          33
         ],
         [
-          "dessa",
-          16
+          "contexto",
+          33
+        ],
+        [
+          "regiao",
+          33
+        ],
+        [
+          "tambem",
+          31
+        ],
+        [
+          "periodo",
+          30
+        ],
+        [
+          "indigenas",
+          30
         ]
       ],
       "tccs": [
@@ -1250,78 +1334,343 @@
           "id": "254",
           "ano": "2012",
           "titulo": "O SURGIMENTO DO BAIRRO ASA BRANCA NA DÉCADA DE 1980, EM BOA VISTA/RR"
+        },
+        {
+          "id": "255",
+          "ano": "2016",
+          "titulo": "A CONSTRUÇÃO DA BR-174 (1967-1977) E OS WAIMIRI-ATROARI"
+        },
+        {
+          "id": "256",
+          "ano": "2016",
+          "titulo": "DESAFIOS DA EDUCAÇÃO SUPERIOR NA UFRR: A PRESENÇA INDÍGENA NO CURSO DE HISTÓRIA (2008 a 2011)"
+        },
+        {
+          "id": "257",
+          "ano": "2016",
+          "titulo": "AS CONDIÇÕES SOCIAIS DOS INDÍGENAS QUE RESIDEM EM ÁREA DE OCUPAÇÃO (BAIRRO SÃO BENTO) NA CIDADE DE BOA VISTA, NO PERÍODO DE 2005 A 2010."
+        },
+        {
+          "id": "258",
+          "ano": "2016",
+          "titulo": "A RODOVIA PERIMETRAL NORTE: OBJETIVOS E IMPACTOS DA SUA CONSTRUÇÃO NO TERRITÓRIO FEDERAL DE RORAIMA (1970-1982)"
+        },
+        {
+          "id": "259",
+          "ano": "2016",
+          "titulo": "O ESTÁGIO SUPERVISIONADO E AS PERSPECTIVAS DA FORMAÇÃO DOCENTE (CURSO DE HISTÓRIA DA UFRR, 2010-2013)"
+        },
+        {
+          "id": "260",
+          "ano": "2016",
+          "titulo": "Avaliação da aprendizagem no ensino de História: um estudo com professores de História da rede pública de ensino básico de boa vista - RR"
+        },
+        {
+          "id": "261",
+          "ano": "2016",
+          "titulo": "PROJETO RAÍZES: O CASO E O DESCASO DO PATRIMÔNIO HISTÓRICO DE BOA VISTA – RR"
+        },
+        {
+          "id": "262",
+          "ano": "2016",
+          "titulo": "A EJA na Penitenciária Agrícola de Monte Cristo, Boa Vista-Roraima: o desafio da ressocialização pela educação (2008-2012)"
+        },
+        {
+          "id": "263",
+          "ano": "2016",
+          "titulo": "A VIOLÊNCIA PRATICADA CONTRA OS POVOS INDÍGENAS PRESENTE NOS RELATOS DOS JORNAIS: O CASO DA FOLHA DE BOA VISTA (2005-2010)"
+        },
+        {
+          "id": "264",
+          "ano": "2016",
+          "titulo": "A TEMÁTICA INDÍGENA NA ESCOLA: UMA ANÁLISE DA EFETIVIDADE PEDAGÓGICA DA LEI 11.645/2008"
+        },
+        {
+          "id": "265",
+          "ano": "2016",
+          "titulo": "A GEOPOLÍTICA DOS GOVERNOS MILITARES BRASILEIROS: A CONSTRUÇÃO DAS RODOVIAS 174 E 401 NO EXTREMO NORTE DA AMAZÔNIA (1967 – 1977)"
+        },
+        {
+          "id": "266",
+          "ano": "2016",
+          "titulo": "O SINDICALISMO BRASILEIRO: História, Lutas, Resistência no final do século XX."
+        },
+        {
+          "id": "267",
+          "ano": "2016",
+          "titulo": "O ENSINO DE HISTÓRIA REGIONAL NO ENSINO MÉDIO EM RORAIMA"
+        },
+        {
+          "id": "268",
+          "ano": "2016",
+          "titulo": "O discurso do jornal Folha de Boa Vista e o Massacre dos Yanomami de Haximu (1993)"
+        },
+        {
+          "id": "269",
+          "ano": "2016",
+          "titulo": "MULHERES INDÍGENAS NA CIDADE DE BOA VISTA: AS FLORES NASCEM NO ASFALTO"
+        },
+        {
+          "id": "270",
+          "ano": "2016",
+          "titulo": "O JORNAL BOA VISTA: porta-voz dos projetos desenvolvidos no Território de Roraima no período de 1973 a 1979"
+        },
+        {
+          "id": "271",
+          "ano": "2016",
+          "titulo": "HISTÓRIA E LITERATURA: APROXIMAÇÕES NA PESQUISA HISTÓRICA"
+        },
+        {
+          "id": "272",
+          "ano": "2016",
+          "titulo": "A CONSTRUÇÃO DA BR-174 (1967-1977) E OS WAIMIRI-ATROARI"
+        },
+        {
+          "id": "273",
+          "ano": "2016",
+          "titulo": "A RODOVIA PERIMETRAL NORTE: OBJETIVOS E IMPACTOS DA SUA CONSTRUÇÃO NO TERRITÓRIO FEDERAL DE RORAIMA (1970-1982)"
+        },
+        {
+          "id": "274",
+          "ano": "2016",
+          "titulo": "HISTÓRIA E MEMÓRIAS DA UNIVERSIDADE FEDERAL DE RORAIMA NO INÍCIO DA DÉCADA DE 1990: postura da gestão administrativa frente às reivindicações dos primeiros trabalhadores em educação"
+        },
+        {
+          "id": "275",
+          "ano": "2016",
+          "titulo": "Avaliação da aprendizagem no ensino de História: um estudo com professores de História da rede pública de ensino básico de boa vista - RR"
+        },
+        {
+          "id": "286",
+          "ano": "2013",
+          "titulo": "Perspectivas históricas das ações voltadas para a inclusão das pessoas com Deficiência visual na primeira década do século XXI em Boa Vista, RR."
+        },
+        {
+          "id": "287",
+          "ano": "2013",
+          "titulo": "MEMÓRIA E SOCIABILIDADE: O Estádio João Mineiro como espaço de integração social na década de 1960"
+        },
+        {
+          "id": "288",
+          "ano": "2013",
+          "titulo": "SÃO JOÃO DA BALIZA: DE VILA À CIDADE de 1974 a 1985"
+        },
+        {
+          "id": "289",
+          "ano": "2013",
+          "titulo": "AS PRÁTICAS EDUCATIVAS QUE CONSTITUEM A FORMAÇÃO DE PROFESSORES DO CURSO DE HISTÓRIA NA UNIVERSIDADE FEDERAL DE RORAIMA NO CONTEXTO DA EDUCAÇÃO INCLUSIVA"
+        },
+        {
+          "id": "290",
+          "ano": "2013",
+          "titulo": "PATRIMÔNIO HISTÓRICO DE BOA VISTA-RR Tombamento dos prédios construídos nos séculos XIX e XX"
+        },
+        {
+          "id": "291",
+          "ano": "2013",
+          "titulo": "O Território Federal de Roraima e o planejamento estratégico do II PND: o Polororaima como ação do Estado brasileiro (1975-1979)"
+        },
+        {
+          "id": "292",
+          "ano": "2013",
+          "titulo": "A CRIAÇÃO DO ESTADO DE ISRAEL E A FRAGMENTAÇÃO DA PALESTINA."
+        },
+        {
+          "id": "293",
+          "ano": "2013",
+          "titulo": "O VALE DO RIO BRANCO PELO OLHAR DE MANOEL DA GAMA LOBO D'ALMADA (1787)"
+        },
+        {
+          "id": "294",
+          "ano": "2013",
+          "titulo": "O ESTADO SANITÁRIO NO RIO BRANCO: Comissões de Saneamento e as notícias das doenças no Jornal do Rio Branco no início do século XX"
+        },
+        {
+          "id": "295",
+          "ano": "2013",
+          "titulo": "A EXPEDIÇÃO FILOSÓFICA AO BRASIL DE ALEXANDRE RODRIGUES FERREIRA: CARÁTER ADMINISTRATIVO E ESTRATÉGICO NO VALE DO RIO BRANCO"
+        },
+        {
+          "id": "296",
+          "ano": "",
+          "titulo": "RORAIMA NA DÉCADA DE 1980: O debate artístico e cultural."
+        },
+        {
+          "id": "297",
+          "ano": "2014",
+          "titulo": "TERRITÓRIO FEDERAL DO RIO BRANCO: ESTUDO DE CASO DA CRIAÇÃO DA COLÔNIA AGRÍCOLA FERNANDO COSTA"
+        },
+        {
+          "id": "298",
+          "ano": "2014",
+          "titulo": "O Movimento Neopentecostal: a prática do Judaísmo na Igreja Ministério Internacional da Restauração na Cidade de Boa Vista (1999 a 2005)."
+        },
+        {
+          "id": "299",
+          "ano": "2014",
+          "titulo": "BR-174: A EXPEDIÇÃO CALLERI (1968-1970)"
+        },
+        {
+          "id": "300",
+          "ano": "2014",
+          "titulo": "AS IMPLICAÇÕES DO PROCESSO MIGRATÓRIO NA FORMAÇÃO DO BAIRRO PINTOLÂNDIA IV, ATUAL SENADOR HÉLIO CAMPOS, NA CIDADE DE BOA VISTA- RORAIMA, NA DÉCADA DE 1990."
+        },
+        {
+          "id": "301",
+          "ano": "2014",
+          "titulo": "MIGRANTES MARANHENSES E A FORMAÇÃO DO MUNICÍPIO DE SÃO LUIZ – RR (1976-1982)"
+        },
+        {
+          "id": "302",
+          "ano": "2014",
+          "titulo": "RIO AMAZONAS NO JORNAL O CATECHISTA DE MANAUS: UMA IMPRENSA VINCULADA AOS INTERESSES DA POLÍTICA EXTERNA DO IMPÉRIO DO BRASIL- (1860 – 1870)"
+        },
+        {
+          "id": "303",
+          "ano": "2013",
+          "titulo": "O DESENVOLVIMENTO DO SETOR INDUSTRIAL NO TERRITÓRIO FEDERAL DE RORAIMA ENTRE 1975 A 1983: A CRIAÇÃO E IMPLANTAÇÃO DO DISTRITO INDUSTRIAL DE BOA VISTA"
+        },
+        {
+          "id": "304",
+          "ano": "2013",
+          "titulo": "POLÍTICA E GOLPE NO PERÍODO DEMOCRÁTICO: AS FORÇAS QUE ATUARAM NA CAMPANHA DA LEGALIDADE DE 1961."
+        },
+        {
+          "id": "305",
+          "ano": "2013",
+          "titulo": "CONCEITOS GEOPOLÍTICOS DA DÉCADA DE 1970: UMA ANÁLISE DO TRATADO DE COOPERAÇÃO AMAZÔNICA - TCA"
+        },
+        {
+          "id": "306",
+          "ano": "2020",
+          "titulo": "ATUAÇÃO DO ALTO COMISSARIADO DAS NAÇÕES UNIDAS PARA REFUGIADOS (ACNUR) NA CIDADE DE BOA VISTA, RORAIMA NO CONTEXTO DA OPERAÇÃO ACOLHIDA (2018-2020)"
+        },
+        {
+          "id": "307",
+          "ano": "2020",
+          "titulo": "PRIMÓRDIOS DA IGREJA EVANGÉLICA ASSEMBLEIA DE DEUS EM RORAIMA: FUNDAÇÃO E CONSOLIDAÇÃO (1915 – 1925)"
+        },
+        {
+          "id": "308",
+          "ano": "2020",
+          "titulo": "O DIREITO À CIDADE: A IMPLEMENTAÇÃO DO PROJETO PARQUE DO RIO BRANCO NA COMUNIDADE FRANCISCO CAETANO FILHO – BOA VISTA/RR (2017-2018)"
+        },
+        {
+          "id": "309",
+          "ano": "2020",
+          "titulo": "NEOLIBERALISMO E EDUCAÇÃO: O PÚBLICO E O PRIVADO NA IMPLEMENTAÇÃO DO PROGRAMA “SABER IGUAL” NO MUNICÍPIO DE BOA VISTA – RR (2013-2018)"
+        },
+        {
+          "id": "310",
+          "ano": "2025",
+          "titulo": "OS REELS E A APRENDIZAGEM SIGNIFICATIVA NO ENSINO DE HISTÓRIA: EXPLORANDO O POTENCIAL EDUCATIVO DOS VÍDEOS DE CURTA DURAÇÃO"
+        },
+        {
+          "id": "311",
+          "ano": "2025",
+          "titulo": "TOPÔNIMOS E MEMÓRIA COLETIVA: OS LOGRADOUROS DO CENTRO DE BOA VISTA - RR"
+        },
+        {
+          "id": "312",
+          "ano": "2024",
+          "titulo": "POVOS INDÍGENAS: AS REPRESENTAÇÕES DOS ALUNOS DO ENSINO MÉDIO NA DISCIPLINA DE HISTÓRIA EM BOA VISTA/RORAIMA"
+        },
+        {
+          "id": "313",
+          "ano": "2024",
+          "titulo": "DO SILÊNCIO DO LAR AO SILÊNCIO ESCOLAR: O NEGRO NO LIVRO DIDÁTICO DE HISTÓRIA DOS ANOS FINAIS DO ENSINO FUNDAMENTAL SOB A PERSPECTIVA DA LEI 10.639/2003"
+        },
+        {
+          "id": "314",
+          "ano": "2024",
+          "titulo": "INFANTICÍDIO YANOMAMI: PRÁTICA CULTURAL EM RORAIMA"
+        },
+        {
+          "id": "315",
+          "ano": "2025",
+          "titulo": "HUGO CHÁVEZ E A POLÍTICA AGRÁRIA NA VENEZUELA: ESTRUTURA E SOBERANIA PRODUTIVA AGROALIMENTAR (2003-2013)"
+        },
+        {
+          "id": "316",
+          "ano": "2024",
+          "titulo": "O ABANDONO DO PATRIMÔNIO CULTURAL: UM ESTUDO DE CASO DA GESTÃO DO ESTADO NO MUSEU INTEGRADO DE RORAIMA (2012-2023)"
+        },
+        {
+          "id": "317",
+          "ano": "2024",
+          "titulo": "EDUCAÇÃO PATRIMONIAL NO ENSINO DE HISTÓRIA: O TRANSFORMAR DA DOCÊNCIA POR MEIO DO PROJETO “MINHA MALOCA, MINHA HISTÓRIA” (PIBID/UFRR 2022-2024)"
         }
       ],
       "lda": {
         "K": 2,
-        "ari": 0.291,
+        "ari": 0.623,
         "diag": {
-          "2": 0.29124628275641673,
-          "3": 0.1313170245623908,
-          "4": 0.08813839854878432
+          "2": 0.6228762796596674,
+          "3": 0.3129286512657329,
+          "4": 0.2901298678492733
         },
         "subtemas": [
           {
             "termos": [
               "historia",
-              "vista",
               "educacao",
               "roraima",
+              "indigenas",
+              "vista",
               "analise",
               "formacao",
-              "mulheres",
-              "identidade",
-              "representacao",
-              "processo"
-            ],
-            "n": 37,
-            "exemplos": [
-              {
-                "id": "232",
-                "ano": "2026",
-                "titulo": "“ME VER POBRE, PRESO OU MORTO JÁ É CULTURAL”: A EMERGÊNCIA DO CINEMA NEGRO ENQUANTO PRÁTICA PEDAGÓGICA PARA A IMPLEMENTAÇÃO DA LEI FEDERAL 10.639/2003 NA EDUCAÇÃO BÁSICA"
-              },
-              {
-                "id": "230",
-                "ano": "2025",
-                "titulo": "A REPRESENTAÇÃO DAS MULHERES NOS FILMES ANTINAZISTAS DA SEGUNDA GUERRA MUNDIAL (1939-1945)"
-              },
-              {
-                "id": "167",
-                "ano": "2025",
-                "titulo": "Arquivo disponível de forma digital e sem restrições de acesso"
-              }
-            ]
-          },
-          {
-            "termos": [
-              "indigenas",
-              "roraima",
-              "regiao",
-              "amazonia",
-              "branco",
-              "processo",
+              "cultura",
               "indigena",
-              "estado",
-              "povos",
-              "cultura"
+              "mulheres"
             ],
-            "n": 32,
+            "n": 61,
             "exemplos": [
               {
-                "id": "228",
-                "ano": "2017",
-                "titulo": "DITADURA E A IGREJA CATÓLICA NO TERRITÓRIO FEDERAL DE RORAIMA: O Serviço Nacional de Informação (1977 – 1988)"
+                "id": "317",
+                "ano": "2024",
+                "titulo": "EDUCAÇÃO PATRIMONIAL NO ENSINO DE HISTÓRIA: O TRANSFORMAR DA DOCÊNCIA POR MEIO DO PROJETO “MINHA MALOCA, MINHA HISTÓRIA” (PIBID/UFRR 2022-2024)"
+              },
+              {
+                "id": "208",
+                "ano": "2025",
+                "titulo": "MEMÓRIAS QUE RESISTEM: A REPRESENTAÇÃO DAS MULHERES INDÍGENAS NAS CARTAS DO PROJETO “MULHERES QUE FAZEM HISTÓRIA, MAS NÃO ESTÃO NOS LIVROS DE HISTÓRIA” (PIBID/UFRR 2022-2024)"
               },
               {
                 "id": "161",
                 "ano": "2021",
                 "titulo": "PATRIMÔNIO CULTURAL: A IMPORTÂNCIA DO FESTIVAL DO BEIJU (2005 - 2019) COMO VALORIZAÇÃO HISTÓRICA E CULTURAL NA COMUNIDADE INDÍGENA TABALASCADA EM RORAIMA"
+              }
+            ]
+          },
+          {
+            "termos": [
+              "roraima",
+              "regiao",
+              "territorio",
+              "branco",
+              "amazonia",
+              "vista",
+              "indigenas",
+              "processo",
+              "estado",
+              "federal"
+            ],
+            "n": 61,
+            "exemplos": [
+              {
+                "id": "270",
+                "ano": "2016",
+                "titulo": "O JORNAL BOA VISTA: porta-voz dos projetos desenvolvidos no Território de Roraima no período de 1973 a 1979"
               },
               {
-                "id": "147",
-                "ano": "2023",
-                "titulo": "O SERVIÇO NACIONAL DE INFORMAÇÕES E A ESPIONAGEM À IGREJA CATÓLICA EM RORAIMA: DA DITADURA À REDEMOCRATIZAÇÃO"
+                "id": "258",
+                "ano": "2016",
+                "titulo": "A RODOVIA PERIMETRAL NORTE: OBJETIVOS E IMPACTOS DA SUA CONSTRUÇÃO NO TERRITÓRIO FEDERAL DE RORAIMA (1970-1982)"
+              },
+              {
+                "id": "273",
+                "ano": "2016",
+                "titulo": "A RODOVIA PERIMETRAL NORTE: OBJETIVOS E IMPACTOS DA SUA CONSTRUÇÃO NO TERRITÓRIO FEDERAL DE RORAIMA (1970-1982)"
               }
             ]
           }
@@ -1362,11 +1711,11 @@
           12
         ],
         [
-          "praticas",
+          "roraima",
           11
         ],
         [
-          "roraima",
+          "praticas",
           11
         ],
         [
@@ -1514,7 +1863,15 @@
       "camada": "descritivo",
       "top_termos": [
         [
+          "acoes",
+          14
+        ],
+        [
           "atividade",
+          14
+        ],
+        [
+          "situacoes",
           14
         ],
         [
@@ -1522,15 +1879,7 @@
           14
         ],
         [
-          "acoes",
-          14
-        ],
-        [
           "teoria",
-          14
-        ],
-        [
-          "situacoes",
           14
         ],
         [
@@ -1546,10 +1895,6 @@
           13
         ],
         [
-          "matematica",
-          11
-        ],
-        [
           "processo",
           11
         ],
@@ -1558,7 +1903,15 @@
           11
         ],
         [
+          "matematica",
+          11
+        ],
+        [
           "conteudo",
+          10
+        ],
+        [
+          "formacao",
           10
         ],
         [
@@ -1567,10 +1920,6 @@
         ],
         [
           "mentais",
-          10
-        ],
-        [
-          "formacao",
           10
         ]
       ],
@@ -1655,68 +2004,68 @@
     },
     {
       "curso": "Ciências Biológicas",
-      "n": 10,
+      "n": 20,
       "camada": "descritivo",
       "top_termos": [
         [
-          "pode",
-          6
+          "roraima",
+          12
         ],
         [
           "resultados",
-          6
-        ],
-        [
-          "roraima",
-          6
+          10
         ],
         [
           "importancia",
-          6
+          9
         ],
         [
-          "genero",
-          5
+          "vista",
+          9
+        ],
+        [
+          "pode",
+          8
+        ],
+        [
+          "estado",
+          8
         ],
         [
           "analise",
-          5
+          8
+        ],
+        [
+          "genero",
+          7
+        ],
+        [
+          "biologia",
+          7
         ],
         [
           "amostras",
-          5
+          7
+        ],
+        [
+          "atraves",
+          7
+        ],
+        [
+          "amazonia",
+          6
         ],
         [
           "estudos",
-          4
+          6
         ],
         [
-          "diferentes",
-          4
+          "tres",
+          6
         ],
         [
-          "podem",
-          4
-        ],
-        [
-          "dados",
-          4
-        ],
-        [
-          "doencas",
-          4
-        ],
-        [
-          "quatro",
-          4
-        ],
-        [
-          "vida",
-          4
-        ],
-        [
-          "revisao",
-          3
+          "processo",
+          6
         ]
       ],
       "tccs": [
@@ -1769,6 +2118,56 @@
           "id": "251",
           "ano": "2023",
           "titulo": "FILOGENIA E TAXONOMIA DO GÊNERO BRACHYGALBA (AVES: GALBULIDAE)"
+        },
+        {
+          "id": "276",
+          "ano": "2008",
+          "titulo": "A FAMÍLIA POLYGALACEAE EM UMA ÁREA DE SAVANA EM RORAIMA, BRASIL"
+        },
+        {
+          "id": "277",
+          "ano": "2008",
+          "titulo": "A Influência da Síndrome de Burnout e da Depressão no Processo de Ensino-Aprendizage"
+        },
+        {
+          "id": "278",
+          "ano": "2008",
+          "titulo": "A INFORMÁTICA NO PROCESSO ENSINO-APRENDIZAGEM DE BIOLOGIA NO ENSINO MÉDIO EM BOA VISTA – RR"
+        },
+        {
+          "id": "279",
+          "ano": "2008",
+          "titulo": "\"EXPRESSÃO DE GENES DA BIOSSÍNTESE DE CATEQUINAS NO TRANSCRIPTOMA DO GUARANÁ (Paullinea cupana)"
+        },
+        {
+          "id": "280",
+          "ano": "2008",
+          "titulo": "IDENTIFICAÇÃO DO GENÓTIPO DO VÍRUS DENGUE CIRCULANTE EM BOA VISTA, RORAIMA, NO ANO DE 2005"
+        },
+        {
+          "id": "281",
+          "ano": "2009",
+          "titulo": "QUALIDADE MICROBIOLÓGICA DA ÁGUA CONSUMIDA NA UNIVERSIDADE FEDERAL DE RORAIMA"
+        },
+        {
+          "id": "282",
+          "ano": "2007",
+          "titulo": "PESQUISA DO VÍRUS DENGUE EM LARVAS DE Aedes aegypti E SUA DINÂMICA DE INFESTAÇÃO EM UM BAIRRO DE BOA VISTA, RORAIMA, BRASIL"
+        },
+        {
+          "id": "283",
+          "ano": "2009",
+          "titulo": "FUNGOS DO SOLO DE SAVANA DE RORAIMA – PPBIO, NÚCLEO REGIONAL RORAIMA, GRADE CAUAMÉ – MONTE CRISTO, BOA VISTA, RORAIMA"
+        },
+        {
+          "id": "284",
+          "ano": "2008",
+          "titulo": "Aplicação de jogos pedagógicos no ensino regular de Biologia e na Educação de Jovens e Adultos no município de Boa Vista em duas escolas estaduais de B.V.D"
+        },
+        {
+          "id": "285",
+          "ano": "2008",
+          "titulo": "Orientação Sexual na Adolescência no Espaço Escolar"
         }
       ],
       "lda": null
@@ -1905,7 +2304,7 @@
         },
         {
           "id": "218",
-          "ano": "20232",
+          "ano": "2023",
           "titulo": "PERFIL DOS RESÍDUOS SÓLIDOS PRODUZIDOS NA ESCOLA MUNICIPAL PROF. JOVACI MARÇAL DA SILVA (VILA DO APIAU, MUCAJAÍ, RR): CAMINHOS PARA A ESTRUTURAÇÃO DE UM PROGRAMA DE EDUCAÇÃO/SENSIBILIZAÇÃO AMBIENTAL."
         },
         {

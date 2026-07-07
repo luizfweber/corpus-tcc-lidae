@@ -1,23 +1,33 @@
 # Análise temática por curso, em camadas — LIDAE/UFRR
 
-Corpus: 252 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · listagem). Exploratório, não censitário.
+Corpus: 319 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · listagem). Exploratório, não censitário.
 
 
 ## 🟢 Camada LDA (N suficiente para sub-temas)
 
-### Insikiran — 81 TCCs · LDA intra-curso (K=2)
-*Seleção de K por estabilidade entre 8 seeds — K2: ARI=0.30 · K3: ARI=0.23 · K4: ARI=0.12. Escolhido K=2 (ARI=0.30).*
-> ⚠️ Estabilidade baixa (ARI=0.30): sub-temas FRÁGEIS, indício a confirmar por leitura — não conclusão.
+### Insikiran — 85 TCCs · LDA intra-curso (K=4)
+*Seleção de K por estabilidade entre 8 seeds — K2: ARI=0.14 · K3: ARI=0.11 · K4: ARI=0.15. Escolhido K=4 (ARI=0.15).*
+> ⚠️ Estabilidade baixa (ARI=0.15): sub-temas FRÁGEIS, indício a confirmar por leitura — não conclusão.
 
-**Sub-tema 1** (40 TCCs) — indigenas, conhecimentos, tradicional, tradicionais, educacao, plantas, tambem, saude, cultura, povo
-   - id 140 (2021): O USO DOS ALIMENTOS INDÍGENAS WAPICHANA COMO PRÁTICA PEDAGÓGICA EDUCATIVA NA COMUNIDADE IN
-   - id 106 (2022): PLANTAS NATIVAS COMO MEDICINA TRADICIONAL INDÍGENA DA COMUNIDADE OLHO D’ÁGUA
-   - id 144 (2021): USO POPULAR DAS PLANTAS MEDICINAIS NA COMUNIDADE INDÍGENA LIVRAMENTO, RORAIMA
-
-**Sub-tema 2** (41 TCCs) — matematica, estadual, educacao, proposta, leitura, escolar, indigenas, jogos, atividades, pedagogica
+**Sub-tema 1** (12 TCCs) — proposta, atividade, estadual, atividades, pedagogica, quimica, milho, social, indigenas, jogo
    - id 71 (2022): PROPOSTA PEDAGÓGICA COLHER MILHO NA ROÇA: atividade social indígena como proposta de inter
-   - id 11 (2024): RELATO DE EXPERIÊNCIA: LEITURA E PRODUÇÃO DE JOGOS PEDAGÓGICOS NO ENSINO FUNDAMENTAL I NA 
+   - id 27 (2024): CONSTRUINDO UMA PROPOSTA PEDAGÓGICAS A PARTIR DA ATIVIDADE SOCIAL “CULTIVAR MANIVAS (Manih
+   - id 107 (2022): USO E DIVERSIDADE DE PIMENTAS ARDOSAS NACOMUNIDADE ALTO ARRAIA: TRAÇANDO NOVOS CAMINHOS IN
+
+**Sub-tema 2** (33 TCCs) — educacao, indigenas, cultura, conhecimentos, escolar, estadual, wapichana, macuxi, artesanato, conhecimento
+   - id 151 (2021): GRAFISMO CORPORAL INDÍGENA MACUXI: UMA CONTRIBUIÇÃO COMO RECURSOS DIDÁTICO-PEDAGÓGICOS NA 
+   - id 25 (2024): LENDAS WAPICHANA EM HISTÓRIAS EM QUADRINHOS: VALORIZANDO A CULTURA E ESTIMULANDO A LEITURA
+   - id 70 (2022): EDUCAÇÃO PATRIMONIAL, CULTURA MATERIAL E ARTESANATO NO JATAPUZINHO
+
+**Sub-tema 3** (22 TCCs) — matematica, jogos, leitura, lingua, projeto, aluno, estadual, fundamental, atraves, material
    - id 117 (2025): A LUDICIDADE NO ENSINO DA MATEMÁTICANOENSINOFUNDAMEMTAL I
+   - id 11 (2024): RELATO DE EXPERIÊNCIA: LEITURA E PRODUÇÃO DE JOGOS PEDAGÓGICOS NO ENSINO FUNDAMENTAL I NA 
+   - id 7 (2024): ELEMENTOS QUÍMICOS DA TABELA PERIÓDICA EM LÍNGUA INDÍGENA COMO MATERIAL DIDÁTICO CONTEXTUA
+
+**Sub-tema 4** (18 TCCs) — saude, tradicional, plantas, indigenas, tradicionais, tambem, medicinais, conhecimentos, alimentacao, comunidades
+   - id 320 (2022): ALIMENTAÇÃO, SAÚDE E EDUCAÇÃO NA COMUNIDADE INDÍGENA MURIRU – TERRA INDÍGENA MURIRU EM ROR
+   - id 101 (2022): ALIMENTAÇÃO, SAÚDE E EDUCAÇÃO NA COMUNIDADEINDÍGENAMURIRU – TERRA INDÍGENA MURIRU EMRORAIM
+   - id 106 (2022): PLANTAS NATIVAS COMO MEDICINA TRADICIONAL INDÍGENA DA COMUNIDADE OLHO D’ÁGUA
 
 
 ### Pedagogia — 29 TCCs · LDA intra-curso (K=2)
@@ -30,24 +40,23 @@ Corpus: 252 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
    - id 112 (2019): PEDAGOGIA HOSPITALAR: CLASSE HOSPITALAR NAS UNIDADES PÚBLICAS DE SAÚDE DE ALTA COMPLEXIDAD
 
 **Sub-tema 2** (14 TCCs) — educacao, pedagogica, coordenacao, estagio, vista, experiencia, especial, pedagogico, pandemia, pedagogia
-   - id 31 (0000): DESAFIOS E POSSIBILIDADES DA COORDENAÇÃO PEDAGÓGICA EM RORAIMA: UM OLHAR A PARTIR DOS TRAB
+   - id 31 (): DESAFIOS E POSSIBILIDADES DA COORDENAÇÃO PEDAGÓGICA EM RORAIMA: UM OLHAR A PARTIR DOS TRAB
    - id 22 (2023): RELAÇÃO PÚBLICO-PRIVADO: INSTITUTO ALFA E BETO E SUA PROPOSTA DE EDUCAÇÃO NA REDE PÚBLICA 
    - id 36 (2019): ATRIBUIÇÕES DO COORDENADOR PEDAGÓGICO NAS ESCOLAS MUNICIPAIS DE BOA VISTA-RR: UMA ANÁLISE 
 
 
-### História — 69 TCCs · LDA intra-curso (K=2)
-*Seleção de K por estabilidade entre 8 seeds — K2: ARI=0.29 · K3: ARI=0.13 · K4: ARI=0.09. Escolhido K=2 (ARI=0.29).*
-> ⚠️ Estabilidade baixa (ARI=0.29): sub-temas FRÁGEIS, indício a confirmar por leitura — não conclusão.
+### História — 122 TCCs · LDA intra-curso (K=2)
+*Seleção de K por estabilidade entre 8 seeds — K2: ARI=0.62 · K3: ARI=0.31 · K4: ARI=0.29. Escolhido K=2 (ARI=0.62).*
 
-**Sub-tema 1** (37 TCCs) — historia, vista, educacao, roraima, analise, formacao, mulheres, identidade, representacao, processo
-   - id 232 (2026): “ME VER POBRE, PRESO OU MORTO JÁ É CULTURAL”: A EMERGÊNCIA DO CINEMA NEGRO ENQUANTO PRÁTIC
-   - id 230 (2025): A REPRESENTAÇÃO DAS MULHERES NOS FILMES ANTINAZISTAS DA SEGUNDA GUERRA MUNDIAL (1939-1945)
-   - id 167 (2025): Arquivo disponível de forma digital e sem restrições de acesso
-
-**Sub-tema 2** (32 TCCs) — indigenas, roraima, regiao, amazonia, branco, processo, indigena, estado, povos, cultura
-   - id 228 (2017): DITADURA E A IGREJA CATÓLICA NO TERRITÓRIO FEDERAL DE RORAIMA: O Serviço Nacional de Infor
+**Sub-tema 1** (61 TCCs) — historia, educacao, roraima, indigenas, vista, analise, formacao, cultura, indigena, mulheres
+   - id 317 (2024): EDUCAÇÃO PATRIMONIAL NO ENSINO DE HISTÓRIA: O TRANSFORMAR DA DOCÊNCIA POR MEIO DO PROJETO 
+   - id 208 (2025): MEMÓRIAS QUE RESISTEM: A REPRESENTAÇÃO DAS MULHERES INDÍGENAS NAS CARTAS DO PROJETO “MULHE
    - id 161 (2021): PATRIMÔNIO CULTURAL: A IMPORTÂNCIA DO FESTIVAL DO BEIJU (2005 - 2019) COMO VALORIZAÇÃO HIS
-   - id 147 (2023): O SERVIÇO NACIONAL DE INFORMAÇÕES E A ESPIONAGEM À IGREJA CATÓLICA EM RORAIMA: DA DITADURA
+
+**Sub-tema 2** (61 TCCs) — roraima, regiao, territorio, branco, amazonia, vista, indigenas, processo, estado, federal
+   - id 270 (2016): O JORNAL BOA VISTA: porta-voz dos projetos desenvolvidos no Território de Roraima no perío
+   - id 258 (2016): A RODOVIA PERIMETRAL NORTE: OBJETIVOS E IMPACTOS DA SUA CONSTRUÇÃO NO TERRITÓRIO FEDERAL D
+   - id 273 (2016): A RODOVIA PERIMETRAL NORTE: OBJETIVOS E IMPACTOS DA SUA CONSTRUÇÃO NO TERRITÓRIO FEDERAL D
 
 
 
@@ -56,7 +65,7 @@ Corpus: 252 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
 ### Música — 22 TCCs · descritivo (sem LDA)
 *N insuficiente para modelagem de tópicos; reporta-se a frequência documental dos termos e a lista de trabalhos.*
 
-**Termos mais recorrentes (nº de TCCs):** musica (20), musical (16), vista (14), educacao (14), analise (13), contexto (12), pratica (12), praticas (11), roraima (11), resultados (11), musicais (10), alem (10), dados (10), formacao (9), processo (8)
+**Termos mais recorrentes (nº de TCCs):** musica (20), musical (16), vista (14), educacao (14), analise (13), contexto (12), pratica (12), roraima (11), praticas (11), resultados (11), musicais (10), alem (10), dados (10), formacao (9), processo (8)
 
 **Trabalhos:**
    - id 92 (2017): O EMPRÉSTIMO MODAL RECORRENTE NO POP ROCK DOS ANOS 1980
@@ -85,7 +94,7 @@ Corpus: 252 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
 ### Matemática — 15 TCCs · descritivo (sem LDA)
 *N insuficiente para modelagem de tópicos; reporta-se a frequência documental dos termos e a lista de trabalhos.*
 
-**Termos mais recorrentes (nº de TCCs):** atividade (14), problema (14), acoes (14), teoria (14), situacoes (14), estudantes (13), galperin (13), resolucao (13), matematica (11), processo (11), fundamental (11), conteudo (10), analisar (10), mentais (10), formacao (10)
+**Termos mais recorrentes (nº de TCCs):** acoes (14), atividade (14), situacoes (14), problema (14), teoria (14), estudantes (13), galperin (13), resolucao (13), processo (11), fundamental (11), matematica (11), conteudo (10), formacao (10), analisar (10), mentais (10)
 
 **Trabalhos:**
    - id 4 (2016): A APRENDIZAGEM DA ATIVIDADE DE SITUAÇÕES PRO-BLEMA EM SISTEMA DE EQUAÇÕES LINEARES FUNDA-M
@@ -104,12 +113,22 @@ Corpus: 252 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
    - id 120 (2024): A ATIVIDADE SITUAÇÕES PROBLEMA DISCENTE EM EXPRESSÕES ALGÉBRICAS EM ESTUDANTES DO 7° ANO N
    - id 119 (2026): CONTRIBUIÇÕES DA TEORIA HISTÓRICO-CULTURAL DA ATIVIDADE NA APRENDIZAGEM DA MATEMÁTICA: UM 
 
-### Ciências Biológicas — 10 TCCs · descritivo (sem LDA)
+### Ciências Biológicas — 20 TCCs · descritivo (sem LDA)
 *N insuficiente para modelagem de tópicos; reporta-se a frequência documental dos termos e a lista de trabalhos.*
 
-**Termos mais recorrentes (nº de TCCs):** pode (6), resultados (6), roraima (6), importancia (6), genero (5), analise (5), amostras (5), estudos (4), diferentes (4), podem (4), dados (4), doencas (4), quatro (4), vida (4), revisao (3)
+**Termos mais recorrentes (nº de TCCs):** roraima (12), resultados (10), importancia (9), vista (9), pode (8), estado (8), analise (8), genero (7), biologia (7), amostras (7), atraves (7), amazonia (6), estudos (6), tres (6), processo (6)
 
 **Trabalhos:**
+   - id 282 (2007): PESQUISA DO VÍRUS DENGUE EM LARVAS DE Aedes aegypti E SUA DINÂMICA DE INFESTAÇÃO EM UM BAI
+   - id 276 (2008): A FAMÍLIA POLYGALACEAE EM UMA ÁREA DE SAVANA EM RORAIMA, BRASIL
+   - id 277 (2008): A Influência da Síndrome de Burnout e da Depressão no Processo de Ensino-Aprendizage
+   - id 278 (2008): A INFORMÁTICA NO PROCESSO ENSINO-APRENDIZAGEM DE BIOLOGIA NO ENSINO MÉDIO EM BOA VISTA – R
+   - id 279 (2008): "EXPRESSÃO DE GENES DA BIOSSÍNTESE DE CATEQUINAS NO TRANSCRIPTOMA DO GUARANÁ (Paullinea cu
+   - id 280 (2008): IDENTIFICAÇÃO DO GENÓTIPO DO VÍRUS DENGUE CIRCULANTE EM BOA VISTA, RORAIMA, NO ANO DE 2005
+   - id 284 (2008): Aplicação de jogos pedagógicos no ensino regular de Biologia e na Educação de Jovens e Adu
+   - id 285 (2008): Orientação Sexual na Adolescência no Espaço Escolar
+   - id 281 (2009): QUALIDADE MICROBIOLÓGICA DA ÁGUA CONSUMIDA NA UNIVERSIDADE FEDERAL DE RORAIMA
+   - id 283 (2009): FUNGOS DO SOLO DE SAVANA DE RORAIMA – PPBIO, NÚCLEO REGIONAL RORAIMA, GRADE CAUAMÉ – MONTE
    - id 241 (2022): USO TRADICIONAL DE PLANTAS MEDICINAIS EM RORAIMA: UMA REVISÃO SISTEMÁTICA
    - id 242 (2022): A BOTÂNICA NO ENSINO MÉDIO: UMA ANÁLISE COMPARATIVA ENTRE TRÊS LIVROS DIDÁTICOS DE BIOLOGI
    - id 243 (2022): PERFIL EPIDEMIOLÓGICO E A DETECÇÃO DOS SOROTIPOS DE DENGUE CIRCULANTE EM RORAIMA ENTRE OS 
@@ -143,7 +162,7 @@ Corpus: 252 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
 
    - id 19 (2023): AS CONTRIBUIÇÕES DO PROGRAMA INSTITUCIONAL DE BOLSA DE INICIAÇÃO À DOCÊNCIA-PIBID PARA A FORMAÇÃO DOCENTE DOS 
    - id 189 (2023): EDUCAÇÃO ESCOLAR INDÍGENA E A GARANTIA À INTERCULTURALIDADE: uma análise a partir da Escola Estadual Indígena 
-   - id 218 (20232): PERFIL DOS RESÍDUOS SÓLIDOS PRODUZIDOS NA ESCOLA MUNICIPAL PROF. JOVACI MARÇAL DA SILVA (VILA DO APIAU, MUCAJA
+   - id 218 (2023): PERFIL DOS RESÍDUOS SÓLIDOS PRODUZIDOS NA ESCOLA MUNICIPAL PROF. JOVACI MARÇAL DA SILVA (VILA DO APIAU, MUCAJA
    - id 129 (2024): DA TERRA AO CONHECIMENTO: UMA PROPOSTA INTERDISCIPLINAR PARA A FORMAÇÃO CONTINUADA DE PROFESSORES DA EDUCAÇÃO 
    - id 186 (2024): DA TERRA AO CONHECIMENTO: UMA PROPOSTA INTERDISCIPLINAR PARA FORMAÇÃO CONTINUADA DE PROFESSORES DA EDUCAÇÃO DE
    - id 191 (2024): LUDICIDADE E FORMAÇÃO DOCENTE: TEM JOGO NO RESIDÊNCIA PEDAGÓGICA?

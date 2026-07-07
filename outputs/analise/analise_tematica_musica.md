@@ -1,10 +1,10 @@
 # Análise temática — TCCs do curso de Música (LIDAE/UFRR)
 
-> Leitura **descritiva e exploratória** dos 21 TCCs de Música do corpus
+> Leitura **descritiva e exploratória** dos 22 TCCs de Música do corpus
 > (defesas de 2017 a 2025), a partir de **título + resumo + palavras-chave**.
 > Fonte: cadastro dos TCCs realizado pelos pesquisadores do NECPF.
 >
-> **Natureza (CLAUDE.md §1):** com N = 21, não se aplica modelagem estatística
+> **Natureza (CLAUDE.md §1):** com N = 22, não se aplica modelagem estatística
 > de tópicos (o pipeline classifica Música na camada "descritiva", sem LDA
 > intra-curso). O agrupamento abaixo é **por leitura**, é indício e não
 > classificação fechada; os eixos **se sobrepõem**.
@@ -13,7 +13,7 @@
 
 Esta é uma **análise temática qualitativa, por leitura** — não um agrupamento
 automático. Os 5 eixos **não** saíram de um algoritmo (como o LDA ou o k-means
-usados no resto do painel); emergiram de uma leitura sistemática dos 21 TCCs,
+usados no resto do painel); emergiram de uma leitura sistemática dos 22 TCCs,
 apoiada por contagem de termos. O passo a passo:
 
 1. **Reunião do material textual.** Para cada TCC, juntei *título + resumo +
@@ -30,7 +30,7 @@ apoiada por contagem de termos. O passo a passo:
    de antemão. TCCs com mais de um foco ficaram marcados como transversais.
 5. **Nomeação.** Cada grupo recebeu um nome que resume o foco comum.
 
-**Por que não LDA/clusters aqui?** Porque N = 21 é pequeno demais para uma
+**Por que não LDA/clusters aqui?** Porque N = 22 é pequeno demais para uma
 modelagem estatística estável (por isso o pipeline coloca Música na camada
 "descritiva", sem LDA intra-curso). Nessa escala, a leitura humana é mais
 confiável — mas é **interpretativa**: outro leitor poderia agrupar de forma
@@ -39,14 +39,14 @@ classificação fechada** (CLAUDE.md §1, §4).
 
 > Diferença em relação à aba "Tópicos (LDA)" do painel: lá, os tópicos são
 > gerados por **algoritmo** sobre os 211 TCCs (K fixado em 8); aqui, os eixos
-> são fruto de **leitura** dos 21 TCCs de Música — dois instrumentos distintos,
+> são fruto de **leitura** dos 22 TCCs de Música — dois instrumentos distintos,
 > ambos exploratórios.
 
 ## 1. Panorama
 
 Dois fios atravessam quase todo o conjunto:
 
-- **Educação musical** — "música/musical" aparece em 19/15 dos 21 TCCs;
+- **Educação musical** — "música/musical" aparece em 20/16 dos 22 TCCs;
   "educação musical" é a palavra-chave mais repetida (6×).
 - **Contexto regional roraimense/amazônico** — "Boa Vista" (13×), "Roraima"
   (11×), "Amazônia" (2× nas palavras-chave).
@@ -88,10 +88,11 @@ Roraima/Amazônia.
 - id 82 — escolas de samba em Boa Vista (estudos de memória)
 - id 83 — gêneros musicais do Norte (transversal ao Eixo 2)
 
-### Eixo 4 — Música, religião e ritual (3 TCCs)
+### Eixo 4 — Música, religião e ritual (4 TCCs)
 - id 108 — colaboração pianística no coro da Igreja Batista Regular de Boa Vista
 - id 90 — canto coral na Igreja Batista Regular (ensino, regência)
 - id 99 — música ritual no terreiro de Umbanda Ogum Matinata (Boa Vista)
+- id 245 — música ritual no terreiro de Umbanda (ponto cantado, performance)
 
 ### Eixo 5 — Educação musical, inclusão e políticas públicas (2 TCCs)
 - id 93 — produção científica e políticas públicas de inclusão
@@ -113,7 +114,7 @@ ritual religioso, música indígena).
 
 ## 4. Limites
 
-- N = 21: estatística instável; os eixos são **indício a confirmar por leitura**.
+- N = 22: estatística instável; os eixos são **indício a confirmar por leitura**.
 - Os eixos **se sobrepõem** (ex.: id 95, 83 e 109 pertencem a mais de um).
 - A análise reflete **a coleta atual** (cadastro NECPF), não o universo de TCCs
   de Música do curso — ausências são lacuna de coleta, não inexistência.

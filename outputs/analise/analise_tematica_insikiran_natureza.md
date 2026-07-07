@@ -1,6 +1,6 @@
 # Análise temática — Insikiran / Ciências da Natureza (LIDAE/UFRR)
 
-> Leitura **descritiva e exploratória** dos 42 TCCs da habilitação *Ciências da
+> Leitura **descritiva e exploratória** dos 46 TCCs da habilitação *Ciências da
 > Natureza* do curso intercultural Insikiran, a partir de **título + resumo +
 > palavras-chave**. Fonte: cadastro dos TCCs realizado pelos pesquisadores do NECPF.
 >
@@ -44,20 +44,20 @@ material/recurso didático contextualizado.
 
 ## Eixos temáticos
 
-### Eixo 1 — Etnomatemática e ensino de matemática (18 TCCs)
+### Eixo 1 — Etnomatemática e ensino de matemática (19 TCCs)
 Matemática a partir de artesanato, grafismo e práticas da comunidade; jogos e
 recursos lúdicos; interpretação de dados.
-ids: 5, 8, 73, 75, 77, 78, 100, 102, 103, 117, 118, 139, 141, 151, 203, 206, 207, 210
+ids: 5, 8, 73, 75, 77, 78, 100, 102, 103, 117, 118, 139, 141, 151, 203, 206, 207, 210, 321
 
-### Eixo 2 — Ensino de Ciências, Química e educação ambiental (10 TCCs)
+### Eixo 2 — Ensino de Ciências, Química e educação ambiental (11 TCCs)
 Experimentos de química de baixo custo, biologia/botânica, hortas escolares,
 água e meio ambiente, educação para a saúde.
-ids: 6, 7, 10, 79, 80, 81, 104, 105, 115, 209
+ids: 6, 7, 10, 79, 80, 81, 104, 105, 115, 209, 319
 
-### Eixo 3 — Plantas medicinais, alimentação e saberes tradicionais (14 TCCs)
+### Eixo 3 — Plantas medicinais, alimentação e saberes tradicionais (16 TCCs)
 Etnobotânica (plantas e remédios tradicionais), alimentação indígena, peixes e
 recursos naturais, saúde da comunidade.
-ids: 9, 74, 76, 101, 106, 107, 116, 140, 142, 143, 144, 150, 152, 153
+ids: 9, 74, 76, 101, 106, 107, 116, 140, 142, 143, 144, 150, 152, 153, 318, 320
 
 ## Leitura
 
@@ -68,6 +68,6 @@ didático contextualizado** para a escola indígena, em diálogo com a comunidad
 
 ## Limites
 
-- N = 42, mas por eixo os números são pequenos — **indício a confirmar por leitura**.
+- N = 46, mas por eixo os números são pequenos — **indício a confirmar por leitura**.
 - Os eixos podem se sobrepor (ex.: hortas aparecem em Ciências e em alimentação).
 - Reflete **a coleta atual** (cadastro NECPF), não o universo de TCCs da habilitação.

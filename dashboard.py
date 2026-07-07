@@ -183,41 +183,41 @@ def consolida_nomes(nomes_list, threshold=85):
 
 # Rótulos LDA — APROXIMADOS, derivados dos 10 termos mais prováveis.
 # Edite as leituras conforme revisão qualitativa.
-# Atualizado com K=8 (252 TCCs, re-treino 2026-06-26 após inclusão da catalogação
-# de 26/06; K fixado por leitura) — rótulos PROVISÓRIOS.
+# Atualizado com K=8 (319 TCCs, re-treino 2026-07-07 após inclusão da catalogação
+# de 07/07; K fixado por leitura) — rótulos PROVISÓRIOS.
 TOPICOS = {
-    0: {"rotulo": "Matemática — Teoria Histórico-Cultural (provisório)",
-        "leitura": "atividade de situações-problema, etapas de Galperin, resolução",
-        "termos": "atividade, problema, situacoes, teoria, resolucao, acoes, "
-                  "estudantes, discente, galperin, matematica"},
-    1: {"rotulo": "Ensino com jogos e material didático na escola indígena (provisório)",
-        "leitura": "matemática e ciências com jogos, ensino fundamental, escola indígena",
-        "termos": "matematica, jogos, aluno, aulas, proposta, indigena, "
-                  "atividades, importancia, fundamental, construcao"},
-    2: {"rotulo": "Formação docente, estágio e coordenação (provisório)",
-        "leitura": "formação de professores, estágio, coordenação pedagógica, música",
-        "termos": "educacao, formacao, pedagogica, docente, estagio, musica, "
-                  "programa, contexto, roraima, coordenacao"},
-    3: {"rotulo": "História, gênero e identidade (provisório)",
-        "leitura": "história social de Roraima, gênero, representação e identidade",
-        "termos": "historia, analise, vista, roraima, genero, social, "
-                  "estado, representacao, periodo, identidade"},
-    4: {"rotulo": "Educação musical e infantil (provisório)",
-        "leitura": "práticas musicais, pedagogia, educação infantil e estágio",
-        "termos": "musical, educacao, infantil, musica, praticas, pedagogia, "
-                  "musicais, processo, estagio, experiencia"},
-    5: {"rotulo": "Saberes tradicionais, língua e plantas medicinais (provisório)",
-        "leitura": "comunidade e cultura indígena, língua, etnobotânica/plantas medicinais",
-        "termos": "comunidade, indigena, lingua, cultura, indigenas, plantas, "
-                  "tradicional, tambem, tradicionais, medicinais"},
-    6: {"rotulo": "História regional, Amazônia e povos indígenas (provisório)",
-        "leitura": "Roraima/Brasil, Amazônia, fronteira e povos indígenas na história",
-        "termos": "educacao, roraima, brasil, indigenas, regiao, estado, "
-                  "amazonia, processo, vista, branco"},
-    7: {"rotulo": "Educação escolar indígena (provisório)",
-        "leitura": "comunidade, escola, terra e projetos da educação escolar indígena",
-        "termos": "indigena, comunidade, educacao, estadual, indigenas, escolar, "
-                  "proposta, leitura, terra, projeto"},
+    0: {"rotulo": "Ensino médio, química e temas diversos (difuso, provisório)",
+        "leitura": "tópico heterogêneo: escolas, ensino médio, química, terras e movimentos",
+        "termos": "escolas, vista, medio, pode, quimica, terras, "
+                  "analisar, movimento, relacao, essas"},
+    1: {"rotulo": "História regional, Amazônia e gênero (provisório)",
+        "leitura": "Roraima e Amazônia, estado e região, análise de gênero e mulheres",
+        "termos": "roraima, vista, analise, branco, estado, regiao, "
+                  "brasil, amazonia, genero, mulheres"},
+    2: {"rotulo": "História, povos indígenas e livro didático (provisório)",
+        "leitura": "história de Roraima, povos indígenas, cultura e material didático",
+        "termos": "historia, indigenas, roraima, vista, povos, analise, "
+                  "indigena, didatico, cultura, estado"},
+    3: {"rotulo": "Matemática, língua e leitura na escola indígena (provisório)",
+        "leitura": "ensino de matemática, língua e leitura no fundamental da escola indígena",
+        "termos": "indigena, matematica, jogos, lingua, leitura, comunidade, "
+                  "estadual, fundamental, projeto, historias"},
+    4: {"rotulo": "Educação escolar indígena, saberes e saúde (provisório)",
+        "leitura": "comunidade e cultura indígena, conhecimentos tradicionais e saúde",
+        "termos": "indigena, comunidade, indigenas, educacao, conhecimentos, cultura, "
+                  "escolar, estadual, proposta, saude"},
+    5: {"rotulo": "História política e território de Roraima (provisório)",
+        "leitura": "território federal, governo, período militar e desenvolvimento regional",
+        "termos": "roraima, territorio, governo, federal, desenvolvimento, nacional, "
+                  "regiao, militar, parte, construcao"},
+    6: {"rotulo": "Formação docente, estágio e educação musical (provisório)",
+        "leitura": "formação de professores, estágio, prática docente e música",
+        "termos": "educacao, formacao, musica, pedagogica, estagio, roraima, "
+                  "docente, musical, ufrr, pratica"},
+    7: {"rotulo": "Matemática (Galperin) e ciências — situações-problema (provisório)",
+        "leitura": "atividade de situações-problema, etapas de Galperin, e temas de ciências",
+        "termos": "atividade, problema, situacoes, teoria, acoes, resolucao, "
+                  "estudantes, dengue, discente, galperin"},
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -1755,7 +1755,7 @@ TEMATICAS = {
             "Educação básica e formação docente": [91, 94, 98, 85, 86, 212, 87, 95],
             "Instrumentos e ensino coletivo": [89, 83, 96, 109],
             "Cultura regional e identidade": [84, 97, 95, 82, 83],
-            "Religião e ritual": [108, 90, 99],
+            "Religião e ritual": [108, 90, 99, 245],
             "Inclusão e políticas públicas": [93, 211],
             "Pontuais (teoria, etnomusicologia)": [92, 109],
         },
@@ -1764,11 +1764,11 @@ TEMATICAS = {
         "arquivo": "analise_tematica_insikiran_natureza.md",
         "eixos": {
             "Etnomatemática e ensino de matemática":
-                [5, 8, 73, 75, 77, 78, 100, 102, 103, 117, 118, 139, 141, 151, 203, 206, 207, 210],
+                [5, 8, 73, 75, 77, 78, 100, 102, 103, 117, 118, 139, 141, 151, 203, 206, 207, 210, 321],
             "Ciências, química e educação ambiental":
-                [6, 7, 10, 79, 80, 81, 104, 105, 115, 209],
+                [6, 7, 10, 79, 80, 81, 104, 105, 115, 209, 319],
             "Plantas medicinais, alimentação e saberes tradicionais":
-                [9, 74, 76, 101, 106, 107, 116, 140, 142, 143, 144, 150, 152, 153],
+                [9, 74, 76, 101, 106, 107, 116, 140, 142, 143, 144, 150, 152, 153, 318, 320],
         },
     },
     "Insikiran — Ciências Sociais": {
@@ -1806,12 +1806,37 @@ TEMATICAS = {
     "História": {
         "arquivo": "analise_tematica_historia.md",
         "eixos": {
-            "Povos indígenas, terras e migração": [146, 154, 164, 168, 174, 175, 179, 184, 194],
-            "Gênero, mulheres e violência": [158, 159, 165, 173, 180, 197, 202, 208],
-            "Religião, religiosidade e patrimônio cultural": [147, 156, 157, 161, 169, 176, 177, 181, 182, 183],
-            "Política, Estado e poder": [145, 155, 163, 166, 171, 196, 200],
-            "Ensino de História e formação docente": [160, 167, 170, 172, 178, 185, 195, 198, 199, 201, 204],
-            "História regional, memória e identidade": [162, 205, 213],
+            "Ensino de História e formação docente":
+                [160, 167, 170, 172, 178, 183, 185, 195, 198, 199, 201, 204, 220, 224,
+                 253, 259, 260, 267, 271, 275, 310, 313, 317],
+            "Política, território e geopolítica":
+                [145, 163, 166, 171, 196, 200, 252, 255, 258, 265, 270, 272, 273, 274,
+                 288, 291, 297, 299, 303, 304, 305],
+            "Povos indígenas, terras e violência":
+                [146, 154, 164, 168, 175, 179, 184, 194, 221, 223, 225, 229, 231, 235,
+                 256, 257, 263, 264, 268, 312, 314],
+            "Patrimônio, memória e cultura":
+                [161, 169, 205, 213, 217, 219, 261, 287, 290, 296, 308, 311, 316],
+            "Religião e religiosidade":
+                [147, 156, 157, 176, 177, 181, 182, 222, 226, 228, 298, 307],
+            "História internacional e historiografia":
+                [155, 162, 227, 232, 233, 234, 292, 293, 295, 302, 315],
+            "Gênero, mulheres e violência":
+                [158, 159, 165, 173, 180, 197, 202, 208, 230, 269],
+            "Educação, trabalho e sociedade":
+                [262, 266, 286, 289, 294, 309],
+            "Migração e formação urbana":
+                [174, 254, 300, 301, 306],
+        },
+    },
+    "Ciências Biológicas": {
+        "arquivo": "analise_tematica_ciencias_biologicas.md",
+        "eixos": {
+            "Ensino de Biologia e recursos didáticos": [242, 247, 249, 250, 277, 278, 284, 285],
+            "Saúde, arboviroses e epidemiologia": [243, 244, 280, 282],
+            "Botânica, taxonomia e biodiversidade": [251, 276, 279, 283],
+            "Etnobiologia e plantas medicinais": [241, 248],
+            "Qualidade da água e ambiente": [246, 281],
         },
     },
 }
