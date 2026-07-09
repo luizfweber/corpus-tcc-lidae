@@ -518,6 +518,22 @@ def lista_faltando(dados, col, rotulo, key):
                      use_container_width=True, hide_index=True)
 
 
+# ── Marca d'água (logo LIDAE ao fundo, centralizada e transparente) ──────────
+_wm = BASE / "assets" / "lidae_wm.png"
+if _wm.exists():
+    import base64 as _b64
+    _wm_uri = _b64.b64encode(_wm.read_bytes()).decode()
+    st.markdown(f"""
+    <style>
+    .stApp::before {{
+      content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+      background-image:url("data:image/png;base64,{_wm_uri}");
+      background-repeat:no-repeat; background-position:center 42%;
+      background-size:min(540px,52vw); opacity:.06;
+    }}
+    </style>
+    """, unsafe_allow_html=True)
+
 # ── Cabeçalho ────────────────────────────────────────────────────────────────
 st.title("📚 Corpus de TCCs — Licenciaturas UFRR")
 st.caption("Laboratório de Indicadores, Dados e Analítica Educacional · LIDAE/NECPF · "
