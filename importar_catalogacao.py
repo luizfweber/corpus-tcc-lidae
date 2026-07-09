@@ -65,6 +65,15 @@ GRUPO = {
     "Letras – Curso anterior": "Letras",
 }
 
+# Aliases de cabeçalho: variações do formulário -> nome canônico esperado em
+# FORM2COL. Aplicado logo após a leitura, para não perder dados quando o Google
+# Forms muda a redação de uma pergunta entre catalogações.
+COLUNAS_ALIAS = {
+    "Nome do estudante pesquisador que preencheu o formulário":
+        "Pesquisador/a responsável pelo registro",
+    "Pesquisador responsável pelo registro": "Pesquisador/a responsável pelo registro",
+}
+
 # Mapa de colunas do formulário -> colunas do consolidado.
 FORM2COL = {
     "Carimbo de data/hora": "carimbo",
@@ -189,6 +198,8 @@ def main():
     novo_path = args[0]
 
     novo = pd.read_csv(novo_path)
+    novo = novo.rename(columns={c: COLUNAS_ALIAS[c] for c in novo.columns
+                                if c in COLUNAS_ALIAS})
     con = pd.read_csv(CONSOLIDADO)
     print(f"Base atual: {len(con)} TCCs | Arquivo novo: {len(novo)} linhas")
 

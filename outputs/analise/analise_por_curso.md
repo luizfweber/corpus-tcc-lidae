@@ -1,33 +1,23 @@
 # Análise temática por curso, em camadas — LIDAE/UFRR
 
-Corpus: 319 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · listagem). Exploratório, não censitário.
+Corpus: 321 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · listagem). Exploratório, não censitário.
 
 
 ## 🟢 Camada LDA (N suficiente para sub-temas)
 
-### Insikiran — 85 TCCs · LDA intra-curso (K=4)
-*Seleção de K por estabilidade entre 8 seeds — K2: ARI=0.14 · K3: ARI=0.11 · K4: ARI=0.15. Escolhido K=4 (ARI=0.15).*
-> ⚠️ Estabilidade baixa (ARI=0.15): sub-temas FRÁGEIS, indício a confirmar por leitura — não conclusão.
+### Insikiran — 87 TCCs · LDA intra-curso (K=2)
+*Seleção de K por estabilidade entre 8 seeds — K2: ARI=0.17 · K3: ARI=0.13 · K4: ARI=0.12. Escolhido K=2 (ARI=0.17).*
+> ⚠️ Estabilidade baixa (ARI=0.17): sub-temas FRÁGEIS, indício a confirmar por leitura — não conclusão.
 
-**Sub-tema 1** (12 TCCs) — proposta, atividade, estadual, atividades, pedagogica, quimica, milho, social, indigenas, jogo
+**Sub-tema 1** (35 TCCs) — proposta, leitura, estadual, lingua, jogos, indigenas, educacao, atividades, projeto, pedagogica
    - id 71 (2022): PROPOSTA PEDAGÓGICA COLHER MILHO NA ROÇA: atividade social indígena como proposta de inter
-   - id 27 (2024): CONSTRUINDO UMA PROPOSTA PEDAGÓGICAS A PARTIR DA ATIVIDADE SOCIAL “CULTIVAR MANIVAS (Manih
-   - id 107 (2022): USO E DIVERSIDADE DE PIMENTAS ARDOSAS NACOMUNIDADE ALTO ARRAIA: TRAÇANDO NOVOS CAMINHOS IN
-
-**Sub-tema 2** (33 TCCs) — educacao, indigenas, cultura, conhecimentos, escolar, estadual, wapichana, macuxi, artesanato, conhecimento
-   - id 151 (2021): GRAFISMO CORPORAL INDÍGENA MACUXI: UMA CONTRIBUIÇÃO COMO RECURSOS DIDÁTICO-PEDAGÓGICOS NA 
-   - id 25 (2024): LENDAS WAPICHANA EM HISTÓRIAS EM QUADRINHOS: VALORIZANDO A CULTURA E ESTIMULANDO A LEITURA
-   - id 70 (2022): EDUCAÇÃO PATRIMONIAL, CULTURA MATERIAL E ARTESANATO NO JATAPUZINHO
-
-**Sub-tema 3** (22 TCCs) — matematica, jogos, leitura, lingua, projeto, aluno, estadual, fundamental, atraves, material
-   - id 117 (2025): A LUDICIDADE NO ENSINO DA MATEMÁTICANOENSINOFUNDAMEMTAL I
    - id 11 (2024): RELATO DE EXPERIÊNCIA: LEITURA E PRODUÇÃO DE JOGOS PEDAGÓGICOS NO ENSINO FUNDAMENTAL I NA 
-   - id 7 (2024): ELEMENTOS QUÍMICOS DA TABELA PERIÓDICA EM LÍNGUA INDÍGENA COMO MATERIAL DIDÁTICO CONTEXTUA
+   - id 61 (2024): RELATO DE EXPERIÊNCIA NA ESCOLA ESTADUAL INDÍGENA TUXAUA EVARISTO:SOLETRANDO NA ESCOLA
 
-**Sub-tema 4** (18 TCCs) — saude, tradicional, plantas, indigenas, tradicionais, tambem, medicinais, conhecimentos, alimentacao, comunidades
+**Sub-tema 2** (52 TCCs) — indigenas, educacao, conhecimentos, matematica, saude, tradicional, cultura, tambem, tradicionais, estadual
    - id 320 (2022): ALIMENTAÇÃO, SAÚDE E EDUCAÇÃO NA COMUNIDADE INDÍGENA MURIRU – TERRA INDÍGENA MURIRU EM ROR
    - id 101 (2022): ALIMENTAÇÃO, SAÚDE E EDUCAÇÃO NA COMUNIDADEINDÍGENAMURIRU – TERRA INDÍGENA MURIRU EMRORAIM
-   - id 106 (2022): PLANTAS NATIVAS COMO MEDICINA TRADICIONAL INDÍGENA DA COMUNIDADE OLHO D’ÁGUA
+   - id 140 (2021): O USO DOS ALIMENTOS INDÍGENAS WAPICHANA COMO PRÁTICA PEDAGÓGICA EDUCATIVA NA COMUNIDADE IN
 
 
 ### Pedagogia — 29 TCCs · LDA intra-curso (K=2)
@@ -65,7 +55,7 @@ Corpus: 319 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
 ### Música — 22 TCCs · descritivo (sem LDA)
 *N insuficiente para modelagem de tópicos; reporta-se a frequência documental dos termos e a lista de trabalhos.*
 
-**Termos mais recorrentes (nº de TCCs):** musica (20), musical (16), vista (14), educacao (14), analise (13), contexto (12), pratica (12), roraima (11), praticas (11), resultados (11), musicais (10), alem (10), dados (10), formacao (9), processo (8)
+**Termos mais recorrentes (nº de TCCs):** musica (20), musical (16), vista (14), educacao (14), analise (13), contexto (12), pratica (12), roraima (11), praticas (11), resultados (11), musicais (10), alem (10), dados (10), formacao (9), bibliografica (8)
 
 **Trabalhos:**
    - id 92 (2017): O EMPRÉSTIMO MODAL RECORRENTE NO POP ROCK DOS ANOS 1980
@@ -94,7 +84,7 @@ Corpus: 319 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
 ### Matemática — 15 TCCs · descritivo (sem LDA)
 *N insuficiente para modelagem de tópicos; reporta-se a frequência documental dos termos e a lista de trabalhos.*
 
-**Termos mais recorrentes (nº de TCCs):** acoes (14), atividade (14), situacoes (14), problema (14), teoria (14), estudantes (13), galperin (13), resolucao (13), processo (11), fundamental (11), matematica (11), conteudo (10), formacao (10), analisar (10), mentais (10)
+**Termos mais recorrentes (nº de TCCs):** problema (14), teoria (14), acoes (14), atividade (14), situacoes (14), galperin (13), estudantes (13), resolucao (13), fundamental (11), matematica (11), processo (11), mentais (10), analisar (10), conteudo (10), formacao (10)
 
 **Trabalhos:**
    - id 4 (2016): A APRENDIZAGEM DA ATIVIDADE DE SITUAÇÕES PRO-BLEMA EM SISTEMA DE EQUAÇÕES LINEARES FUNDA-M

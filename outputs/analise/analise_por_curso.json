@@ -1,59 +1,59 @@
 {
-  "gerado_em": "2026-07-07",
-  "n_total": 319,
+  "gerado_em": "2026-07-09",
+  "n_total": 321,
   "cursos": [
     {
       "curso": "Insikiran",
-      "n": 85,
+      "n": 87,
       "camada": "lda",
       "top_termos": [
         [
           "indigena",
-          81
+          82
         ],
         [
           "comunidade",
-          71
+          73
         ],
         [
           "estadual",
-          55
+          56
         ],
         [
           "indigenas",
-          50
+          51
         ],
         [
           "educacao",
-          44
+          45
         ],
         [
           "importancia",
-          39
+          40
         ],
         [
           "roraima",
-          38
+          39
+        ],
+        [
+          "tambem",
+          36
         ],
         [
           "proposta",
           36
         ],
         [
-          "tambem",
-          35
+          "escolar",
+          33
         ],
         [
-          "escolar",
+          "fundamental",
           33
         ],
         [
           "conhecimentos",
           33
-        ],
-        [
-          "fundamental",
-          32
         ],
         [
           "atraves",
@@ -493,31 +493,41 @@
           "id": "321",
           "ano": "2022",
           "titulo": "ALGORITMOS ALTERNATIVOS PARA AS OPERAÇÕES ARITMÉTICAS FUNDAMENTAL"
+        },
+        {
+          "id": "322",
+          "ano": "2023",
+          "titulo": "HORTA MEDICINAL, EDUCAÇÃO E POVOS INDÍGENAS: UMA EXPERIÊNCIA NA COMUNIDADE OLHO D’ ÁGUA, TERRA INDÍGENA RAPOSA SERRA DO SOL – NORMANDIA, RORAIMA"
+        },
+        {
+          "id": "323",
+          "ano": "2022",
+          "titulo": "A TANAJURA NA COMUNIDADE RAPOSAI : O ESTUDO DA TANAJURA COMO POSSIBILIDADE PARA O ENSINO DE HISTÓRIA LOCAL"
         }
       ],
       "lda": {
-        "K": 4,
-        "ari": 0.147,
+        "K": 2,
+        "ari": 0.171,
         "diag": {
-          "2": 0.14358954047012415,
-          "3": 0.11412868322199507,
-          "4": 0.14741971864972434
+          "2": 0.17116409788901496,
+          "3": 0.13200682345421902,
+          "4": 0.1161248486681588
         },
         "subtemas": [
           {
             "termos": [
               "proposta",
-              "atividade",
+              "leitura",
               "estadual",
-              "atividades",
-              "pedagogica",
-              "quimica",
-              "milho",
-              "social",
+              "lingua",
+              "jogos",
               "indigenas",
-              "jogo"
+              "educacao",
+              "atividades",
+              "projeto",
+              "pedagogica"
             ],
-            "n": 12,
+            "n": 35,
             "exemplos": [
               {
                 "id": "71",
@@ -525,95 +535,31 @@
                 "titulo": "PROPOSTA PEDAGÓGICA COLHER MILHO NA ROÇA: atividade social indígena como proposta de intervenção pedagógica no ensino/aprendizagem dos desafios da Escola Estadual Indígena Jose Antônio de Souza"
               },
               {
-                "id": "27",
-                "ano": "2024",
-                "titulo": "CONSTRUINDO UMA PROPOSTA PEDAGÓGICAS A PARTIR DA ATIVIDADE SOCIAL “CULTIVAR MANIVAS (Manihot esculenta Crantz)"
-              },
-              {
-                "id": "107",
-                "ano": "2022",
-                "titulo": "USO E DIVERSIDADE DE PIMENTAS ARDOSAS NACOMUNIDADE ALTO ARRAIA: TRAÇANDO NOVOS CAMINHOS INTERCULTURAIS"
-              }
-            ]
-          },
-          {
-            "termos": [
-              "educacao",
-              "indigenas",
-              "cultura",
-              "conhecimentos",
-              "escolar",
-              "estadual",
-              "wapichana",
-              "macuxi",
-              "artesanato",
-              "conhecimento"
-            ],
-            "n": 33,
-            "exemplos": [
-              {
-                "id": "151",
-                "ano": "2021",
-                "titulo": "GRAFISMO CORPORAL INDÍGENA MACUXI: UMA CONTRIBUIÇÃO COMO RECURSOS DIDÁTICO-PEDAGÓGICOS NA ESCOLA ESTADUAL INDÍGENA PRESIDENTE JOÃO PESSOA DA COMUNIDADE WILLIMON- RR."
-              },
-              {
-                "id": "25",
-                "ano": "2024",
-                "titulo": "LENDAS WAPICHANA EM HISTÓRIAS EM QUADRINHOS: VALORIZANDO A CULTURA E ESTIMULANDO A LEITURA"
-              },
-              {
-                "id": "70",
-                "ano": "2022",
-                "titulo": "EDUCAÇÃO PATRIMONIAL, CULTURA MATERIAL E ARTESANATO NO JATAPUZINHO"
-              }
-            ]
-          },
-          {
-            "termos": [
-              "matematica",
-              "jogos",
-              "leitura",
-              "lingua",
-              "projeto",
-              "aluno",
-              "estadual",
-              "fundamental",
-              "atraves",
-              "material"
-            ],
-            "n": 22,
-            "exemplos": [
-              {
-                "id": "117",
-                "ano": "2025",
-                "titulo": "A LUDICIDADE NO ENSINO DA MATEMÁTICANOENSINOFUNDAMEMTAL I"
-              },
-              {
                 "id": "11",
                 "ano": "2024",
                 "titulo": "RELATO DE EXPERIÊNCIA: LEITURA E PRODUÇÃO DE JOGOS PEDAGÓGICOS NO ENSINO FUNDAMENTAL I NA ESCOLA MUNICIPAL VOVÓ MARIA DO CARMO"
               },
               {
-                "id": "7",
+                "id": "61",
                 "ano": "2024",
-                "titulo": "ELEMENTOS QUÍMICOS DA TABELA PERIÓDICA EM LÍNGUA INDÍGENA COMO MATERIAL DIDÁTICO CONTEXTUALIZADO PARA O ENSINO DE QUÍMICA/CIÊNCIAS"
+                "titulo": "RELATO DE EXPERIÊNCIA NA ESCOLA ESTADUAL INDÍGENA TUXAUA EVARISTO:SOLETRANDO NA ESCOLA"
               }
             ]
           },
           {
             "termos": [
+              "indigenas",
+              "educacao",
+              "conhecimentos",
+              "matematica",
               "saude",
               "tradicional",
-              "plantas",
-              "indigenas",
-              "tradicionais",
+              "cultura",
               "tambem",
-              "medicinais",
-              "conhecimentos",
-              "alimentacao",
-              "comunidades"
+              "tradicionais",
+              "estadual"
             ],
-            "n": 18,
+            "n": 52,
             "exemplos": [
               {
                 "id": "320",
@@ -626,9 +572,9 @@
                 "titulo": "ALIMENTAÇÃO, SAÚDE E EDUCAÇÃO NA COMUNIDADEINDÍGENAMURIRU – TERRA INDÍGENA MURIRU EMRORAIMA."
               },
               {
-                "id": "106",
-                "ano": "2022",
-                "titulo": "PLANTAS NATIVAS COMO MEDICINA TRADICIONAL INDÍGENA DA COMUNIDADE OLHO D’ÁGUA"
+                "id": "140",
+                "ano": "2021",
+                "titulo": "O USO DOS ALIMENTOS INDÍGENAS WAPICHANA COMO PRÁTICA PEDAGÓGICA EDUCATIVA NA COMUNIDADE INDÍGENA JACAMINHO"
               }
             ]
           }
@@ -673,11 +619,11 @@
           12
         ],
         [
-          "resultados",
+          "ufrr",
           11
         ],
         [
-          "ufrr",
+          "resultados",
           11
         ],
         [
@@ -1739,7 +1685,7 @@
           9
         ],
         [
-          "processo",
+          "bibliografica",
           8
         ]
       ],
@@ -1863,6 +1809,14 @@
       "camada": "descritivo",
       "top_termos": [
         [
+          "problema",
+          14
+        ],
+        [
+          "teoria",
+          14
+        ],
+        [
           "acoes",
           14
         ],
@@ -1875,28 +1829,16 @@
           14
         ],
         [
-          "problema",
-          14
-        ],
-        [
-          "teoria",
-          14
+          "galperin",
+          13
         ],
         [
           "estudantes",
           13
         ],
         [
-          "galperin",
-          13
-        ],
-        [
           "resolucao",
           13
-        ],
-        [
-          "processo",
-          11
         ],
         [
           "fundamental",
@@ -1907,11 +1849,11 @@
           11
         ],
         [
-          "conteudo",
-          10
+          "processo",
+          11
         ],
         [
-          "formacao",
+          "mentais",
           10
         ],
         [
@@ -1919,7 +1861,11 @@
           10
         ],
         [
-          "mentais",
+          "conteudo",
+          10
+        ],
+        [
+          "formacao",
           10
         ]
       ],

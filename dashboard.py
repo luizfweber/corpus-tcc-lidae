@@ -186,38 +186,38 @@ def consolida_nomes(nomes_list, threshold=85):
 # Atualizado com K=8 (319 TCCs, re-treino 2026-07-07 após inclusão da catalogação
 # de 07/07; K fixado por leitura) — rótulos PROVISÓRIOS.
 TOPICOS = {
-    0: {"rotulo": "Ensino médio, química e temas diversos (difuso, provisório)",
-        "leitura": "tópico heterogêneo: escolas, ensino médio, química, terras e movimentos",
-        "termos": "escolas, vista, medio, pode, quimica, terras, "
-                  "analisar, movimento, relacao, essas"},
-    1: {"rotulo": "História regional, Amazônia e gênero (provisório)",
-        "leitura": "Roraima e Amazônia, estado e região, análise de gênero e mulheres",
-        "termos": "roraima, vista, analise, branco, estado, regiao, "
-                  "brasil, amazonia, genero, mulheres"},
-    2: {"rotulo": "História, povos indígenas e livro didático (provisório)",
-        "leitura": "história de Roraima, povos indígenas, cultura e material didático",
-        "termos": "historia, indigenas, roraima, vista, povos, analise, "
-                  "indigena, didatico, cultura, estado"},
-    3: {"rotulo": "Matemática, língua e leitura na escola indígena (provisório)",
-        "leitura": "ensino de matemática, língua e leitura no fundamental da escola indígena",
-        "termos": "indigena, matematica, jogos, lingua, leitura, comunidade, "
-                  "estadual, fundamental, projeto, historias"},
-    4: {"rotulo": "Educação escolar indígena, saberes e saúde (provisório)",
-        "leitura": "comunidade e cultura indígena, conhecimentos tradicionais e saúde",
-        "termos": "indigena, comunidade, indigenas, educacao, conhecimentos, cultura, "
-                  "escolar, estadual, proposta, saude"},
-    5: {"rotulo": "História política e território de Roraima (provisório)",
-        "leitura": "território federal, governo, período militar e desenvolvimento regional",
-        "termos": "roraima, territorio, governo, federal, desenvolvimento, nacional, "
-                  "regiao, militar, parte, construcao"},
-    6: {"rotulo": "Formação docente, estágio e educação musical (provisório)",
-        "leitura": "formação de professores, estágio, prática docente e música",
-        "termos": "educacao, formacao, musica, pedagogica, estagio, roraima, "
-                  "docente, musical, ufrr, pratica"},
-    7: {"rotulo": "Matemática (Galperin) e ciências — situações-problema (provisório)",
-        "leitura": "atividade de situações-problema, etapas de Galperin, e temas de ciências",
-        "termos": "atividade, problema, situacoes, teoria, acoes, resolucao, "
-                  "estudantes, dengue, discente, galperin"},
+    0: {"rotulo": "Educação escolar indígena, história e língua (provisório)",
+        "leitura": "escola indígena estadual, história e língua na comunidade, saúde",
+        "termos": "indigena, historia, educacao, escolar, indigenas, estadual, "
+                  "lingua, comunidade, projeto, saude"},
+    1: {"rotulo": "Saberes indígenas, matemática e material didático (provisório)",
+        "leitura": "conhecimento wapichana, matemática e língua, produção de material didático",
+        "termos": "indigena, comunidade, indigenas, wapichana, conhecimento, matematica, "
+                  "lingua, material, terra, didatico"},
+    2: {"rotulo": "Educação musical, escolas e gênero (provisório)",
+        "leitura": "educação musical em Boa Vista, contexto escolar, análise de mulheres",
+        "termos": "educacao, vista, musica, musical, contexto, escolas, "
+                  "processo, analise, mulheres, indigenas"},
+    3: {"rotulo": "Proposta pedagógica na comunidade indígena (ciências e cultura) (provisório)",
+        "leitura": "proposta pedagógica na comunidade, conhecimentos e cultura, ciências",
+        "termos": "comunidade, indigena, educacao, proposta, conhecimentos, estadual, "
+                  "atividades, ciencias, cultura, pedagogica"},
+    4: {"rotulo": "Matemática — situações-problema (Galperin) (provisório)",
+        "leitura": "atividade de situações-problema, teoria e ações de resolução, estudantes",
+        "termos": "atividade, problema, situacoes, matematica, teoria, acoes, "
+                  "resolucao, estudantes, discente, coordenacao"},
+    5: {"rotulo": "História regional, Amazônia e território federal (provisório)",
+        "leitura": "Roraima e Amazônia, estado e região, território federal do Rio Branco",
+        "termos": "roraima, regiao, estado, amazonia, territorio, federal, "
+                  "branco, brasil, analise, processo"},
+    6: {"rotulo": "Formação docente, estágio e prática (provisório)",
+        "leitura": "formação de professores, estágio e prática pedagógica, jogos, UFRR",
+        "termos": "educacao, formacao, estagio, pedagogica, experiencia, ufrr, "
+                  "docente, jogos, programa, roraima"},
+    7: {"rotulo": "Povos indígenas, história e medicina tradicional (provisório)",
+        "leitura": "povos indígenas e história, plantas medicinais e medicina tradicional",
+        "termos": "indigenas, historia, povos, medicinais, tradicional, plantas, "
+                  "medicina, roraima, representacoes, saude"},
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
