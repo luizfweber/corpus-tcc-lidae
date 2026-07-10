@@ -438,6 +438,36 @@ def carregar_por_curso(mtime: float = 0.0):
 _PC_JSON = BASE / "outputs" / "analise" / "analise_por_curso.json"
 
 
+def _fold_nome(s):
+    """Chave de nome sem acento/caixa/pontuação, só para casar egresso × autor."""
+    s = unicodedata.normalize("NFKD", str(s).lower())
+    s = "".join(c for c in s if not unicodedata.combining(c))
+    return re.sub(r"\s+", " ", re.sub(r"[^a-z0-9 ]", " ", s)).strip()
+
+
+@st.cache_data
+def carregar_egressos_dti(chave: str = ""):
+    """Base individual de egressos da DTI (dado pessoal, LGPD). Mora em
+    dados/_pessoais/ (gitignorada): existe só na execução LOCAL da equipe. Na
+    nuvem pública o arquivo não está presente e a função devolve None — a aba
+    então mostra aviso, sem nunca expor nomes. 'chave' (sem underscore) entra na
+    chave do cache p/ invalidar quando o arquivo muda."""
+    pasta = BASE / "dados" / "_pessoais"
+    arqs = sorted(pasta.glob("egressos_dti_licenciaturas_*.csv"))
+    if not arqs:
+        return None
+    d = pd.read_csv(arqs[-1])
+    # exclui bacharelado explícito (não é egresso de licenciatura)
+    d = d[~d["curso_habilitacao"].astype(str).str.contains(r"\(B\)", na=False)].copy()
+    per = d["afastamento_permanente"].astype(str).str.extract(r"^(\d{4})\.(\d)")
+    d["ano_saida"] = pd.to_numeric(per[0], errors="coerce")
+    d["sem_saida"] = per[1]
+    # exclui sentinela 2099 e períodos ausentes (não imputar — CLAUDE.md §2)
+    d = d[d["ano_saida"].between(1990, 2026)]
+    d["_nome_norm"] = d["pessoa_nome"].apply(_fold_nome)
+    return d
+
+
 df = carregar(mtime=CSV.stat().st_mtime)
 N_TOTAL = len(df)
 
@@ -544,18 +574,20 @@ st.info("**Análise exploratória, não censitária.** Cada número é indício 
 
 # ── Navegação (menu lateral agrupado, com ícones) ──
 # Seções reais, referenciadas por NOME nas abas (reordenar aqui é seguro).
-SECOES = ["Distribuição", "Cobertura de Coleta", "Explorar TCCs",
+SECOES = ["Distribuição", "Cobertura de Coleta", "Registros faltantes",
+          "Explorar TCCs",
           "Tópicos (LDA)", "Análise temática por curso", "Sub-temas por curso (LDA)",
           "Palavras-chave", "Menção indígena", "Povos & territórios",
           "Orientadores", "Bancas", "Orientador × tema"]
 # Itens exibidos no menu, com separadores "---" entre os 4 grupos temáticos.
 # (cada "---" recebe ícone "" para manter o alinhamento com a lista de ícones.)
-_MENU_ITENS = ["Distribuição", "Cobertura de Coleta", "Explorar TCCs", "---",
+_MENU_ITENS = ["Distribuição", "Cobertura de Coleta", "Registros faltantes",
+               "Explorar TCCs", "---",
                "Tópicos (LDA)", "Análise temática por curso",
                "Sub-temas por curso (LDA)", "Palavras-chave", "---",
                "Menção indígena", "Povos & territórios", "---",
                "Orientadores", "Bancas", "Orientador × tema"]
-_MENU_ICONS = ["bar-chart-line", "graph-up-arrow", "search", "",
+_MENU_ICONS = ["bar-chart-line", "graph-up-arrow", "person-x", "search", "",
                "diagram-3", "journal-text", "mortarboard", "tags", "",
                "feather", "geo-alt", "",
                "people", "people-fill", "grid-3x3-gap"]
@@ -1324,6 +1356,83 @@ if secao == "Cobertura de Coleta":
 
     except Exception as e:
         st.error(f"Erro ao carregar dados de egressos: {e}")
+
+# Aba — Registros faltantes por curso (uso interno da equipe; dados restritos)
+if secao == "Registros faltantes":
+    st.subheader("Registros faltantes por curso")
+    st.caption("Ferramenta interna da equipe: cruza os egressos das licenciaturas "
+               "(base da DTI) com os TCCs já catalogados pelo NECPF e lista quem "
+               "ainda não tem TCC cadastrado. Indício para orientar a coleta, não "
+               "veredito (pode haver homônimo ou grafia diferente).")
+
+    _dti_files = sorted((BASE / "dados" / "_pessoais").glob(
+        "egressos_dti_licenciaturas_*.csv"))
+    _chave = str(_dti_files[-1].stat().st_mtime) if _dti_files else "ausente"
+    egr = carregar_egressos_dti(chave=_chave)
+
+    if egr is None:
+        st.info("🔒 **Dados restritos.** Esta aba usa a base de egressos da DTI, "
+                "que contém dados pessoais (nome e matrícula) e por isso **não é "
+                "publicada**. Ela funciona apenas na **execução local** da equipe "
+                "(arquivo em `dados/_pessoais/`). No painel público ela fica "
+                "indisponível, para proteger os dados dos egressos (LGPD).")
+        st.stop()
+
+    # autores já coletados, por grupo (conjunto de nomes normalizados)
+    _aut = df.copy()
+    _aut["_n"] = _aut["autor"].apply(_fold_nome)
+    coletados = {g: set(sub["_n"]) for g, sub in _aut.groupby("grupo_tcc")}
+
+    c1, c2, c3 = st.columns(3)
+    # 1) curso
+    grupos = sorted(egr["grupo_tcc"].dropna().unique())
+    g = c1.selectbox("Curso", grupos, key="rf_curso")
+    eg = egr[egr["grupo_tcc"] == g].copy()
+    eg["_coletado"] = eg["_nome_norm"].isin(coletados.get(g, set()))
+    faltantes_g = eg[~eg["_coletado"]]
+
+    if faltantes_g.empty:
+        st.success(f"Nenhum registro faltante em **{g}** (todos os egressos com "
+                   "período válido já têm TCC catalogado, casando por nome).")
+        st.stop()
+
+    # 2) ano de saída (colação)
+    anos = sorted(faltantes_g["ano_saida"].dropna().astype(int).unique(), reverse=True)
+    ano = c2.selectbox("Ano de saída (colação)", anos, key="rf_ano")
+    fa = faltantes_g[faltantes_g["ano_saida"] == ano]
+
+    # 3) semestre
+    sems = sorted(fa["sem_saida"].dropna().unique())
+    sem = c3.selectbox("Semestre", ["(todos)"] + [f"{s}º" for s in sems], key="rf_sem")
+    if sem != "(todos)":
+        fa = fa[fa["sem_saida"] == sem.rstrip("º")]
+
+    rotulo = f"{g} · {ano}" + (f".{sem.rstrip('º')}" if sem != "(todos)" else "")
+    st.markdown(f"### {len(fa)} egresso(s) sem TCC catalogado — {rotulo}")
+
+    show = (fa[["pessoa_nome", "curso_nome", "afastamento_permanente", "titulo"]]
+            .rename(columns={"pessoa_nome": "Egresso",
+                             "curso_nome": "Curso/habilitação (DTI)",
+                             "afastamento_permanente": "Saída",
+                             "titulo": "Título no sistema (DTI, se houver)"})
+            .sort_values("Egresso").reset_index(drop=True))
+    show.index = show.index + 1
+    st.dataframe(show, use_container_width=True)
+    st.download_button("⬇️ Baixar esta lista (CSV)",
+                       show.to_csv(index=False).encode("utf-8"),
+                       file_name=f"faltantes_{g}_{ano}.csv", mime="text/csv")
+
+    # resumo do curso (todos os anos)
+    tot = len(eg); col = int(eg["_coletado"].sum()); falt = tot - col
+    st.markdown("---")
+    k1, k2, k3 = st.columns(3)
+    k1.metric(f"Egressos de {g} (período válido)", tot)
+    k2.metric("Já catalogados (por nome)", f"{col}  ({col/tot*100:.0f}%)")
+    k3.metric("Faltantes (todos os anos)", falt)
+    st.caption("Cobertura por nome pode diferir da cobertura por contagem "
+               "(aba Cobertura de Coleta): aqui um egresso conta como coletado se "
+               "seu nome aparece no corpus, independentemente do ano. 'Saída' = "
+               "afastamento permanente (colação), não data de defesa.")
 
 # Aba 8 — Povos & territórios indígenas (gazetteer)
 if secao == "Povos & territórios":
