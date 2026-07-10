@@ -728,73 +728,64 @@ if secao == "Distribuição":
                "— reflete disponibilidade do acervo digitalizado.")
 
     st.subheader("Egressos × TCCs cadastrados — por curso (ano a ano)")
-    st.caption("Selecione um curso. Para cada ANO: egressos formados (fonte PROEG, "
-               "tabela de graduados Paricarana) e quantos TCCs desse curso já foram "
-               "cadastrados (por ano de defesa), com a cobertura %. Independe dos "
-               "filtros da barra lateral.")
+    st.caption("Selecione um curso. Para cada ANO: egressos (base DTI, por ano de "
+               "saída/colação) e quantos TCCs desse curso já foram cadastrados "
+               "(por ano de defesa), com a cobertura %. Independe dos filtros da "
+               "barra lateral.")
 
-    _ano = pd.read_csv(BASE / "dados" / "canonico" / "egressos_por_ano.csv")
-    # exclui habilitações não informadas (egressos sem habilitação atribuível —
-    # não entram na cobertura por habilitação; CLAUDE.md §2: não imputar)
-    _cursos = sorted(c for c in _ano["curso_det"].dropna().unique()
-                     if "habilitação não informada" not in str(c).lower())
-    sel_curso = st.selectbox("Curso (com habilitação)", _cursos, key="cob_curso_ano")
-
-    # casa a nomenclatura dos TCCs (curso_fonte) com a dos egressos PROEG (curso_det)
-    TCC2DET = {
-        "Insikiran – Ciências da Natureza": "Insikiran — Ciências da Natureza",
-        "Insikiran – Ciências Sociais": "Insikiran — Ciências Sociais",
-        "Insikiran – Comunicação e Artes": "Insikiran — Comunicação e Artes",
-        "Letras – Inglês": "Letras — Português/Inglês",
-        "Letras – Português": "Letras — Português",
-        "Letras – Curso anterior": "Letras — Antiga estrutura curricular",
-        "LEDUCARR – Ciências Humanas e Sociais": "LEDUCARR — Ciências Humanas e Sociais",
-        "LEDUCARR – Ciências da Natureza e Matemática": "LEDUCARR — Ciências da Natureza e Matemática",
-    }
-    _dft = df.copy()
-    _dft["_det"] = _dft.apply(
-        lambda r: TCC2DET.get(r["curso_fonte"], r["grupo_tcc"]), axis=1)
-
-    egr = (_ano[_ano["curso_det"] == sel_curso].groupby("ano")["egressos"]
-           .sum().astype(int))
-    tcc = (_dft[_dft["_det"] == sel_curso].dropna(subset=["ano_num"])
-           .assign(_a=lambda d: d["ano_num"].astype(int)).groupby("_a").size())
-
-    anos_todos = sorted(set(egr.index) | set(tcc.index))
-    if not anos_todos:
-        st.info("Sem dados para este curso.")
+    _chave = (str(EGRESSOS_PUBLICO.stat().st_mtime)
+              if EGRESSOS_PUBLICO.exists() else "ausente")
+    _egr_dti = carregar_egressos_dti(chave=_chave)
+    if _egr_dti is None:
+        st.warning("Base de egressos da DTI não encontrada "
+                   "(dados/canonico/egressos_publico.csv). "
+                   "Rode `gerar_egressos_publico.py`.")
     else:
-        amin, amax = int(min(anos_todos)), int(max(anos_todos))
-        d0 = min(max(amin, 2015), amax)
-        faixa = st.slider("Faixa de anos", amin, amax, (d0, amax), key="cob_anos")
-        anos = list(range(faixa[0], faixa[1] + 1))
-        cob = pd.DataFrame({"ano": anos})
-        cob["egressos"] = cob["ano"].map(egr).fillna(0).astype(int)
-        cob["tccs"] = cob["ano"].map(tcc).fillna(0).astype(int)
-        cob["cob"] = (cob["tccs"] / cob["egressos"] * 100).where(cob["egressos"] > 0, 0)
+        _cursos = sorted(_egr_dti["grupo_tcc"].dropna().unique())
+        sel_curso = st.selectbox("Curso", _cursos, key="cob_curso_ano")
 
-        fig = go.Figure()
-        fig.add_bar(x=cob["ano"], y=cob["egressos"], name="Egressos",
-                    marker_color=PALETA[1], text=cob["egressos"])
-        fig.add_bar(x=cob["ano"], y=cob["tccs"], name="TCCs cadastrados",
-                    marker_color=PALETA[0], text=cob["tccs"])
-        fig.update_layout(barmode="group", height=440, xaxis_title="Ano",
-                          yaxis_title="Quantidade", legend_title="")
-        fig.update_xaxes(tickmode="linear", dtick=1, tickangle=-45, tickformat="d")
-        st.plotly_chart(fig, use_container_width=True)
+        egr = (_egr_dti[_egr_dti["grupo_tcc"] == sel_curso]
+               .groupby("ano_saida").size())
+        egr.index = egr.index.astype(int)
+        tcc = (df[df["grupo_tcc"] == sel_curso].dropna(subset=["ano_num"])
+               .assign(_a=lambda d: d["ano_num"].astype(int)).groupby("_a").size())
 
-        cob["Cobertura"] = cob["cob"].apply(lambda x: f"{x:.1f}".replace(".", ",") + "%")
-        cob_disp = cob[["ano", "egressos", "tccs", "Cobertura"]].copy()
-        cob_disp["ano"] = cob_disp["ano"].astype(str)   # ano como texto: "2015", sem separador
-        st.dataframe(cob_disp.rename(
-            columns={"ano": "Ano", "egressos": "Egressos", "tccs": "TCCs cadastrados"}),
-            use_container_width=True, hide_index=True)
-        tot_e, tot_t = int(cob["egressos"].sum()), int(cob["tccs"].sum())
-        cobg = (tot_t / tot_e * 100) if tot_e else 0
-        st.caption(f"Curso: **{sel_curso}**. Em {faixa[0]}–{faixa[1]}: {tot_t} TCCs "
-                   f"cadastrados / {tot_e} egressos = "
-                   + f"{cobg:.1f}".replace('.', ',') + "% de cobertura. "
-                   "Egressos: fonte PROEG (anual). Cobertura = TCCs ÷ egressos.")
+        anos_todos = sorted(set(egr.index) | set(tcc.index))
+        if not anos_todos:
+            st.info("Sem dados para este curso.")
+        else:
+            amin, amax = int(min(anos_todos)), int(max(anos_todos))
+            d0 = min(max(amin, 2015), amax)
+            faixa = st.slider("Faixa de anos", amin, amax, (d0, amax), key="cob_anos")
+            anos = list(range(faixa[0], faixa[1] + 1))
+            cob = pd.DataFrame({"ano": anos})
+            cob["egressos"] = cob["ano"].map(egr).fillna(0).astype(int)
+            cob["tccs"] = cob["ano"].map(tcc).fillna(0).astype(int)
+            cob["cob"] = (cob["tccs"] / cob["egressos"] * 100).where(cob["egressos"] > 0, 0)
+
+            fig = go.Figure()
+            fig.add_bar(x=cob["ano"], y=cob["egressos"], name="Egressos (DTI)",
+                        marker_color=PALETA[1], text=cob["egressos"])
+            fig.add_bar(x=cob["ano"], y=cob["tccs"], name="TCCs cadastrados",
+                        marker_color=PALETA[0], text=cob["tccs"])
+            fig.update_layout(barmode="group", height=440, xaxis_title="Ano",
+                              yaxis_title="Quantidade", legend_title="")
+            fig.update_xaxes(tickmode="linear", dtick=1, tickangle=-45, tickformat="d")
+            st.plotly_chart(fig, use_container_width=True)
+
+            cob["Cobertura"] = cob["cob"].apply(lambda x: f"{x:.1f}".replace(".", ",") + "%")
+            cob_disp = cob[["ano", "egressos", "tccs", "Cobertura"]].copy()
+            cob_disp["ano"] = cob_disp["ano"].astype(str)   # ano como texto, sem separador
+            st.dataframe(cob_disp.rename(
+                columns={"ano": "Ano", "egressos": "Egressos", "tccs": "TCCs cadastrados"}),
+                use_container_width=True, hide_index=True)
+            tot_e, tot_t = int(cob["egressos"].sum()), int(cob["tccs"].sum())
+            cobg = (tot_t / tot_e * 100) if tot_e else 0
+            st.caption(f"Curso: **{sel_curso}**. Em {faixa[0]}–{faixa[1]}: {tot_t} TCCs "
+                       f"cadastrados / {tot_e} egressos = "
+                       + f"{cobg:.1f}".replace('.', ',') + "% de cobertura. "
+                       "Egressos: base DTI (por ano de saída/colação). "
+                       "Cobertura = TCCs ÷ egressos.")
 
     st.subheader("Páginas por curso (mediana)")
     st.caption("Agrupado por curso/habilitação — fonte: coluna `curso_fonte` "

@@ -29,11 +29,11 @@ Nada em `dados/` é gerado por script; tudo ali é fonte.
 
 | Arquivo | Conteúdo | Quem lê |
 |---|---|---|
-| `egressos_serie_historica.csv` | egressos acumulados por período e curso; col. `fonte` (PROEG / DTI 2025.2) | `dashboard.py`, cálculo de cobertura |
+| `egressos_publico.csv` | egressos individuais SEM matrícula (nome, curso, período, título), 1 por pessoa | `dashboard.py` (abas Distribuição, Cobertura, Registros faltantes) |
+| `egressos_serie_historica.csv` | egressos acumulados por período/curso; col. `fonte` (PROEG / DTI 2025.2) | referência (PROEG); não lido pelo dashboard desde a migração p/ DTI (10/07/2026) |
+| `egressos_por_curso.csv` | total de egressos por curso | referência (PROEG); não lido pelo dashboard |
+| `egressos_por_ano.csv` | egressos por curso e ano | referência (PROEG); não lido pelo dashboard |
 | `de_para_cursos_proeg.csv` | mapa nome PROEG -> curso_det -> grupo_tcc (escopo do estudo) | referência de normalização |
-| `egressos_por_curso.csv` | total de egressos por curso | `dashboard.py` |
-| `egressos_por_ano.csv` | egressos por curso e ano | `dashboard.py` |
-| `egressos_publico.csv` | egressos individuais SEM matrícula (nome, curso, período, título), 1 por pessoa | `dashboard.py` (aba Registros faltantes) |
 
 `egressos_publico.csv` é **gerado** por `gerar_egressos_publico.py` a partir da
 base sensível em `_pessoais/`. Proteção parcial (decisão do responsável,
