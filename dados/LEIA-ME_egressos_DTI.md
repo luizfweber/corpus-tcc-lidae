@@ -2,8 +2,9 @@
 
 ## Identificação da fonte
 
-- **Arquivo:** `egressos_dti_2026-07-10.csv` (nesta pasta; cópia do original em
-  `[Projeto de pesquisa] UFRR - TCCs/Dados da pesquisa inicial - PROEG/`)
+- **Arquivo:** `_pessoais/egressos_dti_2026-07-10.csv` (todos os arquivos com
+  dado pessoal ficam em `dados/_pessoais/`, pasta inteira gitignorada; cópia do
+  original em `[Projeto de pesquisa] UFRR - TCCs/Dados da pesquisa inicial - PROEG/`)
 - **Origem:** DTI/UFRR, atendendo solicitação da pesquisa LIDAE/NECPF
 - **Data de recebimento:** 10/07/2026
 - **Abrangência:** todos os cursos de graduação da UFRR (48 cursos), não apenas
@@ -71,7 +72,7 @@ dados pessoais) é versionado.
 
 ## Recorte das licenciaturas do estudo (10/07/2026)
 
-`egressos_dti_licenciaturas_2026-07-10.csv` (também no `.gitignore`): filtro da
+`_pessoais/egressos_dti_licenciaturas_2026-07-10.csv` (na pasta vedada): filtro da
 base completa contendo só os cursos da pesquisa, com coluna `grupo_tcc`
 adicionada. Regras de escopo idênticas ao `de_para_cursos_proeg.csv`:
 EaD excluído (Matemática EAD, Geografia EAD, Informática EAD);
@@ -87,7 +88,7 @@ egressos tem 2 registros de TCC (ver artefato 4).
 
 ## Vínculo TCC ↔ matrícula (crosswalk, 10/07/2026)
 
-`matriculas_por_id.csv` (gitignorado): de-para `id` (do corpus de TCCs) →
+`_pessoais/matriculas_por_id.csv` (gitignorado): de-para `id` (do corpus de TCCs) →
 `matricula` (RA oficial da DTI), para os **145 TCCs** confirmados por autor +
 título. Fica **fora** do consolidado justamente para não expor dado pessoal no
 dashboard/GitHub. Para análises que precisem da matrícula, faça o merge local

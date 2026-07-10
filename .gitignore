@@ -16,7 +16,10 @@ venv/
 *_REVISAO.xlsx
 *_CORRECOES.xlsx
 
-# Dados pessoais (LGPD) - nunca versionar no repositorio publico
+# Dados pessoais (LGPD) - pasta inteira vedada; nunca versionar.
+# Qualquer arquivo com nome/matricula vai aqui e fica fora do git por padrao.
+dados/_pessoais/
+# (padroes antigos mantidos como reforco, caso algum arquivo escape para dados/)
 dados/egressos_dti_*.csv
 dados/CONFERENCIA_DTI_*.csv
 dados/matriculas_por_id.csv
