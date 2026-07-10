@@ -19,3 +19,4 @@ venv/
 # Dados pessoais (LGPD) - nunca versionar no repositorio publico
 dados/egressos_dti_*.csv
 dados/CONFERENCIA_DTI_*.csv
+dados/matriculas_por_id.csv

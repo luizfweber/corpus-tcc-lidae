@@ -85,6 +85,16 @@ Física 151/126/52 · Artes Visuais 81/81/5 · Música 66/46/65.
 Nota: em Música há mais títulos de TCC (65) do que matrículas (46) — parte dos
 egressos tem 2 registros de TCC (ver artefato 4).
 
+## Vínculo TCC ↔ matrícula (crosswalk, 10/07/2026)
+
+`matriculas_por_id.csv` (gitignorado): de-para `id` (do corpus de TCCs) →
+`matricula` (RA oficial da DTI), para os **145 TCCs** confirmados por autor +
+título. Fica **fora** do consolidado justamente para não expor dado pessoal no
+dashboard/GitHub. Para análises que precisem da matrícula, faça o merge local
+por `id`. O consolidado permanece limpo (sem coluna de matrícula), e
+`analise_corpus.py` tem filtro de defesa que descarta `matricula` caso ela
+reapareça por engano.
+
 ## Próximos passos (combinados em 10/07/2026)
 
 - [ ] Ajustar/normalizar os dados com o pesquisador (nomes de curso, de/para)

@@ -514,8 +514,10 @@ print("✓ 6_tematica_indigena.png")
 campos_novos = ["ano_num","pag_num","topico_dom","topico_prob","cluster","tem_indigena"]
 out_csv = OUT / "corpus_tccs_analisado.csv"
 cols_orig = list(csv.DictReader(open(CSV,encoding="utf-8")).fieldnames)
-# LGPD: 'matricula' (dado pessoal, da base DTI) fica só no consolidado local;
-# nunca vai para o analisado, que é publicado no dashboard/GitHub.
+# LGPD: 'matricula' (dado pessoal da base DTI) mora no crosswalk gitignorado
+# dados/matriculas_por_id.csv, não no consolidado. Este filtro é defesa extra:
+# se a coluna reaparecer no consolidado por engano, nunca vaza para o analisado
+# (publicado no dashboard/GitHub).
 cols_orig = [c for c in cols_orig if c != "matricula"]
 with open(out_csv,"w",newline="",encoding="utf-8") as f:
     w = csv.DictWriter(f, fieldnames=cols_orig+campos_novos)
