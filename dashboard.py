@@ -1200,120 +1200,92 @@ if secao == "Cobertura de Coleta":
 
     # carregar dados de egressos
     try:
-        egressos = pd.read_csv(BASE / "dados" / "canonico" / "egressos_por_curso.csv")
-        egressos_serie = pd.read_csv(BASE / "dados" / "canonico" / "egressos_serie_historica.csv")
+        # EGRESSOS DA DTI (base individual deduplicada por matrícula; sem
+        # matrícula publicada). O denominador da cobertura vem do banco da DTI,
+        # por grupo de curso (mesma granularidade do corpus).
+        _chave = (str(EGRESSOS_PUBLICO.stat().st_mtime)
+                  if EGRESSOS_PUBLICO.exists() else "ausente")
+        egr_dti = carregar_egressos_dti(chave=_chave)
+        if egr_dti is None:
+            st.warning("Base de egressos da DTI não encontrada "
+                       "(dados/canonico/egressos_publico.csv). "
+                       "Rode `gerar_egressos_publico.py`.")
+            st.stop()
 
-        # MAPEAMENTO: curso_fonte (TCCs) → curso (egressos) — OPÇÃO A
-        mapeamento_curso_fonte = {
-            "História": "História (L)",
-            "Insikiran – Ciências Sociais": "Insikiran — Ciências Sociais",
-            "Insikiran – Ciências da Natureza": "Insikiran — Ciências da Natureza",
-            "Insikiran – Comunicação e Artes": "Insikiran — Comunicação e Artes",
-            "LEDUCARR – Ciências Humanas e Sociais": "LEDUCARR — Ciências Humanas e Sociais",
-            "Pedagogia": "Pedagogia",
-            "Música": "Música",
-            "Matemática": "Matemática (L)",
-            "Letras – Inglês": "Letras — Inglês (nova estrutura)",
-            "Letras – Português": "Letras — Português (nova estrutura)",
-            "Letras – Curso anterior": "Letras — Hab. Literatura/Português (antiga)",
-        }
+        periodo_opt = st.radio(
+            "Período (aplica a egressos e a TCCs)",
+            ["Janela 2015–2025", "Todos os anos"], horizontal=True,
+            key="cob_periodo",
+            help="A janela 2015–2025 é o alvo padrão (CLAUDE.md §5): o acervo "
+                 "digitalizado concentra defesas recentes; comparar com egressos "
+                 "de todos os anos subestima a cobertura.")
+        if periodo_opt.startswith("Janela"):
+            eg_use = egr_dti[egr_dti["ano_saida"].between(2015, 2025)]
+            tcc_use = df[df["ano_num"].between(2015, 2025)]
+        else:
+            eg_use, tcc_use = egr_dti, df
 
-        # Contar TCCs por curso_fonte (desagregado)
-        tccs_por_fonte = df.groupby("curso_fonte").size().reset_index(name="tccs_coletados")
-        # Mapear curso_fonte para curso (egressos)
-        tccs_por_fonte["curso"] = tccs_por_fonte["curso_fonte"].map(mapeamento_curso_fonte)
-        # Agrupar por curso mapeado para consolidar
-        tccs_map = tccs_por_fonte.groupby("curso")["tccs_coletados"].sum().to_dict()
+        egr_por_grupo = eg_use.groupby("grupo_tcc").size()
+        tcc_por_grupo = tcc_use.groupby("grupo_tcc").size()
+        grupos = sorted(set(egr_por_grupo.index) | set(tcc_por_grupo.index))
+        cobertura = pd.DataFrame({"Curso": grupos})
+        cobertura["TCCs"] = cobertura["Curso"].map(tcc_por_grupo).fillna(0).astype(int)
+        cobertura["Egressos"] = cobertura["Curso"].map(egr_por_grupo).fillna(0).astype(int)
+        cobertura["cobertura_pct"] = (cobertura["TCCs"]
+                                      / cobertura["Egressos"].replace(0, pd.NA) * 100)
+        cobertura = cobertura.sort_values("cobertura_pct", ascending=False,
+                                          na_position="last")
 
-        # Usar egressos como base (mantém todas as habilitações/variações)
-        cobertura = egressos.copy()
+        st.caption("Cobertura = TCCs coletados ÷ **egressos da DTI** (base "
+                   "individual, deduplicada por matrícula; bacharelado e EaD "
+                   "excluídos). Egresso = saída/colação na DTI, evento distinto "
+                   "da defesa do TCC. Indício, não veredito (CLAUDE.md §4).")
 
-        # Adicionar coluna de TCCs usando o mapa (mostra 0 para cursos sem TCCs)
-        cobertura["tccs_coletados"] = cobertura["curso"].map(tccs_map).fillna(0).astype(int)
+        st.markdown("#### Cobertura por curso")
+        cob_disp = cobertura.copy()
+        cob_disp["Cobertura %"] = cob_disp["cobertura_pct"].apply(
+            lambda x: (f"{x:.1f}".replace(".", ",") + "%") if pd.notna(x) else "—")
+        st.dataframe(cob_disp[["Curso", "TCCs", "Egressos", "Cobertura %"]],
+                     use_container_width=True, hide_index=True)
+        tot_t, tot_e = int(cobertura["TCCs"].sum()), int(cobertura["Egressos"].sum())
+        st.metric("Cobertura global (no período)",
+                  (f"{tot_t/tot_e*100:.1f}".replace(".", ",") + "%") if tot_e else "—",
+                  help=f"{tot_t} TCCs ÷ {tot_e} egressos da DTI.")
 
-        # Calcular cobertura
-        cobertura["cobertura_pct"] = (cobertura["tccs_coletados"] / cobertura["egressos_total"] * 100)
-
-        # Ordenar por cobertura
-        cobertura = cobertura.sort_values("cobertura_pct", ascending=False)
-
-        # exibir tabela (linha própria)
-        st.markdown("#### Cobertura por Curso")
-        # formatador customizado para vírgula (2 casas decimais)
-        cobertura_display = cobertura[["curso", "tccs_coletados", "egressos_total", "cobertura_pct"]].copy()
-        cobertura_display["Cobertura %"] = cobertura_display["cobertura_pct"].apply(
-            lambda x: f"{x:.2f}".replace(".", ",") + "%"
-        )
-        st.dataframe(cobertura_display[["curso", "tccs_coletados", "egressos_total", "Cobertura %"]].rename(
-            columns={"curso": "Curso", "tccs_coletados": "TCCs", "egressos_total": "Egressos"}
-        ), use_container_width=True, hide_index=True)
-
-        # gráfico de cobertura (linha própria)
-        st.markdown("#### Cobertura por Curso (gráfico)")
-        cob_graf = cobertura.sort_values("cobertura_pct").copy()
+        st.markdown("#### Cobertura por curso (gráfico)")
+        cob_graf = cobertura.dropna(subset=["cobertura_pct"]).sort_values("cobertura_pct")
         cob_graf["cobertura_txt"] = cob_graf["cobertura_pct"].apply(
-            lambda x: f"{x:.2f}".replace(".", ",") + "%")
-        fig = px.bar(cob_graf,
-                    x="cobertura_pct", y="curso",
-                    text="cobertura_txt",
-                    color_discrete_sequence=[PALETA[0]],
-                    labels={"cobertura_pct": "Cobertura (%)", "curso": "Curso"})
+            lambda x: f"{x:.1f}".replace(".", ",") + "%")
+        fig = px.bar(cob_graf, x="cobertura_pct", y="Curso", text="cobertura_txt",
+                     color_discrete_sequence=[PALETA[0]],
+                     labels={"cobertura_pct": "Cobertura (%)", "Curso": ""})
         fig.update_traces(textposition="outside")
-        fig.update_layout(showlegend=False, height=max(400, len(cob_graf) * 26),
+        fig.update_layout(showlegend=False, height=max(400, len(cob_graf) * 30),
                           xaxis_title="Cobertura (%)", yaxis_title="")
         st.plotly_chart(fig, use_container_width=True)
 
-        # gráfico temporal
-        st.markdown("#### Cobertura Temporal (Série Histórica)")
+        # Temporal: egressos (DTI) e TCCs coletados, por ano
+        st.markdown("#### Egressos (DTI) e TCCs coletados, por ano")
+        anos = list(range(2009, 2026))
+        eg_ano = egr_dti[egr_dti["ano_saida"].between(2009, 2025)].groupby("ano_saida").size()
+        tc_ano = (df.dropna(subset=["ano_num"])
+                  .assign(_a=lambda x: x["ano_num"].astype(int))
+                  .query("2009 <= _a <= 2025").groupby("_a").size())
+        serie = pd.DataFrame({"Ano": anos})
+        serie["Egressos (DTI)"] = serie["Ano"].map(eg_ano).fillna(0).astype(int)
+        serie["TCCs coletados"] = serie["Ano"].map(tc_ano).fillna(0).astype(int)
+        serie_long = serie.melt("Ano", var_name="Série", value_name="Quantidade")
+        fig2 = px.line(serie_long, x="Ano", y="Quantidade", color="Série", markers=True,
+                       color_discrete_sequence=[PALETA[3], PALETA[0]])
+        fig2.update_layout(height=380, hovermode="x unified", legend_title="",
+                           yaxis_title="Quantidade por ano")
+        st.plotly_chart(fig2, use_container_width=True)
 
-        # Mapa de curso_fonte para contar TCCs por período
-        tccs_por_curso_fonte = df.groupby("curso_fonte").size().to_dict()
-
-        # calcular cobertura por período — DESAGREGADO POR CURSO
-        coberturas_periodo = []
-        for periodo in egressos_serie["periodo"].unique():
-            periodo_data = egressos_serie[egressos_serie["periodo"] == periodo]
-            for _, row in periodo_data.iterrows():
-                curso = row["curso"]
-                egressos_acum = row["egressos_acumulado"]
-
-                # Encontrar curso_fonte que mapeia para este curso
-                curso_fonte_match = None
-                for cf, c_mapeado in mapeamento_curso_fonte.items():
-                    if c_mapeado == curso:
-                        curso_fonte_match = cf
-                        break
-
-                tccs = tccs_por_curso_fonte.get(curso_fonte_match, 0) if curso_fonte_match else 0
-                cobertura_pct = (tccs / egressos_acum * 100) if egressos_acum > 0 else 0
-                coberturas_periodo.append({
-                    "periodo": periodo,
-                    "curso": curso,
-                    "tccs": tccs,
-                    "egressos": egressos_acum,
-                    "cobertura": cobertura_pct
-                })
-
-        if coberturas_periodo:
-            cob_df = pd.DataFrame(coberturas_periodo)
-            # agrupar por período e curso para evitar duplicação
-            cob_agg = cob_df.groupby(["periodo", "curso"]).first().reset_index()
-            cob_agg["cobertura_txt"] = cob_agg["cobertura"].apply(
-                lambda x: f"{x:.2f}".replace(".", ",") + "%")
-            fig2 = px.bar(cob_agg, x="periodo", y="cobertura", color="curso",
-                         text="cobertura_txt", barmode="group",
-                         color_discrete_sequence=PALETA,
-                         labels={"cobertura": "Cobertura (%)", "periodo": "Período", "curso": "Curso"})
-            fig2.update_traces(textposition="outside")
-            fig2.update_layout(height=450, hovermode="x unified")
-            st.plotly_chart(fig2, use_container_width=True)
-
-        st.info("""
-        **Nota sobre interpretação:**
-        - Cobertura = TCCs coletados ÷ egressos do período
-        - A janela 2015–2025 é padrão pois o acervo digitalizado concentra defesas recentes
-        - Dados exploratórios — não censitários — ver relatório metodológico LIDAE
-        """)
+        st.info("**Interpretação:** cobertura = TCCs coletados ÷ egressos da DTI. "
+                "A janela 2015–2025 é o alvo padrão (o acervo digitalizado "
+                "concentra defesas recentes). O ano do egresso é o de saída/colação "
+                "na DTI, distinto do ano de defesa do TCC. Números exploratórios, "
+                "não censitários (relatório metodológico LIDAE).")
 
         st.markdown("---")
         st.markdown("#### 📋 Lista de TCCs coletados (por curso)")
