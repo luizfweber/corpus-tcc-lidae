@@ -69,6 +69,22 @@ dados pessoais) é versionado.
 - `curso_habilitacao` destrava a cobertura **por habilitação** (Letras,
   Insikiran, LEDUCARR, Química).
 
+## Recorte das licenciaturas do estudo (10/07/2026)
+
+`egressos_dti_licenciaturas_2026-07-10.csv` (também no `.gitignore`): filtro da
+base completa contendo só os cursos da pesquisa, com coluna `grupo_tcc`
+adicionada. Regras de escopo idênticas ao `de_para_cursos_proeg.csv`:
+EaD excluído (Matemática EAD, Geografia EAD, Informática EAD);
+LETRAS - LIBRAS excluído (bacharelado). **5.514 linhas, 5.393 matrículas,
+1.093 com título de TCC.** Por grupo (linhas/matrículas/com TCC):
+Pedagogia 1294/1294/99 · Letras 872/818/212 · História 600/600/23 ·
+Insikiran 586/578/258 · Geografia 524/516/97 · Cs. Biológicas 516/515/156 ·
+Química 338/337/62 · Matemática 326/322/56 · LEDUCARR 160/160/8 ·
+Física 151/126/52 · Artes Visuais 81/81/5 · Música 66/46/65.
+
+Nota: em Música há mais títulos de TCC (65) do que matrículas (46) — parte dos
+egressos tem 2 registros de TCC (ver artefato 4).
+
 ## Próximos passos (combinados em 10/07/2026)
 
 - [ ] Ajustar/normalizar os dados com o pesquisador (nomes de curso, de/para)
