@@ -48,7 +48,7 @@ dados pessoais) é versionado.
    estatísticas por ano (CLAUDE.md §2).
 3. **A definição de "egresso" usada pela DTI não veio explicitada.** Não se sabe
    ainda se a extração inclui apenas formados (colação de grau) ou também outras
-   formas de saída. **Confirmar com a DTI/PROGRAD antes de usar como denominador
+   formas de saída. **Confirmar com a DTI/PROEG antes de usar como denominador
    de cobertura.**
 4. **Duplicidade por matrícula** (mesma pessoa com 2 títulos de TCC): decidir
    regra de contagem — egresso conta 1 vez; TCC pode contar 2.
@@ -95,9 +95,20 @@ por `id`. O consolidado permanece limpo (sem coluna de matrícula), e
 `analise_corpus.py` tem filtro de defesa que descarta `matricula` caso ela
 reapareça por engano.
 
+## Série histórica estendida até 2025.2 (10/07/2026)
+
+A `egressos_serie_historica.csv` ganhou o **período 6 = "2025.2"** e uma coluna
+`fonte`. Os 81 egressos de 2025.2 das licenciaturas (que a PROEG, parando em
+2025.1, não tinha) foram incorporados a partir da DTI, marcados como
+`fonte = DTI 2026-07-10`; as linhas anteriores seguem `fonte = PROEG`. Os 2
+egressos de Letras "Português/Inglês" (habilitação sem correspondência na série)
+entraram como **linha nova** marcada, sem forçar numa habilitação existente (§2).
+Backup em `outputs/backups/egressos_serie_historica_pre_2025.2_*.csv`.
+
 ## Próximos passos (combinados em 10/07/2026)
 
 - [ ] Ajustar/normalizar os dados com o pesquisador (nomes de curso, de/para)
-- [ ] Confirmar com DTI/PROGRAD a definição de egresso da extração
+- [ ] Confirmar com DTI/PROEG a definição de egresso da extração
+- [x] Estender a série histórica com 2025.2 (feito, fonte marcada)
 - [ ] Reconciliar totais com `egressos_serie_historica.csv`
 - [ ] Gerar agregados anonimizados (por curso × ano) para uso no dashboard

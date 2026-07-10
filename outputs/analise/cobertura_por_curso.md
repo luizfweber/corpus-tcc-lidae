@@ -14,27 +14,29 @@
   cai entre 2015 e 2025. Excluídos: bacharelado explícito `(B)`; sentinela 2099;
   vazios.
 - **Denominador B (série histórica):** `egressos_serie_historica.csv` (canônico,
-  reconciliado com a PROGRAD), janela = acumulado 2021–2025.1 menos acumulado
+  reconciliado com a PROEG e **estendido até 2025.2 com o incremento da DTI** —
+  ver período 6, coluna `fonte`), janela = acumulado 2025.2 menos acumulado
   2009–2014.2.
 
 ## Resultado
 
 | grupo_tcc | TCC total | TCC 15–25 | egr DTI | egr hist | cob DTI % | cob hist % |
 |---|--:|--:|--:|--:|--:|--:|
-| História | 122 | 96 | 171 | 165 | **56,1** | 58,2 |
-| Música | 22 | 22 | 46 | 41 | **47,8** | 53,7 |
-| Matemática | 15 | 14 | 56 | 52 | 25,0 | 26,9 |
-| Insikiran | 87 | 87 | 353 | 355 | 24,6 | 24,5 |
-| Pedagogia | 29 | 27 | 202 | 194 | 13,4 | 13,9 |
-| LEDUCARR | 16 | 15 | 122 | 119 | 12,3 | 12,6 |
-| Ciências Biológicas | 20 | 10 | 107 | 63 | 9,3 | 15,9 |
-| Letras | 10 | 10 | 152 | 156 | 6,6 | 6,4 |
-| Artes Visuais | 0 | 0 | 73 | 74 | 0,0 | 0,0 |
-| Física | 0 | 0 | 29 | 26 | 0,0 | 0,0 |
-| Geografia | 0 | 0 | 136 | 102 | 0,0 | 0,0 |
-| Química | 0 | 0 | 62 | 56 | 0,0 | 0,0 |
+| História | 122 | 96 | 171 | 168 | **56,1** | 57,1 |
+| Música | 22 | 22 | 46 | 46 | **47,8** | 47,8 |
+| Matemática | 15 | 14 | 56 | 53 | 25,0 | 26,4 |
+| Insikiran | 87 | 87 | 353 | 371 | 24,6 | 23,5 |
+| Pedagogia | 29 | 27 | 202 | 205 | 13,4 | 13,2 |
+| LEDUCARR | 16 | 15 | 122 | 126 | 12,3 | 11,9 |
+| Ciências Biológicas | 20 | 10 | 107 | 74 | 9,3 | 13,5 |
+| Letras | 10 | 10 | 152 | 158 | 6,6 | 6,3 |
+| Artes Visuais | 0 | 0 | 73 | 75 | 0,0 | 0,0 |
+| Física | 0 | 0 | 29 | 28 | 0,0 | 0,0 |
+| Geografia | 0 | 0 | 136 | 116 | 0,0 | 0,0 |
+| Química | 0 | 0 | 62 | 64 | 0,0 | 0,0 |
 
-**Global na janela:** 281 TCCs ÷ ~1.509 egressos (DTI) ≈ **18,6%**.
+**Global na janela:** 281 TCCs ÷ ~1.509 egressos (DTI) ≈ **18,6%**. Com a série
+estendida a 2025.2, as duas fontes ficam próximas (ex.: Música 46 = 46).
 
 ## Leitura (indício, não veredito — §4)
 
@@ -58,5 +60,5 @@
 3. **Discrepância DTI × série histórica:** as duas fontes concordam de perto em
    quase todos os cursos; divergem em Cs. Biológicas (ver acima) e Geografia
    (136 vs 102). Mantidas as duas colunas; o número oficial deve ser confirmado
-   com a PROGRAD antes de publicação.
+   com a PROEG antes de publicação.
 4. O corpus cresce; estes percentuais são um retrato de 10/07/2026.
