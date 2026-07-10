@@ -33,6 +33,13 @@ Nada em `dados/` é gerado por script; tudo ali é fonte.
 | `de_para_cursos_proeg.csv` | mapa nome PROEG -> curso_det -> grupo_tcc (escopo do estudo) | referência de normalização |
 | `egressos_por_curso.csv` | total de egressos por curso | `dashboard.py` |
 | `egressos_por_ano.csv` | egressos por curso e ano | `dashboard.py` |
+| `egressos_publico.csv` | egressos individuais SEM matrícula (nome, curso, período, título), 1 por pessoa | `dashboard.py` (aba Registros faltantes) |
+
+`egressos_publico.csv` é **gerado** por `gerar_egressos_publico.py` a partir da
+base sensível em `_pessoais/`. Proteção parcial (decisão do responsável,
+10/07/2026): nome/curso/período/título são públicos; **matrícula e histórico de
+matrículas NÃO entram**. Deduplica por matrícula (quem tem 2 títulos conta como
+1 egresso). Rode o gerador de novo quando chegar base nova da DTI.
 
 ## Corpus de TCCs (fonte + derivado)
 

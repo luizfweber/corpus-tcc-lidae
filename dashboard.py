@@ -445,20 +445,19 @@ def _fold_nome(s):
     return re.sub(r"\s+", " ", re.sub(r"[^a-z0-9 ]", " ", s)).strip()
 
 
+EGRESSOS_PUBLICO = BASE / "dados" / "canonico" / "egressos_publico.csv"
+
+
 @st.cache_data
 def carregar_egressos_dti(chave: str = ""):
-    """Base individual de egressos da DTI (dado pessoal, LGPD). Mora em
-    dados/_pessoais/ (gitignorada): existe só na execução LOCAL da equipe. Na
-    nuvem pública o arquivo não está presente e a função devolve None — a aba
-    então mostra aviso, sem nunca expor nomes. 'chave' (sem underscore) entra na
-    chave do cache p/ invalidar quando o arquivo muda."""
-    pasta = BASE / "dados" / "_pessoais"
-    arqs = sorted(pasta.glob("egressos_dti_licenciaturas_*.csv"))
-    if not arqs:
+    """Egressos da DTI, versão PÚBLICA (nome, curso, período, título — SEM
+    matrícula). Gerada por gerar_egressos_publico.py a partir da base sensível;
+    a matrícula fica protegida em dados/_pessoais/ e nunca entra aqui. Devolve
+    None se o arquivo não existe (deploy antigo). 'chave' (sem underscore) entra
+    na chave do cache p/ invalidar quando o arquivo muda."""
+    if not EGRESSOS_PUBLICO.exists():
         return None
-    d = pd.read_csv(arqs[-1])
-    # exclui bacharelado explícito (não é egresso de licenciatura)
-    d = d[~d["curso_habilitacao"].astype(str).str.contains(r"\(B\)", na=False)].copy()
+    d = pd.read_csv(EGRESSOS_PUBLICO)
     per = d["afastamento_permanente"].astype(str).str.extract(r"^(\d{4})\.(\d)")
     d["ano_saida"] = pd.to_numeric(per[0], errors="coerce")
     d["sem_saida"] = per[1]
@@ -1365,18 +1364,19 @@ if secao == "Registros faltantes":
                "ainda não tem TCC cadastrado. Indício para orientar a coleta, não "
                "veredito (pode haver homônimo ou grafia diferente).")
 
-    _dti_files = sorted((BASE / "dados" / "_pessoais").glob(
-        "egressos_dti_licenciaturas_*.csv"))
-    _chave = str(_dti_files[-1].stat().st_mtime) if _dti_files else "ausente"
+    _chave = (str(EGRESSOS_PUBLICO.stat().st_mtime)
+              if EGRESSOS_PUBLICO.exists() else "ausente")
     egr = carregar_egressos_dti(chave=_chave)
 
     if egr is None:
-        st.info("🔒 **Dados restritos.** Esta aba usa a base de egressos da DTI, "
-                "que contém dados pessoais (nome e matrícula) e por isso **não é "
-                "publicada**. Ela funciona apenas na **execução local** da equipe "
-                "(arquivo em `dados/_pessoais/`). No painel público ela fica "
-                "indisponível, para proteger os dados dos egressos (LGPD).")
+        st.info("Base de egressos ainda não gerada. Rode "
+                "`python3 gerar_egressos_publico.py` para criar "
+                "`dados/canonico/egressos_publico.csv` a partir da base da DTI.")
         st.stop()
+
+    st.caption("🔒 Proteção parcial (LGPD): nome, curso, período e título do TCC "
+               "são públicos (TCCs são documentos públicos); a **matrícula** e o "
+               "histórico de matrículas ficam protegidos e não aparecem aqui.")
 
     # autores já coletados, por grupo (conjunto de nomes normalizados)
     _aut = df.copy()
@@ -1410,11 +1410,13 @@ if secao == "Registros faltantes":
     rotulo = f"{g} · {ano}" + (f".{sem.rstrip('º')}" if sem != "(todos)" else "")
     st.markdown(f"### {len(fa)} egresso(s) sem TCC catalogado — {rotulo}")
 
-    show = (fa[["pessoa_nome", "curso_nome", "afastamento_permanente", "titulo"]]
+    fa = fa.copy()
+    fa["titulo"] = fa["titulo"].fillna("")   # evita "None" na tabela
+    # Sem coluna "Saída": ano e semestre já vêm dos seletores acima (redundante).
+    show = (fa[["pessoa_nome", "curso_nome", "titulo"]]
             .rename(columns={"pessoa_nome": "Egresso",
-                             "curso_nome": "Curso/habilitação (DTI)",
-                             "afastamento_permanente": "Saída",
-                             "titulo": "Título no sistema (DTI, se houver)"})
+                             "curso_nome": "Curso/habilitação",
+                             "titulo": "Título no sistema (se houver)"})
             .sort_values("Egresso").reset_index(drop=True))
     show.index = show.index + 1
     st.dataframe(show, use_container_width=True)
@@ -1429,10 +1431,11 @@ if secao == "Registros faltantes":
     k1.metric(f"Egressos de {g} (período válido)", tot)
     k2.metric("Já catalogados (por nome)", f"{col}  ({col/tot*100:.0f}%)")
     k3.metric("Faltantes (todos os anos)", falt)
-    st.caption("Cobertura por nome pode diferir da cobertura por contagem "
-               "(aba Cobertura de Coleta): aqui um egresso conta como coletado se "
-               "seu nome aparece no corpus, independentemente do ano. 'Saída' = "
-               "afastamento permanente (colação), não data de defesa.")
+    st.caption("Cada egresso conta uma vez (deduplicado por matrícula; quem tem "
+               "2 títulos na DTI não vira 2 egressos). O ano e o semestre são de "
+               "saída/colação, não de defesa. Um egresso conta como coletado se "
+               "seu nome aparece no corpus, independentemente do ano — pode diferir "
+               "da aba Cobertura de Coleta, que conta por contagem.")
 
 # Aba 8 — Povos & territórios indígenas (gazetteer)
 if secao == "Povos & territórios":
