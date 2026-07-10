@@ -53,10 +53,10 @@ dados pessoais) é versionado.
    de cobertura.**
 4. **Duplicidade por matrícula** (mesma pessoa com 2 títulos de TCC): decidir
    regra de contagem — egresso conta 1 vez; TCC pode contar 2.
-5. **Granularidade de curso difere da série histórica PROEG** (`egressos_serie_historica.csv`):
+5. **Granularidade de curso difere da série histórica PROEG** (`canonico/egressos_serie_historica.csv`):
    ex. aqui `LICENCIATURA INTERCULTURAL` aparece como curso + 3 habilitações e
    também como 3 cursos separados; Letras tem habilitações com sufixo `v. I/II`.
-   Será preciso um **de/para** novo (análogo ao `de_para_cursos_proeg.csv`).
+   Será preciso um **de/para** novo (análogo ao `canonico/de_para_cursos_proeg.csv`).
 6. **Reconciliação com a série histórica (4.544) ainda não feita** — os totais
    desta base individual devem ser confrontados com os acumulados da PROEG antes
    de substituir qualquer número canônico (CLAUDE.md §5, §6).
@@ -74,7 +74,7 @@ dados pessoais) é versionado.
 
 `_pessoais/egressos_dti_licenciaturas_2026-07-10.csv` (na pasta vedada): filtro da
 base completa contendo só os cursos da pesquisa, com coluna `grupo_tcc`
-adicionada. Regras de escopo idênticas ao `de_para_cursos_proeg.csv`:
+adicionada. Regras de escopo idênticas ao `canonico/de_para_cursos_proeg.csv`:
 EaD excluído (Matemática EAD, Geografia EAD, Informática EAD);
 LETRAS - LIBRAS excluído (bacharelado). **5.514 linhas, 5.393 matrículas,
 1.093 com título de TCC.** Por grupo (linhas/matrículas/com TCC):
@@ -98,7 +98,7 @@ reapareça por engano.
 
 ## Série histórica estendida até 2025.2 (10/07/2026)
 
-A `egressos_serie_historica.csv` ganhou o **período 6 = "2025.2"** e uma coluna
+A `canonico/egressos_serie_historica.csv` ganhou o **período 6 = "2025.2"** e uma coluna
 `fonte`. Os 81 egressos de 2025.2 das licenciaturas (que a PROEG, parando em
 2025.1, não tinha) foram incorporados a partir da DTI, marcados como
 `fonte = DTI 2026-07-10`; as linhas anteriores seguem `fonte = PROEG`. Os 2
@@ -111,5 +111,5 @@ Backup em `outputs/backups/egressos_serie_historica_pre_2025.2_*.csv`.
 - [ ] Ajustar/normalizar os dados com o pesquisador (nomes de curso, de/para)
 - [ ] Confirmar com DTI/PROEG a definição de egresso da extração
 - [x] Estender a série histórica com 2025.2 (feito, fonte marcada)
-- [ ] Reconciliar totais com `egressos_serie_historica.csv`
+- [ ] Reconciliar totais com `canonico/egressos_serie_historica.csv`
 - [ ] Gerar agregados anonimizados (por curso × ano) para uso no dashboard

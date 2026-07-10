@@ -702,7 +702,7 @@ if secao == "Distribuição":
                "cadastrados (por ano de defesa), com a cobertura %. Independe dos "
                "filtros da barra lateral.")
 
-    _ano = pd.read_csv(BASE / "dados" / "egressos_por_ano.csv")
+    _ano = pd.read_csv(BASE / "dados" / "canonico" / "egressos_por_ano.csv")
     # exclui habilitações não informadas (egressos sem habilitação atribuível —
     # não entram na cobertura por habilitação; CLAUDE.md §2: não imputar)
     _cursos = sorted(c for c in _ano["curso_det"].dropna().unique()
@@ -1169,8 +1169,8 @@ if secao == "Cobertura de Coleta":
 
     # carregar dados de egressos
     try:
-        egressos = pd.read_csv(BASE / "dados" / "egressos_por_curso.csv")
-        egressos_serie = pd.read_csv(BASE / "dados" / "egressos_serie_historica.csv")
+        egressos = pd.read_csv(BASE / "dados" / "canonico" / "egressos_por_curso.csv")
+        egressos_serie = pd.read_csv(BASE / "dados" / "canonico" / "egressos_serie_historica.csv")
 
         # MAPEAMENTO: curso_fonte (TCCs) → curso (egressos) — OPÇÃO A
         mapeamento_curso_fonte = {

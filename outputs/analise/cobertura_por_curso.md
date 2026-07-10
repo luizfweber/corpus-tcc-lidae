@@ -13,7 +13,7 @@
   contando **egressos distintos** (matrícula única) cujo `afastamento_permanente`
   cai entre 2015 e 2025. Excluídos: bacharelado explícito `(B)`; sentinela 2099;
   vazios.
-- **Denominador B (série histórica):** `egressos_serie_historica.csv` (canônico,
+- **Denominador B (série histórica):** `canonico/egressos_serie_historica.csv` (canônico,
   reconciliado com a PROEG e **estendido até 2025.2 com o incremento da DTI** —
   ver período 6, coluna `fonte`), janela = acumulado 2025.2 menos acumulado
   2009–2014.2.
