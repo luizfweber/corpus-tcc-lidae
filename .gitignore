@@ -15,3 +15,6 @@ venv/
 # Planilhas de revisão manual (artefatos temporários)
 *_REVISAO.xlsx
 *_CORRECOES.xlsx
+
+# Dados pessoais (LGPD) - nunca versionar no repositorio publico
+dados/egressos_dti_*.csv
