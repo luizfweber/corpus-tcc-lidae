@@ -4,7 +4,7 @@
 Dashboard interativo — Corpus de TCCs das Licenciaturas UFRR (LIDAE)
 Executar:  streamlit run dashboard.py
 
-Princípios (CLAUDE.md): exploratório (não censitário), mediana p/ páginas,
+Princípios do projeto: exploratório (não censitário), mediana p/ páginas,
 nunca imputar, sempre declarar denominador e exclusões, indício ≠ conclusão.
 """
 from pathlib import Path
@@ -78,7 +78,7 @@ pio.templates.default = "plotly+necpf"
 
 # ─────────────────────────────────────────────────────────────────────────────
 # HABILITAÇÕES — cursos AGREGADOS em grupo_tcc (Insikiran, LEDUCARR, Letras) têm
-# sub-habilitação distinta (CLAUDE.md §5). Mapeia curso_fonte → rótulo;
+# sub-habilitação distinta. Mapeia curso_fonte → rótulo;
 # os demais cursos permanecem pelo grupo_tcc.
 # ─────────────────────────────────────────────────────────────────────────────
 SPLIT_HABILITACAO = {
@@ -116,7 +116,7 @@ def limpa_nome(s):
                 "", s, flags=re.I)
     # remove "em Educação" e similares no final
     s = re.sub(r"\s+(?:em|de Educação|de Educación|de Estudo).*$", "", s, flags=re.I)
-    # PRESERVA acentos na exibição (CLAUDE.md §6 — a grafia é mantida).
+    # PRESERVA acentos na exibição (a grafia da fonte é mantida).
     # A remoção de diacríticos ocorre apenas em norm_nome_agressiva (fuzzy matching).
     # remove TODOS os pontos (incluindo iniciais de nomes: J.C. → JC)
     s = s.replace(".", " ")
@@ -461,7 +461,7 @@ def carregar_egressos_dti(chave: str = ""):
     per = d["afastamento_permanente"].astype(str).str.extract(r"^(\d{4})\.(\d)")
     d["ano_saida"] = pd.to_numeric(per[0], errors="coerce")
     d["sem_saida"] = per[1]
-    # exclui sentinela 2099 e períodos ausentes (não imputar — CLAUDE.md §2)
+    # exclui sentinela 2099 e períodos ausentes (não imputar)
     d = d[d["ano_saida"].between(1990, 2026)]
     d["_nome_norm"] = d["pessoa_nome"].apply(_fold_nome)
     return d
@@ -526,7 +526,7 @@ def lista_tccs(dados, key, cols):
 
 def lista_faltando(dados, col, rotulo, key):
     """Expander com os TCCs sem o campo `col` no cadastro do NECPF.
-    Ausência = lacuna de coleta, não inexistência (CLAUDE.md §2 — não imputar)."""
+    Ausência = lacuna de coleta, não inexistência (não imputar)."""
     if col in ("ano_num", "pag_num"):
         falta = dados[dados[col].isna()]
     else:
@@ -537,7 +537,7 @@ def lista_faltando(dados, col, rotulo, key):
             st.success(f"Todos os TCCs do filtro têm {rotulo} cadastrado.")
             return
         st.caption("Lacuna no cadastro do NECPF — não inexistência. "
-                   "Excluídos das estatísticas do campo (CLAUDE.md §2).")
+                   "Excluídos das estatísticas do campo (não são imputados).")
         cols = [c for c in ["id", "curso_det", "titulo", "autor", "ano_num",
                             "orientador"] if c in falta.columns]
         d = falta[cols].copy()
@@ -615,7 +615,7 @@ sel_grupos = st.sidebar.multiselect("Curso (com habilitações)", ORDEM_CURSOS_D
                                     default=ORDEM_CURSOS_DET)
 
 # anos plausíveis (1990–2030); valores fora são erro de digitação da fonte e
-# ficam de fora do filtro, tratados como ausentes (CLAUDE.md §2 — não imputar)
+# ficam de fora do filtro, tratados como ausentes (não imputar)
 anos_validos = df["ano_num"].dropna()
 anos_validos = anos_validos[anos_validos.between(1990, 2030)]
 if not anos_validos.empty:
@@ -702,7 +702,7 @@ if secao == "Distribuição":
     anos = f.dropna(subset=["ano_num"])
     n_sem = f["ano_num"].isna().sum()
     if not anos.empty:
-        ano_ini = 2015                       # piso do eixo (janela 2015–atual, CLAUDE.md §4)
+        ano_ini = 2015                       # piso do eixo (janela 2015–atual)
         ano_atual = pd.Timestamp.now().year
         anos_int = anos["ano_num"].astype(int)
         n_fora = int(((anos_int < ano_ini) | (anos_int > ano_atual)).sum())
@@ -789,7 +789,8 @@ if secao == "Distribuição":
 
     st.subheader("Páginas por curso (mediana)")
     st.caption("Agrupado por curso/habilitação — fonte: coluna `curso_fonte` "
-               "(Insikiran, LEDUCARR e Letras desagregados). Mediana, não média (CLAUDE.md §7).")
+               "(Insikiran, LEDUCARR e Letras desagregados). Mediana, não média "
+               "(distribuição assimétrica).")
     pgd = fcd.dropna(subset=["pag_num"])
     if not pgd.empty:
         ordem_det = pgd["curso_det"].value_counts().index.tolist()
@@ -913,7 +914,7 @@ if secao == "Sub-temas por curso (LDA)":
                "só separa os cursos entre si). O método se ajusta ao Nº de TCCs: "
                "🟢 LDA (sub-temas) · 🟠 descritivo (termos + leitura) · 🔴 listagem. "
                "Complementa a aba *Análise temática por curso* (leitura qualitativa). "
-               "Exploratório, não censitário (CLAUDE.md §1, §4).")
+               "Exploratório, não censitário.")
 
     PC = carregar_por_curso(mtime=_PC_JSON.stat().st_mtime if _PC_JSON.exists() else 0.0)
     if PC is None:
@@ -955,7 +956,7 @@ if secao == "Sub-temas por curso (LDA)":
                        "modelar tópicos aqui seria ruído.")
         elif c["camada"] == "listagem":
             st.caption(f"N ínfimo ({c['n']}): qualquer modelagem seria artefato "
-                       "(CLAUDE.md §1). Apenas identificação dos trabalhos.")
+                       "Apenas identificação dos trabalhos.")
 
         # termos recorrentes (camadas LDA e descritiva)
         if c["top_termos"]:
@@ -1207,7 +1208,7 @@ if secao == "Cobertura de Coleta":
             "Período (aplica a egressos e a TCCs)",
             ["Janela 2015–2025", "Todos os anos"], horizontal=True,
             key="cob_periodo",
-            help="A janela 2015–2025 é o alvo padrão (CLAUDE.md §5): o acervo "
+            help="A janela 2015–2025 é o alvo padrão: o acervo "
                  "digitalizado concentra defesas recentes; comparar com egressos "
                  "de todos os anos subestima a cobertura.")
         if periodo_opt.startswith("Janela"):
@@ -1230,7 +1231,7 @@ if secao == "Cobertura de Coleta":
         st.caption("Cobertura = TCCs coletados ÷ **egressos da DTI** (base "
                    "individual, deduplicada por matrícula; bacharelado e EaD "
                    "excluídos). Egresso = saída/colação na DTI, evento distinto "
-                   "da defesa do TCC. Indício, não veredito (CLAUDE.md §4).")
+                   "da defesa do TCC. Indício, não veredito.")
 
         st.markdown("#### Cobertura por curso")
         cob_disp = cobertura.copy()
@@ -1593,7 +1594,7 @@ avaliam **vários** TCCs juntas, a ligação fica **mais forte** (maior peso). O
 **4. Filtro de recorrência.** O controle *"Mínimo de bancas para incluir o membro"*
 remove participantes esporádicos, deixando visível o núcleo recorrente.
 
-**Limites (leitura exploratória, CLAUDE.md §1, §4).** A extração de um texto livre
+**Limites (leitura exploratória).** A extração de um texto livre
 é sujeita a falhas; nomes muito abreviados ou colados podem escapar. A rede
 retrata **a coleta atual**, não o universo de bancas — ausência de um vínculo
 significa lacuna de cadastro, não que a co-participação não existiu.
@@ -1697,7 +1698,7 @@ ver só o núcleo recorrente; observe quem são os **círculos grandes e centrai
                "Cada aresta liga um **orientador** (verde) a um **membro avaliador** "
                "(âmbar); a espessura/proximidade reflete quantas vezes esse membro "
                "participou de bancas daquele orientador. Revela 'círculos' de "
-               "avaliação por área/curso. Indício exploratório (CLAUDE.md §1, §4).")
+               "avaliação por área/curso. Indício exploratório.")
 
     # pares orientador → membro
     par = Counter(); ori_cont = Counter(); mem_cont = Counter()
@@ -1971,10 +1972,25 @@ if secao == "Análise temática por curso":
         with st.expander("📄 Ver análise completa (panorama, eixos detalhados, leitura)"):
             st.markdown(texto)
     else:
-        st.info(f"Análise temática de {sel_tem} ainda não gerada "
-                f"(esperado: outputs/analise/{info['arquivo']}).")
+        st.info(f"A análise temática de {sel_tem} ainda não foi gerada.")
 
 st.markdown("---")
-st.caption("Fonte: cadastro dos TCCs realizado pelos pesquisadores do NECPF "
-           "(211 TCCs únicos), com série histórica de egressos da PROEG. "
-           "Dados exploratórios — ver relatório metodológico LIDAE.")
+# Rodapé dinâmico: os números vêm das bases carregadas, para não envelhecerem
+# quando o corpus cresce. Aqui conta-se a base de egressos INTEIRA (o loader
+# filtra períodos válidos; o rodapé descreve a fonte, então usa o total).
+@st.cache_data
+def _total_egressos(chave: str = ""):
+    if not EGRESSOS_PUBLICO.exists():
+        return None
+    return len(pd.read_csv(EGRESSOS_PUBLICO, usecols=["pessoa_nome"]))
+
+_rod_tot = _total_egressos(
+    chave=str(EGRESSOS_PUBLICO.stat().st_mtime) if EGRESSOS_PUBLICO.exists() else "ausente")
+_rod_n_egr = f"{_rod_tot:,}".replace(",", ".") if _rod_tot else None
+st.caption(
+    f"Fonte: cadastro dos TCCs realizado pelos pesquisadores do NECPF "
+    f"({N_TOTAL} TCCs únicos)"
+    + (f", com a base de egressos das licenciaturas da UFRR ({_rod_n_egr} egressos, "
+       "fornecida pela DTI). " if _rod_n_egr else ". ")
+    + "Dados exploratórios, não censitários: cada número é indício a interpretar. "
+    "Laboratório de Indicadores, Dados e Analítica Educacional (LIDAE/NECPF/UFRR).")
