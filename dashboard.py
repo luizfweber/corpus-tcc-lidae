@@ -1844,12 +1844,15 @@ TEMATICAS = {
     "Música": {
         "arquivo": "analise_tematica_musica.md",
         "eixos": {
+            # Cada TCC entra em UM eixo (o foco principal declarado no resumo),
+            # para que a soma das barras seja igual ao total do curso. As
+            # sobreposições temáticas são comentadas no texto da análise.
             "Educação básica e formação docente": [91, 94, 98, 85, 86, 212, 87, 95],
             "Instrumentos e ensino coletivo": [89, 83, 96, 109],
-            "Cultura regional e identidade": [84, 97, 95, 82, 83],
+            "Cultura regional e identidade": [84, 97, 82],
             "Religião e ritual": [108, 90, 99, 245],
             "Inclusão e políticas públicas": [93, 211],
-            "Pontuais (teoria, etnomusicologia)": [92, 109],
+            "Pontuais (teoria musical)": [92],
         },
     },
     "Insikiran — Ciências da Natureza": {
@@ -1868,8 +1871,8 @@ TEMATICAS = {
         "eixos": {
             "Atividades sociais e Método Indutivo Intercultural": [24, 27, 28, 69, 71, 131, 138],
             "Cultura material, artesanato e patrimônio": [70, 72, 132, 136, 137],
-            "Narrativas, história e memória": [25, 68, 88, 133],
-            "Saúde, plantas medicinais e bem-estar": [67, 134, 135],
+            "Narrativas, história e memória": [25, 68, 88, 133, 323],
+            "Saúde, plantas medicinais e bem-estar": [67, 134, 135, 322],
             "Gestão escolar e migração (pontuais)": [26, 66],
         },
     },
@@ -1958,8 +1961,28 @@ if secao == "Análise temática por curso":
                       xaxis_title="Nº de TCCs", yaxis_title="")
     st.plotly_chart(fig, use_container_width=True)
     n_unicos = len({i for ids in eixos.values() for i in ids})
-    st.caption(f"{n_unicos} TCCs de Música; alguns pertencem a mais de um eixo "
-               "(sobreposição) — por isso a soma das barras excede o total.")
+    st.caption(f"{n_unicos} TCCs de {sel_tem}. Cada trabalho entra em **um único "
+               "eixo** (o foco principal do resumo), então a soma das barras é "
+               "igual ao total do curso. Trabalhos que tocam mais de um tema "
+               "estão comentados na análise completa.")
+
+    # Trava de consistência: avisa se os eixos deixarem de refletir o corpus
+    # (ex.: chegaram TCCs novos e a leitura ainda não foi atualizada, ou um id
+    # ficou em dois eixos). Sem isso o gráfico pode divergir em silêncio.
+    _fonte_curso = {"Insikiran — Ciências da Natureza": "Insikiran – Ciências da Natureza",
+                    "Insikiran — Ciências Sociais": "Insikiran – Ciências Sociais",
+                    "Insikiran — Comunicação e Artes": "Insikiran – Comunicação e Artes"}
+    _n_corpus = int((df["curso_fonte"] == _fonte_curso[sel_tem]).sum()
+                    if sel_tem in _fonte_curso else (df["grupo_tcc"] == sel_tem).sum())
+    _soma = sum(len(v) for v in eixos.values())
+    if _soma != n_unicos:
+        st.warning(f"⚠️ Inconsistência: a soma dos eixos ({_soma}) difere dos TCCs "
+                   f"distintos classificados ({n_unicos}). Algum trabalho está em "
+                   "mais de um eixo.")
+    if n_unicos != _n_corpus:
+        st.warning(f"⚠️ A leitura cobre {n_unicos} TCCs, mas o corpus tem "
+                   f"{_n_corpus} em {sel_tem}. A análise temática precisa ser "
+                   "atualizada com os trabalhos novos.")
 
     # ── Metodologia (logo abaixo do gráfico) ──
     metodo = _secao_md(texto, "como esta análise foi feita")

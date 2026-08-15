@@ -4,7 +4,7 @@
 > título, resumo e palavras-chave. Fonte: cadastro dos TCCs realizado pelos
 > pesquisadores do NECPF. Atualizada após as catalogações de 26/06 e 07/07/2026.
 >
-> Natureza (CLAUDE.md §1): agrupamento por leitura, é indício e não classificação
+> Natureza da análise: agrupamento por leitura, é indício e não classificação
 > fechada; os eixos podem se sobrepor.
 
 ## Como esta análise foi feita (método)
@@ -24,7 +24,7 @@ contagem de termos. O passo a passo:
 Com 122 TCCs, o curso é grande o bastante para a LDA intra-curso (ver aba
 Sub-temas por curso), mas a leitura capta nuances que o modelo dilui. É
 interpretativa: outro leitor poderia agrupar de forma diferente. Indício, não
-classificação fechada (CLAUDE.md §1, §4).
+classificação fechada (análise exploratória).
 
 ## Panorama
 

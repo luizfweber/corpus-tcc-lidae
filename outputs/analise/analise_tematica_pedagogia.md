@@ -4,7 +4,7 @@
 > partir de **título + resumo + palavras-chave**. Fonte: cadastro dos TCCs
 > realizado pelos pesquisadores do NECPF.
 >
-> **Natureza (CLAUDE.md §1):** agrupamento **por leitura**, é indício e não
+> **Natureza da análise:** agrupamento **por leitura**, é indício e não
 > classificação fechada; os eixos podem se sobrepor.
 
 ## Como esta análise foi feita (método)
@@ -29,7 +29,7 @@ contagem de termos. O passo a passo:
 estatística estável (o pipeline trata Pedagogia na camada LDA intra-curso apenas
 com K=2 e estabilidade baixa). Nessa escala a leitura humana é mais confiável —
 mas é **interpretativa**: outro leitor poderia agrupar de forma ligeiramente
-diferente. Daí ser **indício, não classificação fechada** (CLAUDE.md §1, §4).
+diferente. Daí ser **indício, não classificação fechada** (análise exploratória).
 
 ## Panorama
 

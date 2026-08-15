@@ -1,10 +1,10 @@
 # Análise temática — Insikiran / Ciências Sociais (LIDAE/UFRR)
 
-> Leitura **descritiva e exploratória** dos 21 TCCs da habilitação *Ciências
+> Leitura **descritiva e exploratória** dos 23 TCCs da habilitação *Ciências
 > Sociais* do curso intercultural Insikiran, a partir de **título + resumo +
 > palavras-chave**. Fonte: cadastro dos TCCs realizado pelos pesquisadores do NECPF.
 >
-> **Natureza (CLAUDE.md §1):** agrupamento **por leitura**, é indício e não
+> **Natureza da análise:** agrupamento **por leitura**, é indício e não
 > classificação fechada; os eixos podem se sobrepor.
 
 ## Como esta análise foi feita (método)
@@ -29,7 +29,7 @@ contagem de termos. O passo a passo:
 para uma modelagem estatística estável. Nessa escala a leitura humana é mais
 confiável — mas é **interpretativa**: outro leitor poderia agrupar de forma
 ligeiramente diferente. Daí ser **indício, não classificação fechada**
-(CLAUDE.md §1, §4).
+(análise exploratória).
 
 ## Panorama
 
@@ -55,19 +55,23 @@ Educação patrimonial, tranças, trançado e artefatos dos povos Macuxi, Ingari
 e Wai Wai.
 ids: 70, 72, 132, 136, 137
 
-### Eixo 3 — Narrativas, história e memória da comunidade (4 TCCs)
+### Eixo 3 — Narrativas, história e memória da comunidade (5 TCCs)
 Lendas e narrativas indígenas, ensino de história local, etnomapeamento,
 revitalização de conhecimentos.
-ids: 25, 68, 88, 133
+ids: 25, 68, 88, 133, 323
 
-### Eixo 4 — Saúde, plantas medicinais e bem-estar (3 TCCs)
+### Eixo 4 — Saúde, plantas medicinais e bem-estar (4 TCCs)
 Plantas medicinais, horta medicinal e saúde mental nas comunidades.
-ids: 67, 134, 135
+ids: 67, 134, 135, 322
 
 ### Eixo 5 — Gestão escolar e migração (2 TCCs · pontuais)
 Projeto político-pedagógico da escola indígena; acolhimento de migrantes
 indígenas venezuelanos.
 ids: 26, 66
+
+**Conferência:** 7 + 5 + 5 + 4 + 2 = **23 TCCs**, igual ao total da habilitação
+no corpus. Inclui os 2 trabalhos incorporados na catalogação de 09/07/2026
+(ids 322 e 323).
 
 ## Leitura
 
@@ -79,6 +83,6 @@ Atividade.
 
 ## Limites
 
-- N = 21, com eixos pequenos — **indício a confirmar por leitura**.
+- N = 23, com eixos pequenos — **indício a confirmar por leitura**.
 - Os eixos podem se sobrepor (ex.: atividades sociais também mobilizam cultura material).
 - Reflete **a coleta atual** (cadastro NECPF), não o universo de TCCs da habilitação.

@@ -4,15 +4,16 @@
 > (defesas de 2017 a 2025), a partir de **título + resumo + palavras-chave**.
 > Fonte: cadastro dos TCCs realizado pelos pesquisadores do NECPF.
 >
-> **Natureza (CLAUDE.md §1):** com N = 22, não se aplica modelagem estatística
+> **Natureza da análise:** com N = 22, não se aplica modelagem estatística
 > de tópicos (o pipeline classifica Música na camada "descritiva", sem LDA
 > intra-curso). O agrupamento abaixo é **por leitura**, é indício e não
-> classificação fechada; os eixos **se sobrepõem**.
+> classificação fechada. Cada TCC é contado em **um único eixo** (o foco
+> principal), e as afinidades entre eixos são sinalizadas no texto.
 
 ## Como esta análise foi feita (método)
 
 Esta é uma **análise temática qualitativa, por leitura** — não um agrupamento
-automático. Os 5 eixos **não** saíram de um algoritmo (como o LDA ou o k-means
+automático. Os 6 eixos **não** saíram de um algoritmo (como o LDA ou o k-means
 usados no resto do painel); emergiram de uma leitura sistemática dos 22 TCCs,
 apoiada por contagem de termos. O passo a passo:
 
@@ -26,19 +27,20 @@ apoiada por contagem de termos. O passo a passo:
 3. **Leitura e codificação.** Li o **foco central** de cada TCC (sobre o quê é o
    trabalho) e atribuí um rótulo curto a cada um.
 4. **Agrupamento indutivo.** Reuni os TCCs de foco semelhante. Os eixos — e o
-   próprio número **5** — **emergiram** desse agrupamento; não foram definidos
-   de antemão. TCCs com mais de um foco ficaram marcados como transversais.
+   próprio número **6** — **emergiram** desse agrupamento; não foram definidos
+   de antemão. TCCs com mais de um foco foram alocados no eixo do foco
+   **principal** e marcados como *transversais*, para que a contagem feche.
 5. **Nomeação.** Cada grupo recebeu um nome que resume o foco comum.
 
 **Por que não LDA/clusters aqui?** Porque N = 22 é pequeno demais para uma
 modelagem estatística estável (por isso o pipeline coloca Música na camada
 "descritiva", sem LDA intra-curso). Nessa escala, a leitura humana é mais
 confiável — mas é **interpretativa**: outro leitor poderia agrupar de forma
-ligeiramente diferente, e os eixos se sobrepõem. Daí serem **indício, não
-classificação fechada** (CLAUDE.md §1, §4).
+ligeiramente diferente, e há afinidades entre eixos. Daí serem **indício, não
+classificação fechada** (análise exploratória).
 
 > Diferença em relação à aba "Tópicos (LDA)" do painel: lá, os tópicos são
-> gerados por **algoritmo** sobre os 211 TCCs (K fixado em 8); aqui, os eixos
+> gerados por **algoritmo** sobre os 321 TCCs (K fixado em 8); aqui, os eixos
 > são fruto de **leitura** dos 22 TCCs de Música — dois instrumentos distintos,
 > ambos exploratórios.
 
@@ -59,7 +61,12 @@ regência (2), inclusão (2).
 
 ## 2. Eixos temáticos
 
-### Eixo 1 — Ensino de música na educação básica e formação docente (~8 TCCs)
+> **Regra de contagem:** cada TCC entra em **um único eixo**, o do seu foco
+> principal declarado no resumo. Assim a soma dos eixos é igual ao total do
+> curso (22). Os trabalhos que tocam mais de um tema estão sinalizados como
+> *transversais* dentro do seu eixo principal.
+
+### Eixo 1 — Ensino de música na educação básica e formação docente (8 TCCs)
 O maior eixo: prática docente, estágio/Residência Pedagógica, BNCC e
 referenciais de educação musical (Swanwick, Lucy Green).
 
@@ -70,23 +77,26 @@ referenciais de educação musical (Swanwick, Lucy Green).
 - id 86 — práticas de ensino na Residência Pedagógica (formação docente)
 - id 212 — ensino remoto emergencial na pandemia (desafios da docência)
 - id 87 — música × educação física: "O Passo", interdisciplinaridade (BNCC)
-- id 95 — músicas regionalistas como material para o ensino (BNCC)
+- id 95 — canções regionais do Festival Canto Forte como material didático
+  (BNCC) · *transversal com o Eixo 3: o repertório é regional, mas o objetivo
+  declarado é produzir atividades para a educação básica*
 
-### Eixo 2 — Ensino de instrumentos e ensino coletivo (~4 TCCs)
+### Eixo 2 — Ensino de instrumentos e ensino coletivo (4 TCCs)
 - id 89 — aulas de piano em grupo (método Suzuki)
-- id 83 — contrabaixo elétrico e gêneros musicais do Norte
 - id 96 — ensino coletivo de violão (Orquestra de Violões do IBVM)
-- id 109 — flauta doce com musicalidades indígenas roraimenses
+- id 83 — contrabaixo elétrico: levadas em quatro gêneros do Norte ·
+  *transversal com o Eixo 3 (repertório regional)*
+- id 109 — flauta doce com musicalidades indígenas roraimenses ·
+  *transversal com etnomusicologia; o foco declarado é a prática coletiva
+  do instrumento*
 
-### Eixo 3 — Música, cultura regional e identidade (~5 TCCs)
+### Eixo 3 — Música, cultura regional e identidade (3 TCCs)
 Festivais, percussão e memória: música como expressão cultural de
 Roraima/Amazônia.
 
 - id 84 — Festival Folclórico de Caracaraí
 - id 97 — Festival Folclórico de Caracaraí: a percussão (Cobra Mariana, Gavião)
-- id 95 — Festival Canto Forte: canções regionais
 - id 82 — escolas de samba em Boa Vista (estudos de memória)
-- id 83 — gêneros musicais do Norte (transversal ao Eixo 2)
 
 ### Eixo 4 — Música, religião e ritual (4 TCCs)
 - id 108 — colaboração pianística no coro da Igreja Batista Regular de Boa Vista
@@ -98,9 +108,11 @@ Roraima/Amazônia.
 - id 93 — produção científica e políticas públicas de inclusão
 - id 211 — produções científicas sobre inclusão de pessoas com deficiência
 
-### Pontuais
-- id 92 — teoria/análise: empréstimo modal no pop rock dos anos 1980
-- id 109 — música indígena/etnomusicologia (transversal ao Eixo 2)
+### Eixo 6 — Teoria e análise musical (1 TCC)
+- id 92 — empréstimo modal no pop rock dos anos 1980
+
+**Conferência:** 8 + 4 + 3 + 4 + 2 + 1 = **22 TCCs**, igual ao total de Música
+no corpus.
 
 ## 3. Leitura
 
@@ -115,6 +127,8 @@ ritual religioso, música indígena).
 ## 4. Limites
 
 - N = 22: estatística instável; os eixos são **indício a confirmar por leitura**.
-- Os eixos **se sobrepõem** (ex.: id 95, 83 e 109 pertencem a mais de um).
+- Há **afinidade temática entre eixos** (ex.: os ids 95, 83 e 109 tocam também
+  a cultura regional). Cada um foi contado uma única vez, no eixo do foco
+  principal, e sinalizado como transversal.
 - A análise reflete **a coleta atual** (cadastro NECPF), não o universo de TCCs
   de Música do curso — ausências são lacuna de coleta, não inexistência.

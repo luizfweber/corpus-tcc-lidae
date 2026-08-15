@@ -4,7 +4,7 @@
 > a partir de título, resumo e palavras-chave. Fonte: cadastro dos TCCs realizado
 > pelos pesquisadores do NECPF.
 >
-> Natureza (CLAUDE.md §1): agrupamento por leitura, é indício e não classificação
+> Natureza da análise: agrupamento por leitura, é indício e não classificação
 > fechada; os eixos podem se sobrepor.
 
 ## Como esta análise foi feita (método)
