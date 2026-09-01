@@ -1,6 +1,6 @@
 # Análise temática por curso, em camadas — LIDAE/UFRR
 
-Corpus: 321 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · listagem). Exploratório, não censitário.
+Corpus: 338 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · listagem). Exploratório, não censitário.
 
 
 ## 🟢 Camada LDA (N suficiente para sub-temas)
@@ -35,15 +35,15 @@ Corpus: 321 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
    - id 36 (2019): ATRIBUIÇÕES DO COORDENADOR PEDAGÓGICO NAS ESCOLAS MUNICIPAIS DE BOA VISTA-RR: UMA ANÁLISE 
 
 
-### História — 122 TCCs · LDA intra-curso (K=2)
-*Seleção de K por estabilidade entre 8 seeds — K2: ARI=0.62 · K3: ARI=0.31 · K4: ARI=0.29. Escolhido K=2 (ARI=0.62).*
+### História — 130 TCCs · LDA intra-curso (K=2)
+*Seleção de K por estabilidade entre 8 seeds — K2: ARI=0.54 · K3: ARI=0.27 · K4: ARI=0.22. Escolhido K=2 (ARI=0.54).*
 
-**Sub-tema 1** (61 TCCs) — historia, educacao, roraima, indigenas, vista, analise, formacao, cultura, indigena, mulheres
+**Sub-tema 1** (62 TCCs) — historia, educacao, indigenas, roraima, vista, analise, indigena, cultura, formacao, processo
    - id 317 (2024): EDUCAÇÃO PATRIMONIAL NO ENSINO DE HISTÓRIA: O TRANSFORMAR DA DOCÊNCIA POR MEIO DO PROJETO 
    - id 208 (2025): MEMÓRIAS QUE RESISTEM: A REPRESENTAÇÃO DAS MULHERES INDÍGENAS NAS CARTAS DO PROJETO “MULHE
    - id 161 (2021): PATRIMÔNIO CULTURAL: A IMPORTÂNCIA DO FESTIVAL DO BEIJU (2005 - 2019) COMO VALORIZAÇÃO HIS
 
-**Sub-tema 2** (61 TCCs) — roraima, regiao, territorio, branco, amazonia, vista, indigenas, processo, estado, federal
+**Sub-tema 2** (68 TCCs) — roraima, regiao, territorio, branco, amazonia, estado, vista, federal, processo, nacional
    - id 270 (2016): O JORNAL BOA VISTA: porta-voz dos projetos desenvolvidos no Território de Roraima no perío
    - id 258 (2016): A RODOVIA PERIMETRAL NORTE: OBJETIVOS E IMPACTOS DA SUA CONSTRUÇÃO NO TERRITÓRIO FEDERAL D
    - id 273 (2016): A RODOVIA PERIMETRAL NORTE: OBJETIVOS E IMPACTOS DA SUA CONSTRUÇÃO NO TERRITÓRIO FEDERAL D
@@ -52,10 +52,10 @@ Corpus: 321 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
 
 ## 🟠 Camada descritiva (N médio — termos + leitura)
 
-### Música — 22 TCCs · descritivo (sem LDA)
+### Música — 27 TCCs · descritivo (sem LDA)
 *N insuficiente para modelagem de tópicos; reporta-se a frequência documental dos termos e a lista de trabalhos.*
 
-**Termos mais recorrentes (nº de TCCs):** musica (20), musical (16), vista (14), educacao (14), analise (13), contexto (12), pratica (12), roraima (11), praticas (11), resultados (11), musicais (10), alem (10), dados (10), formacao (9), bibliografica (8)
+**Termos mais recorrentes (nº de TCCs):** musica (25), musical (20), vista (19), educacao (17), roraima (15), contexto (15), alem (14), praticas (14), analise (14), pratica (13), musicais (12), atraves (12), resultados (12), formacao (12), bibliografica (11)
 
 **Trabalhos:**
    - id 92 (2017): O EMPRÉSTIMO MODAL RECORRENTE NO POP ROCK DOS ANOS 1980
@@ -67,11 +67,14 @@ Corpus: 321 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
    - id 98 (2019): A IMPORTÂNCIA DA REGÊNCIA NAS AULAS DE MÚSICA NA EDUCAÇÃO BÁSICA
    - id 108 (2019): A COLABORAÇÃO PIANÍSTICA NO CORO DA IGREJA BATISTA REGULAR DE BOA VISTA: COMPETÊNCIAS EXER
    - id 211 (2019): PRODUÇÕES CIENTÍFICAS ACERCA DA EDUCAÇÃO MUSICAL NO PROCESSO DE INCLUSÃO DE PESSOAS COM DE
+   - id 333 (2019): DIVERSIDADE MUSICAL EM CONVERSAS COM DISCENTES: UM OLHAR PARA O CURSO DE LICENCIATURA EM M
    - id 83 (2020): CONTRABAIXO ELÉTRICO: UM ESTUDO DAS LEVADAS EM QUATRO GÊNEROS MUSICAIS DA REGIÃO NORTE
    - id 85 (2021): PRÁTICAS INFORMAIS DE APRENDIZAGEM MUSICAL NA FORMAÇÃO DISCENTE DO CURSO DE LICENCIATURA E
    - id 87 (2021): MÚSICA E MOVIMENTO: "O PASSO" COMO POSSIBILIDADE INTERDISCIPLINAR ENTRE MÚSICA E EDUCAÇÃO 
    - id 95 (2021): MÚSICAS REGIONALISTAS DO FESTIVAL CANTO FORTE: ATIVIDADES PARA O ENSINO DE MÚSICA NA EDUCA
    - id 97 (2021): FESTIVAL FOLCLÓRICO DE CARACARAÍ: A PERCUSSÃO NOS GRUPOS COBRA MARIANA E GAVIÃO CARACARÁ
+   - id 332 (2021): AS NARRATIVAS COMO MEMÓRIA DA FORMAÇÃO DE UM PROFESSOR: UM OLHAR SOBRE O PROJETO “MÚSICA P
+   - id 334 (2021): PRÁTICAS CRIATIVAS NA EDUCAÇÃO BÁSICA: A CONSTRUÇÃO DO FAZER MUSICAL A PARTIR DA IMPROVISA
    - id 109 (2022): MÚSICA INDÍGENA PARA FLAUTA DOCE: POSSIBILIDADES DIDÁTICAS COM MUSICALIDADES DE QUATRO EST
    - id 212 (2022): COMPREENSSÕES ACERCA DO ENSINO REMOTO EMERGENCIAL DO CURSO DE LICENCIATURA EM MÚSICA DA UF
    - id 90 (2024): ENSINO E APRENDIZAGEM DE MÚSICA ATRAVÉS DE PRÁTICAS DE CANTO CORAL NA IGREJA BATISTA REGUL
@@ -80,11 +83,13 @@ Corpus: 321 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
    - id 96 (2025): ENSINO COLETIVO DE VIOLÃO NA ORQUESTRA DE VIOLÕES DO INSTITUTO BOA VISTA DE MÚSICA (IBVM):
    - id 99 (2025): CONSIDERAÇÕES SOBRE A MÚSICA RITUAL NO TERREIRO DE UMBANDA OGUM MATINATA EM BOA VISTA – RR
    - id 245 (2025): CONSIDERAÇÕES SOBRE A MÚSICA RITUAL NO TERREIRO DE UMBANDA
+   - id 330 (2025): ENSINO DE MÚSICA EM ESPAÇOS NÃO FORMAIS: RELATO DE EXPERIÊNCIA COM CRIANÇAS INDÍGENAS VENE
+   - id 331 (2026): ENSINO DE INSTRUMENTOS DE CORDAS FRICCIONADAS FRENTE À CRISE MIGRATÓRIA VENEZUELANA: (RE)C
 
 ### Matemática — 15 TCCs · descritivo (sem LDA)
 *N insuficiente para modelagem de tópicos; reporta-se a frequência documental dos termos e a lista de trabalhos.*
 
-**Termos mais recorrentes (nº de TCCs):** problema (14), teoria (14), acoes (14), atividade (14), situacoes (14), galperin (13), estudantes (13), resolucao (13), fundamental (11), matematica (11), processo (11), mentais (10), analisar (10), conteudo (10), formacao (10)
+**Termos mais recorrentes (nº de TCCs):** situacoes (14), problema (14), teoria (14), atividade (14), acoes (14), estudantes (13), galperin (13), resolucao (13), matematica (11), processo (11), fundamental (11), conteudo (10), analisar (10), mentais (10), formacao (10)
 
 **Trabalhos:**
    - id 4 (2016): A APRENDIZAGEM DA ATIVIDADE DE SITUAÇÕES PRO-BLEMA EM SISTEMA DE EQUAÇÕES LINEARES FUNDA-M
@@ -103,10 +108,10 @@ Corpus: 321 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
    - id 120 (2024): A ATIVIDADE SITUAÇÕES PROBLEMA DISCENTE EM EXPRESSÕES ALGÉBRICAS EM ESTUDANTES DO 7° ANO N
    - id 119 (2026): CONTRIBUIÇÕES DA TEORIA HISTÓRICO-CULTURAL DA ATIVIDADE NA APRENDIZAGEM DA MATEMÁTICA: UM 
 
-### Ciências Biológicas — 20 TCCs · descritivo (sem LDA)
+### Ciências Biológicas — 24 TCCs · descritivo (sem LDA)
 *N insuficiente para modelagem de tópicos; reporta-se a frequência documental dos termos e a lista de trabalhos.*
 
-**Termos mais recorrentes (nº de TCCs):** roraima (12), resultados (10), importancia (9), vista (9), pode (8), estado (8), analise (8), genero (7), biologia (7), amostras (7), atraves (7), amazonia (6), estudos (6), tres (6), processo (6)
+**Termos mais recorrentes (nº de TCCs):** roraima (14), resultados (12), vista (12), importancia (11), pode (10), analise (9), estudos (8), quanto (8), estado (8), tres (8), teve (8), tambem (8), atraves (8), genero (7), saude (7)
 
 **Trabalhos:**
    - id 282 (2007): PESQUISA DO VÍRUS DENGUE EM LARVAS DE Aedes aegypti E SUA DINÂMICA DE INFESTAÇÃO EM UM BAI
@@ -119,6 +124,9 @@ Corpus: 321 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
    - id 285 (2008): Orientação Sexual na Adolescência no Espaço Escolar
    - id 281 (2009): QUALIDADE MICROBIOLÓGICA DA ÁGUA CONSUMIDA NA UNIVERSIDADE FEDERAL DE RORAIMA
    - id 283 (2009): FUNGOS DO SOLO DE SAVANA DE RORAIMA – PPBIO, NÚCLEO REGIONAL RORAIMA, GRADE CAUAMÉ – MONTE
+   - id 335 (2019): PERCEPÇÃO DA QUALIDADE DE VIDA E FATORES ESTRESSORES NO AMBIENTE DE TRABALHO DOS PROFESSOR
+   - id 336 (2019): EDUCAÇÃO AMBIENTAL: PERCEPÇÃO E CONSCIÊNCIA DE ESTUDANTES DO ENSINO FUNDAMENTAL A RESPEITO
+   - id 337 (2019): CULTIVO ORGÂNICO DE Brassica oleracea L. var. acephala DC. COMO ESTRATÉGIA EDUCATIVA ALIME
    - id 241 (2022): USO TRADICIONAL DE PLANTAS MEDICINAIS EM RORAIMA: UMA REVISÃO SISTEMÁTICA
    - id 242 (2022): A BOTÂNICA NO ENSINO MÉDIO: UMA ANÁLISE COMPARATIVA ENTRE TRÊS LIVROS DIDÁTICOS DE BIOLOGI
    - id 243 (2022): PERFIL EPIDEMIOLÓGICO E A DETECÇÃO DOS SOROTIPOS DE DENGUE CIRCULANTE EM RORAIMA ENTRE OS 
@@ -129,6 +137,7 @@ Corpus: 321 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
    - id 249 (2023): JOGO DA MEMÓRIA “MACRÓFITAS AQUÁTICAS”: CONSTRUÇÃO DE UM RECURSO DIDÁTICO PARA O ENSINO DE
    - id 250 (2023): CONTRIBUIÇÃO AO ENSINO-APRENDIZADO DA DENGUE EM TURMAS DE ENSINO MÉDIO DO COLÉGIO DE APLIC
    - id 251 (2023): FILOGENIA E TAXONOMIA DO GÊNERO BRACHYGALBA (AVES: GALBULIDAE)
+   - id 327 (2023): VIABILIDADE DA AÇÃO ANTIBACTERIANA E ANTIOXIDANTE DE FITOEXTRATOS DE Miconia rubiginosa (B
 
 
 ## 🔴 Camada listagem (N ínfimo — sem modelagem)

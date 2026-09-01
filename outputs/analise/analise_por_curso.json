@@ -1,6 +1,6 @@
 {
-  "gerado_em": "2026-07-09",
-  "n_total": 321,
+  "gerado_em": "2026-09-01",
+  "n_total": 338,
   "cursos": [
     {
       "curso": "Insikiran",
@@ -48,11 +48,11 @@
           33
         ],
         [
-          "fundamental",
+          "conhecimentos",
           33
         ],
         [
-          "conhecimentos",
+          "fundamental",
           33
         ],
         [
@@ -619,11 +619,11 @@
           12
         ],
         [
-          "ufrr",
+          "resultados",
           11
         ],
         [
-          "resultados",
+          "ufrr",
           11
         ],
         [
@@ -639,11 +639,11 @@
           10
         ],
         [
-          "pedagogica",
+          "pedagogico",
           10
         ],
         [
-          "pedagogico",
+          "pedagogica",
           10
         ]
       ],
@@ -871,68 +871,68 @@
     },
     {
       "curso": "História",
-      "n": 122,
+      "n": 130,
       "camada": "lda",
       "top_termos": [
         [
           "roraima",
-          69
+          74
         ],
         [
           "analise",
-          61
+          63
         ],
         [
           "historia",
-          60
+          63
         ],
         [
           "vista",
-          47
+          51
         ],
         [
           "processo",
-          43
+          47
         ],
         [
           "compreender",
-          42
+          44
         ],
         [
           "estado",
-          39
+          43
         ],
         [
           "analisar",
-          36
+          37
         ],
         [
           "brasil",
-          35
-        ],
-        [
-          "federal",
-          33
+          36
         ],
         [
           "contexto",
-          33
+          36
         ],
         [
           "regiao",
-          33
+          36
+        ],
+        [
+          "federal",
+          34
         ],
         [
           "tambem",
-          31
+          34
         ],
         [
           "periodo",
-          30
+          32
         ],
         [
-          "indigenas",
-          30
+          "atraves",
+          32
         ]
       ],
       "tccs": [
@@ -1545,31 +1545,71 @@
           "id": "317",
           "ano": "2024",
           "titulo": "EDUCAÇÃO PATRIMONIAL NO ENSINO DE HISTÓRIA: O TRANSFORMAR DA DOCÊNCIA POR MEIO DO PROJETO “MINHA MALOCA, MINHA HISTÓRIA” (PIBID/UFRR 2022-2024)"
+        },
+        {
+          "id": "324",
+          "ano": "2015",
+          "titulo": "AS MULHERES PRIVADAS DE LIBERDADE NA CADEIA PÚBLICA FEMININA DE BOA VISTA"
+        },
+        {
+          "id": "325",
+          "ano": "2011",
+          "titulo": "A IGREJA MATRIZ NOSSA SENHORA DO CARMO DE 1943 A 1953: ESPAÇO DE SENSIBILIDADE E SOCIABILIDADE"
+        },
+        {
+          "id": "326",
+          "ano": "2011",
+          "titulo": "O GOVERNO HÉLIO DA COSTA CAMPOS (1970 – 1974) COOPTAÇÃO E PODER NO TERRITÓRIO FEDERAL DE RORAIMA"
+        },
+        {
+          "id": "328",
+          "ano": "2011",
+          "titulo": "O LUGAR E A UTOPIA:HISTÓRIA E MEMÓRIAS DE MIGRANTES NORDESTINOS EM RORAIMA (1980 a 1991)"
+        },
+        {
+          "id": "329",
+          "ano": "2011",
+          "titulo": "MIGRAÇÃO DE NORDESTINOS PARA O VALE DO RIO BRANCO (RR) ENTRE 1890 E 1930"
+        },
+        {
+          "id": "338",
+          "ano": "2019",
+          "titulo": "A CULINÁRIA REGIONAL RORAIMENSE: UMA IDENTIDADE CULTURAL CONSTRUÍDA"
+        },
+        {
+          "id": "339",
+          "ano": "2019",
+          "titulo": "A VESTIMENTA E O USO DE ADORNOS DOS NEGROS E PARDOS LIVRES/LIBERTOS COMO ESTRATÉGIA DE DISTINÇÃO E ASCENSÃO SOCIAL NA AMÉRICA PORTUGUESA ENTRE A SEGUNDA METADE DO SÉCULO XVIII E INÍCIO DO SÉCULO XIX"
+        },
+        {
+          "id": "340",
+          "ano": "2019",
+          "titulo": "INSTITUTOS CONFESSIONAIS: CONVERGÊNCIA, DIVERGÊNCIA E DESAFIOS NO SÉCULO XXI."
         }
       ],
       "lda": {
         "K": 2,
-        "ari": 0.623,
+        "ari": 0.536,
         "diag": {
-          "2": 0.6228762796596674,
-          "3": 0.3129286512657329,
-          "4": 0.2901298678492733
+          "2": 0.5362614456291926,
+          "3": 0.2688357886927551,
+          "4": 0.22249660431146107
         },
         "subtemas": [
           {
             "termos": [
               "historia",
               "educacao",
-              "roraima",
               "indigenas",
+              "roraima",
               "vista",
               "analise",
-              "formacao",
-              "cultura",
               "indigena",
-              "mulheres"
+              "cultura",
+              "formacao",
+              "processo"
             ],
-            "n": 61,
+            "n": 62,
             "exemplos": [
               {
                 "id": "317",
@@ -1595,13 +1635,13 @@
               "territorio",
               "branco",
               "amazonia",
-              "vista",
-              "indigenas",
-              "processo",
               "estado",
-              "federal"
+              "vista",
+              "federal",
+              "processo",
+              "nacional"
             ],
-            "n": 61,
+            "n": 68,
             "exemplos": [
               {
                 "id": "270",
@@ -1625,68 +1665,68 @@
     },
     {
       "curso": "Música",
-      "n": 22,
+      "n": 27,
       "camada": "descritivo",
       "top_termos": [
         [
           "musica",
-          20
+          25
         ],
         [
           "musical",
-          16
+          20
         ],
         [
           "vista",
-          14
+          19
         ],
         [
           "educacao",
+          17
+        ],
+        [
+          "roraima",
+          15
+        ],
+        [
+          "contexto",
+          15
+        ],
+        [
+          "alem",
+          14
+        ],
+        [
+          "praticas",
           14
         ],
         [
           "analise",
-          13
-        ],
-        [
-          "contexto",
-          12
+          14
         ],
         [
           "pratica",
-          12
-        ],
-        [
-          "roraima",
-          11
-        ],
-        [
-          "praticas",
-          11
-        ],
-        [
-          "resultados",
-          11
+          13
         ],
         [
           "musicais",
-          10
+          12
         ],
         [
-          "alem",
-          10
+          "atraves",
+          12
         ],
         [
-          "dados",
-          10
+          "resultados",
+          12
         ],
         [
           "formacao",
-          9
+          12
         ],
         [
           "bibliografica",
-          8
+          11
         ]
       ],
       "tccs": [
@@ -1799,6 +1839,31 @@
           "id": "245",
           "ano": "2025",
           "titulo": "CONSIDERAÇÕES SOBRE A MÚSICA RITUAL NO TERREIRO DE UMBANDA"
+        },
+        {
+          "id": "330",
+          "ano": "2025",
+          "titulo": "ENSINO DE MÚSICA EM ESPAÇOS NÃO FORMAIS: RELATO DE EXPERIÊNCIA COM CRIANÇAS INDÍGENAS VENEZUELANASEMABRIGO PARA MIGRANTES EM BOA VISTA-RR"
+        },
+        {
+          "id": "331",
+          "ano": "2026",
+          "titulo": "ENSINO DE INSTRUMENTOS DE CORDAS FRICCIONADAS FRENTE À CRISE MIGRATÓRIA VENEZUELANA: (RE)CONFIGURAÇÕES EM BOA VISTA (RR)"
+        },
+        {
+          "id": "332",
+          "ano": "2021",
+          "titulo": "AS NARRATIVAS COMO MEMÓRIA DA FORMAÇÃO DE UM PROFESSOR: UM OLHAR SOBRE O PROJETO “MÚSICA PARA TODOS"
+        },
+        {
+          "id": "333",
+          "ano": "2019",
+          "titulo": "DIVERSIDADE MUSICAL EM CONVERSAS COM DISCENTES: UM OLHAR PARA O CURSO DE LICENCIATURA EM MÚSICA DA UFRR"
+        },
+        {
+          "id": "334",
+          "ano": "2021",
+          "titulo": "PRÁTICAS CRIATIVAS NA EDUCAÇÃO BÁSICA: A CONSTRUÇÃO DO FAZER MUSICAL A PARTIR DA IMPROVISAÇÃO"
         }
       ],
       "lda": null
@@ -1809,6 +1874,10 @@
       "camada": "descritivo",
       "top_termos": [
         [
+          "situacoes",
+          14
+        ],
+        [
           "problema",
           14
         ],
@@ -1817,32 +1886,24 @@
           14
         ],
         [
-          "acoes",
-          14
-        ],
-        [
           "atividade",
           14
         ],
         [
-          "situacoes",
+          "acoes",
           14
-        ],
-        [
-          "galperin",
-          13
         ],
         [
           "estudantes",
           13
         ],
         [
-          "resolucao",
+          "galperin",
           13
         ],
         [
-          "fundamental",
-          11
+          "resolucao",
+          13
         ],
         [
           "matematica",
@@ -1853,7 +1914,11 @@
           11
         ],
         [
-          "mentais",
+          "fundamental",
+          11
+        ],
+        [
+          "conteudo",
           10
         ],
         [
@@ -1861,7 +1926,7 @@
           10
         ],
         [
-          "conteudo",
+          "mentais",
           10
         ],
         [
@@ -1950,27 +2015,39 @@
     },
     {
       "curso": "Ciências Biológicas",
-      "n": 20,
+      "n": 24,
       "camada": "descritivo",
       "top_termos": [
         [
           "roraima",
-          12
+          14
         ],
         [
           "resultados",
-          10
-        ],
-        [
-          "importancia",
-          9
+          12
         ],
         [
           "vista",
-          9
+          12
+        ],
+        [
+          "importancia",
+          11
         ],
         [
           "pode",
+          10
+        ],
+        [
+          "analise",
+          9
+        ],
+        [
+          "estudos",
+          8
+        ],
+        [
+          "quanto",
           8
         ],
         [
@@ -1978,7 +2055,19 @@
           8
         ],
         [
-          "analise",
+          "tres",
+          8
+        ],
+        [
+          "teve",
+          8
+        ],
+        [
+          "tambem",
+          8
+        ],
+        [
+          "atraves",
           8
         ],
         [
@@ -1986,32 +2075,8 @@
           7
         ],
         [
-          "biologia",
+          "saude",
           7
-        ],
-        [
-          "amostras",
-          7
-        ],
-        [
-          "atraves",
-          7
-        ],
-        [
-          "amazonia",
-          6
-        ],
-        [
-          "estudos",
-          6
-        ],
-        [
-          "tres",
-          6
-        ],
-        [
-          "processo",
-          6
         ]
       ],
       "tccs": [
@@ -2114,6 +2179,26 @@
           "id": "285",
           "ano": "2008",
           "titulo": "Orientação Sexual na Adolescência no Espaço Escolar"
+        },
+        {
+          "id": "327",
+          "ano": "2023",
+          "titulo": "VIABILIDADE DA AÇÃO ANTIBACTERIANA E ANTIOXIDANTE DE FITOEXTRATOS DE Miconia rubiginosa (Bonpl.) DC. E Rhynchanthera grandiflora (Aubl.) DC. PRODUZIDOS HÁ MAIS DE DEZ ANOS"
+        },
+        {
+          "id": "335",
+          "ano": "2019",
+          "titulo": "PERCEPÇÃO DA QUALIDADE DE VIDA E FATORES ESTRESSORES NO AMBIENTE DE TRABALHO DOS PROFESSORES DE DUAS ESCOLAS PÚBLICAS DA REDE ESTADUAL DE ENSINO DE BOA VISTA-RR"
+        },
+        {
+          "id": "336",
+          "ano": "2019",
+          "titulo": "EDUCAÇÃO AMBIENTAL: PERCEPÇÃO E CONSCIÊNCIA DE ESTUDANTES DO ENSINO FUNDAMENTAL A RESPEITO DO RIO BRANCO BOA VISTA, RORAIMA."
+        },
+        {
+          "id": "337",
+          "ano": "2019",
+          "titulo": "CULTIVO ORGÂNICO DE Brassica oleracea L. var. acephala DC. COMO ESTRATÉGIA EDUCATIVA ALIMENTAR NA ESCOLA ESTADUAL OSWALDO CRUZ, BOA VISTA - RR"
         }
       ],
       "lda": null

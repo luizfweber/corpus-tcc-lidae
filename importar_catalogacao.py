@@ -97,8 +97,14 @@ def fold(s):
     return re.sub(r"\s+", " ", s)
 
 def keyf(s):
-    return "".join(c for c in unicodedata.normalize("NFKD", str(s).lower())
-                   if not unicodedata.combining(c)).strip()
+    """Chave de comparação de nomes: sem acento, sem pontuação e com partícula de
+    uma letra colada ao sobrenome. Assim "Márcia d’Acampora", "Márcia D ́Acampora"
+    e "Marcia d Acampora" viram a mesma chave."""
+    s = "".join(c for c in unicodedata.normalize("NFKD", str(s).lower())
+                if not unicodedata.combining(c))
+    s = re.sub(r"[^a-z0-9\s]", " ", s)          # tira apóstrofo e pontuação
+    s = re.sub(r"\s+", " ", s).strip()
+    return re.sub(r"\b([a-z])\s+(?=[a-z])", r"\1", s)   # "d acampora" -> "dacampora"
 
 _CONN = {"de", "da", "do", "dos", "das", "e"}
 def tcase(s):
@@ -106,13 +112,13 @@ def tcase(s):
                     for w in s.split())
 
 _TIT = re.compile(r"\b(Prof(?:essor)?[ao]?|Dr[ao]?|Drª|Doutor[a]?|Me|Msc|Ms|"
-                  r"Mestre|Esp|MSc|Ma|Mst|Mr)\b\.?", re.I)
+                  r"Mestre|Esp|MSc|Ma|Mst|Mr|Grad(?:uad[ao])?|Bel|Lic)\b\.?", re.I)
 _INST = re.compile(r"\s*(?:Curso\s+de|Curso\b|Universidade|Instituto|Licenciatura|"
                    r"Departamento|Centro|UFRR|UERR|IFRR|IFPA|SEED|CEDUC|"
                    r"Educação\s+do\s+Campo)\b", re.I)
 _INSTKW = ("curso", "licenciatura", "universidade", "instituto", "departamento",
            "ufrr", "uerr", "ifrr", "ifpa", "seed", "ceduc", "educacao do campo")
-_ROLE = re.compile(r"^(presidente|membro|orientador|banca|curso)\b", re.I)
+_ROLE = re.compile(r"^(presidente|membro|orientador[a]?|banca|curso|suplente|avaliador[a]?|examinador[a]?|coordenador[a]?|titular)\b", re.I)
 _NAO = re.compile(r"^\s*n[ãa]o\b", re.I)
 
 def _base_clean(p):
@@ -124,6 +130,10 @@ def _base_clean(p):
     p = re.split(r"(?:palavras?[\s-]*chave)", p, flags=re.I)[0]
     p = re.split(r"\s*[:\-–]\s*(orientador|membro|presidente|titular|suplente|"
                  r"coorientador|curso)", p, flags=re.I)[0]
+    # corta a descrição de titulação que segue o nome:
+    # "Fulano - Doutor em Música pela UNICAMP" -> "Fulano"
+    p = re.split(r"\s*[,\-–]?\s*\b(?:doutor[a]?|mestr[ea]|especializa[çc][ãa]o|"
+                 r"especialista|licenciad[ao]|bacharel|graduad[ao])\b", p, flags=re.I)[0]
     p = re.sub(r"\([^)]*\)", "", p)
     p = re.sub(r"\(.*$", "", p)
     p = _INST.split(p)[0]
@@ -156,6 +166,15 @@ class Unificador:
             return None
         if low in self.key2nome:
             return self.key2nome[low]
+        # nome truncado: "Albanita de Jesus Rodrigues" dentro de
+        # "Albanita de Jesus Rodrigues da Silva". Exige 3+ tokens e prefixo exato,
+        # para não fundir pessoas distintas que só compartilham nome e sobrenome.
+        tk = low.split()
+        if len(tk) >= 3:
+            contidos = [k for k in self.chaves
+                        if k.split()[:len(tk)] == tk and len(k.split()) > len(tk)]
+            if len(contidos) == 1:
+                return self.key2nome[contidos[0]]
         m = process.extractOne(low, self.chaves, scorer=fuzz.token_sort_ratio)
         if m and m[1] >= LIMIAR_FUZZY:
             return self.key2nome[m[0]]
@@ -167,9 +186,18 @@ class Unificador:
         if pd.isna(v) or str(v).strip() == "" or _NAO.match(str(v).strip()):
             return ""
         out, seen = [], set()
-        for p in re.split(r"[;\n]| e (?=[A-ZÁÉ])", str(v)):
+        txt = str(v)
+        # " e " separa nomes só em lista de uma linha ("João e Maria"). Havendo ';'
+        # ou quebra de linha, dividir por " e " partiria instituições ao meio
+        # (ex.: "Trás-os-Montes e Alto Douro" virava um membro chamado "Alto Douro").
+        padrao = r"[;\n]" if (";" in txt or "\n" in txt) else r"[;\n]| e (?=[A-ZÁÉ])"
+        for p in re.split(padrao, txt):
             nm = self.unifica(_base_clean(re.sub(r"^\s*e\s+", "", p)))
             if not nm or len(nm.split()) < 2 or len(nm) <= 5:
+                continue
+            # resto de titulação/instituição não é nome de pessoa
+            if re.match(r"^(em|pela|pelo|no|na)\b", nm, re.I) or \
+               re.search(r"\bpel[ao]\b", nm, re.I):
                 continue
             if keyf(nm) not in seen:
                 seen.add(keyf(nm)); out.append(nm)
@@ -246,7 +274,17 @@ def main():
             row[ccol] = r.get(fcol, "")
         row["ano_defesa"] = ano_plausivel(row.get("ano_defesa", ""))
         rows.append(row)
-    add = pd.DataFrame(rows)[con.columns.tolist()]
+    add = pd.DataFrame(rows)
+    # Colunas que existem no consolidado mas não vêm do formulário (ex.:
+    # 'orientador_dti', preenchida por cruzamento posterior) entram vazias, em vez
+    # de quebrar a importação. Assim o esquema pode crescer sem mexer aqui.
+    for c in con.columns:
+        if c not in add.columns:
+            add[c] = ""
+    extras = [c for c in add.columns if c not in con.columns]
+    if extras:
+        print(f"\n  [aviso] colunas geradas fora do esquema do consolidado: {extras}")
+    add = add[con.columns.tolist()]
 
     # 7. relatório de conferência
     print(f"\n== NOMES A CONFERIR (fuzzy no limiar {LIMIAR_REVISAO}-{LIMIAR_FUZZY}) ==")
@@ -255,8 +293,9 @@ def main():
             print(f"  '{nm}'  ~  '{match}'  ({sc}%)  <- confira se é a mesma pessoa")
     else:
         print("  (nenhum)")
-    resid = re.compile(r"\b(Prof|Dr|Presidente|Membro|Curso|Universidade|UFRR|"
-                       r"Palavras|chave)\b|[ºª]", re.I)
+    resid = re.compile(r"\b(Prof|Dr|Presidente|Membro|Suplente|Curso|Universidade|"
+                       r"Instituto|Federal|UFRR|Palavras|chave|Doutor|Mestre|"
+                       r"Pela|Pelo)\b|^Em\b|[ºª]", re.I)
     sus = [(r["id"], v) for _, r in add.iterrows()
            for v in [r["banca_membro_1"], r["banca_membro_2"], r["banca_membro_3"],
                      r["banca_membro_4"], r["orientador"]]

@@ -186,38 +186,38 @@ def consolida_nomes(nomes_list, threshold=85):
 # Atualizado com K=8 (319 TCCs, re-treino 2026-07-07 após inclusão da catalogação
 # de 07/07; K fixado por leitura) — rótulos PROVISÓRIOS.
 TOPICOS = {
-    0: {"rotulo": "Educação escolar indígena, história e língua (provisório)",
-        "leitura": "escola indígena estadual, história e língua na comunidade, saúde",
-        "termos": "indigena, historia, educacao, escolar, indigenas, estadual, "
-                  "lingua, comunidade, projeto, saude"},
-    1: {"rotulo": "Saberes indígenas, matemática e material didático (provisório)",
-        "leitura": "conhecimento wapichana, matemática e língua, produção de material didático",
-        "termos": "indigena, comunidade, indigenas, wapichana, conhecimento, matematica, "
-                  "lingua, material, terra, didatico"},
-    2: {"rotulo": "Educação musical, escolas e gênero (provisório)",
-        "leitura": "educação musical em Boa Vista, contexto escolar, análise de mulheres",
-        "termos": "educacao, vista, musica, musical, contexto, escolas, "
-                  "processo, analise, mulheres, indigenas"},
-    3: {"rotulo": "Proposta pedagógica na comunidade indígena (ciências e cultura) (provisório)",
-        "leitura": "proposta pedagógica na comunidade, conhecimentos e cultura, ciências",
-        "termos": "comunidade, indigena, educacao, proposta, conhecimentos, estadual, "
-                  "atividades, ciencias, cultura, pedagogica"},
-    4: {"rotulo": "Matemática — situações-problema (Galperin) (provisório)",
-        "leitura": "atividade de situações-problema, teoria e ações de resolução, estudantes",
-        "termos": "atividade, problema, situacoes, matematica, teoria, acoes, "
-                  "resolucao, estudantes, discente, coordenacao"},
-    5: {"rotulo": "História regional, Amazônia e território federal (provisório)",
-        "leitura": "Roraima e Amazônia, estado e região, território federal do Rio Branco",
-        "termos": "roraima, regiao, estado, amazonia, territorio, federal, "
-                  "branco, brasil, analise, processo"},
-    6: {"rotulo": "Formação docente, estágio e prática (provisório)",
-        "leitura": "formação de professores, estágio e prática pedagógica, jogos, UFRR",
-        "termos": "educacao, formacao, estagio, pedagogica, experiencia, ufrr, "
-                  "docente, jogos, programa, roraima"},
-    7: {"rotulo": "Povos indígenas, história e medicina tradicional (provisório)",
-        "leitura": "povos indígenas e história, plantas medicinais e medicina tradicional",
-        "termos": "indigenas, historia, povos, medicinais, tradicional, plantas, "
-                  "medicina, roraima, representacoes, saude"},
+    0: {"rotulo": "Povos indígenas na história do Vale do Rio Branco (provisório)",
+        "leitura": "história dos povos indígenas, Rio Branco e Amazônia, séculos e processos",
+        "termos": "indigenas, branco, historia, seculo, processo, povos, "
+                  "analise, amazonia, regiao, vale"},
+    1: {"rotulo": "Educação escolar indígena e proposta pedagógica na comunidade (provisório)",
+        "leitura": "escola indígena estadual, proposta pedagógica, matemática, língua e cultura",
+        "termos": "indigena, comunidade, indigenas, educacao, estadual, proposta, "
+                  "matematica, lingua, escolar, cultura"},
+    2: {"rotulo": "Música, gênero e representação na imprensa (provisório)",
+        "leitura": "educação musical em Boa Vista, mulheres e gênero, discurso e jornal",
+        "termos": "musica, musical, vista, mulheres, analise, jornal, "
+                  "discurso, genero, representacao, musicais"},
+    3: {"rotulo": "Boa Vista: cidade, identidade e saúde pública (provisório)",
+        "leitura": "cidade de Boa Vista e Roraima, identidade e memória, projetos e dengue",
+        "termos": "vista, roraima, historia, cidade, identidade, projeto, "
+                  "dengue, atraves, estado, historico"},
+    4: {"rotulo": "Território Federal, governo e período militar (provisório)",
+        "leitura": "Território Federal de Roraima, governo e Estado nacional, desenvolvimento regional",
+        "termos": "roraima, territorio, federal, governo, nacional, estado, "
+                  "regiao, desenvolvimento, militar, periodo"},
+    5: {"rotulo": "Formação docente e prática escolar (provisório)",
+        "leitura": "formação de professores, escolas de Roraima, prática e processos na UFRR",
+        "termos": "educacao, historia, formacao, roraima, escolar, escolas, "
+                  "ufrr, analise, pratica, processo"},
+    6: {"rotulo": "Matemática: situações-problema e estágio (provisório)",
+        "leitura": "atividade de situações-problema, teoria e ações de resolução, estágio e formação",
+        "termos": "atividade, problema, formacao, estagio, teoria, situacoes, "
+                  "experiencia, estudantes, resolucao, acoes"},
+    7: {"rotulo": "Saberes tradicionais, plantas medicinais e saúde indígena (provisório)",
+        "leitura": "comunidade indígena, saúde e medicina tradicional, plantas medicinais",
+        "termos": "comunidade, indigena, saude, tradicional, plantas, medicinais, "
+                  "indigenas, conhecimentos, tradicionais, tambem"},
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -1847,11 +1847,11 @@ TEMATICAS = {
             # Cada TCC entra em UM eixo (o foco principal declarado no resumo),
             # para que a soma das barras seja igual ao total do curso. As
             # sobreposições temáticas são comentadas no texto da análise.
-            "Educação básica e formação docente": [91, 94, 98, 85, 86, 212, 87, 95],
-            "Instrumentos e ensino coletivo": [89, 83, 96, 109],
+            "Educação básica e formação docente": [91, 94, 98, 85, 86, 212, 87, 95, 332, 333, 334],
+            "Instrumentos e ensino coletivo": [89, 83, 96, 109, 331],
             "Cultura regional e identidade": [84, 97, 82],
             "Religião e ritual": [108, 90, 99, 245],
-            "Inclusão e políticas públicas": [93, 211],
+            "Inclusão e políticas públicas": [93, 211, 330],
             "Pontuais (teoria musical)": [92],
         },
     },
@@ -1906,31 +1906,31 @@ TEMATICAS = {
                  253, 259, 260, 267, 271, 275, 310, 313, 317],
             "Política, território e geopolítica":
                 [145, 163, 166, 171, 196, 200, 252, 255, 258, 265, 270, 272, 273, 274,
-                 288, 291, 297, 299, 303, 304, 305],
+                 288, 291, 297, 299, 303, 304, 305, 326],
             "Povos indígenas, terras e violência":
                 [146, 154, 164, 168, 175, 179, 184, 194, 221, 223, 225, 229, 231, 235,
                  256, 257, 263, 264, 268, 312, 314],
             "Patrimônio, memória e cultura":
-                [161, 169, 205, 213, 217, 219, 261, 287, 290, 296, 308, 311, 316],
+                [161, 169, 205, 213, 217, 219, 261, 287, 290, 296, 308, 311, 316, 338],
             "Religião e religiosidade":
-                [147, 156, 157, 176, 177, 181, 182, 222, 226, 228, 298, 307],
+                [147, 156, 157, 176, 177, 181, 182, 222, 226, 228, 298, 307, 325, 340],
             "História internacional e historiografia":
-                [155, 162, 227, 232, 233, 234, 292, 293, 295, 302, 315],
+                [155, 162, 227, 232, 233, 234, 292, 293, 295, 302, 315, 339],
             "Gênero, mulheres e violência":
-                [158, 159, 165, 173, 180, 197, 202, 208, 230, 269],
+                [158, 159, 165, 173, 180, 197, 202, 208, 230, 269, 324],
             "Educação, trabalho e sociedade":
                 [262, 266, 286, 289, 294, 309],
             "Migração e formação urbana":
-                [174, 254, 300, 301, 306],
+                [174, 254, 300, 301, 306, 328, 329],
         },
     },
     "Ciências Biológicas": {
         "arquivo": "analise_tematica_ciencias_biologicas.md",
         "eixos": {
-            "Ensino de Biologia e recursos didáticos": [242, 247, 249, 250, 277, 278, 284, 285],
-            "Saúde, arboviroses e epidemiologia": [243, 244, 280, 282],
+            "Ensino de Biologia e recursos didáticos": [242, 247, 249, 250, 277, 278, 284, 285, 336, 337],
+            "Saúde, epidemiologia e bem-estar": [243, 244, 280, 282, 335],
             "Botânica, taxonomia e biodiversidade": [251, 276, 279, 283],
-            "Etnobiologia e plantas medicinais": [241, 248],
+            "Plantas medicinais, bioatividade e etnobiologia": [241, 248, 327],
             "Qualidade da água e ambiente": [246, 281],
         },
     },

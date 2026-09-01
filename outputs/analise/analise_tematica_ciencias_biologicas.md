@@ -1,6 +1,6 @@
 # Análise temática — Ciências Biológicas (LIDAE/UFRR)
 
-> Leitura descritiva e exploratória dos 20 TCCs do curso de Ciências Biológicas,
+> Leitura descritiva e exploratória dos 24 TCCs do curso de Ciências Biológicas,
 > a partir de título, resumo e palavras-chave. Fonte: cadastro dos TCCs realizado
 > pelos pesquisadores do NECPF.
 >
@@ -43,7 +43,7 @@ Livros didáticos, jogos, sequências didáticas, informática e temas transvers
 ensino de biologia e ciências.
 ids: 242, 247, 249, 250, 277, 278, 284, 285
 
-### Eixo 2 — Saúde, arboviroses e epidemiologia (4 TCCs)
+### Eixo 2 — Saúde, epidemiologia e bem-estar (4 TCCs)
 Dengue (sorotipos, genótipos, vetor Aedes) e malária, com técnicas moleculares.
 ids: 243, 244, 280, 282
 
@@ -52,7 +52,7 @@ Filogenia e taxonomia (aves, Polygalaceae), fungos do solo e biologia molecular 
 guaraná, no ambiente de savana amazônica.
 ids: 251, 276, 279, 283
 
-### Eixo 4 — Etnobiologia e plantas medicinais (2 TCCs)
+### Eixo 4 — Plantas medicinais, bioatividade e etnobiologia (2 TCCs)
 Uso tradicional de plantas medicinais e atividade antioxidante e antimicrobiana de
 extratos vegetais.
 ids: 241, 248

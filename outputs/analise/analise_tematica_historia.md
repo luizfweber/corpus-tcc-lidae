@@ -1,8 +1,8 @@
 # Análise temática — História (LIDAE/UFRR)
 
-> Leitura descritiva e exploratória dos 122 TCCs do curso de História, a partir de
+> Leitura descritiva e exploratória dos 130 TCCs do curso de História, a partir de
 > título, resumo e palavras-chave. Fonte: cadastro dos TCCs realizado pelos
-> pesquisadores do NECPF. Atualizada após as catalogações de 26/06 e 07/07/2026.
+> pesquisadores do NECPF. Atualizada após as catalogações de 26/06, 07/07 e 01/09/2026.
 >
 > Natureza da análise: agrupamento por leitura, é indício e não classificação
 > fechada; os eixos podem se sobrepor.
@@ -21,7 +21,7 @@ contagem de termos. O passo a passo:
 4. Agrupamento indutivo: os eixos emergiram do agrupamento.
 5. Nomeação de cada grupo.
 
-Com 122 TCCs, o curso é grande o bastante para a LDA intra-curso (ver aba
+Com 130 TCCs, o curso é grande o bastante para a LDA intra-curso (ver aba
 Sub-temas por curso), mas a leitura capta nuances que o modelo dilui. É
 interpretativa: outro leitor poderia agrupar de forma diferente. Indício, não
 classificação fechada (análise exploratória).
@@ -42,11 +42,11 @@ relações étnico-raciais e história regional na escola.
 ids: 160, 167, 170, 172, 178, 183, 185, 195, 198, 199, 201, 204, 220, 224, 253,
 259, 260, 267, 271, 275, 310, 313, 317
 
-### Eixo 2 — Política, território e geopolítica (21 TCCs)
+### Eixo 2 — Política, território e geopolítica (22 TCCs)
 Território Federal do Rio Branco, regime militar, BR-174 e Perimetral Norte,
 planos de desenvolvimento, governos e disputas políticas.
 ids: 145, 163, 166, 171, 196, 200, 252, 255, 258, 265, 270, 272, 273, 274, 288,
-291, 297, 299, 303, 304, 305
+291, 297, 299, 303, 304, 305, 326
 
 ### Eixo 3 — Povos indígenas, terras e violência (21 TCCs)
 Demarcação de terras (Raposa/Serra do Sol, Yanomami), violência, marco temporal,
@@ -54,33 +54,33 @@ Waimiri-Atroari, presença indígena no ensino superior e representação.
 ids: 146, 154, 164, 168, 175, 179, 184, 194, 221, 223, 225, 229, 231, 235, 256,
 257, 263, 264, 268, 312, 314
 
-### Eixo 4 — Patrimônio, memória e cultura (13 TCCs)
+### Eixo 4 — Patrimônio, memória e cultura (14 TCCs)
 Patrimônio histórico de Boa Vista, museus, tombamento, toponímia, teatro, futebol,
 movimento cultural roraimense.
-ids: 161, 169, 205, 213, 217, 219, 261, 287, 290, 296, 308, 311, 316
+ids: 161, 169, 205, 213, 217, 219, 261, 287, 290, 296, 308, 311, 316, 338
 
-### Eixo 5 — Religião e religiosidade (12 TCCs)
+### Eixo 5 — Religião e religiosidade (14 TCCs)
 Ordens e missões beneditinas, Igreja Católica na ditadura, pentecostalismo e
 neopentecostalismo, irmandades e candomblé.
-ids: 147, 156, 157, 176, 177, 181, 182, 222, 226, 228, 298, 307
+ids: 147, 156, 157, 176, 177, 181, 182, 222, 226, 228, 298, 307, 325, 340
 
-### Eixo 6 — História internacional e historiografia (11 TCCs)
+### Eixo 6 — História internacional e historiografia (12 TCCs)
 Amazônia colonial e europeus, Segunda Guerra, César, Escola dos Annales, Israel e
 Palestina, Venezuela, expedições e viajantes.
-ids: 155, 162, 227, 232, 233, 234, 292, 293, 295, 302, 315
+ids: 155, 162, 227, 232, 233, 234, 292, 293, 295, 302, 315, 339
 
-### Eixo 7 — Gênero, mulheres e violência (10 TCCs)
+### Eixo 7 — Gênero, mulheres e violência (11 TCCs)
 História das mulheres, representação feminina, feminicídio, mulheres indígenas.
-ids: 158, 159, 165, 173, 180, 197, 202, 208, 230, 269
+ids: 158, 159, 165, 173, 180, 197, 202, 208, 230, 269, 324
 
 ### Eixo 8 — Educação, trabalho e sociedade (6 TCCs)
 EJA, sindicalismo, inclusão e educação especial, saneamento e neoliberalismo na
 educação.
 ids: 262, 266, 286, 289, 294, 309
 
-### Eixo 9 — Migração e formação urbana (5 TCCs)
+### Eixo 9 — Migração e formação urbana (7 TCCs)
 Migração (maranhense, venezuelana) e formação de bairros e municípios de Roraima.
-ids: 174, 254, 300, 301, 306
+ids: 174, 254, 300, 301, 306, 328, 329
 
 ## Leitura
 
@@ -92,7 +92,7 @@ frente robusta e crescente. Em paralelo, agendas contemporâneas (gênero, rela�
 
 ## Limites
 
-- N igual a 122, mas muito heterogêneo; por eixo os números são menores: indício a
+- N igual a 130, mas muito heterogêneo; por eixo os números são menores: indício a
   confirmar por leitura.
 - Os eixos se sobrepõem (ex.: mulheres indígenas tocam Gênero e Povos indígenas;
   BR-174 toca Território e Povos indígenas).
