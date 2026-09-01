@@ -242,6 +242,19 @@ def main():
     print(f"  Já cadastrados (ignorados): {len(ja)}")
     print(f"  Título é URL (pulados):     {len(url)}")
     print(f"  NOVOS a inserir:            {len(novos)}")
+
+    # Título preenchido como link: o registro é inutilizável por título. Verifica
+    # pelo AUTOR se a obra já está na base, para distinguir "reenvio de algo já
+    # cadastrado" de "trabalho que ficará de fora e precisa ser recuperado".
+    if len(url):
+        autores_base = {fold(a) for a in con["autor"].dropna()}
+        print("\n  Detalhe dos títulos preenchidos como URL:")
+        for _, r in url.iterrows():
+            aut = r.get("Autor/a do TCC", "")
+            ja_tem = fold(aut) in autores_base
+            marca = "já consta na base (provável reenvio)" if ja_tem else \
+                    "NÃO consta na base — recuperar o título com o pesquisador"
+            print(f"    - {aut} [{r.get('Curso/licenciatura analisada','')}]: {marca}")
     if novos.empty:
         print("\nNada novo a importar."); return
 
