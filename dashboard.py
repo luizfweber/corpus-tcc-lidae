@@ -267,6 +267,10 @@ GZ_TERRITORIOS = {
     "Olho d'Água": ["olho d'agua", "olho d agua", "olho dagua"],
     "Anta": ["comunidade anta", "anta i", "anta ii"],
     "Laje": ["comunidade laje"],
+    "Jatapuzinho": ["jatapuzinho"],
+    "Alto Arraia": ["alto arraia"],
+    "Boca da Mata": ["boca da mata"],
+    "Vila Nova Esperança": ["vila nova esperanca", "vila nova esperança"],
     "Ponta da Serra": ["ponta da serra"],
     "Boqueirão": ["boqueirao"],
 }
@@ -489,6 +493,66 @@ N_TOTAL = len(df)
 
 # curso desagregado por habilitação (Insikiran, LEDUCARR e Letras); usado em filtros e gráficos
 df["curso_det"] = df.apply(curso_habilitacao, axis=1)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# MANUTENÇÃO DO GAZETTEER
+# O dicionário de povos e territórios é curado à mão, mas o corpus cresce. Esta
+# verificação varre o texto atrás de nomes próprios introduzidos pelas fórmulas
+# usuais ("comunidade indígena X", "Terra Indígena X", "povo X") e sinaliza os
+# que ainda não constam do dicionário. É um alerta de manutenção, não uma
+# detecção automática de etnônimo: o que ela aponta precisa de conferência.
+# ─────────────────────────────────────────────────────────────────────────────
+_GZ_MAI = r"[A-ZÁÂÃÀÉÊÍÓÔÕÚÜÇ][a-zá-úâêôãõç'’-]{2,}"
+_GZ_CON = r"(?:\s+(?:d[aeo]s?|e)\b)?"
+_GZ_NOME = _GZ_MAI + r"(?:" + _GZ_CON + r"\s+" + _GZ_MAI + r"){0,2}"
+_GZ_PADROES = [
+    (r"(?i:comunidades?)\s+(?i:ind[íi]gena\s+)?(" + _GZ_NOME + r")", "comunidade"),
+    (r"(?i:terra\s+ind[íi]gena)\s+(" + _GZ_NOME + r")", "terra indígena"),
+    (r"(?i:maloca)\s+(" + _GZ_NOME + r")", "maloca"),
+    (r"(?i:aldeia)\s+(" + _GZ_NOME + r")", "aldeia"),
+    (r"(?i:povos?|etnia)\s+(" + _GZ_MAI + r")", "povo/etnia"),
+    (r"(?i:regi[ãa]o)\s+(?:d[aeo]\s+)?(" + _GZ_NOME + r")", "região"),
+]
+_GZ_GENERICO = {
+    "indigena", "indigenas", "amazonica", "amazonia", "norte", "sul", "leste",
+    "oeste", "brasil", "roraima", "boa vista", "serras", "serra", "escolar",
+    "estadual", "escola", "local", "rural", "urbana", "brasileira", "brasileiro",
+    "nacional", "municipio", "terra", "terras", "povo", "povos",
+}
+
+
+@st.cache_data
+def candidatos_gazetteer(chave: str = "", minimo: int = 2):
+    """Nomes citados no corpus que ainda não estão no gazetteer, com o nº de TCCs
+    em que aparecem. 'chave' (sem underscore) invalida o cache quando o CSV muda."""
+    cobertos = set()
+    for grupo in (GZ_POVOS, GZ_TERRITORIOS):
+        for nome, variantes in grupo.items():
+            cobertos.add(_fold_gz(nome))
+            cobertos |= {_fold_gz(v) for v in variantes}
+    achados = {}
+    for r in df.itertuples():
+        txt = re.sub(r"\s+", " ", f"{r.titulo} {r.resumo} {r.palavras_chave}")
+        for padrao, tipo in _GZ_PADROES:
+            for m in re.finditer(padrao, txt):
+                nome = _fold_gz(m.group(1))
+                # remove prefixos repetidos ("Indígena de Alto Arraia" -> "alto arraia")
+                nome = re.sub(r"^(?:(?:indigena|indigenas|d[aeo]s?|e)\s+)+", "", nome)
+                if not nome or nome in cobertos or nome in _GZ_GENERICO:
+                    continue
+                # descarta recorte geográfico genérico ("Norte do Brasil")
+                if nome.split()[0] in _GZ_GENERICO:
+                    continue
+                # descarta pedaço de nome já coberto (ex.: "Serra do Sol" de
+                # "Raposa Serra do Sol", ou "Olho" de "Olho d'Água")
+                if any(nome in c or c.startswith(nome + " ") for c in cobertos):
+                    continue
+                achados.setdefault((nome, tipo), set()).add(r.id)
+    linhas = [{"nome": n, "tipo": t, "n": len(ids)}
+              for (n, t), ids in achados.items() if len(ids) >= minimo]
+    return (pd.DataFrame(linhas).sort_values("n", ascending=False)
+            if linhas else pd.DataFrame(columns=["nome", "tipo", "n"]))
 
 # ─────────────────────────────────────────────────────────────────────────────
 # ORDEM CANÔNICA DE CURSOS — fixa em TODO o dashboard: por nº de TCCs (desc).
@@ -1457,6 +1521,26 @@ if secao == "Povos & territórios":
             st.plotly_chart(fig, use_container_width=True)
         else:
             st.info("Nenhum território citado no filtro atual.")
+
+    # Alerta de manutenção: nomes citados no corpus fora do dicionário.
+    _novos = candidatos_gazetteer(chave=str(CSV.stat().st_mtime))
+    if not _novos.empty:
+        with st.expander(f"🔎 Manutenção do dicionário: {len(_novos)} nome(s) "
+                         "citado(s) no corpus que ainda não constam do gazetteer"):
+            st.caption(
+                "Encontrados pelas fórmulas usuais do texto (\"comunidade indígena X\", "
+                "\"Terra Indígena X\", \"povo X\"), com 2 ou mais TCCs. São **sugestões a "
+                "conferir**, não detecção automática de etnônimo: podem ser nomes de "
+                "escola, de fazenda ou trechos de frase. Depois de confirmados, acrescente "
+                "ao gazetteer no código para entrarem nas contagens.")
+            st.dataframe(
+                _novos.rename(columns={"nome": "Nome citado", "tipo": "Citado como",
+                                       "n": "TCCs"}),
+                use_container_width=True, hide_index=True)
+    else:
+        st.caption("✅ Dicionário em dia: nenhum nome de comunidade, terra ou povo "
+                   "citado em 2 ou mais TCCs ficou de fora do gazetteer. "
+                   "A verificação roda sobre todo o corpus a cada atualização.")
 
     if _sem_pov or _sem_ter:
         st.caption(
