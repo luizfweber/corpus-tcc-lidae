@@ -238,6 +238,10 @@ GZ_POVOS = {
     "Pirititi": ["pirititi"],
     "Waimiri-Atroari": ["waimiri", "atroari"],
     "Warao": ["warao"],
+    # Pemon e Akawaio: macro-grupos aparentados de Taurepang e Ingarikó,
+    # citados nominalmente em TCCs do corpus.
+    "Pemon": ["pemon", "pemom"],
+    "Akawaio": ["akawaio"],
 }
 GZ_TERRITORIOS = {
     "Raposa Serra do Sol": ["raposa serra do sol", "raposa-serra do sol",
@@ -249,7 +253,20 @@ GZ_TERRITORIOS = {
     "Serra da Moça": ["serra da moca"],
     "Waimiri-Atroari (TI)": ["waimiri-atroari"],
     "Ananás": ["ananas"],
-    "Manoa-Pium": ["manoa-pium"],
+        # "Manoá-Pium" aparece no corpus sem hífen; sem a variante com espaço a
+    # entrada não casava nenhum TCC. "manoa" cobre as citações à comunidade.
+    "Manoá-Pium": ["manoa-pium", "manoa pium", "manoa"],
+    "Maturuca": ["maturuca"],
+    "Serra da Lua": ["serra da lua"],
+    "Jacamim": ["jacamim"],
+    "Trombetas-Mapuera": ["trombetas-mapuera", "trombetas mapuera", "mapuera"],
+    "Barata/Livramento": ["barata-livramento", "barata livramento", "barata"],
+    "Muriru": ["muriru"],
+    "Raimundão": ["raimundao"],
+    "Canavial": ["canavial"],
+    "Olho d'Água": ["olho d'agua", "olho d agua", "olho dagua"],
+    "Anta": ["comunidade anta", "anta i", "anta ii"],
+    "Laje": ["comunidade laje"],
     "Ponta da Serra": ["ponta da serra"],
     "Boqueirão": ["boqueirao"],
 }
@@ -1413,6 +1430,12 @@ if secao == "Povos & territórios":
     cpov = conta_gazetteer(txt_gz, GZ_POVOS)
     cter = conta_gazetteer(txt_gz, GZ_TERRITORIOS)
 
+    # Entradas do dicionário SEM nenhuma menção no filtro atual. Só aparecem
+    # aqui porque o gazetteer é uma lista regional curada, não uma lista extraída
+    # do corpus: a ausência é lacuna da coleta, não inexistência do povo/terra.
+    _sem_pov = [k for k in GZ_POVOS if k not in set(cpov["nome"])] if not cpov.empty else list(GZ_POVOS)
+    _sem_ter = [k for k in GZ_TERRITORIOS if k not in set(cter["nome"])] if not cter.empty else list(GZ_TERRITORIOS)
+
     cc1, cc2 = st.columns(2)
     with cc1:
         st.markdown("**Povos (etnônimos) mais citados**")
@@ -1434,6 +1457,14 @@ if secao == "Povos & territórios":
             st.plotly_chart(fig, use_container_width=True)
         else:
             st.info("Nenhum território citado no filtro atual.")
+
+    if _sem_pov or _sem_ter:
+        st.caption(
+            "Sem menção no filtro atual, embora constem no dicionário regional: "
+            + ("**povos:** " + ", ".join(_sem_pov) + ". " if _sem_pov else "")
+            + ("**territórios:** " + ", ".join(_sem_ter) + ". " if _sem_ter else "")
+            + "A ausência indica lacuna da coleta, não inexistência do povo ou "
+              "da terra indígena.")
 
     st.markdown("**Povos citados × curso**")
     linhas = []
