@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Análise temática POR CURSO, em camadas — LIDAE/UFRR
+Análise temática POR CURSO, em camadas, LIDAE/UFRR
 ============================================================================
 Por que por curso: o LDA global apenas redescobria a divisão entre cursos
 (Tópico≈Música, Tópico≈Insikiran). Olhar DENTRO de cada curso revela sub-temas
-reais — mas só onde há documentos suficientes (CLAUDE.md §1, §2, §4).
+reais, mas só onde há documentos suficientes (CLAUDE.md §1, §2, §4).
 
 TRÊS CAMADAS, segundo o N de cada curso (atualizado p/ 211 TCCs, 2026-06-19):
   • LDA (N alto):        Insikiran (81), História (47) e Pedagogia (29).
                           K pequeno, escolhido por ESTABILIDADE (ARI entre seeds).
-  • Descritivo (N médio): Música (21), Matemática (15). Sem LDA — termos mais
+  • Descritivo (N médio): Música (21), Matemática (15). Sem LDA, termos mais
                           frequentes + listagem. Modelar tópicos aqui seria ruído.
   • Listagem (N ínfimo):  LEDUCARR (10), Letras (7). Nenhuma
-                          modelagem — só identificação dos trabalhos.
+                          modelagem, só identificação dos trabalhos.
 
 Gera DOIS artefatos (mesma fonte de verdade):
   outputs/analise/analise_por_curso.md    (leitura humana)
@@ -166,15 +166,15 @@ def camada_lda(curso, k_lo, k_hi):
 
     # markdown
     diag_txt = " · ".join(f"K{k}: ARI={v:.2f}" for k, v in diag.items())
-    out(f"### {curso} — {len(sub)} TCCs · LDA intra-curso (K={K_best})")
-    out(f"*Seleção de K por estabilidade entre 8 seeds — {diag_txt}. "
+    out(f"### {curso}, {len(sub)} TCCs · LDA intra-curso (K={K_best})")
+    out(f"*Seleção de K por estabilidade entre 8 seeds, {diag_txt}. "
         f"Escolhido K={K_best} (ARI={ari:.2f}).*")
     if ari < 0.4:
         out(f"> ⚠️ Estabilidade baixa (ARI={ari:.2f}): sub-temas FRÁGEIS, "
-            "indício a confirmar por leitura — não conclusão.")
+            "indício a confirmar por leitura, não conclusão.")
     out("")
     for n, st_ in enumerate(subtemas, 1):
-        out(f"**Sub-tema {n}** ({st_['n']} TCCs) — {', '.join(st_['termos'])}")
+        out(f"**Sub-tema {n}** ({st_['n']} TCCs), {', '.join(st_['termos'])}")
         for e in st_["exemplos"]:
             out(f"   - id {e['id']} ({e['ano']}): {e['titulo'][:90]}")
         out("")
@@ -190,7 +190,7 @@ def camada_lda(curso, k_lo, k_hi):
 def camada_descritiva(curso):
     sub = [r for r in rows if r["grupo_tcc"] == curso]
     top = top_termos(sub)
-    out(f"### {curso} — {len(sub)} TCCs · descritivo (sem LDA)")
+    out(f"### {curso}, {len(sub)} TCCs · descritivo (sem LDA)")
     out(f"*N insuficiente para modelagem de tópicos; reporta-se a frequência "
         f"documental dos termos e a lista de trabalhos.*\n")
     out(f"**Termos mais recorrentes (nº de TCCs):** "
@@ -207,7 +207,7 @@ def camada_descritiva(curso):
 # ── CAMADA LISTAGEM ──────────────────────────────────────────────────────────
 def camada_listagem(curso):
     sub = [r for r in rows if r["grupo_tcc"] == curso]
-    out(f"### {curso} — {len(sub)} TCCs · listagem (sem análise)")
+    out(f"### {curso}, {len(sub)} TCCs · listagem (sem análise)")
     out(f"*N ínfimo ({len(sub)}): qualquer modelagem seria artefato "
         f"(CLAUDE.md §1). Apenas identificação.*\n")
     for r in sorted(sub, key=lambda r: str(r.get("ano_defesa", ""))):
@@ -219,7 +219,7 @@ def camada_listagem(curso):
 
 
 # ── execução ─────────────────────────────────────────────────────────────────
-out("# Análise temática por curso, em camadas — LIDAE/UFRR\n")
+out("# Análise temática por curso, em camadas, LIDAE/UFRR\n")
 out(f"Corpus: {len(rows)} TCCs. Tratamento conforme o N de cada curso "
     "(LDA · descritivo · listagem). Exploratório, não censitário.\n")
 
@@ -229,11 +229,11 @@ out("\n## 🟢 Camada LDA (N suficiente para sub-temas)\n")
 for curso, (lo, hi) in LDA_CURSOS.items():
     registros.append(camada_lda(curso, lo, hi))
 
-out("\n## 🟠 Camada descritiva (N médio — termos + leitura)\n")
+out("\n## 🟠 Camada descritiva (N médio, termos + leitura)\n")
 for curso in DESCRITIVO:
     registros.append(camada_descritiva(curso))
 
-out("\n## 🔴 Camada listagem (N ínfimo — sem modelagem)\n")
+out("\n## 🔴 Camada listagem (N ínfimo, sem modelagem)\n")
 for curso in LISTAGEM:
     registros.append(camada_listagem(curso))
 

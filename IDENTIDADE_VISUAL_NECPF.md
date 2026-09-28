@@ -1,4 +1,4 @@
-# Identidade Visual — NECPF
+# Identidade Visual: NECPF
 **Sistema de design para o dashboard de dados de pesquisa**
 *Núcleo de Estudos em Educação, Cultura, Poder e Formação · CCLA / UFRR*
 
@@ -17,7 +17,7 @@ A logo do NECPF reúne quatro elementos que orientam toda a identidade:
 | **Rio (linhas sinuosas)** | Rio Branco; fluxo, percurso formativo | Branco sobre verde |
 | **Logotipo "NECPF"** | Assinatura institucional | Verde-floresta |
 
-**Princípio de aplicação:** o verde-floresta é a cor institucional dominante (estrutura, texto, identidade); azul-teal, âmbar e terracota são cores de apoio e de dados, usadas para categorizar, destacar e diferenciar — nunca competindo com o verde como base.
+**Princípio de aplicação:** o verde-floresta é a cor institucional dominante (estrutura, texto, identidade); azul-teal, âmbar e terracota são cores de apoio e de dados, usadas para categorizar, destacar e diferenciar, nunca competindo com o verde como base.
 
 ---
 
@@ -36,7 +36,7 @@ A logo do NECPF reúne quatro elementos que orientam toda a identidade:
 
 Cada cor-âncora expandida em escala 50–900 para uso em fundos, bordas, estados (hover/active), preenchimentos de gráfico e texto sobre fundos claros/escuros.
 
-### Verde-floresta — `--verde`
+### Verde-floresta: `--verde`
 
 | Token | Hex | Uso sugerido |
 |---|---|---|
@@ -45,13 +45,13 @@ Cada cor-âncora expandida em escala 50–900 para uso em fundos, bordas, estado
 | verde-200 | `#9FC6AE` | Borda suave, divisórias |
 | verde-300 | `#6FA888` | Ícones secundários |
 | verde-400 | `#468A66` | Estado hover de botão |
-| verde-500 | `#2A724A` | — |
+| verde-500 | `#2A724A` |, |
 | **verde-600** | **`#1B5E3B`** | **Base institucional** |
 | verde-700 | `#164E31` | Texto sobre fundo claro, active |
 | verde-800 | `#103A25` | Cabeçalho escuro |
 | verde-900 | `#0A2718` | Fundo escuro / dark mode |
 
-### Azul-teal — `--teal`
+### Azul-teal: `--teal`
 
 | Token | Hex | Uso sugerido |
 |---|---|---|
@@ -63,38 +63,38 @@ Cada cor-âncora expandida em escala 50–900 para uso em fundos, bordas, estado
 | **teal-500** | **`#1A7A8A`** | **Base de apoio / links** |
 | teal-600 | `#156675` | Active |
 | teal-700 | `#114E5A` | Texto sobre claro |
-| teal-800 | `#0C3941` | — |
+| teal-800 | `#0C3941` |, |
 | teal-900 | `#07252A` | Fundo escuro |
 
-### Âmbar — `--ambar`
+### Âmbar: `--ambar`
 
 | Token | Hex | Uso sugerido |
 |---|---|---|
 | ambar-50 | `#FBF4E1` | Fundo de destaque suave |
 | ambar-100 | `#F6E5B3` | Realce de fundo |
 | ambar-200 | `#EFD174` | Borda de destaque |
-| ambar-300 | `#E6BC3E` | — |
+| ambar-300 | `#E6BC3E` |, |
 | ambar-400 | `#DCAD24` | Hover |
 | **ambar-500** | **`#D4A017`** | **Base de destaque** |
 | ambar-600 | `#B08412` | Active |
 | ambar-700 | `#88660E` | Texto âmbar sobre claro |
-| ambar-800 | `#5F480A` | — |
-| ambar-900 | `#3A2C06` | — |
+| ambar-800 | `#5F480A` |, |
+| ambar-900 | `#3A2C06` |, |
 
-### Terracota — `--terracota`
+### Terracota: `--terracota`
 
 | Token | Hex | Uso sugerido |
 |---|---|---|
 | terracota-50 | `#FBEAE3` | Fundo de alerta suave |
 | terracota-100 | `#F4C9B6` | Realce |
 | terracota-200 | `#EBA384` | Borda de alerta |
-| terracota-300 | `#DF7B53` | — |
+| terracota-300 | `#DF7B53` |, |
 | terracota-400 | `#D45D2E` | Hover |
 | **terracota-500** | **`#C1440E`** | **Base de alerta/ênfase** |
 | terracota-600 | `#A23A0C` | Active |
 | terracota-700 | `#7C2C09` | Texto sobre claro |
-| terracota-800 | `#561F06` | — |
-| terracota-900 | `#331303` | — |
+| terracota-800 | `#561F06` |, |
+| terracota-900 | `#331303` |, |
 
 ### Neutros (cinza com leve calor)
 
@@ -266,7 +266,7 @@ Ordem recomendada para máxima distinção entre categorias:
 
 - Texto de corpo sobre fundo claro: use `neutro-700`/`neutro-800` (contraste AA).
 - Verde-floresta (`verde-600`) como texto sobre branco atinge contraste AA para títulos e textos grandes; para corpo pequeno, prefira `verde-700`.
-- Âmbar (`ambar-500`) tem contraste baixo sobre branco para texto — use-o em **preenchimentos e destaques**, não em texto pequeno; para rótulos, use `ambar-700`.
+- Âmbar (`ambar-500`) tem contraste baixo sobre branco para texto, use-o em **preenchimentos e destaques**, não em texto pequeno; para rótulos, use `ambar-700`.
 - Não codifique informação **apenas** por cor em gráficos: combine com rótulos, padrões ou ícones (importante para séries de dados de pesquisa).
 
 ---

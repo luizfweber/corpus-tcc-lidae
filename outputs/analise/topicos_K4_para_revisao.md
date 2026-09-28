@@ -1,4 +1,4 @@
-# Tópicos LDA (K=4, seed 42) — base para revisão de rótulos
+# Tópicos LDA (K=4, seed 42): base para revisão de rótulos
 
 Corpus: 147 TCCs · vocabulário: 800 termos
 

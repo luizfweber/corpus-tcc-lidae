@@ -1,4 +1,4 @@
-# Análise temática — TCCs do curso de Música (LIDAE/UFRR)
+# Análise temática: TCCs do curso de Música (LIDAE/UFRR)
 
 > Leitura **descritiva e exploratória** dos 27 TCCs de Música do corpus
 > (defesas de 2017 a 2026), a partir de **título + resumo + palavras-chave**.
@@ -12,7 +12,7 @@
 
 ## Como esta análise foi feita (método)
 
-Esta é uma **análise temática qualitativa, por leitura** — não um agrupamento
+Esta é uma **análise temática qualitativa, por leitura**, não um agrupamento
 automático. Os 6 eixos **não** saíram de um algoritmo (como o LDA ou o k-means
 usados no resto do painel); emergiram de uma leitura sistemática dos 27 TCCs,
 apoiada por contagem de termos. O passo a passo:
@@ -22,12 +22,12 @@ apoiada por contagem de termos. O passo a passo:
 2. **Apoio quantitativo (frequência).** Calculei quais termos e palavras-chave
    mais se repetem no conjunto, removendo palavras vazias e termos genéricos
    ("trabalho", "pesquisa", "educação", "ensino"…). Isso evidenciou os fios
-   dominantes — educação musical, contexto roraimense/amazônico, prática docente
-   — descritos no Panorama.
+   dominantes, educação musical, contexto roraimense/amazônico, prática docente
+   descritos no Panorama.
 3. **Leitura e codificação.** Li o **foco central** de cada TCC (sobre o quê é o
    trabalho) e atribuí um rótulo curto a cada um.
-4. **Agrupamento indutivo.** Reuni os TCCs de foco semelhante. Os eixos — e o
-   próprio número **6** — **emergiram** desse agrupamento; não foram definidos
+4. **Agrupamento indutivo.** Reuni os TCCs de foco semelhante. Os eixos, e o
+   próprio número **6**, **emergiram** desse agrupamento; não foram definidos
    de antemão. TCCs com mais de um foco foram alocados no eixo do foco
    **principal** e marcados como *transversais*, para que a contagem feche.
 5. **Nomeação.** Cada grupo recebeu um nome que resume o foco comum.
@@ -35,22 +35,22 @@ apoiada por contagem de termos. O passo a passo:
 **Por que não LDA/clusters aqui?** Porque N = 27 é pequeno demais para uma
 modelagem estatística estável (por isso o pipeline coloca Música na camada
 "descritiva", sem LDA intra-curso). Nessa escala, a leitura humana é mais
-confiável — mas é **interpretativa**: outro leitor poderia agrupar de forma
+confiável, mas é **interpretativa**: outro leitor poderia agrupar de forma
 ligeiramente diferente, e há afinidades entre eixos. Daí serem **indício, não
 classificação fechada** (análise exploratória).
 
 > Diferença em relação à aba "Tópicos (LDA)" do painel: lá, os tópicos são
 > gerados por **algoritmo** sobre os 338 TCCs (K fixado em 8); aqui, os eixos
-> são fruto de **leitura** dos 27 TCCs de Música — dois instrumentos distintos,
+> são fruto de **leitura** dos 27 TCCs de Música, dois instrumentos distintos,
 > ambos exploratórios.
 
 ## 1. Panorama
 
 Dois fios atravessam quase todo o conjunto:
 
-- **Educação musical** — "música/musical" aparece nos **27** TCCs;
+- **Educação musical**, "música/musical" aparece nos **27** TCCs;
   "educação musical" é a palavra-chave mais repetida (4×).
-- **Contexto regional roraimense/amazônico** — "Boa Vista" em 15 TCCs,
+- **Contexto regional roraimense/amazônico**, "Boa Vista" em 15 TCCs,
   "Roraima" em 15, "Amazônia" em 3.
 
 Palavras-chave repetidas (≥2 TCCs): educação musical (4), ensino de música (2),
@@ -66,56 +66,56 @@ performance ritual (2).
 > curso (27). Os trabalhos que tocam mais de um tema estão sinalizados como
 > *transversais* dentro do seu eixo principal.
 
-### Eixo 1 — Ensino de música na educação básica e formação docente (11 TCCs)
+### Eixo 1: Ensino de música na educação básica e formação docente (11 TCCs)
 O maior eixo: prática docente, estágio/Residência Pedagógica, BNCC e
 referenciais de educação musical (Swanwick, Lucy Green).
 
-- id 91 — aulas de música na educação básica (Residência Pedagógica; Swanwick)
-- id 94 — práticas de canto e formação do licenciado
-- id 98 — a regência nas aulas de música na educação básica
-- id 85 — práticas informais de aprendizagem musical na formação (Lucy Green)
-- id 86 — práticas de ensino na Residência Pedagógica (formação docente)
-- id 212 — ensino remoto emergencial na pandemia (desafios da docência)
-- id 87 — música × educação física: "O Passo", interdisciplinaridade (BNCC)
-- id 332 — narrativas como memória da formação docente (Projeto Música para Todos)
-- id 333 — diversidade musical em conversas com discentes da licenciatura
-- id 334 — práticas criativas na educação básica a partir da improvisação
-- id 95 — canções regionais do Festival Canto Forte como material didático
+- id 91, aulas de música na educação básica (Residência Pedagógica; Swanwick)
+- id 94, práticas de canto e formação do licenciado
+- id 98, a regência nas aulas de música na educação básica
+- id 85, práticas informais de aprendizagem musical na formação (Lucy Green)
+- id 86, práticas de ensino na Residência Pedagógica (formação docente)
+- id 212, ensino remoto emergencial na pandemia (desafios da docência)
+- id 87, música × educação física: "O Passo", interdisciplinaridade (BNCC)
+- id 332, narrativas como memória da formação docente (Projeto Música para Todos)
+- id 333, diversidade musical em conversas com discentes da licenciatura
+- id 334, práticas criativas na educação básica a partir da improvisação
+- id 95, canções regionais do Festival Canto Forte como material didático
   (BNCC) · *transversal com o Eixo 3: o repertório é regional, mas o objetivo
   declarado é produzir atividades para a educação básica*
 
-### Eixo 2 — Ensino de instrumentos e ensino coletivo (5 TCCs)
-- id 89 — aulas de piano em grupo (método Suzuki)
-- id 96 — ensino coletivo de violão (Orquestra de Violões do IBVM)
-- id 83 — contrabaixo elétrico: levadas em quatro gêneros do Norte ·
+### Eixo 2: Ensino de instrumentos e ensino coletivo (5 TCCs)
+- id 89, aulas de piano em grupo (método Suzuki)
+- id 96, ensino coletivo de violão (Orquestra de Violões do IBVM)
+- id 83, contrabaixo elétrico: levadas em quatro gêneros do Norte ·
   *transversal com o Eixo 3 (repertório regional)*
-- id 331 — cordas friccionadas no contexto da crise migratória venezuelana
-- id 109 — flauta doce com musicalidades indígenas roraimenses ·
+- id 331, cordas friccionadas no contexto da crise migratória venezuelana
+- id 109, flauta doce com musicalidades indígenas roraimenses ·
   *transversal com etnomusicologia; o foco declarado é a prática coletiva
   do instrumento*
 
-### Eixo 3 — Música, cultura regional e identidade (3 TCCs)
+### Eixo 3: Música, cultura regional e identidade (3 TCCs)
 Festivais, percussão e memória: música como expressão cultural de
 Roraima/Amazônia.
 
-- id 84 — Festival Folclórico de Caracaraí
-- id 97 — Festival Folclórico de Caracaraí: a percussão (Cobra Mariana, Gavião)
-- id 82 — escolas de samba em Boa Vista (estudos de memória)
+- id 84, Festival Folclórico de Caracaraí
+- id 97, Festival Folclórico de Caracaraí: a percussão (Cobra Mariana, Gavião)
+- id 82, escolas de samba em Boa Vista (estudos de memória)
 
-### Eixo 4 — Música, religião e ritual (4 TCCs)
-- id 108 — colaboração pianística no coro da Igreja Batista Regular de Boa Vista
-- id 90 — canto coral na Igreja Batista Regular (ensino, regência)
-- id 99 — música ritual no terreiro de Umbanda Ogum Matinata (Boa Vista)
-- id 245 — música ritual no terreiro de Umbanda (ponto cantado, performance)
+### Eixo 4: Música, religião e ritual (4 TCCs)
+- id 108, colaboração pianística no coro da Igreja Batista Regular de Boa Vista
+- id 90, canto coral na Igreja Batista Regular (ensino, regência)
+- id 99, música ritual no terreiro de Umbanda Ogum Matinata (Boa Vista)
+- id 245, música ritual no terreiro de Umbanda (ponto cantado, performance)
 
-### Eixo 5 — Educação musical, inclusão e políticas públicas (3 TCCs)
-- id 93 — produção científica e políticas públicas de inclusão
-- id 211 — produções científicas sobre inclusão de pessoas com deficiência
-- id 330 — ensino de música em espaço não formal com crianças indígenas Warao
+### Eixo 5: Educação musical, inclusão e políticas públicas (3 TCCs)
+- id 93, produção científica e políticas públicas de inclusão
+- id 211, produções científicas sobre inclusão de pessoas com deficiência
+- id 330, ensino de música em espaço não formal com crianças indígenas Warao
   em abrigo para migrantes venezuelanos (práticas pedagógicas inclusivas)
 
-### Eixo 6 — Teoria e análise musical (1 TCC)
-- id 92 — empréstimo modal no pop rock dos anos 1980
+### Eixo 6: Teoria e análise musical (1 TCC)
+- id 92, empréstimo modal no pop rock dos anos 1980
 
 **Conferência:** 11 + 5 + 3 + 4 + 3 + 1 = **27 TCCs**, igual ao total de Música
 no corpus.
@@ -123,7 +123,7 @@ no corpus.
 ## 3. Leitura
 
 O curso de Música aparece **fortemente territorializado**: mesmo os trabalhos
-"pedagógicos" mobilizam repertório e contextos locais — festivais, gêneros do
+"pedagógicos" mobilizam repertório e contextos locais, festivais, gêneros do
 Norte, igrejas e terreiros de Boa Vista, musicalidades indígenas. O foco
 predominante é **formar o professor de música para a escola básica**, com forte
 presença do estágio e da Residência Pedagógica; em paralelo, há uma veia
@@ -137,4 +137,4 @@ ritual religioso, música indígena).
   a cultura regional). Cada um foi contado uma única vez, no eixo do foco
   principal, e sinalizado como transversal.
 - A análise reflete **a coleta atual** (cadastro NECPF), não o universo de TCCs
-  de Música do curso — ausências são lacuna de coleta, não inexistência.
+  de Música do curso, ausências são lacuna de coleta, não inexistência.

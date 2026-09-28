@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Inspeção qualitativa dos tópicos LDA com K=4 — LIDAE/UFRR
+Inspeção qualitativa dos tópicos LDA com K=4, LIDAE/UFRR
 ============================================================================
-Objetivo: dar BASE DE LEITURA para rotular os tópicos (CLAUDE.md §4 — o rótulo
+Objetivo: dar BASE DE LEITURA para rotular os tópicos (CLAUDE.md §4, o rótulo
 sai da leitura dos documentos, não só dos top-termos). Não altera modelo/dados.
 
 Para cada tópico (K=4, seed 42, igual ao pipeline) imprime:
@@ -92,7 +92,7 @@ def out(s=""):
     linhas.append(s)
 
 
-out(f"# Tópicos LDA (K={K}, seed {SEED}) — base para revisão de rótulos\n")
+out(f"# Tópicos LDA (K={K}, seed {SEED}), base para revisão de rótulos\n")
 out(f"Corpus: {len(rows)} TCCs · vocabulário: {len(vocab)} termos\n")
 out("> Os rótulos devem sair da LEITURA dos documentos abaixo, não só dos "
     "top-termos (CLAUDE.md §4). Tópico = indício, não categoria fechada.\n")

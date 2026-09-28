@@ -253,7 +253,7 @@ def main():
             aut = r.get("Autor/a do TCC", "")
             ja_tem = fold(aut) in autores_base
             marca = "já consta na base (provável reenvio)" if ja_tem else \
-                    "NÃO consta na base — recuperar o título com o pesquisador"
+                    "NÃO consta na base, recuperar o título com o pesquisador"
             print(f"    - {aut} [{r.get('Curso/licenciatura analisada','')}]: {marca}")
     if novos.empty:
         print("\nNada novo a importar."); return

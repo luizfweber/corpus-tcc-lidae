@@ -1,4 +1,4 @@
-# Cobertura da coleta por curso (LIDAE/NECPF) — janela 2015–2025
+# Cobertura da coleta por curso (LIDAE/NECPF): janela 2015–2025
 
 > **Cobertura = TCCs coletados na janela ÷ egressos da janela** (CLAUDE.md §5).
 > Exploratório, não censitário: o corpus é um piloto desbalanceado (§1).
@@ -14,7 +14,7 @@
   cai entre 2015 e 2025. Excluídos: bacharelado explícito `(B)`; sentinela 2099;
   vazios.
 - **Denominador B (série histórica):** `canonico/egressos_serie_historica.csv` (canônico,
-  reconciliado com a PROEG e **estendido até 2025.2 com o incremento da DTI** —
+  reconciliado com a PROEG e **estendido até 2025.2 com o incremento da DTI**, 
   ver período 6, coluna `fonte`), janela = acumulado 2025.2 menos acumulado
   2009–2014.2.
 
@@ -38,7 +38,7 @@
 **Global na janela:** 281 TCCs ÷ ~1.509 egressos (DTI) ≈ **18,6%**. Com a série
 estendida a 2025.2, as duas fontes ficam próximas (ex.: Música 46 = 46).
 
-## Leitura (indício, não veredito — §4)
+## Leitura (indício, não veredito: §4)
 
 - A coleta é mais **profunda** em História (56%) e Música (48%): onde o NECPF
   concentrou esforço. Insikiran tem a maior massa absoluta (87 TCCs).
@@ -48,14 +48,14 @@ estendida a 2025.2, as duas fontes ficam próximas (ex.: Música 46 = 46).
 - Não confundir cobertura baixa com "pouca produção": é **disponibilidade de
   acervo coletado**, não medida de produção docente (§4, §6).
 
-## Ressalvas da fonte (preservadas, não corrigidas — §3)
+## Ressalvas da fonte (preservadas, não corrigidas: §3)
 
 1. **Conceito do denominador DTI:** `afastamento_permanente` é a **saída/colação
    de grau**, não a data de defesa. É "quem se formou na janela", aproximação
    legítima do universo de egressos, mas evento distinto da defesa do TCC.
 2. **Licenciatura × bacharelado:** só Ciências Biológicas mistura as duas
    modalidades na DTI. Excluímos o `(B)` explícito, mas restam 114 registros de
-   habilitação vazia (ambíguos) — por isso a série histórica (que isola "(L)")
+   habilitação vazia (ambíguos), por isso a série histórica (que isola "(L)")
    é o denominador **mais confiável** para Cs. Biológicas (63, não 107).
 3. **Discrepância DTI × série histórica:** as duas fontes concordam de perto em
    quase todos os cursos; divergem em Cs. Biológicas (ver acima) e Geografia

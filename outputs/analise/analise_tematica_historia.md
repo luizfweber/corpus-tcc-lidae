@@ -1,4 +1,4 @@
-# Análise temática — História (LIDAE/UFRR)
+# Análise temática: História (LIDAE/UFRR)
 
 > Leitura descritiva e exploratória dos 130 TCCs do curso de História, a partir de
 > título, resumo e palavras-chave. Fonte: cadastro dos TCCs realizado pelos
@@ -36,49 +36,49 @@ indígenas, Boa Vista, território, análise, migração.
 
 ## Eixos temáticos
 
-### Eixo 1 — Ensino de História e formação docente (23 TCCs)
+### Eixo 1: Ensino de História e formação docente (23 TCCs)
 Livro didático, avaliação, estágio, patrimônio no ensino, cultura digital (reels),
 relações étnico-raciais e história regional na escola.
 ids: 160, 167, 170, 172, 178, 183, 185, 195, 198, 199, 201, 204, 220, 224, 253,
 259, 260, 267, 271, 275, 310, 313, 317
 
-### Eixo 2 — Política, território e geopolítica (22 TCCs)
+### Eixo 2: Política, território e geopolítica (22 TCCs)
 Território Federal do Rio Branco, regime militar, BR-174 e Perimetral Norte,
 planos de desenvolvimento, governos e disputas políticas.
 ids: 145, 163, 166, 171, 196, 200, 252, 255, 258, 265, 270, 272, 273, 274, 288,
 291, 297, 299, 303, 304, 305, 326
 
-### Eixo 3 — Povos indígenas, terras e violência (21 TCCs)
+### Eixo 3: Povos indígenas, terras e violência (21 TCCs)
 Demarcação de terras (Raposa/Serra do Sol, Yanomami), violência, marco temporal,
 Waimiri-Atroari, presença indígena no ensino superior e representação.
 ids: 146, 154, 164, 168, 175, 179, 184, 194, 221, 223, 225, 229, 231, 235, 256,
 257, 263, 264, 268, 312, 314
 
-### Eixo 4 — Patrimônio, memória e cultura (14 TCCs)
+### Eixo 4: Patrimônio, memória e cultura (14 TCCs)
 Patrimônio histórico de Boa Vista, museus, tombamento, toponímia, teatro, futebol,
 movimento cultural roraimense.
 ids: 161, 169, 205, 213, 217, 219, 261, 287, 290, 296, 308, 311, 316, 338
 
-### Eixo 5 — Religião e religiosidade (14 TCCs)
+### Eixo 5: Religião e religiosidade (14 TCCs)
 Ordens e missões beneditinas, Igreja Católica na ditadura, pentecostalismo e
 neopentecostalismo, irmandades e candomblé.
 ids: 147, 156, 157, 176, 177, 181, 182, 222, 226, 228, 298, 307, 325, 340
 
-### Eixo 6 — História internacional e historiografia (12 TCCs)
+### Eixo 6: História internacional e historiografia (12 TCCs)
 Amazônia colonial e europeus, Segunda Guerra, César, Escola dos Annales, Israel e
 Palestina, Venezuela, expedições e viajantes.
 ids: 155, 162, 227, 232, 233, 234, 292, 293, 295, 302, 315, 339
 
-### Eixo 7 — Gênero, mulheres e violência (11 TCCs)
+### Eixo 7: Gênero, mulheres e violência (11 TCCs)
 História das mulheres, representação feminina, feminicídio, mulheres indígenas.
 ids: 158, 159, 165, 173, 180, 197, 202, 208, 230, 269, 324
 
-### Eixo 8 — Educação, trabalho e sociedade (6 TCCs)
+### Eixo 8: Educação, trabalho e sociedade (6 TCCs)
 EJA, sindicalismo, inclusão e educação especial, saneamento e neoliberalismo na
 educação.
 ids: 262, 266, 286, 289, 294, 309
 
-### Eixo 9 — Migração e formação urbana (7 TCCs)
+### Eixo 9: Migração e formação urbana (7 TCCs)
 Migração (maranhense, venezuelana) e formação de bairros e municípios de Roraima.
 ids: 174, 254, 300, 301, 306, 328, 329
 

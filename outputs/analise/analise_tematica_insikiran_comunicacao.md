@@ -1,4 +1,4 @@
-# Análise temática — Insikiran / Comunicação e Artes (LIDAE/UFRR)
+# Análise temática: Insikiran / Comunicação e Artes (LIDAE/UFRR)
 
 > Leitura **descritiva e exploratória** dos 18 TCCs da habilitação *Comunicação
 > e Artes* do curso intercultural Insikiran, a partir de **título + resumo +
@@ -9,7 +9,7 @@
 
 ## Como esta análise foi feita (método)
 
-Esta é uma **análise temática qualitativa, por leitura** — não um agrupamento
+Esta é uma **análise temática qualitativa, por leitura**, não um agrupamento
 automático. Os eixos **não** saíram de um algoritmo (como o LDA ou o k-means do
 restante do painel); emergiram de uma leitura sistemática dos TCCs, apoiada por
 contagem de termos. O passo a passo:
@@ -27,7 +27,7 @@ contagem de termos. O passo a passo:
 
 **Por que não LDA por habilitação?** Porque o N por habilitação é pequeno demais
 para uma modelagem estatística estável. Nessa escala a leitura humana é mais
-confiável — mas é **interpretativa**: outro leitor poderia agrupar de forma
+confiável, mas é **interpretativa**: outro leitor poderia agrupar de forma
 ligeiramente diferente. Daí ser **indício, não classificação fechada**
 (análise exploratória).
 
@@ -44,28 +44,28 @@ narrativas orais como material didático.
 
 ## Eixos temáticos
 
-### Eixo 1 — Leitura, escrita e formação de leitores (4 TCCs)
+### Eixo 1: Leitura, escrita e formação de leitores (4 TCCs)
 Práticas de leitura/escrita e formação de leitores indígenas na educação básica.
 ids: 50, 54, 60, 61
 
-### Eixo 2 — Ensino de línguas indígenas (5 TCCs)
+### Eixo 2: Ensino de línguas indígenas (5 TCCs)
 Ensino de Wapichana, Macuxi e Wai Wai, com material didático (jogos, futebol,
 literatura indígena).
 ids: 56, 57, 58, 59, 64
 
-### Eixo 3 — Narrativas orais, mitos e lendas (3 TCCs)
+### Eixo 3: Narrativas orais, mitos e lendas (3 TCCs)
 Mitos, lendas e histórias tradicionais como recurso pedagógico.
 ids: 52, 53, 63
 
-### Eixo 4 — Jogos pedagógicos e lúdico (2 TCCs)
+### Eixo 4: Jogos pedagógicos e lúdico (2 TCCs)
 Jogos e brincadeiras no ensino-aprendizagem dos anos iniciais.
 ids: 11, 55
 
-### Eixo 5 — Cantos, arte e cultura (2 TCCs)
+### Eixo 5: Cantos, arte e cultura (2 TCCs)
 Cantos Parixara para o letramento; artesanato, arte e pintura na escola.
 ids: 51, 62
 
-### Eixo 6 — Inclusão e etnociência (2 TCCs · pontuais)
+### Eixo 6: Inclusão e etnociência (2 TCCs · pontuais)
 Educação inclusiva (aluno com deficiência); a tanajura como tema de ensino.
 ids: 65, 130
 
@@ -78,7 +78,7 @@ material didático. Jogos e ludicidade são o recurso metodológico recorrente.
 
 ## Limites
 
-- N = 18, com eixos pequenos — **indício a confirmar por leitura**.
+- N = 18, com eixos pequenos, **indício a confirmar por leitura**.
 - Os eixos podem se sobrepor (ex.: jogos aparecem tanto no ensino de línguas
   quanto no eixo lúdico).
 - Reflete **a coleta atual** (cadastro NECPF), não o universo de TCCs da habilitação.

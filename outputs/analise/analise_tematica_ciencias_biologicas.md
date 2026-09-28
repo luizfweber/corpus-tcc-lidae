@@ -1,4 +1,4 @@
-# Análise temática — Ciências Biológicas (LIDAE/UFRR)
+# Análise temática: Ciências Biológicas (LIDAE/UFRR)
 
 > Leitura descritiva e exploratória dos 24 TCCs do curso de Ciências Biológicas,
 > a partir de título, resumo e palavras-chave. Fonte: cadastro dos TCCs realizado
@@ -38,26 +38,26 @@ qualidade da água).
 
 ## Eixos temáticos
 
-### Eixo 1 — Ensino de Biologia e recursos didáticos (8 TCCs)
+### Eixo 1: Ensino de Biologia e recursos didáticos (8 TCCs)
 Livros didáticos, jogos, sequências didáticas, informática e temas transversais no
 ensino de biologia e ciências.
 ids: 242, 247, 249, 250, 277, 278, 284, 285
 
-### Eixo 2 — Saúde, epidemiologia e bem-estar (4 TCCs)
+### Eixo 2: Saúde, epidemiologia e bem-estar (4 TCCs)
 Dengue (sorotipos, genótipos, vetor Aedes) e malária, com técnicas moleculares.
 ids: 243, 244, 280, 282
 
-### Eixo 3 — Botânica, taxonomia e biodiversidade (4 TCCs)
+### Eixo 3: Botânica, taxonomia e biodiversidade (4 TCCs)
 Filogenia e taxonomia (aves, Polygalaceae), fungos do solo e biologia molecular do
 guaraná, no ambiente de savana amazônica.
 ids: 251, 276, 279, 283
 
-### Eixo 4 — Plantas medicinais, bioatividade e etnobiologia (2 TCCs)
+### Eixo 4: Plantas medicinais, bioatividade e etnobiologia (2 TCCs)
 Uso tradicional de plantas medicinais e atividade antioxidante e antimicrobiana de
 extratos vegetais.
 ids: 241, 248
 
-### Eixo 5 — Qualidade da água e ambiente (2 TCCs)
+### Eixo 5: Qualidade da água e ambiente (2 TCCs)
 Potabilidade e qualidade microbiológica da água consumida no campus.
 ids: 246, 281
 

@@ -1,4 +1,4 @@
-# Guia Completo — Reimportação e Publicação do Dashboard
+# Guia Completo: Reimportação e Publicação do Dashboard
 
 ## Índice
 
@@ -26,14 +26,14 @@ corpus_v2/outputs/relatorio_tipo_tcc_vazio.xlsx
 ```
 
 Colunas:
-- `id` — identificador único (não edite)
-- `grupo_tcc` — grupo de curso (não edite)
-- `titulo` — título do TCC (use para identificar)
-- `autor` — autor do trabalho (não edite)
-- `orientador` — orientador (referência)
-- `pesquisador` — **quem catalogou** ← contate esta pessoa
-- `ano_defesa` — ano (não edite)
-- `curso_fonte` — curso original (não edite)
+- `id`, identificador único (não edite)
+- `grupo_tcc`, grupo de curso (não edite)
+- `titulo`, título do TCC (use para identificar)
+- `autor`, autor do trabalho (não edite)
+- `orientador`, orientador (referência)
+- `pesquisador`, **quem catalogou** ← contate esta pessoa
+- `ano_defesa`, ano (não edite)
+- `curso_fonte`, curso original (não edite)
 
 #### Passo 2: Para cada linha, identifique o tipo
 
@@ -51,28 +51,28 @@ Para cada TCC:
 
 Preencha com **UM DESTES**:
 
-- `Monografia` — trabalho de conclusão de curso
-- `Artigo` — artigo científico ou acadêmico
-- `Relato de Experiência` — relato vivencial
-- `Trabalho de Pesquisa` — pesquisa sistemática
-- `Projeto` — projeto de intervenção
-- `Dissertação` — nível mestrado
-- `Tese` — nível doutorado
-- `Estudo de Caso` — análise de caso específico
-- `Revisão Sistemática` — revisão de literatura
-- `Ensaio` — ensaio acadêmico
-- `Resenha` — resenha crítica
-- `Outro` — se não se encaixa em nenhum
+- `Monografia`, trabalho de conclusão de curso
+- `Artigo`, artigo científico ou acadêmico
+- `Relato de Experiência`, relato vivencial
+- `Trabalho de Pesquisa`, pesquisa sistemática
+- `Projeto`, projeto de intervenção
+- `Dissertação`, nível mestrado
+- `Tese`, nível doutorado
+- `Estudo de Caso`, análise de caso específico
+- `Revisão Sistemática`, revisão de literatura
+- `Ensaio`, ensaio acadêmico
+- `Resenha`, resenha crítica
+- `Outro`, se não se encaixa em nenhum
 
 #### Passo 4: Crie arquivo preenchido
 
-**Opção A — Direto em Excel:**
+**Opção A, Direto em Excel:**
 1. Abra `relatorio_tipo_tcc_vazio.xlsx` novamente
 2. Adicione uma **nova coluna** chamada `tipo_tcc`
 3. Preencha as células com os tipos identificados
 4. Salve como: **`relatorio_tipo_tcc_vazio_PREENCHIDO.xlsx`**
 
-**Opção B — CSV simples:**
+**Opção B, CSV simples:**
 1. Crie um arquivo CSV com 2 colunas:
    ```
    id,tipo_tcc
@@ -128,7 +128,7 @@ RELATÓRIO DE REIMPORTAÇÃO
 ✓ Registros atualizados: 92
 
 ⚠️  Conflitos encontrados: 3
-   (tipo_tcc já estava preenchido — mantido valor original)
+   (tipo_tcc já estava preenchido, mantido valor original)
 
 📊 Resumo final:
    Total com tipo_tcc preenchido: 123/128
@@ -170,8 +170,8 @@ Ao recarregar o dashboard (se estiver rodando):
 
 ### 2.2 Pré-requisitos
 
-1. **GitHub** — conta gratuita em https://github.com
-2. **Streamlit Community Cloud** — conta gratuita em https://streamlit.io
+1. **GitHub**, conta gratuita em https://github.com
+2. **Streamlit Community Cloud**, conta gratuita em https://streamlit.io
 3. **Este repositório** no seu GitHub pessoal
 
 ### 2.3 Passo 1: Preparar o repositório GitHub
@@ -181,7 +181,7 @@ Ao recarregar o dashboard (se estiver rodando):
 1. Acesse https://github.com/new
 2. Preencha:
    - **Repository name:** `corpus-tcc-lidae` (ou outro nome)
-   - **Description:** "Dashboard interativo de TCCs — LIDAE/UFRR"
+   - **Description:** "Dashboard interativo de TCCs, LIDAE/UFRR"
    - **Public** ← IMPORTANTE (precisa ser público para Community Cloud)
 3. Clique em "Create repository"
 
@@ -197,7 +197,7 @@ git init
 git add .
 
 # commit
-git commit -m "Dashboard LIDAE corpus TCCs — v1.0"
+git commit -m "Dashboard LIDAE corpus TCCs, v1.0"
 
 # adicionar remote (use a URL do seu repositório)
 git remote add origin https://github.com/seu_usuario/corpus-tcc-lidae.git
@@ -410,7 +410,7 @@ git push
 
 **Pronto!** O Streamlit Cloud detecta a mudança e refaz o deploy em ~30-60 segundos.
 
-Ninguém precisa fazer nada — a URL continua a mesma:
+Ninguém precisa fazer nada, a URL continua a mesma:
 ```
 https://seu-app-name.streamlit.app
 ```

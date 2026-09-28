@@ -1,4 +1,4 @@
-# Customização de Layout — Dashboard LIDAE
+# Customização de Layout: Dashboard LIDAE
 
 ## 1. Mudar para Layout WIDE (tela inteira)
 
@@ -133,7 +133,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.title("📚 Corpus de TCCs — LIDAE/UFRR")
+st.title("📚 Corpus de TCCs, LIDAE/UFRR")
 ```
 
 **.streamlit/config.toml:**
@@ -145,4 +145,4 @@ primaryColor = "#4AABDB"
 
 ---
 
-**Dúvidas?** Edite o arquivo e recarregue — Streamlit aplica mudanças em tempo real.
+**Dúvidas?** Edite o arquivo e recarregue, Streamlit aplica mudanças em tempo real.

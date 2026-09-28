@@ -1,4 +1,4 @@
-# Análise temática — Pedagogia (LIDAE/UFRR)
+# Análise temática: Pedagogia (LIDAE/UFRR)
 
 > Leitura **descritiva e exploratória** dos 29 TCCs do curso de Pedagogia, a
 > partir de **título + resumo + palavras-chave**. Fonte: cadastro dos TCCs
@@ -9,7 +9,7 @@
 
 ## Como esta análise foi feita (método)
 
-Esta é uma **análise temática qualitativa, por leitura** — não um agrupamento
+Esta é uma **análise temática qualitativa, por leitura**, não um agrupamento
 automático. Os eixos **não** saíram de um algoritmo (como o LDA ou o k-means do
 restante do painel); emergiram de uma leitura sistemática dos TCCs, apoiada por
 contagem de termos. O passo a passo:
@@ -27,7 +27,7 @@ contagem de termos. O passo a passo:
 
 **Por que não LDA com N = 29?** Porque é pequeno demais para uma modelagem
 estatística estável (o pipeline trata Pedagogia na camada LDA intra-curso apenas
-com K=2 e estabilidade baixa). Nessa escala a leitura humana é mais confiável —
+com K=2 e estabilidade baixa). Nessa escala a leitura humana é mais confiável, 
 mas é **interpretativa**: outro leitor poderia agrupar de forma ligeiramente
 diferente. Daí ser **indício, não classificação fechada** (análise exploratória).
 
@@ -45,43 +45,43 @@ educação especial e da atuação do pedagogo em contextos diversos.
 
 ## Eixos temáticos
 
-### Eixo 1 — Estágio supervisionado e Residência Pedagógica (8 TCCs)
+### Eixo 1: Estágio supervisionado e Residência Pedagógica (8 TCCs)
 Relatos de experiência formadora no estágio e na Residência Pedagógica
 (presencial, remoto, anos iniciais, alfabetização).
 ids: 21, 23, 33, 34, 35, 44, 45, 47
 
-### Eixo 2 — Coordenação e gestão pedagógica (6 TCCs)
+### Eixo 2: Coordenação e gestão pedagógica (6 TCCs)
 Atuação e perfil do coordenador pedagógico, gestão escolar e relação
 público-privado em Roraima.
 ids: 22, 31, 36, 38, 39, 49
 
-### Eixo 3 — Educação infantil, jogos e brincadeiras (4 TCCs)
+### Eixo 3: Educação infantil, jogos e brincadeiras (4 TCCs)
 Ludicidade, brincar e desenvolvimento na pré-escola e nos anos iniciais.
 ids: 32, 40, 48, 149
 
-### Eixo 4 — Educação especial e inclusão (4 TCCs)
+### Eixo 4: Educação especial e inclusão (4 TCCs)
 Autismo/TEA, inclusão escolar e o ensino da educação especial nas licenciaturas.
 ids: 20, 30, 113, 114
 
-### Eixo 5 — Pedagogia em contextos não-escolares (4 TCCs)
+### Eixo 5: Pedagogia em contextos não-escolares (4 TCCs)
 Pedagogia hospitalar, pedagogo no judiciário e Educação de Jovens e Adultos.
 ids: 42, 110, 111, 112
 
-### Eixo 6 — Formação docente e educação indígena (3 TCCs · pontuais)
+### Eixo 6: Formação docente e educação indígena (3 TCCs · pontuais)
 Formação de professores (normativa), configuração docente em comunidade
 indígena e relato de vivência na educação escolar indígena.
 ids: 37, 41, 43
 
 ## Leitura
 
-A Pedagogia da UFRR aparece centrada na **prática profissional** — o estágio e a
-residência são o gênero dominante — e na **gestão pedagógica**. Ao lado disso,
+A Pedagogia da UFRR aparece centrada na **prática profissional**, o estágio e a
+residência são o gênero dominante, e na **gestão pedagógica**. Ao lado disso,
 expande-se para **contextos não-escolares** (hospitalar, jurídico, EJA) e dá
 atenção consistente à **educação especial/inclusão** e à educação infantil.
 
 ## Limites
 
-- N = 29, com eixos pequenos — **indício a confirmar por leitura**.
+- N = 29, com eixos pequenos, **indício a confirmar por leitura**.
 - Os eixos podem se sobrepor (ex.: alfabetização aparece no estágio e na ed. infantil).
-- Há TCCs de título idêntico (ids 32 e 149) — possível duplicata da fonte, mantida.
+- Há TCCs de título idêntico (ids 32 e 149), possível duplicata da fonte, mantida.
 - Reflete **a coleta atual** (cadastro NECPF), não o universo de TCCs do curso.

@@ -52,12 +52,12 @@ dados pessoais) é versionado.
    formas de saída. **Confirmar com a DTI/PROEG antes de usar como denominador
    de cobertura.**
 4. **Duplicidade por matrícula** (mesma pessoa com 2 títulos de TCC): decidir
-   regra de contagem — egresso conta 1 vez; TCC pode contar 2.
+   regra de contagem, egresso conta 1 vez; TCC pode contar 2.
 5. **Granularidade de curso difere da série histórica PROEG** (`canonico/egressos_serie_historica.csv`):
    ex. aqui `LICENCIATURA INTERCULTURAL` aparece como curso + 3 habilitações e
    também como 3 cursos separados; Letras tem habilitações com sufixo `v. I/II`.
    Será preciso um **de/para** novo (análogo ao `canonico/de_para_cursos_proeg.csv`).
-6. **Reconciliação com a série histórica (4.544) ainda não feita** — os totais
+6. **Reconciliação com a série histórica (4.544) ainda não feita**, os totais
    desta base individual devem ser confrontados com os acumulados da PROEG antes
    de substituir qualquer número canônico (CLAUDE.md §5, §6).
 
@@ -83,7 +83,7 @@ Insikiran 586/578/258 · Geografia 524/516/97 · Cs. Biológicas 516/515/156 ·
 Química 338/337/62 · Matemática 326/322/56 · LEDUCARR 160/160/8 ·
 Física 151/126/52 · Artes Visuais 81/81/5 · Música 66/46/65.
 
-Nota: em Música há mais títulos de TCC (65) do que matrículas (46) — parte dos
+Nota: em Música há mais títulos de TCC (65) do que matrículas (46), parte dos
 egressos tem 2 registros de TCC (ver artefato 4).
 
 ## Vínculo TCC ↔ matrícula (crosswalk, 10/07/2026)

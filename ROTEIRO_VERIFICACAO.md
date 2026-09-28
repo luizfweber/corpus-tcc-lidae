@@ -11,14 +11,14 @@ matrícula, sem matrícula publicada.
 
 ## 0. Antes de começar
 
-- [ ] O app abre e mostra o cabeçalho "Corpus de TCCs — Licenciaturas UFRR" com
+- [ ] O app abre e mostra o cabeçalho "Corpus de TCCs, Licenciaturas UFRR" com
       os KPIs no topo (TCCs, Grupos, Mediana de páginas, etc.).
 - [ ] O menu lateral "Navegação" lista as três abas de egressos:
       **Distribuição**, **Cobertura de Coleta** e **Registros faltantes**.
 
 ## 1. Aba "Distribuição"
 
-Rolar até a seção **"Egressos × TCCs cadastrados — por curso (ano a ano)"**.
+Rolar até a seção **"Egressos × TCCs cadastrados, por curso (ano a ano)"**.
 
 - [ ] A legenda diz "egressos (**base DTI**, por ano de saída/colação)".
 - [ ] Ao escolher um **Curso** e uma **Faixa de anos**, o gráfico mostra duas

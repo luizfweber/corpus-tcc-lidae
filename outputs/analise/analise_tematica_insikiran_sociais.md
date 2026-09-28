@@ -1,4 +1,4 @@
-# Análise temática — Insikiran / Ciências Sociais (LIDAE/UFRR)
+# Análise temática: Insikiran / Ciências Sociais (LIDAE/UFRR)
 
 > Leitura **descritiva e exploratória** dos 23 TCCs da habilitação *Ciências
 > Sociais* do curso intercultural Insikiran, a partir de **título + resumo +
@@ -9,7 +9,7 @@
 
 ## Como esta análise foi feita (método)
 
-Esta é uma **análise temática qualitativa, por leitura** — não um agrupamento
+Esta é uma **análise temática qualitativa, por leitura**, não um agrupamento
 automático. Os eixos **não** saíram de um algoritmo (como o LDA ou o k-means do
 restante do painel); emergiram de uma leitura sistemática dos TCCs, apoiada por
 contagem de termos. O passo a passo:
@@ -27,7 +27,7 @@ contagem de termos. O passo a passo:
 
 **Por que não LDA por habilitação?** Porque o N por habilitação é pequeno demais
 para uma modelagem estatística estável. Nessa escala a leitura humana é mais
-confiável — mas é **interpretativa**: outro leitor poderia agrupar de forma
+confiável, mas é **interpretativa**: outro leitor poderia agrupar de forma
 ligeiramente diferente. Daí ser **indício, não classificação fechada**
 (análise exploratória).
 
@@ -45,26 +45,26 @@ valorização da cultura material e das narrativas.
 
 ## Eixos temáticos
 
-### Eixo 1 — Atividades sociais e Método Indutivo Intercultural (7 TCCs)
+### Eixo 1: Atividades sociais e Método Indutivo Intercultural (7 TCCs)
 Propostas pedagógicas a partir de práticas da comunidade (plantar/colher milho,
 fazer caxiri, cuidar do quintal, pescar, baladeira/calendário socionatural).
 ids: 24, 27, 28, 69, 71, 131, 138
 
-### Eixo 2 — Cultura material, artesanato e patrimônio (5 TCCs)
+### Eixo 2: Cultura material, artesanato e patrimônio (5 TCCs)
 Educação patrimonial, tranças, trançado e artefatos dos povos Macuxi, Ingarikó
 e Wai Wai.
 ids: 70, 72, 132, 136, 137
 
-### Eixo 3 — Narrativas, história e memória da comunidade (5 TCCs)
+### Eixo 3: Narrativas, história e memória da comunidade (5 TCCs)
 Lendas e narrativas indígenas, ensino de história local, etnomapeamento,
 revitalização de conhecimentos.
 ids: 25, 68, 88, 133, 323
 
-### Eixo 4 — Saúde, plantas medicinais e bem-estar (4 TCCs)
+### Eixo 4: Saúde, plantas medicinais e bem-estar (4 TCCs)
 Plantas medicinais, horta medicinal e saúde mental nas comunidades.
 ids: 67, 134, 135, 322
 
-### Eixo 5 — Gestão escolar e migração (2 TCCs · pontuais)
+### Eixo 5: Gestão escolar e migração (2 TCCs · pontuais)
 Projeto político-pedagógico da escola indígena; acolhimento de migrantes
 indígenas venezuelanos.
 ids: 26, 66
@@ -83,6 +83,6 @@ Atividade.
 
 ## Limites
 
-- N = 23, com eixos pequenos — **indício a confirmar por leitura**.
+- N = 23, com eixos pequenos, **indício a confirmar por leitura**.
 - Os eixos podem se sobrepor (ex.: atividades sociais também mobilizam cultura material).
 - Reflete **a coleta atual** (cadastro NECPF), não o universo de TCCs da habilitação.

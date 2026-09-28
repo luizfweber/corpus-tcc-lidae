@@ -185,7 +185,7 @@ def reimporta(df_novo):
 
     if conflitos:
         print(f"\n⚠️  Conflitos encontrados: {len(conflitos)}")
-        print("   (tipo_tcc já estava preenchido — mantido valor original)")
+        print("   (tipo_tcc já estava preenchido, mantido valor original)")
         for conf in conflitos[:5]:  # mostra primeiros 5
             print(f"     id {conf['id']}: {conf['tipo_antigo']} (novo: {conf['tipo_novo']})")
         if len(conflitos) > 5:

@@ -1,4 +1,4 @@
-# Mapa do fluxo de dados (corpus_v2) — LIDAE/NECPF
+# Mapa do fluxo de dados (corpus_v2): LIDAE/NECPF
 
 Onde cada arquivo vive, quem o gera e quem o lê. Regra de ouro: **fonte** é
 editável e versionada; **derivado** nunca é editado à mão, sempre regenerado.

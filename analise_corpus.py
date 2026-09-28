@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Análise exploratória do corpus de TCCs — LIDAE/UFRR
+Análise exploratória do corpus de TCCs, LIDAE/UFRR
 Protocolo: descritiva → LDA → clustering → redes → temática indígena
 """
 import csv, re, unicodedata, warnings
@@ -88,7 +88,7 @@ _NAO_KW = re.compile(r'^\s*n[ãa]o\s*(info|se aplica)', re.I)
 
 def palavras_chave_limpas(val):
     """Separa as palavras-chave (detecta o separador por entrada) e remove o
-    rótulo 'Palavras-chave:' embutido — evita injetar tokens 'palavras'/'chave'
+    rótulo 'Palavras-chave:' embutido, evita injetar tokens 'palavras'/'chave'
     no modelo. Devolve os termos separados por ' ; '."""
     if not val or _NAO_KW.match(str(val).strip()):
         return ""
@@ -112,7 +112,7 @@ for r in rows:
 # 2. ANÁLISE DESCRITIVA
 # ============================================================================
 fig, axes = plt.subplots(1, 3, figsize=(16, 5))
-fig.suptitle(f"Corpus de TCCs — LIDAE/UFRR  (n={N}, piloto exploratório)",
+fig.suptitle(f"Corpus de TCCs, LIDAE/UFRR  (n={N}, piloto exploratório)",
              fontsize=13, fontweight="bold", y=1.01)
 
 # 2a. TCCs por grupo
@@ -139,7 +139,7 @@ axes[1].set_title(f"TCCs por ano (n={len(anos_validos)}, "
                   f"{N-len(anos_validos)} sem ano)")
 axes[1].tick_params(axis="x", rotation=45)
 
-# 2c. Páginas por grupo (mediana — CLAUDE.md §2 regra 7)
+# 2c. Páginas por grupo (mediana: CLAUDE.md §2 regra 7)
 pags_grupo = defaultdict(list)
 for r in rows:
     if r["pag_num"]:
@@ -182,7 +182,7 @@ if top_orient:
         ax.text(v + 0.1, i, str(v), va="center", fontsize=9)
     ax.set_xlabel("TCCs orientados")
     ax.set_title("Orientadores com 2+ TCCs no corpus\n"
-                 "(nomes normalizados — variações podem subsistir)")
+                 "(nomes normalizados, variações podem subsistir)")
     ax.set_xlim(0, max(vals2) + 2)
     plt.tight_layout()
     plt.savefig(OUT / "2_orientadores.png", dpi=150, bbox_inches="tight")
@@ -190,7 +190,7 @@ if top_orient:
     print("✓ 2_orientadores.png")
 
 # ============================================================================
-# 3. LDA — MODELAGEM DE TÓPICOS
+# 3. LDA: MODELAGEM DE TÓPICOS
 # ============================================================================
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.decomposition import LatentDirichletAllocation
@@ -210,7 +210,7 @@ for k in range(4, 9):
     perps[k] = lda.perplexity(X)
     modelos[k] = lda
 
-# K FIXADO em 8 por decisão de leitura (granularidade fina — revela nichos como
+# K FIXADO em 8 por decisão de leitura (granularidade fina: revela nichos como
 # história/gênero e etnobotânica). Perplexidade é INDÍCIO, não veredito (§4):
 # K=8 (498) fica perto do mínimo K=4 (491). Rótulos exigem revisão qualitativa.
 K_LDA = 8
@@ -232,7 +232,7 @@ ROTULOS = {
     6: "Tópico G", 7: "Tópico H",
 }
 
-print("\n── Tópicos LDA (rótulos APROXIMADOS — requerem revisão qualitativa) ──")
+print("\n── Tópicos LDA (rótulos APROXIMADOS, requerem revisão qualitativa) ──")
 for t, terms in termos_top.items():
     print(f"  [{ROTULOS.get(t,'?')}] {', '.join(terms)}")
 
@@ -256,7 +256,7 @@ ax.set_xticks(range(len(grupos_uniq))); ax.set_xticklabels(grupos_uniq, rotation
 ax.set_yticks(range(n_top)); ax.set_yticklabels([ROTULOS.get(t,f"T{t}") for t in range(n_top)])
 plt.colorbar(im, ax=ax, label="Nº TCCs")
 ax.set_title(f"Distribuição de tópicos LDA (K={K_best}) por grupo de curso\n"
-             "INDÍCIO exploratório — rótulos requerem revisão qualitativa")
+             "INDÍCIO exploratório, rótulos requerem revisão qualitativa")
 for i in range(n_top):
     for j in range(len(grupos_uniq)):
         if mat[i,j] > 0:
@@ -291,7 +291,7 @@ for k in range(3, 9):
 K_clust = max(silhs, key=silhs.get)
 print(f"\n  Silhuetas k-means: { {k: round(v,3) for k,v in silhs.items()} }")
 print(f"  K escolhido: {K_clust}  (silhueta={silhs[K_clust]:.3f})")
-print("  NOTA: silhueta baixa em texto curto é esperada — fronteiras porosas, não falha.")
+print("  NOTA: silhueta baixa em texto curto é esperada, fronteiras porosas, não falha.")
 
 km_final = KMeans(n_clusters=K_clust, random_state=42, n_init=10)
 cluster_labels = km_final.fit_predict(Xt)
@@ -327,7 +327,7 @@ axes[1].legend(handles=patches, title="Grupo", fontsize=7, loc="best")
 axes[1].set_title("Grupos de curso formais\n(mesmo espaço SVD)")
 axes[1].set_xlabel("SVD dim 1"); axes[1].set_ylabel("SVD dim 2")
 
-plt.suptitle("Clustering TF-IDF — INDÍCIO exploratório", fontsize=11, y=1.01)
+plt.suptitle("Clustering TF-IDF, INDÍCIO exploratório", fontsize=11, y=1.01)
 plt.tight_layout()
 plt.savefig(OUT / "4_clustering.png", dpi=150, bbox_inches="tight")
 plt.close()
@@ -382,7 +382,7 @@ try:
               mpatches.Patch(color=PALETA[2], label="Tópico dominante")]
     ax.legend(handles=legend, loc="upper left", fontsize=8)
     ax.set_title("Rede orientação → tópico dominante\n"
-                 "Espessura = nº TCCs | INDÍCIO — nomes podem ter variações residuais")
+                 "Espessura = nº TCCs | INDÍCIO, nomes podem ter variações residuais")
     ax.axis("off")
     plt.tight_layout()
     plt.savefig(OUT / "5a_rede_orientacao.png", dpi=150, bbox_inches="tight")
@@ -432,7 +432,7 @@ try:
         nx.draw_networkx_labels(G_banca2, pos2, font_size=6.5, ax=ax)
         ew = [G_banca2[u][v]["weight"] for u,v in G_banca2.edges()]
         nx.draw_networkx_edges(G_banca2, pos2, width=ew, alpha=0.5, ax=ax)
-        ax.set_title(f"Rede de bancas — pares com 2+ co-participações\n"
+        ax.set_title(f"Rede de bancas, pares com 2+ co-participações\n"
                      f"(n={G_banca2.number_of_nodes()} pessoas, "
                      f"{G_banca2.number_of_edges()} pares | "
                      f"{sem_banca} TCCs sem banca)")
@@ -445,10 +445,10 @@ try:
         print("  Rede de bancas: sem pares com 2+ co-participações após filtro.")
 
 except ImportError:
-    print("  networkx não instalado — etapa 5 pulada.")
+    print("  networkx não instalado, etapa 5 pulada.")
 
 # ============================================================================
-# 6. ANÁLISE TEMÁTICA — PRESENÇA INDÍGENA
+# 6. ANÁLISE TEMÁTICA: PRESENÇA INDÍGENA
 # ============================================================================
 TERMOS_INDIGENA = [
     "indigena","indigenas","indigeno","indigenos","indio","indios",
@@ -456,7 +456,7 @@ TERMOS_INDIGENA = [
     "yanomami","waiwai","wai wai","insikiran","tuxaua","comunidade indigena",
     "escola indigena","educacao indigena","territorio indigeno","terra indigena",
     "povo indigena","povos indigenas","etnia","etnologia","etnografico",
-    # Gazetteer regional de Roraima (povos + territórios) — alinha a detecção
+    # Gazetteer regional de Roraima (povos + territórios): alinha a detecção
     # ao gazetteer do dashboard. Nomes próprios inequívocos; "maloca" foi EXCLUÍDO
     # por ser ambíguo (gerou falso positivo em projeto escolar não indígena).
     "makuxi","wapixana","taurepang","taulipang","ingariko","ingarico","patamona",
@@ -500,7 +500,7 @@ for i, g in enumerate(gs):
     ax.text(tot+0.3, i, f"{pct:.0f}%", va="center", fontsize=8)
 ax.legend(fontsize=8); ax.set_xlabel("Nº de TCCs")
 ax.set_title("Presença de menção indígena por grupo\n"
-             "CRITÉRIO: menção em título, resumo ou palavras-chave — "
+             "CRITÉRIO: menção em título, resumo ou palavras-chave, "
              "capta MENÇÃO, não centralidade do tema")
 ax.set_xlim(0, max(ind_por_grupo[g][1] for g in gs) + 8)
 plt.tight_layout()
@@ -530,7 +530,7 @@ print(f"✓ corpus_tccs_analisado.csv ({N} linhas, {len(cols_orig)+len(campos_no
 # 8. RELATÓRIO TEXTUAL
 # ============================================================================
 relatorio = f"""
-RELATÓRIO EXPLORATÓRIO — CORPUS TCCs LIDAE/UFRR
+RELATÓRIO EXPLORATÓRIO, CORPUS TCCs LIDAE/UFRR
 ================================================
 Data: 2026-06-16 | Piloto: {N} TCCs | Natureza: exploratória, não censitária
 
@@ -538,9 +538,9 @@ Data: 2026-06-16 | Piloto: {N} TCCs | Natureza: exploratória, não censitária
    - {N} TCCs únicos consolidados a partir de 2 formulários Google Forms.
    - Grupos: {', '.join(f'{g} ({cnt_grupo[g]})' for g in grupos_ord)}.
    - Anos com registro: {min(anos_validos) if anos_validos else '?'}–{max(anos_validos) if anos_validos else '?'}
-     ({N-len(anos_validos)} TCCs sem ano informado — excluídos desta contagem).
+     ({N-len(anos_validos)} TCCs sem ano informado, excluídos desta contagem).
 
-2. PÁGINAS (mediana por grupo — assimetria justifica mediana)
+2. PÁGINAS (mediana por grupo, assimetria justifica mediana)
 """.strip() + "\n"
 
 for g in grupos_ord:
@@ -560,7 +560,7 @@ for t, terms in termos_top.items():
 
 relatorio += f"""
 4. CLUSTERING (k={K_clust}, silhueta={silhs[K_clust]:.3f})
-   Silhueta baixa é esperada em corpus pequeno e texto curto — indica
+   Silhueta baixa é esperada em corpus pequeno e texto curto, indica
    fronteiras temáticas porosas, não falha metodológica.
 """
 for k in range(K_clust):
@@ -570,7 +570,7 @@ for k in range(K_clust):
 relatorio += f"""
 5. REDES
    Orientadores com 2+ TCCs: {len(orient_recorrentes)} ({pct_recorrentes:.0f}% dos TCCs).
-   TCCs sem banca registrada: {sem_banca}/{N} — campo não preenchido na fonte.
+   TCCs sem banca registrada: {sem_banca}/{N}, campo não preenchido na fonte.
    Nomes normalizados (títulos removidos); variações residuais podem subsistir.
 
 6. MENÇÃO INDÍGENA
@@ -580,8 +580,8 @@ relatorio += f"""
    Lista completa de termos: {', '.join(TERMOS_INDIGENA)}.
 
 LIMITAÇÕES GERAIS
-   - Corpus piloto (128 TCCs) — resultados não generalizáveis ao acervo completo.
-   - Alguns grupos têm n muito pequeno (LEDUCAR=1, Letras=6) — estatísticas instáveis.
+   - Corpus piloto (128 TCCs), resultados não generalizáveis ao acervo completo.
+   - Alguns grupos têm n muito pequeno (LEDUCAR=1, Letras=6), estatísticas instáveis.
    - Resumos incompletos ou ausentes afetam LDA e clustering.
    - Nomes de orientadores/bancas têm variações residuais mesmo após normalização.
 """

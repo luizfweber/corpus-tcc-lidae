@@ -1,10 +1,10 @@
-# Guia de Preenchimento e Reimportação — tipo_tcc
+# Guia de Preenchimento e Reimportação: tipo_tcc
 
 ## 1. Situação Atual
 
 - **95 de 128 TCCs** têm a coluna `tipo_tcc` vazia
 - Foram gerados dois arquivos para preenchimento:
-  - `outputs/relatorio_tipo_tcc_vazio.xlsx` (recomendado — fácil de editar)
+  - `outputs/relatorio_tipo_tcc_vazio.xlsx` (recomendado, fácil de editar)
   - `outputs/relatorio_tipo_tcc_vazio.csv` (alternativa em texto)
 
 ## 2. Passo a Passo para Preenchimento
@@ -45,12 +45,12 @@ Para cada linha:
 
 Quando terminar de anotar os tipos:
 
-**Opção A — Se preencheu em planilha separada:**
+**Opção A, Se preencheu em planilha separada:**
 1. Crie uma nova coluna chamada `tipo_tcc` 
 2. Cole os tipos que anotou
 3. Salve como: `relatorio_tipo_tcc_vazio_PREENCHIDO.xlsx`
 
-**Opção B — Se quer usar outra forma:**
+**Opção B, Se quer usar outra forma:**
 - Crie um CSV com colunas `id` e `tipo_tcc`
 - Salve como: `relatorio_tipo_tcc_vazio_PREENCHIDO.csv`
 
@@ -114,7 +114,7 @@ RELATÓRIO DE REIMPORTAÇÃO
 ✓ Registros atualizados: 92
 
 ⚠️  Conflitos encontrados: 3
-   (tipo_tcc já estava preenchido — mantido valor original)
+   (tipo_tcc já estava preenchido, mantido valor original)
      id 45: Artigo (novo: Monografia)
      ...
 
@@ -141,10 +141,10 @@ RELATÓRIO DE REIMPORTAÇÃO
 
 ## 5. Segurança
 
-- ✅ **Backup automático** — antes de qualquer mudança
-- ✅ **Validação** — rejeita dados inválidos
-- ✅ **Aviso de conflito** — se tipo já estava preenchido
-- ✅ **Rastreabilidade** — log completo do que foi feito
+- ✅ **Backup automático**, antes de qualquer mudança
+- ✅ **Validação**, rejeita dados inválidos
+- ✅ **Aviso de conflito**, se tipo já estava preenchido
+- ✅ **Rastreabilidade**, log completo do que foi feito
 
 ## 6. Se algo der errado
 
@@ -157,7 +157,7 @@ RELATÓRIO DE REIMPORTAÇÃO
 **Quer desfazer?**
 1. Seu backup está em `outputs/backups/`
 2. Copie o backup de volta para `outputs/analise/corpus_tccs_analisado.csv`
-3. Pronto — voltou ao estado anterior
+3. Pronto, voltou ao estado anterior
 
 ## 7. Próximos Passos (após reimportação)
 

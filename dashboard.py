@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Dashboard interativo — Corpus de TCCs das Licenciaturas UFRR (LIDAE)
+Dashboard interativo do corpus de TCCs das Licenciaturas UFRR (LIDAE)
 Executar:  streamlit run dashboard.py
 
 Princípios do projeto: exploratório (não censitário), mediana p/ páginas,
@@ -20,7 +20,7 @@ import networkx as nx
 from collections import Counter
 
 # ─────────────────────────────────────────────────────────────────────────────
-# FONTE PADRÃO — Source Sans Pro (padrão do Streamlit), aplicada à interface
+# FONTE PADRÃO: Source Sans Pro (padrão do Streamlit), aplicada à interface
 # (CSS) e aos gráficos (Plotly). Mantém o mesmo tipo em todo o dashboard.
 # (No Google Fonts a família atual chama-se "Source Sans 3".)
 # ─────────────────────────────────────────────────────────────────────────────
@@ -32,7 +32,7 @@ BASE = Path(__file__).parent
 CSV = BASE / "outputs" / "analise" / "corpus_tccs_analisado.csv"
 
 # ─────────────────────────────────────────────────────────────────────────────
-# PALETA DE CORES — Identidade Visual NECPF
+# PALETA DE CORES: Identidade Visual NECPF
 # ─────────────────────────────────────────────────────────────────────────────
 # Verde-floresta (institucional), Azul-teal, Âmbar, Terracota
 PALETA = ["#1B5E3B",   # Verde-floresta (1)
@@ -45,7 +45,7 @@ PALETA = ["#1B5E3B",   # Verde-floresta (1)
           "#DF7B53"]   # Terracota clara (8)
 
 # ─────────────────────────────────────────────────────────────────────────────
-# TEMPLATE PLOTLY "NECPF" — aplica a identidade visual aos gráficos:
+# TEMPLATE PLOTLY "NECPF": aplica a identidade visual aos gráficos:
 # paleta categórica (§5.1), escala sequencial verde (§5.2), divergente (§5.3),
 # fundo transparente, grades/eixos em neutros, títulos em verde-floresta, fonte.
 # Combinado com o template base ("plotly+necpf") p/ herdar bons padrões.
@@ -77,7 +77,7 @@ pio.templates["necpf"] = _necpf
 pio.templates.default = "plotly+necpf"
 
 # ─────────────────────────────────────────────────────────────────────────────
-# HABILITAÇÕES — cursos AGREGADOS em grupo_tcc (Insikiran, LEDUCARR, Letras) têm
+# HABILITAÇÕES: cursos AGREGADOS em grupo_tcc (Insikiran, LEDUCARR, Letras) têm
 # sub-habilitação distinta. Mapeia curso_fonte → rótulo;
 # os demais cursos permanecem pelo grupo_tcc.
 # ─────────────────────────────────────────────────────────────────────────────
@@ -128,7 +128,7 @@ def limpa_nome(s):
     s = " ".join(_title_palavra(w, i == 0) for i, w in enumerate(s.split()) if w)
     return s
 
-# conectivos de nomes próprios em português — minúsculos (exceto se 1ª palavra)
+# conectivos de nomes próprios em português: minúsculos (exceto se 1ª palavra)
 _CONECTIVOS_NOME = {"de", "da", "do", "das", "dos", "e"}
 
 def _title_palavra(w, primeira):
@@ -181,10 +181,10 @@ def consolida_nomes(nomes_list, threshold=85):
 
     return mapa
 
-# Rótulos LDA — APROXIMADOS, derivados dos 10 termos mais prováveis.
+# Rótulos LDA: APROXIMADOS, derivados dos 10 termos mais prováveis.
 # Edite as leituras conforme revisão qualitativa.
 # Atualizado com K=8 (319 TCCs, re-treino 2026-07-07 após inclusão da catalogação
-# de 07/07; K fixado por leitura) — rótulos PROVISÓRIOS.
+# de 07/07; K fixado por leitura): rótulos PROVISÓRIOS.
 TOPICOS = {
     0: {"rotulo": "Povos indígenas na história do Vale do Rio Branco (provisório)",
         "leitura": "história dos povos indígenas, Rio Branco e Amazônia, séculos e processos",
@@ -276,7 +276,7 @@ GZ_TERRITORIOS = {
 }
 
 def _fold_gz(s):
-    """minúsculas, sem acento, só [a-z0-9'- ] — para casar termos do gazetteer."""
+    """minúsculas, sem acento, só [a-z0-9'- ], para casar termos do gazetteer."""
     s = unicodedata.normalize("NFKD", str(s).lower())
     s = "".join(c for c in s if not unicodedata.combining(c))
     return re.sub(r"\s+", " ", re.sub(r"[^a-z0-9'\- ]", " ", s)).strip()
@@ -401,10 +401,10 @@ def fig_rede(G, cor_no=PALETA[1]):
     return fig
 
 # ─────────────────────────────────────────────────────────────────────────────
-st.set_page_config(page_title="TCCs Licenciaturas UFRR — LIDAE",
+st.set_page_config(page_title="TCCs Licenciaturas UFRR (LIDAE)",
                    page_icon="📚", layout="wide")
 
-# Fonte única (Source Sans Pro) em toda a interface — títulos, textos, tabelas,
+# Fonte única (Source Sans Pro) em toda a interface: títulos, textos, tabelas,
 # sidebar, menu de navegação, widgets. Os gráficos Plotly usam a mesma via template.
 st.markdown("""
 <style>
@@ -471,7 +471,7 @@ EGRESSOS_PUBLICO = BASE / "dados" / "canonico" / "egressos_publico.csv"
 
 @st.cache_data
 def carregar_egressos_dti(chave: str = ""):
-    """Egressos da DTI, versão PÚBLICA (nome, curso, período, título — SEM
+    """Egressos da DTI, versão PÚBLICA (nome, curso, período, título, SEM
     matrícula). Gerada por gerar_egressos_publico.py a partir da base sensível;
     a matrícula fica protegida em dados/_pessoais/ e nunca entra aqui. Devolve
     None se o arquivo não existe (deploy antigo). 'chave' (sem underscore) entra
@@ -555,7 +555,7 @@ def candidatos_gazetteer(chave: str = "", minimo: int = 2):
             if linhas else pd.DataFrame(columns=["nome", "tipo", "n"]))
 
 # ─────────────────────────────────────────────────────────────────────────────
-# ORDEM CANÔNICA DE CURSOS — fixa em TODO o dashboard: por nº de TCCs (desc).
+# ORDEM CANÔNICA DE CURSOS: fixa em TODO o dashboard: por nº de TCCs (desc).
 # Evita que cada gráfico/lista organize os cursos de forma diferente.
 # ─────────────────────────────────────────────────────────────────────────────
 ORDEM_CURSOS = df["grupo_tcc"].value_counts().index.tolist()
@@ -613,11 +613,11 @@ def lista_faltando(dados, col, rotulo, key):
     else:
         falta = dados[~dados[col].apply(_tem_valor)]
     n = len(falta)
-    with st.expander(f"🔎 TCCs sem {rotulo} cadastrado — {n}", expanded=False):
+    with st.expander(f"🔎 TCCs sem {rotulo} cadastrado, {n}", expanded=False):
         if n == 0:
             st.success(f"Todos os TCCs do filtro têm {rotulo} cadastrado.")
             return
-        st.caption("Lacuna no cadastro do NECPF — não inexistência. "
+        st.caption("Lacuna no cadastro do NECPF, não inexistência. "
                    "Excluídos das estatísticas do campo (não são imputados).")
         cols = [c for c in ["id", "curso_det", "titulo", "autor", "ano_num",
                             "orientador"] if c in falta.columns]
@@ -645,11 +645,11 @@ if _wm.exists():
     """, unsafe_allow_html=True)
 
 # ── Cabeçalho ────────────────────────────────────────────────────────────────
-st.title("📚 Corpus de TCCs — Licenciaturas UFRR")
+st.title("📚 Corpus de TCCs das Licenciaturas UFRR")
 st.caption("Laboratório de Indicadores, Dados e Analítica Educacional · LIDAE/NECPF · "
            "Piloto exploratório")
 st.info("**Análise exploratória, não censitária.** Cada número é indício a "
-        "interpretar, não conclusão. Corpus-piloto desbalanceado — grupos com "
+        "interpretar, não conclusão. Corpus-piloto desbalanceado, grupos com "
         "poucos TCCs (LEDUCARR, Letras) têm estatísticas instáveis.")
 
 # ── Navegação (menu lateral agrupado, com ícones) ──
@@ -740,7 +740,7 @@ c1.metric("TCCs", len(f))
 c2.metric("Grupos", f["grupo_tcc"].nunique())
 med_pag = f["pag_num"].median()
 c3.metric("Mediana de páginas", f"{med_pag:.0f}" if pd.notna(med_pag) else "—",
-          help="Mediana (não média) — distribuição assimétrica. "
+          help="Mediana (não média), distribuição assimétrica. "
                f"Exclui {f['pag_num'].isna().sum()} sem dado.")
 pct_ind = f["tem_indigena"].mean() * 100
 c4.metric("Menção indígena", f"{pct_ind:.0f}%",
@@ -762,7 +762,7 @@ st.markdown("---")
 # ── Abas ─────────────────────────────────────────────────────────────────────
 # Conteúdo de cada seção é escolhido pelo menu lateral (secao)
 
-# Aba 1 — Distribuição
+# Aba 1: Distribuição
 if secao == "Distribuição":
     st.subheader("TCCs por curso (com habilitações)")
     st.caption("Insikiran, LEDUCARR e Letras aparecem desagregados por habilitação; "
@@ -802,13 +802,13 @@ if secao == "Distribuição":
         st.plotly_chart(fig, use_container_width=True)
         if n_fora:
             st.caption(f"⚠️ {n_fora} TCC(s) com ano fora de {ano_ini}–{ano_atual} "
-                       "(provável erro de registro) — excluído(s) do gráfico; verificar.")
-    st.caption(f"⚠️ {n_sem} TCCs sem ano informado — excluídos deste gráfico "
+                       "(provável erro de registro), excluído(s) do gráfico; verificar.")
+    st.caption(f"⚠️ {n_sem} TCCs sem ano informado, excluídos deste gráfico "
                "(não imputados).")
-    st.caption("A curva NÃO deve ser lida como 'aumento de produção docente' "
-               "— reflete disponibilidade do acervo digitalizado.")
+    st.caption("A curva NÃO deve ser lida como 'aumento de produção docente', "
+               "reflete disponibilidade do acervo digitalizado.")
 
-    st.subheader("Egressos × TCCs cadastrados — por curso (ano a ano)")
+    st.subheader("Egressos × TCCs cadastrados por curso (ano a ano)")
     st.caption("Selecione um curso. Para cada ANO: egressos (base DTI, por ano de "
                "saída/colação) e quantos TCCs desse curso já foram cadastrados "
                "(por ano de defesa), com a cobertura %. Independe dos filtros da "
@@ -869,7 +869,7 @@ if secao == "Distribuição":
                        "Cobertura = TCCs ÷ egressos.")
 
     st.subheader("Páginas por curso (mediana)")
-    st.caption("Agrupado por curso/habilitação — fonte: coluna `curso_fonte` "
+    st.caption("Agrupado por curso/habilitação, fonte: coluna `curso_fonte` "
                "(Insikiran, LEDUCARR e Letras desagregados). Mediana, não média "
                "(distribuição assimétrica).")
     pgd = fcd.dropna(subset=["pag_num"])
@@ -882,7 +882,7 @@ if secao == "Distribuição":
                           height=max(400, len(ordem_det) * 42))
         st.plotly_chart(fig, use_container_width=True)
         st.caption(f"Exclui {f['pag_num'].isna().sum()} TCCs sem nº de páginas. "
-                   "Habilitações de Letras têm poucos TCCs (n=1–3) — leitura cautelosa.")
+                   "Habilitações de Letras têm poucos TCCs (n=1–3), leitura cautelosa.")
 
     st.markdown("---")
     st.markdown("#### 📋 Lista de TCCs (por curso)")
@@ -894,7 +894,7 @@ if secao == "Distribuição":
     lista_faltando(f, "ano_num", "ano de defesa", "falta_ano")
     lista_faltando(f, "pag_num", "nº de páginas", "falta_pag")
 
-# Aba 2 — Tópicos LDA
+# Aba 2: Tópicos LDA
 if secao == "Tópicos (LDA)":
     st.subheader("Distribuição de tópicos (modelagem LDA, K=8)")
     st.caption("⚠️ Rótulos APROXIMADOS, derivados dos termos mais prováveis. "
@@ -927,7 +927,7 @@ if secao == "Tópicos (LDA)":
 
     st.markdown("**Termos mais prováveis por tópico** (revisar leituras)")
     for i, info in TOPICOS.items():
-        st.markdown(f"- **{info['rotulo']}** — _{info['leitura']}_  \n"
+        st.markdown(f"- **{info['rotulo']}**, _{info['leitura']}_  \n"
                     f"  <span style='color:gray;font-size:0.85em'>{info['termos']}</span>",
                     unsafe_allow_html=True)
 
@@ -948,7 +948,7 @@ if secao == "Tópicos (LDA)":
     Temos mais de uma centena de trabalhos de conclusão de curso (TCCs) das licenciaturas da UFRR.
     Lê-los um a um, classificando seus temas à mão, seria lento e sujeito ao olhar de quem classifica.
     Existe uma forma de o computador sugerir, sozinho, sobre quais assuntos esses trabalhos falam?
-    **Existe — e uma das técnicas mais usadas para isso chama-se LDA.**
+    **Existe, e uma das técnicas mais usadas para isso chama-se LDA.**
 
     #### A ideia, em uma frase
     A LDA parte de uma suposição simples e intuitiva:
@@ -963,7 +963,7 @@ if secao == "Tópicos (LDA)":
     - Estima a **proporção de cada tema** dentro de cada TCC.
 
     É como observar muitas receitas sem conhecer os pratos e, só pelos ingredientes que se repetem,
-    deduzir que existem "receitas de bolo", "de sopa" e "de salada" — e depois dizer quanto de cada
+    deduzir que existem "receitas de bolo", "de sopa" e "de salada", e depois dizer quanto de cada
     estilo há em cada prato.
 
     #### Um cuidado essencial
@@ -972,7 +972,7 @@ if secao == "Tópicos (LDA)":
     Mais importante: a técnica identifica **quais palavras aparecem com frequência**, e não necessariamente
     qual é o foco central do trabalho. Um TCC pode citar "indígena" de passagem sem que esse seja seu tema principal.
 
-    Por isso, no LIDAE, o resultado da LDA é tratado como **indício, um ponto de partida para a leitura** —
+    Por isso, no LIDAE, o resultado da LDA é tratado como **indício, um ponto de partida para a leitura**, 
     nunca como conclusão definitiva. A interpretação final exige a leitura cuidadosa dos textos pelos pesquisadores.
 
     #### Em resumo
@@ -985,7 +985,7 @@ if secao == "Tópicos (LDA)":
     **Princípio metodológico:**
     *Métodos computacionais como instrumentos de leitura, não como veredito.*
 
-    *Laboratório de Indicadores, Dados e Analítica Educacional — LIDAE/NECPF–UFRR*
+    *Laboratório de Indicadores, Dados e Analítica Educacional, LIDAE/NECPF–UFRR*
     """)
 
 # Sub-temas por curso (modelagem LDA/descritivo em camadas, do JSON por curso)
@@ -1003,15 +1003,15 @@ if secao == "Sub-temas por curso (LDA)":
                    "Rode no terminal: `python3 analise_por_curso.py`")
     else:
         cursos = PC["cursos"]
-        rotulo = {"lda": "🟢 LDA — sub-temas",
-                  "descritivo": "🟠 Descritivo — termos + leitura",
-                  "listagem": "🔴 Listagem — sem modelagem"}
+        rotulo = {"lda": "🟢 LDA, sub-temas",
+                  "descritivo": "🟠 Descritivo, termos + leitura",
+                  "listagem": "🔴 Listagem, sem modelagem"}
         nomes = [f"{c['curso']} · {c['n']} TCCs · {c['camada']}" for c in cursos]
         idx = st.selectbox("Selecione o curso", range(len(cursos)),
                            format_func=lambda i: nomes[i])
         c = cursos[idx]
 
-        st.markdown(f"#### {c['curso']} — {c['n']} TCCs · {rotulo[c['camada']]}")
+        st.markdown(f"#### {c['curso']}, {c['n']} TCCs · {rotulo[c['camada']]}")
 
         if c["camada"] == "lda":
             K, ari = c["lda"]["K"], c["lda"]["ari"]
@@ -1019,7 +1019,7 @@ if secao == "Sub-temas por curso (LDA)":
                        f"(ARI={ari:.2f} entre 8 seeds).")
             if ari < 0.4:
                 st.warning(f"⚠️ Estabilidade baixa (ARI={ari:.2f}): os sub-temas "
-                           "são INDÍCIO frágil — fronteiras porosas entre eles, "
+                           "são INDÍCIO frágil, fronteiras porosas entre eles, "
                            "não categorias fechadas. Confirmar por leitura.")
             for n, sub in enumerate(c["lda"]["subtemas"], 1):
                 st.markdown(
@@ -1033,7 +1033,7 @@ if secao == "Sub-temas por curso (LDA)":
             st.markdown("---")
         elif c["camada"] == "descritivo":
             st.caption("N insuficiente para LDA confiável. Mostram-se os termos "
-                       "mais recorrentes (em nº de TCCs) e a lista de trabalhos — "
+                       "mais recorrentes (em nº de TCCs) e a lista de trabalhos, "
                        "modelar tópicos aqui seria ruído.")
         elif c["camada"] == "listagem":
             st.caption(f"N ínfimo ({c['n']}): qualquer modelagem seria artefato "
@@ -1055,7 +1055,7 @@ if secao == "Sub-temas por curso (LDA)":
             columns={"id": "id", "ano": "Ano", "titulo": "Título"})
         st.dataframe(tdf, use_container_width=True, hide_index=True, height=260)
 
-# Aba 4 — Menção indígena
+# Aba 4: Menção indígena
 if secao == "Menção indígena":
     st.subheader("Presença de menção indígena por curso (com habilitações)")
     st.caption("CRITÉRIO: lista de 26 termos (indígena, intercultural, macuxi, "
@@ -1071,11 +1071,11 @@ if secao == "Menção indígena":
 Reunimos os trabalhos de conclusão de curso (TCCs) das licenciaturas da UFRR e
 queríamos responder a uma pergunta aparentemente simples:
 
-> Quais desses trabalhos falam sobre cultura indígena — e quão central é esse tema em cada um?
+> Quais desses trabalhos falam sobre cultura indígena, e quão central é esse tema em cada um?
 
 Ler todos os trabalhos inteiros, um por um, levaria muito tempo. Por isso, buscamos
 uma forma de o computador nos ajudar a **encontrar e organizar** esses trabalhos. Mas,
-como veremos, o computador ajuda a procurar — quem decide é sempre uma pessoa.
+como veremos, o computador ajuda a procurar, quem decide é sempre uma pessoa.
 
 #### A primeira ideia (e por que ela não basta)
 A solução óbvia seria: *peça ao computador para procurar a palavra "indígena"*. Onde
@@ -1083,27 +1083,27 @@ ela aparecer, marque o trabalho. Isso funciona em parte, mas tem dois furos:
 
 1. **Palavras que parecem indicar o tema, mas nem sempre indicam.** Palavras como
    *"povos"* ou *"tradicional"* aparecem em muitos contextos. "Família tradicional",
-   "métodos tradicionais de ensino", "os povos da Antiguidade" — nada disso é sobre
+   "métodos tradicionais de ensino", "os povos da Antiguidade", nada disso é sobre
    cultura indígena.
 2. **Trabalhos que falam do tema sem usar a palavra exata.** Um TCC pode tratar
    profundamente da cultura Macuxi sem nunca escrever a palavra "indígena".
 
-Ou seja: a busca simples **erra para os dois lados** — marca trabalhos que não deveria
+Ou seja: a busca simples **erra para os dois lados**, marca trabalhos que não deveria
 e perde trabalhos que deveria encontrar.
 
 #### A ideia melhor: um "dicionário regional" (gazetteer)
 Pense num detetive tentando descobrir de qual cidade veio uma carta anônima. Ele não
-procura uma única palavra — procura **pistas locais**: o nome de uma rua, de um time
+procura uma única palavra, procura **pistas locais**: o nome de uma rua, de um time
 pequeno, de uma comida típica. Foi isso que montamos: uma lista curada de **pistas da
 cultura indígena de Roraima** (no jargão técnico, um **gazetteer**). A nossa reúne:
 
-- **Nomes de povos** — Macuxi, Wapichana, Yanomami, Taurepang, Ye'kwana e outros.
-- **Nomes de lugares** — terras indígenas como Raposa Serra do Sol e São Marcos; "maloca".
-- **Línguas e famílias linguísticas** — Karib, Aruak, "língua macuxi".
-- **Instituições e temas da educação indígena** — Insikiran, escola indígena, magistério indígena.
+- **Nomes de povos**, Macuxi, Wapichana, Yanomami, Taurepang, Ye'kwana e outros.
+- **Nomes de lugares**, terras indígenas como Raposa Serra do Sol e São Marcos; "maloca".
+- **Línguas e famílias linguísticas**, Karib, Aruak, "língua macuxi".
+- **Instituições e temas da educação indígena**, Insikiran, escola indígena, magistério indígena.
 
 A grande vantagem: muitas dessas pistas são **inconfundíveis**. Ninguém escreve
-"Yanomami" ou "Macuxi" por acaso — diferente de "tradicional", que pode aparecer em
+"Yanomami" ou "Macuxi" por acaso, diferente de "tradicional", que pode aparecer em
 qualquer assunto.
 
 #### A sacada principal: nem toda pista vale o mesmo
@@ -1121,18 +1121,18 @@ Um trabalho que menciona "Macuxi" é classificado com segurança. Já um que só
 
 #### O computador procura, mas o ser humano decide
 O computador faz a parte cansativa: varre os trabalhos em segundos e separa três grupos
-— os de **pistas fortes** (alta confiança), os de só **pistas fracas** (zona cinzenta,
+os de **pistas fortes** (alta confiança), os de só **pistas fracas** (zona cinzenta,
 para revisar) e os **sem pista alguma**. Mas a palavra final é sempre de uma pessoa, que
 lê os casos de fronteira. A máquina **estreita o trabalho**; não substitui o julgamento.
 
 #### O que descobrimos ao testar
 Tínhamos colocado a palavra *"indígena"* como **pista fraca**, por achá-la ambígua. Mas,
-ao revisar, percebemos que **neste conjunto específico** — TCCs de licenciatura de
-Roraima, boa parte do curso intercultural Insikiran — a palavra "indígena" quase sempre
+ao revisar, percebemos que **neste conjunto específico**, TCCs de licenciatura de
+Roraima, boa parte do curso intercultural Insikiran, a palavra "indígena" quase sempre
 indica mesmo o tema. A lição: **a régua precisa ser ajustada ao material analisado.**
 
 Também notamos que faltavam na lista os **nomes das comunidades indígenas** (como
-Maturuca e Anta II). Incluí-los é o próximo passo — e gera um benefício extra: uma lista
+Maturuca e Anta II). Incluí-los é o próximo passo, e gera um benefício extra: uma lista
 organizada de comunidades de Roraima, útil para futuras pesquisas do laboratório.
 
 > 💡 As **pistas fortes** (povos e territórios) estão mapeadas na aba **"Povos & territórios"**.
@@ -1140,11 +1140,11 @@ organizada de comunidades de Roraima, útil para futuras pesquisas do laboratór
 #### Um aviso importante
 Encontrar a palavra **não é o mesmo** que provar que o trabalho gira em torno do tema.
 Um TCC pode citar "Macuxi" de passagem; outro pode ser inteiramente dedicado à cultura
-Macuxi. Por isso, tudo o que esse método produz são **indícios exploratórios** — um mapa
+Macuxi. Por isso, tudo o que esse método produz são **indícios exploratórios**, um mapa
 para guiar a leitura, não uma conclusão pronta.
 
 ---
-*Documento produzido no âmbito do LIDAE — Laboratório de Indicadores, Dados e Analítica
+*Documento produzido no âmbito do LIDAE, Laboratório de Indicadores, Dados e Analítica
 Educacional (NECPF/UFRR).*
 """)
 
@@ -1182,7 +1182,7 @@ Educacional (NECPF/UFRR).*
     lista_tccs(flt, key="ind",
                cols=["id", "curso_det", "tem_indigena", "titulo", "autor", "ano_num"])
 
-# Aba 5 — Orientadores
+# Aba 5: Orientadores
 if secao == "Orientadores":
     st.subheader("Orientadores recorrentes")
     st.caption("Nomes consolidados por fuzzy matching (similitude ≥85%). "
@@ -1205,7 +1205,7 @@ if secao == "Orientadores":
                       yaxis={"categoryorder": "array",
                              "categoryarray": ORDEM_CURSOS_DET[::-1]})
     st.plotly_chart(fig, use_container_width=True)
-    st.caption("'TCCs por orientador' varia por curso — cursos com poucos "
+    st.caption("'TCCs por orientador' varia por curso, cursos com poucos "
                "orientadores distintos concentram mais a orientação.")
 
     # ── Ranking dentro de um curso (ou de todos) ─────────────────────────────
@@ -1244,7 +1244,7 @@ if secao == "Orientadores":
     st.markdown("---")
     lista_faltando(f, "orientador", "orientador", "falta_orient")
 
-# Aba 6 — Explorar
+# Aba 6: Explorar
 if secao == "Explorar TCCs":
     st.subheader("Explorador de TCCs")
     busca = st.text_input("Buscar em título / resumo / palavras-chave")
@@ -1267,7 +1267,7 @@ if secao == "Explorar TCCs":
             st.write(row["resumo"] if str(row["resumo"]).strip() else
                      "_(sem resumo no cadastro)_")
 
-# Aba 7 — Cobertura de Coleta
+# Aba 7: Cobertura de Coleta
 if secao == "Cobertura de Coleta":
     st.subheader("Cobertura de Coleta: TCCs × Egressos")
 
@@ -1401,7 +1401,7 @@ if secao == "Cobertura de Coleta":
     except Exception as e:
         st.error(f"Erro ao carregar dados de egressos: {e}")
 
-# Aba — Registros faltantes por curso (uso interno da equipe; dados restritos)
+# Aba: Registros faltantes por curso (uso interno da equipe; dados restritos)
 if secao == "Registros faltantes":
     st.subheader("Registros faltantes por curso")
     st.caption("Ferramenta interna da equipe: cruza os egressos das licenciaturas "
@@ -1453,7 +1453,7 @@ if secao == "Registros faltantes":
         fa = fa[fa["sem_saida"] == sem.rstrip("º")]
 
     rotulo = f"{g} · {ano}" + (f".{sem.rstrip('º')}" if sem != "(todos)" else "")
-    st.markdown(f"### {len(fa)} egresso(s) sem TCC catalogado — {rotulo}")
+    st.markdown(f"### {len(fa)} egresso(s) sem TCC catalogado, {rotulo}")
 
     fa = fa.copy()
     fa["titulo"] = fa["titulo"].fillna("")   # evita "None" na tabela
@@ -1479,10 +1479,10 @@ if secao == "Registros faltantes":
     st.caption("Cada egresso conta uma vez (deduplicado por matrícula; quem tem "
                "2 títulos na DTI não vira 2 egressos). O ano e o semestre são de "
                "saída/colação, não de defesa. Um egresso conta como coletado se "
-               "seu nome aparece no corpus, independentemente do ano — pode diferir "
+               "seu nome aparece no corpus, independentemente do ano, pode diferir "
                "da aba Cobertura de Coleta, que conta por contagem.")
 
-# Aba 8 — Povos & territórios indígenas (gazetteer)
+# Aba 8: Povos & territórios indígenas (gazetteer)
 if secao == "Povos & territórios":
     st.subheader("Povos e territórios indígenas citados")
     st.caption("Detecção por gazetteer regional de Roraima (etnônimos, terras "
@@ -1574,9 +1574,9 @@ if secao == "Povos & territórios":
     st.markdown("#### TCCs por povo ou território citado")
     opcoes_gz = {"Todos": None}
     for nome in sorted(GZ_POVOS.keys()):
-        opcoes_gz[f"Povo — {nome}"] = ("pov", nome)
+        opcoes_gz[f"Povo: {nome}"] = ("pov", nome)
     for nome in sorted(GZ_TERRITORIOS.keys()):
-        opcoes_gz[f"Território — {nome}"] = ("ter", nome)
+        opcoes_gz[f"Território: {nome}"] = ("ter", nome)
     sel_gz = st.selectbox("Filtrar por povo ou território",
                           list(opcoes_gz.keys()), key="gz_sel")
     val_gz = opcoes_gz[sel_gz]
@@ -1591,7 +1591,7 @@ if secao == "Povos & territórios":
     lista_tccs(filt_gz, key="gz_tccs",
                cols=["id", "curso_det", "titulo", "autor", "ano_num"])
 
-# Aba 9 — Co-ocorrência de palavras-chave
+# Aba 9: Co-ocorrência de palavras-chave
 if secao == "Palavras-chave":
     st.subheader("Co-ocorrência de palavras-chave")
     st.caption("Palavras-chave informadas pelos autores (não os tópicos do LDA). "
@@ -1669,12 +1669,12 @@ if secao == "Palavras-chave":
     st.markdown("---")
     lista_faltando(f, "palavras_chave", "palavras-chave", "falta_kw")
 
-# Aba 10 — Rede de bancas examinadoras
+# Aba 10: Rede de bancas examinadoras
 if secao == "Bancas":
     st.subheader("Rede de bancas examinadoras")
     pct = f["banca_examinadora"].map(_tem_valor).mean() * 100 if len(f) else 0
     st.caption(f"Co-participação **entre membros avaliadores** (o presidente/"
-               f"orientador de cada banca é EXCLUÍDO aqui — ver análise própria "
+               f"orientador de cada banca é EXCLUÍDO aqui, ver análise própria "
                f"abaixo). Dois nomes se ligam quando avaliaram o mesmo TCC. "
                f"Preenchido em ~{pct:.0f}% dos TCCs no filtro; ausência = lacuna "
                "de coleta, não inexistência de banca.")
@@ -1682,17 +1682,17 @@ if secao == "Bancas":
     with st.expander("📖 Como construímos a rede de bancas (metodologia)"):
         st.markdown("""
 A rede mostra **quem avaliou TCCs junto com quem**. Ela é construída em quatro
-passos, a partir do campo *Membros da banca examinadora* do cadastro do NECPF —
+passos, a partir do campo *Membros da banca examinadora* do cadastro do NECPF, 
 um texto livre, preenchido com grafias e formatos variados.
 
 **1. Leitura do campo.** Cada registro de banca é um texto único (ex.:
-*"Prof. Dr. Héctor José García Mendoza — UFRR; Profa. Dra. Edileusa do Socorro…"*).
+*"Prof. Dr. Héctor José García Mendoza, UFRR; Profa. Dra. Edileusa do Socorro…"*).
 Separamos os nomes nos sinais usados pelos catalogadores: ponto-e-vírgula, barra
 `|`, quebra de linha, vírgula e a conjunção "e".
 
 **2. Limpeza de cada nome.** De cada trecho removemos:
-- **Titulação** — Prof./Profa., Dr./Dra., Me., Msc., Esp., Mestre, Doutor(a)…;
-- **Instituição e função** — UFRR, Universidade, Instituto, Curso de…, "membro",
+- **Titulação**, Prof./Profa., Dr./Dra., Me., Msc., Esp., Mestre, Doutor(a)…;
+- **Instituição e função**, UFRR, Universidade, Instituto, Curso de…, "membro",
   "orientador", "presidente", e o que vem entre parênteses;
 - "não informado" e fragmentos com menos de duas palavras.
 
@@ -1700,9 +1700,9 @@ Separamos os nomes nos sinais usados pelos catalogadores: ponto-e-vírgula, barr
   remoção de acento serve só internamente, para agrupar variações do mesmo nome.
 
 **3. Montagem da rede (co-participação).** Para cada TCC, os **membros avaliadores**
-formam um pequeno grupo totalmente ligado entre si — cada um se conecta a todos os
+formam um pequeno grupo totalmente ligado entre si, cada um se conecta a todos os
 outros daquela mesma banca. O **presidente/orientador é excluído** desta rede (ele
-tem uma análise própria — *Orientador × membros*, mais abaixo). Quando duas pessoas
+tem uma análise própria, *Orientador × membros*, mais abaixo). Quando duas pessoas
 avaliam **vários** TCCs juntas, a ligação fica **mais forte** (maior peso). O
 **tamanho de cada nó** é o número de bancas em que a pessoa participou como membro.
 
@@ -1711,7 +1711,7 @@ remove participantes esporádicos, deixando visível o núcleo recorrente.
 
 **Limites (leitura exploratória).** A extração de um texto livre
 é sujeita a falhas; nomes muito abreviados ou colados podem escapar. A rede
-retrata **a coleta atual**, não o universo de bancas — ausência de um vínculo
+retrata **a coleta atual**, não o universo de bancas, ausência de um vínculo
 significa lacuna de cadastro, não que a co-participação não existiu.
 """)
 
@@ -1720,40 +1720,40 @@ significa lacuna de cadastro, não que a co-participação não existiu.
 **O que cada elemento da rede quer dizer:**
 
 - **Cada círculo é um professor.** Quanto **maior** o círculo, em **mais bancas**
-  a pessoa participou — passe o mouse para ver o número exato. Círculos grandes
+  a pessoa participou, passe o mouse para ver o número exato. Círculos grandes
   são avaliadores recorrentes na formação daquele conjunto de cursos.
 - **Cada linha é uma co-participação:** os dois professores ligados **avaliaram
   pelo menos um mesmo TCC juntos**.
 - **A proximidade conta uma história:** o desenho aproxima quem avalia junto com
   **frequência**. Assim, professores que dividem muitas bancas acabam **vizinhos**,
   formando **agrupamentos**.
-- **Os agrupamentos** costumam corresponder a um **curso ou área** — um núcleo de
+- **Os agrupamentos** costumam corresponder a um **curso ou área**, um núcleo de
   docentes que se avaliam mutuamente (ex.: o núcleo do Insikiran, o de Matemática,
   o de História aparecem como "ilhas" distintas).
 - **Nós nas pontas ou soltos** participam de poucas bancas ou têm poucos parceiros
-  recorrentes — costumam ser examinadores externos ou pontuais.
+  recorrentes, costumam ser examinadores externos ou pontuais.
 - **Pontes entre agrupamentos** (uma pessoa ligando duas "ilhas") são docentes que
   **circulam entre cursos/áreas**.
 
 **O que a relação NÃO diz:**
 
-- A **espessura da linha é sempre a mesma** — ela não mostra quantas vezes os dois
+- A **espessura da linha é sempre a mesma**, ela não mostra quantas vezes os dois
   avaliaram juntos. Essa intensidade aparece na **proximidade** (vínculos repetidos
   puxam os nós para perto) e no controle de "mínimo de bancas".
 - Estar na mesma banca **não implica** concordância, parceria de pesquisa ou
-  hierarquia — só que se encontraram numa avaliação.
+  hierarquia, só que se encontraram numa avaliação.
 - A rede mostra **a coleta atual**, não o universo real de bancas.
 
 **Para ler na prática:** aumente o *"mínimo de bancas para incluir o membro"* para
 ver só o núcleo recorrente; observe quem são os **círculos grandes e centrais**
 (avaliadores muito requisitados) e quem faz **ponte** entre as ilhas.
 
-> Aqui o **orientador de cada banca não entra** — esta rede é só entre os
+> Aqui o **orientador de cada banca não entra**, esta rede é só entre os
 > **membros avaliadores**. A relação do orientador com quem ele convida está na
 > análise *Orientador × membros*, logo abaixo.
 """)
 
-    # membros AVALIADORES de cada banca (sem o orientador) — colunas banca_membro_*
+    # membros AVALIADORES de cada banca (sem o orientador): colunas banca_membro_*
     _MCOLS = [c for c in ["banca_membro_1", "banca_membro_2", "banca_membro_3",
                           "banca_membro_4"] if c in f.columns]
 
@@ -1784,7 +1784,7 @@ ver só o núcleo recorrente; observe quem são os **círculos grandes e centrai
 
         st.markdown("**Rede de co-participação entre membros** (sem o orientador)"
                     + ("" if sel_curso_bn == "Todos os cursos"
-                       else f" — {sel_curso_bn}"))
+                       else f", {sel_curso_bn}"))
         min_b = st.slider("Mínimo de bancas para incluir o membro", 1, 4, 2,
                           key="bn_min")
         G = nx.Graph()
@@ -1855,7 +1855,7 @@ ver só o núcleo recorrente; observe quem são os **círculos grandes e centrai
         else:
             st.info("Poucos pares atingem os mínimos escolhidos para formar rede.")
 
-        st.markdown("**Detalhe por orientador** — membros mais convidados")
+        st.markdown("**Detalhe por orientador**, membros mais convidados")
         oris_disp = sorted([o for o, c in ori_cont.items() if c >= 2])
         if oris_disp:
             sel_o = st.selectbox("Selecione o orientador", oris_disp, key="om_sel")
@@ -1871,7 +1871,7 @@ ver só o núcleo recorrente; observe quem são os **círculos grandes e centrai
     # ── Lacunas no cadastro de bancas (filtrável por curso) ──────────────────
     st.markdown("---")
     st.markdown("#### 🔎 TCCs com cadastro de banca a completar")
-    st.caption("Lacunas no campo de banca examinadora — para preencher a partir "
+    st.caption("Lacunas no campo de banca examinadora, para preencher a partir "
                "dos PDFs. 'Ausente' = campo vazio/'não informado'; "
                "'Incompleta' = só 1 nome registrado (banca tem ≥ 2 membros + orientador).")
 
@@ -1914,12 +1914,12 @@ ver só o núcleo recorrente; observe quem são os **círculos grandes e centrai
                    cols=["id", "curso_det", "situacao_banca", "n_membros_banca",
                          "titulo", "autor", "orientador", "ano_num"])
 
-# Aba 11 — Orientador × tema (tópico LDA)
+# Aba 11: Orientador × tema (tópico LDA)
 if secao == "Orientador × tema":
     st.subheader("Orientador × tema (tópico LDA)")
     st.caption(f"Distribuição dos TCCs de cada orientador recorrente (≥2 TCCs) "
                f"pelos {len(TOPICOS)} tópicos do LDA. ⚠️ Tópico é indício, não "
-               "categoria; o N por orientador é pequeno — leitura qualitativa.")
+               "categoria; o N por orientador é pequeno, leitura qualitativa.")
     fo = f[f["orientador"].apply(_tem_valor) & f["topico_dom"].notna()].copy()
     if fo.empty:
         st.info("Sem orientador/tópico utilizável no filtro atual.")
@@ -1942,9 +1942,9 @@ if secao == "Orientador × tema":
             st.plotly_chart(fig, use_container_width=True)
             st.markdown("**Legenda dos tópicos:**")
             for i, info in TOPICOS.items():
-                st.markdown(f"- **T{i}** — {info['rotulo']}")
+                st.markdown(f"- **T{i}**, {info['rotulo']}")
 
-# Aba 12 — Análise temática por curso (leitura qualitativa)
+# Aba 12: Análise temática por curso (leitura qualitativa)
 def _secao_md(texto, titulo_contem):
     """Extrai uma seção (## ...) do markdown pelo trecho do título."""
     for bloco in re.split(r"(?m)^##\s+", texto):

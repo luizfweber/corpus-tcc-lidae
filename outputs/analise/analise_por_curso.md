@@ -1,61 +1,61 @@
-# Análise temática por curso, em camadas — LIDAE/UFRR
+# Análise temática por curso, em camadas, LIDAE/UFRR
 
 Corpus: 338 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · listagem). Exploratório, não censitário.
 
 
 ## 🟢 Camada LDA (N suficiente para sub-temas)
 
-### Insikiran — 87 TCCs · LDA intra-curso (K=2)
-*Seleção de K por estabilidade entre 8 seeds — K2: ARI=0.17 · K3: ARI=0.13 · K4: ARI=0.12. Escolhido K=2 (ARI=0.17).*
-> ⚠️ Estabilidade baixa (ARI=0.17): sub-temas FRÁGEIS, indício a confirmar por leitura — não conclusão.
+### Insikiran, 87 TCCs · LDA intra-curso (K=2)
+*Seleção de K por estabilidade entre 8 seeds, K2: ARI=0.17 · K3: ARI=0.13 · K4: ARI=0.12. Escolhido K=2 (ARI=0.17).*
+> ⚠️ Estabilidade baixa (ARI=0.17): sub-temas FRÁGEIS, indício a confirmar por leitura, não conclusão.
 
-**Sub-tema 1** (35 TCCs) — proposta, leitura, estadual, lingua, jogos, indigenas, educacao, atividades, projeto, pedagogica
+**Sub-tema 1** (35 TCCs), proposta, leitura, estadual, lingua, jogos, indigenas, educacao, atividades, projeto, pedagogica
    - id 71 (2022): PROPOSTA PEDAGÓGICA COLHER MILHO NA ROÇA: atividade social indígena como proposta de inter
    - id 11 (2024): RELATO DE EXPERIÊNCIA: LEITURA E PRODUÇÃO DE JOGOS PEDAGÓGICOS NO ENSINO FUNDAMENTAL I NA 
    - id 61 (2024): RELATO DE EXPERIÊNCIA NA ESCOLA ESTADUAL INDÍGENA TUXAUA EVARISTO:SOLETRANDO NA ESCOLA
 
-**Sub-tema 2** (52 TCCs) — indigenas, educacao, conhecimentos, matematica, saude, tradicional, cultura, tambem, tradicionais, estadual
+**Sub-tema 2** (52 TCCs), indigenas, educacao, conhecimentos, matematica, saude, tradicional, cultura, tambem, tradicionais, estadual
    - id 320 (2022): ALIMENTAÇÃO, SAÚDE E EDUCAÇÃO NA COMUNIDADE INDÍGENA MURIRU – TERRA INDÍGENA MURIRU EM ROR
    - id 101 (2022): ALIMENTAÇÃO, SAÚDE E EDUCAÇÃO NA COMUNIDADEINDÍGENAMURIRU – TERRA INDÍGENA MURIRU EMRORAIM
    - id 140 (2021): O USO DOS ALIMENTOS INDÍGENAS WAPICHANA COMO PRÁTICA PEDAGÓGICA EDUCATIVA NA COMUNIDADE IN
 
 
-### Pedagogia — 29 TCCs · LDA intra-curso (K=2)
-*Seleção de K por estabilidade entre 8 seeds — K2: ARI=0.31 · K3: ARI=0.19. Escolhido K=2 (ARI=0.31).*
-> ⚠️ Estabilidade baixa (ARI=0.31): sub-temas FRÁGEIS, indício a confirmar por leitura — não conclusão.
+### Pedagogia, 29 TCCs · LDA intra-curso (K=2)
+*Seleção de K por estabilidade entre 8 seeds, K2: ARI=0.31 · K3: ARI=0.19. Escolhido K=2 (ARI=0.31).*
+> ⚠️ Estabilidade baixa (ARI=0.31): sub-temas FRÁGEIS, indício a confirmar por leitura, não conclusão.
 
-**Sub-tema 1** (15 TCCs) — pedagogia, educacao, formacao, estagio, processo, pedagogo, infantil, hospitalar, escolar, supervisionado
+**Sub-tema 1** (15 TCCs), pedagogia, educacao, formacao, estagio, processo, pedagogo, infantil, hospitalar, escolar, supervisionado
    - id 149 (2018): JOGOS E BRINCADEIRAS NO PROCESSO DE APRENDIZAGEM NA PRÉ- ESCOLA
    - id 32 (2018): JOGOS E BRINCADEIRAS NO PROCESSO DE APRENDIZAGEM NA PRÉ-ESCOLA
    - id 112 (2019): PEDAGOGIA HOSPITALAR: CLASSE HOSPITALAR NAS UNIDADES PÚBLICAS DE SAÚDE DE ALTA COMPLEXIDAD
 
-**Sub-tema 2** (14 TCCs) — educacao, pedagogica, coordenacao, estagio, vista, experiencia, especial, pedagogico, pandemia, pedagogia
+**Sub-tema 2** (14 TCCs), educacao, pedagogica, coordenacao, estagio, vista, experiencia, especial, pedagogico, pandemia, pedagogia
    - id 31 (): DESAFIOS E POSSIBILIDADES DA COORDENAÇÃO PEDAGÓGICA EM RORAIMA: UM OLHAR A PARTIR DOS TRAB
    - id 22 (2023): RELAÇÃO PÚBLICO-PRIVADO: INSTITUTO ALFA E BETO E SUA PROPOSTA DE EDUCAÇÃO NA REDE PÚBLICA 
    - id 36 (2019): ATRIBUIÇÕES DO COORDENADOR PEDAGÓGICO NAS ESCOLAS MUNICIPAIS DE BOA VISTA-RR: UMA ANÁLISE 
 
 
-### História — 130 TCCs · LDA intra-curso (K=2)
-*Seleção de K por estabilidade entre 8 seeds — K2: ARI=0.54 · K3: ARI=0.27 · K4: ARI=0.22. Escolhido K=2 (ARI=0.54).*
+### História, 130 TCCs · LDA intra-curso (K=2)
+*Seleção de K por estabilidade entre 8 seeds, K2: ARI=0.54 · K3: ARI=0.27 · K4: ARI=0.22. Escolhido K=2 (ARI=0.54).*
 
-**Sub-tema 1** (62 TCCs) — historia, educacao, indigenas, roraima, vista, analise, indigena, cultura, formacao, processo
+**Sub-tema 1** (62 TCCs), historia, educacao, indigenas, roraima, vista, analise, indigena, cultura, formacao, processo
    - id 317 (2024): EDUCAÇÃO PATRIMONIAL NO ENSINO DE HISTÓRIA: O TRANSFORMAR DA DOCÊNCIA POR MEIO DO PROJETO 
    - id 208 (2025): MEMÓRIAS QUE RESISTEM: A REPRESENTAÇÃO DAS MULHERES INDÍGENAS NAS CARTAS DO PROJETO “MULHE
    - id 161 (2021): PATRIMÔNIO CULTURAL: A IMPORTÂNCIA DO FESTIVAL DO BEIJU (2005 - 2019) COMO VALORIZAÇÃO HIS
 
-**Sub-tema 2** (68 TCCs) — roraima, regiao, territorio, branco, amazonia, estado, vista, federal, processo, nacional
+**Sub-tema 2** (68 TCCs), roraima, regiao, territorio, branco, amazonia, estado, vista, federal, processo, nacional
    - id 270 (2016): O JORNAL BOA VISTA: porta-voz dos projetos desenvolvidos no Território de Roraima no perío
    - id 258 (2016): A RODOVIA PERIMETRAL NORTE: OBJETIVOS E IMPACTOS DA SUA CONSTRUÇÃO NO TERRITÓRIO FEDERAL D
    - id 273 (2016): A RODOVIA PERIMETRAL NORTE: OBJETIVOS E IMPACTOS DA SUA CONSTRUÇÃO NO TERRITÓRIO FEDERAL D
 
 
 
-## 🟠 Camada descritiva (N médio — termos + leitura)
+## 🟠 Camada descritiva (N médio, termos + leitura)
 
-### Música — 27 TCCs · descritivo (sem LDA)
+### Música, 27 TCCs · descritivo (sem LDA)
 *N insuficiente para modelagem de tópicos; reporta-se a frequência documental dos termos e a lista de trabalhos.*
 
-**Termos mais recorrentes (nº de TCCs):** musica (25), musical (20), vista (19), educacao (17), roraima (15), contexto (15), alem (14), praticas (14), analise (14), pratica (13), musicais (12), atraves (12), resultados (12), formacao (12), bibliografica (11)
+**Termos mais recorrentes (nº de TCCs):** musica (25), musical (20), vista (19), educacao (17), roraima (15), contexto (15), analise (14), alem (14), praticas (14), pratica (13), musicais (12), atraves (12), formacao (12), resultados (12), bibliografica (11)
 
 **Trabalhos:**
    - id 92 (2017): O EMPRÉSTIMO MODAL RECORRENTE NO POP ROCK DOS ANOS 1980
@@ -86,10 +86,10 @@ Corpus: 338 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
    - id 330 (2025): ENSINO DE MÚSICA EM ESPAÇOS NÃO FORMAIS: RELATO DE EXPERIÊNCIA COM CRIANÇAS INDÍGENAS VENE
    - id 331 (2026): ENSINO DE INSTRUMENTOS DE CORDAS FRICCIONADAS FRENTE À CRISE MIGRATÓRIA VENEZUELANA: (RE)C
 
-### Matemática — 15 TCCs · descritivo (sem LDA)
+### Matemática, 15 TCCs · descritivo (sem LDA)
 *N insuficiente para modelagem de tópicos; reporta-se a frequência documental dos termos e a lista de trabalhos.*
 
-**Termos mais recorrentes (nº de TCCs):** situacoes (14), problema (14), teoria (14), atividade (14), acoes (14), estudantes (13), galperin (13), resolucao (13), matematica (11), processo (11), fundamental (11), conteudo (10), analisar (10), mentais (10), formacao (10)
+**Termos mais recorrentes (nº de TCCs):** teoria (14), acoes (14), situacoes (14), problema (14), atividade (14), estudantes (13), galperin (13), resolucao (13), fundamental (11), processo (11), matematica (11), formacao (10), mentais (10), analisar (10), conteudo (10)
 
 **Trabalhos:**
    - id 4 (2016): A APRENDIZAGEM DA ATIVIDADE DE SITUAÇÕES PRO-BLEMA EM SISTEMA DE EQUAÇÕES LINEARES FUNDA-M
@@ -108,10 +108,10 @@ Corpus: 338 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
    - id 120 (2024): A ATIVIDADE SITUAÇÕES PROBLEMA DISCENTE EM EXPRESSÕES ALGÉBRICAS EM ESTUDANTES DO 7° ANO N
    - id 119 (2026): CONTRIBUIÇÕES DA TEORIA HISTÓRICO-CULTURAL DA ATIVIDADE NA APRENDIZAGEM DA MATEMÁTICA: UM 
 
-### Ciências Biológicas — 24 TCCs · descritivo (sem LDA)
+### Ciências Biológicas, 24 TCCs · descritivo (sem LDA)
 *N insuficiente para modelagem de tópicos; reporta-se a frequência documental dos termos e a lista de trabalhos.*
 
-**Termos mais recorrentes (nº de TCCs):** roraima (14), resultados (12), vista (12), importancia (11), pode (10), analise (9), estudos (8), quanto (8), estado (8), tres (8), teve (8), tambem (8), atraves (8), genero (7), saude (7)
+**Termos mais recorrentes (nº de TCCs):** roraima (14), resultados (12), vista (12), importancia (11), pode (10), analise (9), quanto (8), estudos (8), estado (8), tres (8), tambem (8), teve (8), atraves (8), dados (7), genero (7)
 
 **Trabalhos:**
    - id 282 (2007): PESQUISA DO VÍRUS DENGUE EM LARVAS DE Aedes aegypti E SUA DINÂMICA DE INFESTAÇÃO EM UM BAI
@@ -140,9 +140,9 @@ Corpus: 338 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
    - id 327 (2023): VIABILIDADE DA AÇÃO ANTIBACTERIANA E ANTIOXIDANTE DE FITOEXTRATOS DE Miconia rubiginosa (B
 
 
-## 🔴 Camada listagem (N ínfimo — sem modelagem)
+## 🔴 Camada listagem (N ínfimo, sem modelagem)
 
-### Letras — 10 TCCs · listagem (sem análise)
+### Letras, 10 TCCs · listagem (sem análise)
 *N ínfimo (10): qualquer modelagem seria artefato (CLAUDE.md §1). Apenas identificação.*
 
    - id 239 (2021): DO LIMÃO À LIMONADA: REFLEXÕES ACERCA DA CONTRIBUIÇÃO DO ENSINO REMOTO PARA O ENSINO PRESENCIAL DE LÍNGUA INGL
@@ -156,7 +156,7 @@ Corpus: 338 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
    - id 14 (2023): PAPÉIS SOCIAIS DE GÊNERO NO LIVRO MULHERZINHAS, DE LOUISA MAY ALCOTT
    - id 238 (2023): PAPÉIS SOCIAIS DE GÊNERO NO LIVRO MULHERZINHAS DE LOUISA MAY ALCOTT
 
-### LEDUCARR — 16 TCCs · listagem (sem análise)
+### LEDUCARR, 16 TCCs · listagem (sem análise)
 *N ínfimo (16): qualquer modelagem seria artefato (CLAUDE.md §1). Apenas identificação.*
 
    - id 19 (2023): AS CONTRIBUIÇÕES DO PROGRAMA INSTITUCIONAL DE BOLSA DE INICIAÇÃO À DOCÊNCIA-PIBID PARA A FORMAÇÃO DOCENTE DOS 

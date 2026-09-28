@@ -1,0 +1,9 @@
+nome_original,nome_corrigido,quantidade_tccs,problema,observacao
+JONILDO VIANA,,1,MAIÚSCULA (deveria ser Title Case),Está em caixa alta
+Maria Edith Romano Siems-Marcondes,,2,Hífen (Siems-Marcondes),"Deveria ser sem hífen ou confirmar se é variante de ""Maria Edith Romano Siems"""
+Maria Edith Romano Siems,,1,Possível variante de Siems-Marcondes,Verificar se é a mesma pessoa
+Rafael Friesen,,1,Possível variante de Rafael Ricardo Friesen,Verificar se é a mesma pessoa
+Rafael Ricardo Friesen,,1,Possível variante de Rafael Friesen,Verificar se é a mesma pessoa
+Fábio Almeida de Carvalho,,3,Possível variante de Fabíola Christian Almeida de Carvalho,Verificar: Fábio (masculino) vs Fabíola (feminino) — pode ser pessoa diferente
+Fabíola Christian Almeida de Carvalho,,3,Possível duplicata de Fábio Almeida de Carvalho,Nomes muito similares
+Não informado,,2,Orientador não registrado,Deixar como está ou substituir por vazio?

@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Teste de ESTABILIDADE do LDA — LIDAE/UFRR
+Teste de ESTABILIDADE do LDA, LIDAE/UFRR
 ============================================================================
 Pergunta metodológica: a divisão em K tópicos SOBREVIVE a mudanças de seed?
 Num corpus pequeno (147 TCCs, textos curtos), tópicos instáveis são esperados
-— este script MEDE essa instabilidade em vez de escondê-la (CLAUDE.md §1, §4).
+este script MEDE essa instabilidade em vez de escondê-la (CLAUDE.md §1, §4).
 
 Replica EXATAMENTE o pré-processamento de analise_corpus.py:
   texto = título + resumo + palavras-chave  →  limpa() + STOP_ALL (≥4 letras)
@@ -180,7 +180,7 @@ print(f"\nMais ESTÁVEL (maior ARI):       K={melhor_ari['K']} "
 print(f"Melhor PERPLEXIDADE (pipeline): K={melhor_perp['K']} "
       f"(perp={melhor_perp['perp_med']:.1f})")
 if melhor_ari["K"] != melhor_perp["K"]:
-    print("⚠️  Os dois critérios DIVERGEM — a perplexidade sozinha não basta.\n"
+    print("⚠️  Os dois critérios DIVERGEM, a perplexidade sozinha não basta.\n"
           "    Decisão de K deve pesar estabilidade + leitura qualitativa (CLAUDE.md §5).")
 else:
     print("✓  Os dois critérios CONVERGEM neste K.")
@@ -206,7 +206,7 @@ ax1.set_xlabel("K (nº de tópicos)")
 ax1.set_ylabel("Estabilidade entre seeds (0–1)")
 ax1.set_xticks(Ks)
 ax1.set_ylim(0, 1)
-ax1.set_title("Estabilidade do LDA por K — 12 seeds, corpus de 147 TCCs\n"
+ax1.set_title("Estabilidade do LDA por K, 12 seeds, corpus de 147 TCCs\n"
               "(quanto mais alto e mais 'apertado', mais reprodutível)",
               fontsize=11)
 ax1.legend(loc="upper right")

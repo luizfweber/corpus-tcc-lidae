@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Detector de inconsistências para revisão MANUAL — LIDAE/UFRR
+Detector de inconsistências para revisão MANUAL, LIDAE/UFRR
 ============================================================================
 Varre o corpus e SINALIZA registros com dados suspeitos nos campos título,
-resumo, autor, palavras-chave, tipo de TCC e ano. NÃO corrige nada — apenas
+resumo, autor, palavras-chave, tipo de TCC e ano. NÃO corrige nada, apenas
 gera uma planilha editável para verificação humana (CLAUDE.md §2, §3:
 nunca imputar, nunca "corrigir" em silêncio).
 
 Saídas:
-  VERIFICACAO_DADOS.xlsx   (editável — aba 'verificar' + aba 'resumo_problemas')
+  VERIFICACAO_DADOS.xlsx   (editável, aba 'verificar' + aba 'resumo_problemas')
   VERIFICACAO_DADOS.csv    (mesma tabela, formato simples)
 Rodar:  python3 verifica_inconsistencias.py
 """
@@ -191,7 +191,7 @@ print("Problemas por tipo:")
 for t, n in resumo_tab.itertuples(index=False):
     print(f"  {n:>3}  {t}")
 
-print("\n🔴 PRIORIDADE ALTA — campos com dado estranho:")
+print("\n🔴 PRIORIDADE ALTA, campos com dado estranho:")
 for _, r in alta.iterrows():
     print(f"  id {r['id']:>3} ({r['grupo_tcc']}): {r['PROBLEMAS_DETECTADOS']}")
 

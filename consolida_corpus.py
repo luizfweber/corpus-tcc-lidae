@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Consolidação do corpus de TCCs das Licenciaturas UFRR (LIDAE) — versão "do zero".
+Consolidação do corpus de TCCs das Licenciaturas UFRR (LIDAE), versão "do zero".
 
 Reconstrói a base de TCCs a partir das DUAS fontes originais (respostas dos
 formulários Google), seguindo o CLAUDE.md:
@@ -326,7 +326,7 @@ def main():
     # ---- grava log ----
     rel = os.path.join(OUT_DIR, "relatorio_consolidacao.txt")
     with open(rel, "w", encoding="utf-8") as f:
-        f.write("RELATÓRIO DE CONSOLIDAÇÃO DO CORPUS DE TCCs — LIDAE/UFRR\n")
+        f.write("RELATÓRIO DE CONSOLIDAÇÃO DO CORPUS DE TCCs, LIDAE/UFRR\n")
         f.write("=" * 60 + "\n\n")
         f.write("\n".join(log) + "\n\n")
         if confl:
