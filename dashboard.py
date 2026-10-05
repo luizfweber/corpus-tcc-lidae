@@ -813,6 +813,7 @@ if secao == "Distribuição":
                "saída/colação) e quantos TCCs desse curso já foram cadastrados "
                "(por ano de defesa), com a cobertura %. Independe dos filtros da "
                "barra lateral.")
+    st.caption("Agregado por **grupo de curso**, sem separar habilitações. Motivo: na base da DTI, 80% a 87% dos egressos de Insikiran, LEDUCARR e Letras estão registrados no curso genérico, sem habilitação. Desagregar daria um denominador incompleto. As abas que usam só o corpus mostram as habilitações separadas.")
 
     _chave = (str(EGRESSOS_PUBLICO.stat().st_mtime)
               if EGRESSOS_PUBLICO.exists() else "ausente")
@@ -916,13 +917,16 @@ if secao == "Tópicos (LDA)":
                       margin=dict(r=70))
     st.plotly_chart(fig, use_container_width=True)
 
-    st.markdown("**Tópico dominante × grupo de curso**")
-    ct = pd.crosstab(fdt["topico_rotulo"], fdt["grupo_tcc"])
-    ct = ct[[c for c in ORDEM_CURSOS if c in ct.columns]]  # ordem canônica
+    st.markdown("**Tópico dominante × curso (com habilitações)**")
+    # Desagregado por habilitação: o corpus tem curso_fonte em 100% dos TCCs,
+    # então não há motivo para agregar Insikiran, LEDUCARR e Letras aqui.
+    ct = pd.crosstab(fdt["topico_rotulo"], fdt["curso_det"])
+    ct = ct[[c for c in ORDEM_CURSOS_DET if c in ct.columns]]  # ordem canônica
     ct = ct.loc[ct.sum(axis=1).sort_values(ascending=False).index]  # maiores no topo
     fig = px.imshow(ct, text_auto=True, color_continuous_scale=SEQ_NECPF,
                     aspect="auto")
-    fig.update_layout(height=460, xaxis_title="", yaxis_title="")
+    fig.update_layout(height=480, xaxis_title="", yaxis_title="",
+                      xaxis_tickangle=-35, margin=dict(b=120))
     st.plotly_chart(fig, use_container_width=True)
 
     st.markdown("**Termos mais prováveis por tópico** (revisar leituras)")
@@ -1313,6 +1317,7 @@ if secao == "Cobertura de Coleta":
                    "individual, deduplicada por matrícula; bacharelado e EaD "
                    "excluídos). Egresso = saída/colação na DTI, evento distinto "
                    "da defesa do TCC. Indício, não veredito.")
+        st.caption("Agregado por **grupo de curso**, sem separar habilitações. Motivo: na base da DTI, 80% a 87% dos egressos de Insikiran, LEDUCARR e Letras estão registrados no curso genérico, sem habilitação. Desagregar daria um denominador incompleto. As abas que usam só o corpus mostram as habilitações separadas.")
 
         st.markdown("#### Cobertura por curso")
         cob_disp = cobertura.copy()
@@ -1362,9 +1367,10 @@ if secao == "Cobertura de Coleta":
 
         st.markdown("---")
         st.markdown("#### 📋 Lista de TCCs coletados (por curso)")
-        cursos_cob = ["(todos)"] + ORDEM_CURSOS
-        sel_c = st.selectbox("Filtrar por curso", cursos_cob, key="cob_filtro")
-        flt = df if sel_c == "(todos)" else df[df["grupo_tcc"] == sel_c]
+        cursos_cob = ["(todos)"] + ORDEM_CURSOS_DET
+        sel_c = st.selectbox("Filtrar por curso (com habilitação)", cursos_cob,
+                             key="cob_filtro")
+        flt = df if sel_c == "(todos)" else df[df["curso_det"] == sel_c]
         lista_tccs(flt, key="cob",
                    cols=["id", "curso_det", "titulo", "autor", "ano_num", "pag_num"])
 
@@ -1422,6 +1428,7 @@ if secao == "Registros faltantes":
     st.caption("🔒 Proteção parcial (LGPD): nome, curso, período e título do TCC "
                "são públicos (TCCs são documentos públicos); a **matrícula** e o "
                "histórico de matrículas ficam protegidos e não aparecem aqui.")
+    st.caption("Agregado por **grupo de curso**, sem separar habilitações. Motivo: na base da DTI, 80% a 87% dos egressos de Insikiran, LEDUCARR e Letras estão registrados no curso genérico, sem habilitação. Desagregar daria um denominador incompleto. As abas que usam só o corpus mostram as habilitações separadas.")
 
     # autores já coletados, por grupo (conjunto de nomes normalizados)
     _aut = df.copy()
