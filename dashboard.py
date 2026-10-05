@@ -2059,9 +2059,17 @@ if secao == "Análise temática por curso":
 
     sel_tem = st.selectbox("Curso / habilitação", list(TEMATICAS.keys()),
                            key="tematica_curso")
-    st.caption("Disponível para Música, Pedagogia, História e as três habilitações "
-               "do Insikiran. Outros cursos serão acrescentados conforme a leitura "
-               "for redigida.")
+    # Cobertura da leitura: calculada, para a legenda não envelhecer quando um
+    # curso novo ganhar análise ou quando chegar catalogação de curso ainda sem.
+    _ids_tem = {i for _c in TEMATICAS.values() for _v in _c["eixos"].values() for i in _v}
+    _sem_tem = sorted(df.loc[~df["id"].isin(_ids_tem), "grupo_tcc"].dropna().unique())
+    st.caption(
+        f"Leitura redigida para {len(TEMATICAS)} cursos/habilitações: "
+        + ", ".join(TEMATICAS.keys()) + ". "
+        + (f"Ainda sem análise temática: {', '.join(_sem_tem)} "
+           f"({int((~df['id'].isin(_ids_tem)).sum())} TCCs). "
+           if _sem_tem else "")
+        + "Os demais serão acrescentados conforme a leitura for redigida.")
     info = TEMATICAS[sel_tem]
     _pt = BASE / "outputs" / "analise" / info["arquivo"]
     texto = _pt.read_text(encoding="utf-8") if _pt.exists() else ""
