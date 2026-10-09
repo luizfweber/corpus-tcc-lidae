@@ -1,60 +1,58 @@
-RELATÓRIO EXPLORATÓRIO — CORPUS TCCs LIDAE/UFRR
+RELATÓRIO EXPLORATÓRIO, CORPUS TCCs LIDAE/UFRR
 ================================================
-Data: 2026-06-16 | Piloto: 338 TCCs | Natureza: exploratória, não censitária
+Data: 2026-06-16 | Piloto: 344 TCCs | Natureza: exploratória, não censitária
 
 1. CORPUS
-   - 338 TCCs únicos consolidados a partir de 2 formulários Google Forms.
-   - Grupos: História (130), Insikiran (87), Pedagogia (29), Música (27), Ciências Biológicas (24), LEDUCARR (16), Matemática (15), Letras (10).
+   - 344 TCCs únicos consolidados a partir de 2 formulários Google Forms.
+   - Grupos: História (130), Insikiran (87), Pedagogia (29), Música (27), Ciências Biológicas (25), LEDUCARR (16), Matemática (15), Letras (10), Artes Visuais (5).
    - Anos com registro: 2007–2026
-     (3 TCCs sem ano informado — excluídos desta contagem).
+     (3 TCCs sem ano informado, excluídos desta contagem).
 
-2. PÁGINAS (mediana por grupo — assimetria justifica mediana)
+2. PÁGINAS (mediana por grupo, assimetria justifica mediana)
    História: mediana=57 | min=34 | max=107 | n=130
    Insikiran: mediana=41 | min=18 | max=104 | n=87
    Pedagogia: mediana=24 | min=15 | max=49 | n=29
    Música: mediana=62 | min=36 | max=171 | n=27
-   Ciências Biológicas: mediana=46 | min=19 | max=127 | n=24
+   Ciências Biológicas: mediana=47 | min=19 | max=127 | n=25
    LEDUCARR: mediana=32 | min=21 | max=62 | n=16
    Matemática: mediana=50 | min=41 | max=93 | n=15
    Letras: mediana=40 | min=14 | max=61 | n=10
+   Artes Visuais: mediana=49 | min=45 | max=77 | n=5
 
 3. LDA (K=8 tópicos, menor perplexidade)
-   Perplexidades testadas: {4: 497.9, 5: 484.0, 6: 479.2, 7: 490.1, 8: 489.1}
+   Perplexidades testadas: {4: 493.2, 5: 503.5, 6: 491.1, 7: 499.1, 8: 494.5}
    ATENÇÃO: rótulos abaixo são aproximados e requerem revisão qualitativa.
-   [Tópico A]: indigenas, branco, historia, seculo, processo, povos, analise, amazonia, regiao, vale
-   [Tópico B]: indigena, comunidade, indigenas, educacao, estadual, proposta, matematica, lingua, escolar, cultura
-   [Tópico C]: musica, musical, vista, mulheres, analise, jornal, discurso, genero, representacao, musicais
-   [Tópico D]: vista, roraima, historia, cidade, identidade, projeto, dengue, atraves, estado, historico
-   [Tópico E]: roraima, territorio, federal, governo, nacional, estado, regiao, desenvolvimento, militar, periodo
-   [Tópico F]: educacao, historia, formacao, roraima, escolar, escolas, ufrr, analise, pratica, processo
-   [Tópico G]: atividade, problema, formacao, estagio, teoria, situacoes, experiencia, estudantes, resolucao, acoes
-   [Tópico H]: comunidade, indigena, saude, tradicional, plantas, medicinais, indigenas, conhecimentos, tradicionais, tambem
+   [Tópico A]: educacao, formacao, estagio, pedagogica, roraima, ufrr, experiencia, docente, processo, projeto
+   [Tópico B]: indigena, comunidade, indigenas, educacao, conhecimentos, tradicional, saude, estadual, tambem, plantas
+   [Tópico C]: educacao, musica, musical, escolas, vista, contexto, pratica, alem, tambem, praticas
+   [Tópico D]: decada, artes, analise, guerra, suicidio, artistico, performance, visuais, vista, cenario
+   [Tópico E]: roraima, atividade, problema, territorio, situacoes, acoes, federal, regiao, vista, desenvolvimento
+   [Tópico F]: historia, analise, roraima, vista, branco, processo, mulheres, indigenas, social, seculo
+   [Tópico G]: indigena, matematica, lingua, jogos, estadual, leitura, comunidade, fundamental, proposta, didatico
+   [Tópico H]: educacao, cultura, indigena, escolar, indigenas, comunidade, cultural, roraima, local, artesanato
 
-4. CLUSTERING (k=8, silhueta=0.037)
-   Silhueta baixa é esperada em corpus pequeno e texto curto — indica
+4. CLUSTERING (k=5, silhueta=0.034)
+   Silhueta baixa é esperada em corpus pequeno e texto curto, indica
    fronteiras temáticas porosas, não falha metodológica.
-   C0 (n=42): {'História': 40, 'Ciências Biológicas': 2}
-   C1 (n=80): {'Insikiran': 69, 'LEDUCARR': 6, 'História': 3}
-   C2 (n=14): {'Matemática': 14}
-   C3 (n=80): {'Música': 26, 'Pedagogia': 25, 'História': 10}
-   C4 (n=43): {'História': 30, 'Insikiran': 5, 'LEDUCARR': 4}
-   C5 (n=12): {'História': 12}
-   C6 (n=48): {'História': 35, 'Ciências Biológicas': 7, 'Letras': 4}
-   C7 (n=19): {'Insikiran': 12, 'Pedagogia': 3, 'LEDUCARR': 2}
+   C0 (n=14): {'Matemática': 14}
+   C1 (n=95): {'Insikiran': 83, 'LEDUCARR': 6, 'História': 5}
+   C2 (n=130): {'História': 30, 'Pedagogia': 28, 'Música': 27}
+   C3 (n=48): {'História': 47, 'Ciências Biológicas': 1}
+   C4 (n=57): {'História': 48, 'Ciências Biológicas': 5, 'Insikiran': 3}
 
 5. REDES
-   Orientadores com 2+ TCCs: 60 (86% dos TCCs).
-   TCCs sem banca registrada: 0/338 — campo não preenchido na fonte.
+   Orientadores com 2+ TCCs: 62 (86% dos TCCs).
+   TCCs sem banca registrada: 0/344, campo não preenchido na fonte.
    Nomes normalizados (títulos removidos); variações residuais podem subsistir.
 
 6. MENÇÃO INDÍGENA
-   139/338 TCCs (41%) mencionam termos indígenas.
+   139/344 TCCs (40%) mencionam termos indígenas.
    Critério: lista de 57 termos em título + resumo + palavras-chave.
    LIMITE: capta MENÇÃO, não centralidade. Falsos positivos/negativos possíveis.
    Lista completa de termos: indigena, indigenas, indigeno, indigenos, indio, indios, indigenismo, indigenista, intercultur, wapichana, macuxi, yanomami, waiwai, wai wai, insikiran, tuxaua, comunidade indigena, escola indigena, educacao indigena, territorio indigeno, terra indigena, povo indigena, povos indigenas, etnia, etnologia, etnografico, makuxi, wapixana, taurepang, taulipang, ingariko, ingarico, patamona, yanomame, yanomam, yekwana, ye'kwana, yekuana, maiongong, wai-wai, sapara, zapara, pirititi, waimiri, atroari, warao, raposa serra do sol, raposa-serra do sol, comunidade raposa, sao marcos, malacacheta, tabalascada, serra da moca, ananas, manoa-pium, ponta da serra, boqueirao.
 
 LIMITAÇÕES GERAIS
-   - Corpus piloto (128 TCCs) — resultados não generalizáveis ao acervo completo.
-   - Alguns grupos têm n muito pequeno (LEDUCAR=1, Letras=6) — estatísticas instáveis.
+   - Corpus piloto (128 TCCs), resultados não generalizáveis ao acervo completo.
+   - Alguns grupos têm n muito pequeno (LEDUCAR=1, Letras=6), estatísticas instáveis.
    - Resumos incompletos ou ausentes afetam LDA e clustering.
    - Nomes de orientadores/bancas têm variações residuais mesmo após normalização.

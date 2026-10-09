@@ -1,6 +1,6 @@
 {
-  "gerado_em": "2026-09-28",
-  "n_total": 338,
+  "gerado_em": "2026-10-09",
+  "n_total": 344,
   "cursos": [
     {
       "curso": "Insikiran",
@@ -48,11 +48,11 @@
           33
         ],
         [
-          "conhecimentos",
+          "fundamental",
           33
         ],
         [
-          "fundamental",
+          "conhecimentos",
           33
         ],
         [
@@ -635,11 +635,11 @@
           10
         ],
         [
-          "vista",
+          "pedagogico",
           10
         ],
         [
-          "pedagogico",
+          "vista",
           10
         ],
         [
@@ -1685,11 +1685,11 @@
           17
         ],
         [
-          "roraima",
+          "contexto",
           15
         ],
         [
-          "contexto",
+          "roraima",
           15
         ],
         [
@@ -1697,11 +1697,11 @@
           14
         ],
         [
-          "alem",
+          "praticas",
           14
         ],
         [
-          "praticas",
+          "alem",
           14
         ],
         [
@@ -1874,7 +1874,11 @@
       "camada": "descritivo",
       "top_termos": [
         [
-          "teoria",
+          "problema",
+          14
+        ],
+        [
+          "atividade",
           14
         ],
         [
@@ -1886,19 +1890,15 @@
           14
         ],
         [
-          "problema",
+          "teoria",
           14
-        ],
-        [
-          "atividade",
-          14
-        ],
-        [
-          "estudantes",
-          13
         ],
         [
           "galperin",
+          13
+        ],
+        [
+          "estudantes",
           13
         ],
         [
@@ -1910,27 +1910,27 @@
           11
         ],
         [
-          "processo",
-          11
-        ],
-        [
           "matematica",
           11
         ],
         [
-          "formacao",
-          10
-        ],
-        [
-          "mentais",
-          10
+          "processo",
+          11
         ],
         [
           "analisar",
           10
         ],
         [
+          "formacao",
+          10
+        ],
+        [
           "conteudo",
+          10
+        ],
+        [
+          "mentais",
           10
         ]
       ],
@@ -2015,31 +2015,47 @@
     },
     {
       "curso": "Ciências Biológicas",
-      "n": 24,
+      "n": 25,
       "camada": "descritivo",
       "top_termos": [
         [
           "roraima",
-          14
+          15
         ],
         [
           "resultados",
-          12
+          13
         ],
         [
           "vista",
-          12
+          13
+        ],
+        [
+          "pode",
+          11
         ],
         [
           "importancia",
           11
         ],
         [
-          "pode",
+          "analise",
           10
         ],
         [
-          "analise",
+          "estado",
+          9
+        ],
+        [
+          "estudos",
+          9
+        ],
+        [
+          "tambem",
+          9
+        ],
+        [
+          "atraves",
           9
         ],
         [
@@ -2047,11 +2063,11 @@
           8
         ],
         [
-          "estudos",
+          "genero",
           8
         ],
         [
-          "estado",
+          "processo",
           8
         ],
         [
@@ -2059,24 +2075,8 @@
           8
         ],
         [
-          "tambem",
+          "amostras",
           8
-        ],
-        [
-          "teve",
-          8
-        ],
-        [
-          "atraves",
-          8
-        ],
-        [
-          "dados",
-          7
-        ],
-        [
-          "genero",
-          7
         ]
       ],
       "tccs": [
@@ -2199,6 +2199,11 @@
           "id": "337",
           "ano": "2019",
           "titulo": "CULTIVO ORGÂNICO DE Brassica oleracea L. var. acephala DC. COMO ESTRATÉGIA EDUCATIVA ALIMENTAR NA ESCOLA ESTADUAL OSWALDO CRUZ, BOA VISTA - RR"
+        },
+        {
+          "id": "346",
+          "ano": "2019",
+          "titulo": "CARACTERÍSTICAS EPIDEMIOLÓGICAS DAS NOTIFICAÇÕES PARA O VÍRUS ZIKA NO ESTADO DE RORAIMA DE JANEIRO DE 2018 A JULHO DE 2019"
         }
       ],
       "lda": null
@@ -2347,6 +2352,40 @@
           "id": "237",
           "ano": "2025",
           "titulo": "DEGRADAÇÃO DO IGARAPÉ ARRAIA NA COMUNIDADE INDÍGENA MANOÁ, MUNICÍPIO DE BONFIM-RR"
+        }
+      ],
+      "lda": null
+    },
+    {
+      "curso": "Artes Visuais",
+      "n": 5,
+      "camada": "listagem",
+      "top_termos": [],
+      "tccs": [
+        {
+          "id": "341",
+          "ano": "2014",
+          "titulo": "A INSERÇÃO DA PERFORMANCE ART NO CENÁRIO ARTÍSTICO DAS ARTES VISUAIS DE BOA VISTA/RR"
+        },
+        {
+          "id": "342",
+          "ano": "2014",
+          "titulo": "ANIMAÇÃO EXPERIMENTAL"
+        },
+        {
+          "id": "343",
+          "ano": "2014",
+          "titulo": "ARTE EDUCAÇÃO: o estudo das inteligências múltiplas nas atividades didático-pedagógicas"
+        },
+        {
+          "id": "344",
+          "ano": "2014",
+          "titulo": "ENSINO/APRENDIZAGEM DAS ARTES VISUAIS: um olhar para o PIBID e os estágios curriculares supervisionados."
+        },
+        {
+          "id": "345",
+          "ano": "2014",
+          "titulo": "O EROTISMO DO CORPO NAS PERFORMANCES DE BERNA REALE"
         }
       ],
       "lda": null

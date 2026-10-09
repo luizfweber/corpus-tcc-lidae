@@ -186,38 +186,30 @@ def consolida_nomes(nomes_list, threshold=85):
 # Atualizado com K=8 (319 TCCs, re-treino 2026-07-07 após inclusão da catalogação
 # de 07/07; K fixado por leitura): rótulos PROVISÓRIOS.
 TOPICOS = {
-    0: {"rotulo": "Povos indígenas na história do Vale do Rio Branco (provisório)",
-        "leitura": "história dos povos indígenas, Rio Branco e Amazônia, séculos e processos",
-        "termos": "indigenas, branco, historia, seculo, processo, povos, "
-                  "analise, amazonia, regiao, vale"},
-    1: {"rotulo": "Educação escolar indígena e proposta pedagógica na comunidade (provisório)",
-        "leitura": "escola indígena estadual, proposta pedagógica, matemática, língua e cultura",
-        "termos": "indigena, comunidade, indigenas, educacao, estadual, proposta, "
-                  "matematica, lingua, escolar, cultura"},
-    2: {"rotulo": "Música, gênero e representação na imprensa (provisório)",
-        "leitura": "educação musical em Boa Vista, mulheres e gênero, discurso e jornal",
-        "termos": "musica, musical, vista, mulheres, analise, jornal, "
-                  "discurso, genero, representacao, musicais"},
-    3: {"rotulo": "Boa Vista: cidade, identidade e saúde pública (provisório)",
-        "leitura": "cidade de Boa Vista e Roraima, identidade e memória, projetos e dengue",
-        "termos": "vista, roraima, historia, cidade, identidade, projeto, "
-                  "dengue, atraves, estado, historico"},
-    4: {"rotulo": "Território Federal, governo e período militar (provisório)",
-        "leitura": "Território Federal de Roraima, governo e Estado nacional, desenvolvimento regional",
-        "termos": "roraima, territorio, federal, governo, nacional, estado, "
-                  "regiao, desenvolvimento, militar, periodo"},
-    5: {"rotulo": "Formação docente e prática escolar (provisório)",
-        "leitura": "formação de professores, escolas de Roraima, prática e processos na UFRR",
-        "termos": "educacao, historia, formacao, roraima, escolar, escolas, "
-                  "ufrr, analise, pratica, processo"},
-    6: {"rotulo": "Matemática: situações-problema e estágio (provisório)",
-        "leitura": "atividade de situações-problema, teoria e ações de resolução, estágio e formação",
-        "termos": "atividade, problema, formacao, estagio, teoria, situacoes, "
-                  "experiencia, estudantes, resolucao, acoes"},
-    7: {"rotulo": "Saberes tradicionais, plantas medicinais e saúde indígena (provisório)",
-        "leitura": "comunidade indígena, saúde e medicina tradicional, plantas medicinais",
-        "termos": "comunidade, indigena, saude, tradicional, plantas, medicinais, "
-                  "indigenas, conhecimentos, tradicionais, tambem"},
+    0: {"rotulo": "Formação docente, estágio e prática pedagógica (provisório)",
+        "leitura": "estágio e formação de professores, prática pedagógica na UFRR",
+        "termos": "educacao, formacao, estagio, pedagogica, roraima, ufrr, experiencia, docente, processo, projeto"},
+    1: {"rotulo": "Saberes tradicionais, saúde e plantas medicinais na comunidade indígena (provisório)",
+        "leitura": "conhecimentos tradicionais, saúde e plantas medicinais",
+        "termos": "indigena, comunidade, indigenas, educacao, conhecimentos, tradicional, saude, estadual, tambem, plantas"},
+    2: {"rotulo": "Educação musical e práticas nas escolas (provisório)",
+        "leitura": "ensino de música, contexto escolar e práticas em Boa Vista",
+        "termos": "educacao, musica, musical, escolas, vista, contexto, pratica, alem, tambem, praticas"},
+    3: {"rotulo": "Artes visuais, performance e temas diversos (difuso, n pequeno) (provisório)",
+        "leitura": "tópico pequeno e heterogêneo: performance e cenário artístico, guerra, suicídio",
+        "termos": "decada, artes, analise, guerra, suicidio, artistico, performance, visuais, vista, cenario"},
+    4: {"rotulo": "Situações-problema e território regional (misto) (provisório)",
+        "leitura": "mistura situações-problema (Matemática) com território e desenvolvimento regional",
+        "termos": "roraima, atividade, problema, territorio, situacoes, acoes, federal, regiao, vista, desenvolvimento"},
+    5: {"rotulo": "História regional de Roraima: Rio Branco, mulheres e povos indígenas (provisório)",
+        "leitura": "história de Roraima e do Rio Branco, mulheres, povos indígenas, séculos",
+        "termos": "historia, analise, roraima, vista, branco, processo, mulheres, indigenas, social, seculo"},
+    6: {"rotulo": "Matemática, língua e leitura na escola indígena (provisório)",
+        "leitura": "matemática, língua e leitura no fundamental, jogos e material didático",
+        "termos": "indigena, matematica, lingua, jogos, estadual, leitura, comunidade, fundamental, proposta, didatico"},
+    7: {"rotulo": "Cultura, artesanato e educação escolar indígena (provisório)",
+        "leitura": "cultura e artesanato na escola indígena, cultura local",
+        "termos": "educacao, cultura, indigena, escolar, indigenas, comunidade, cultural, roraima, local, artesanato"},
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -786,7 +778,8 @@ if secao == "Distribuição":
         ano_ini = 2015                       # piso do eixo (janela 2015–atual)
         ano_atual = pd.Timestamp.now().year
         anos_int = anos["ano_num"].astype(int)
-        n_fora = int(((anos_int < ano_ini) | (anos_int > ano_atual)).sum())
+        n_antes = int((anos_int < ano_ini).sum())     # válidos, só fora da janela
+        n_futuro = int((anos_int > ano_atual).sum())  # ano posterior ao atual: suspeito
         # eixo FIXO de ano_ini ao ano atual; anos sem TCC = 0
         serie = (anos_int[(anos_int >= ano_ini) & (anos_int <= ano_atual)]
                  .value_counts().sort_index()
@@ -800,9 +793,13 @@ if secao == "Distribuição":
                           height=380)
         fig.update_xaxes(tickmode="linear", tick0=ano_ini, dtick=1, tickangle=-45)
         st.plotly_chart(fig, use_container_width=True)
-        if n_fora:
-            st.caption(f"⚠️ {n_fora} TCC(s) com ano fora de {ano_ini}–{ano_atual} "
-                       "(provável erro de registro), excluído(s) do gráfico; verificar.")
+        if n_antes:
+            st.caption(f"{n_antes} TCC(s) defendido(s) antes de {ano_ini} ficam fora "
+                       f"deste gráfico, que mostra a janela {ano_ini}–{ano_atual}. "
+                       "Os anos são válidos e os TCCs seguem nas demais análises.")
+        if n_futuro:
+            st.caption(f"⚠️ {n_futuro} TCC(s) com ano posterior a {ano_atual}: "
+                       "provável erro de registro, excluído(s) do gráfico; verificar.")
     st.caption(f"⚠️ {n_sem} TCCs sem ano informado, excluídos deste gráfico "
                "(não imputados).")
     st.caption("A curva NÃO deve ser lida como 'aumento de produção docente', "
@@ -2050,7 +2047,7 @@ TEMATICAS = {
         "arquivo": "analise_tematica_ciencias_biologicas.md",
         "eixos": {
             "Ensino de Biologia e recursos didáticos": [242, 247, 249, 250, 277, 278, 284, 285, 336, 337],
-            "Saúde, epidemiologia e bem-estar": [243, 244, 280, 282, 335],
+            "Saúde, epidemiologia e bem-estar": [243, 244, 280, 282, 335, 346],
             "Botânica, taxonomia e biodiversidade": [251, 276, 279, 283],
             "Plantas medicinais, bioatividade e etnobiologia": [241, 248, 327],
             "Qualidade da água e ambiente": [246, 281],

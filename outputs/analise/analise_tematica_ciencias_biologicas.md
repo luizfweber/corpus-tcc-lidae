@@ -1,6 +1,6 @@
 # Análise temática: Ciências Biológicas (LIDAE/UFRR)
 
-> Leitura descritiva e exploratória dos 24 TCCs do curso de Ciências Biológicas,
+> Leitura descritiva e exploratória dos 25 TCCs do curso de Ciências Biológicas,
 > a partir de título, resumo e palavras-chave. Fonte: cadastro dos TCCs realizado
 > pelos pesquisadores do NECPF.
 >
@@ -23,7 +23,7 @@ contagem de termos. O passo a passo:
    de antemão.
 5. Nomeação de cada grupo.
 
-Por que não LDA com N igual a 20? Porque é pequeno demais para modelagem estável
+Por que não LDA com N igual a 25? Porque é pequeno demais para modelagem estável
 (o pipeline trata Ciências Biológicas na camada descritiva). A leitura humana é
 mais confiável nessa escala, mas é interpretativa: outro leitor poderia agrupar de
 forma ligeiramente diferente. Daí ser indício, não classificação fechada.
@@ -38,28 +38,35 @@ qualidade da água).
 
 ## Eixos temáticos
 
-### Eixo 1: Ensino de Biologia e recursos didáticos (8 TCCs)
-Livros didáticos, jogos, sequências didáticas, informática e temas transversais no
-ensino de biologia e ciências.
-ids: 242, 247, 249, 250, 277, 278, 284, 285
+Cada TCC entra em um único eixo, o do foco principal declarado no resumo.
 
-### Eixo 2: Saúde, epidemiologia e bem-estar (4 TCCs)
+### Eixo 1: Ensino de Biologia e recursos didáticos (10 TCCs)
+Livros didáticos, jogos, sequências didáticas, informática e temas transversais no
+ensino de biologia e ciências. Inclui educação ambiental com estudantes do ensino
+fundamental (336) e o cultivo orgânico como estratégia educativa (337).
+ids: 242, 247, 249, 250, 277, 278, 284, 285, 336, 337
+
+### Eixo 2: Saúde, epidemiologia e bem-estar (6 TCCs)
 Dengue (sorotipos, genótipos, vetor Aedes) e malária, com técnicas moleculares.
-ids: 243, 244, 280, 282
+Inclui a epidemiologia do vírus Zika em Roraima (346) e a qualidade de vida e o
+estresse de professores da rede estadual (335).
+ids: 243, 244, 280, 282, 335, 346
 
 ### Eixo 3: Botânica, taxonomia e biodiversidade (4 TCCs)
 Filogenia e taxonomia (aves, Polygalaceae), fungos do solo e biologia molecular do
 guaraná, no ambiente de savana amazônica.
 ids: 251, 276, 279, 283
 
-### Eixo 4: Plantas medicinais, bioatividade e etnobiologia (2 TCCs)
+### Eixo 4: Plantas medicinais, bioatividade e etnobiologia (3 TCCs)
 Uso tradicional de plantas medicinais e atividade antioxidante e antimicrobiana de
-extratos vegetais.
-ids: 241, 248
+extratos vegetais, incluindo fitoextratos de Melastomataceae (327).
+ids: 241, 248, 327
 
 ### Eixo 5: Qualidade da água e ambiente (2 TCCs)
 Potabilidade e qualidade microbiológica da água consumida no campus.
 ids: 246, 281
+
+**Conferência:** 10 + 6 + 4 + 3 + 2 = **25 TCCs**, igual ao total do curso no corpus.
 
 ## Leitura
 
@@ -70,7 +77,7 @@ ensino de biologia. Os temas de saúde (dengue, malária) e de ambiente (savana,
 
 ## Limites
 
-- N igual a 20, com eixos pequenos: indício a confirmar por leitura.
-- Os eixos podem se sobrepor (ex.: dengue aparece tanto em epidemiologia quanto no
-  ensino, como sequência didática).
+- N igual a 25, com eixos pequenos: indício a confirmar por leitura.
+- Há afinidade entre eixos (ex.: dengue aparece em epidemiologia e no ensino,
+  como sequência didática). Cada TCC foi contado uma única vez.
 - Reflete a coleta atual (cadastro NECPF), não o universo de TCCs do curso.

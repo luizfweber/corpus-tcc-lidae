@@ -54,6 +54,7 @@ GRUPO = {
     "História": "História",
     "Ciências Biológicas": "Ciências Biológicas",
     "Pedagogia": "Pedagogia", "Música": "Música", "Matemática": "Matemática",
+    "Artes Visuais": "Artes Visuais",
     "Insikiran – Ciências da Natureza": "Insikiran",
     "Insikiran – Ciências Sociais": "Insikiran",
     "Insikiran – Comunicação e Artes": "Insikiran",

@@ -5,7 +5,7 @@ Análise temática POR CURSO, em camadas, LIDAE/UFRR
 ============================================================================
 Por que por curso: o LDA global apenas redescobria a divisão entre cursos
 (Tópico≈Música, Tópico≈Insikiran). Olhar DENTRO de cada curso revela sub-temas
-reais, mas só onde há documentos suficientes (CLAUDE.md §1, §2, §4).
+reais, mas só onde há documentos suficientes.
 
 TRÊS CAMADAS, segundo o N de cada curso (atualizado p/ 211 TCCs, 2026-06-19):
   • LDA (N alto):        Insikiran (81), História (47) e Pedagogia (29).
@@ -39,7 +39,7 @@ OUT_JSON = BASE / "outputs" / "analise" / "analise_por_curso.json"
 
 LDA_CURSOS = {"Insikiran": (2, 4), "Pedagogia": (2, 3), "História": (2, 4)}
 DESCRITIVO = ["Música", "Matemática", "Ciências Biológicas"]
-LISTAGEM   = ["Letras", "LEDUCARR"]
+LISTAGEM   = ["Letras", "LEDUCARR", "Artes Visuais"]
 
 SEEDS_EST = list(range(8))
 MAX_ITER  = 40
@@ -208,8 +208,8 @@ def camada_descritiva(curso):
 def camada_listagem(curso):
     sub = [r for r in rows if r["grupo_tcc"] == curso]
     out(f"### {curso}, {len(sub)} TCCs · listagem (sem análise)")
-    out(f"*N ínfimo ({len(sub)}): qualquer modelagem seria artefato "
-        f"(CLAUDE.md §1). Apenas identificação.*\n")
+    out(f"*N ínfimo ({len(sub)}): qualquer modelagem seria artefato. "
+        f"Apenas identificação.*\n")
     for r in sorted(sub, key=lambda r: str(r.get("ano_defesa", ""))):
         out(f"   - id {r.get('id','?')} ({r.get('ano_defesa','?')}): "
             f"{titulo_limpo(r)[:110]}")

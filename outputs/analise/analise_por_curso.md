@@ -1,6 +1,6 @@
 # Análise temática por curso, em camadas, LIDAE/UFRR
 
-Corpus: 338 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · listagem). Exploratório, não censitário.
+Corpus: 344 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · listagem). Exploratório, não censitário.
 
 
 ## 🟢 Camada LDA (N suficiente para sub-temas)
@@ -55,7 +55,7 @@ Corpus: 338 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
 ### Música, 27 TCCs · descritivo (sem LDA)
 *N insuficiente para modelagem de tópicos; reporta-se a frequência documental dos termos e a lista de trabalhos.*
 
-**Termos mais recorrentes (nº de TCCs):** musica (25), musical (20), vista (19), educacao (17), roraima (15), contexto (15), analise (14), alem (14), praticas (14), pratica (13), musicais (12), atraves (12), formacao (12), resultados (12), bibliografica (11)
+**Termos mais recorrentes (nº de TCCs):** musica (25), musical (20), vista (19), educacao (17), contexto (15), roraima (15), analise (14), praticas (14), alem (14), pratica (13), musicais (12), atraves (12), formacao (12), resultados (12), bibliografica (11)
 
 **Trabalhos:**
    - id 92 (2017): O EMPRÉSTIMO MODAL RECORRENTE NO POP ROCK DOS ANOS 1980
@@ -89,7 +89,7 @@ Corpus: 338 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
 ### Matemática, 15 TCCs · descritivo (sem LDA)
 *N insuficiente para modelagem de tópicos; reporta-se a frequência documental dos termos e a lista de trabalhos.*
 
-**Termos mais recorrentes (nº de TCCs):** teoria (14), acoes (14), situacoes (14), problema (14), atividade (14), estudantes (13), galperin (13), resolucao (13), fundamental (11), processo (11), matematica (11), formacao (10), mentais (10), analisar (10), conteudo (10)
+**Termos mais recorrentes (nº de TCCs):** problema (14), atividade (14), acoes (14), situacoes (14), teoria (14), galperin (13), estudantes (13), resolucao (13), fundamental (11), matematica (11), processo (11), analisar (10), formacao (10), conteudo (10), mentais (10)
 
 **Trabalhos:**
    - id 4 (2016): A APRENDIZAGEM DA ATIVIDADE DE SITUAÇÕES PRO-BLEMA EM SISTEMA DE EQUAÇÕES LINEARES FUNDA-M
@@ -108,10 +108,10 @@ Corpus: 338 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
    - id 120 (2024): A ATIVIDADE SITUAÇÕES PROBLEMA DISCENTE EM EXPRESSÕES ALGÉBRICAS EM ESTUDANTES DO 7° ANO N
    - id 119 (2026): CONTRIBUIÇÕES DA TEORIA HISTÓRICO-CULTURAL DA ATIVIDADE NA APRENDIZAGEM DA MATEMÁTICA: UM 
 
-### Ciências Biológicas, 24 TCCs · descritivo (sem LDA)
+### Ciências Biológicas, 25 TCCs · descritivo (sem LDA)
 *N insuficiente para modelagem de tópicos; reporta-se a frequência documental dos termos e a lista de trabalhos.*
 
-**Termos mais recorrentes (nº de TCCs):** roraima (14), resultados (12), vista (12), importancia (11), pode (10), analise (9), quanto (8), estudos (8), estado (8), tres (8), tambem (8), teve (8), atraves (8), dados (7), genero (7)
+**Termos mais recorrentes (nº de TCCs):** roraima (15), resultados (13), vista (13), pode (11), importancia (11), analise (10), estado (9), estudos (9), tambem (9), atraves (9), quanto (8), genero (8), processo (8), tres (8), amostras (8)
 
 **Trabalhos:**
    - id 282 (2007): PESQUISA DO VÍRUS DENGUE EM LARVAS DE Aedes aegypti E SUA DINÂMICA DE INFESTAÇÃO EM UM BAI
@@ -127,6 +127,7 @@ Corpus: 338 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
    - id 335 (2019): PERCEPÇÃO DA QUALIDADE DE VIDA E FATORES ESTRESSORES NO AMBIENTE DE TRABALHO DOS PROFESSOR
    - id 336 (2019): EDUCAÇÃO AMBIENTAL: PERCEPÇÃO E CONSCIÊNCIA DE ESTUDANTES DO ENSINO FUNDAMENTAL A RESPEITO
    - id 337 (2019): CULTIVO ORGÂNICO DE Brassica oleracea L. var. acephala DC. COMO ESTRATÉGIA EDUCATIVA ALIME
+   - id 346 (2019): CARACTERÍSTICAS EPIDEMIOLÓGICAS DAS NOTIFICAÇÕES PARA O VÍRUS ZIKA NO ESTADO DE RORAIMA DE
    - id 241 (2022): USO TRADICIONAL DE PLANTAS MEDICINAIS EM RORAIMA: UMA REVISÃO SISTEMÁTICA
    - id 242 (2022): A BOTÂNICA NO ENSINO MÉDIO: UMA ANÁLISE COMPARATIVA ENTRE TRÊS LIVROS DIDÁTICOS DE BIOLOGI
    - id 243 (2022): PERFIL EPIDEMIOLÓGICO E A DETECÇÃO DOS SOROTIPOS DE DENGUE CIRCULANTE EM RORAIMA ENTRE OS 
@@ -143,7 +144,7 @@ Corpus: 338 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
 ## 🔴 Camada listagem (N ínfimo, sem modelagem)
 
 ### Letras, 10 TCCs · listagem (sem análise)
-*N ínfimo (10): qualquer modelagem seria artefato (CLAUDE.md §1). Apenas identificação.*
+*N ínfimo (10): qualquer modelagem seria artefato. Apenas identificação.*
 
    - id 239 (2021): DO LIMÃO À LIMONADA: REFLEXÕES ACERCA DA CONTRIBUIÇÃO DO ENSINO REMOTO PARA O ENSINO PRESENCIAL DE LÍNGUA INGL
    - id 12 (2022): O LÉXICO RORAIMENSE NAS REDES SOCIAIS LOCAIS – KABOCANDO
@@ -157,7 +158,7 @@ Corpus: 338 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
    - id 238 (2023): PAPÉIS SOCIAIS DE GÊNERO NO LIVRO MULHERZINHAS DE LOUISA MAY ALCOTT
 
 ### LEDUCARR, 16 TCCs · listagem (sem análise)
-*N ínfimo (16): qualquer modelagem seria artefato (CLAUDE.md §1). Apenas identificação.*
+*N ínfimo (16): qualquer modelagem seria artefato. Apenas identificação.*
 
    - id 19 (2023): AS CONTRIBUIÇÕES DO PROGRAMA INSTITUCIONAL DE BOLSA DE INICIAÇÃO À DOCÊNCIA-PIBID PARA A FORMAÇÃO DOCENTE DOS 
    - id 189 (2023): EDUCAÇÃO ESCOLAR INDÍGENA E A GARANTIA À INTERCULTURALIDADE: uma análise a partir da Escola Estadual Indígena 
@@ -175,3 +176,12 @@ Corpus: 338 TCCs. Tratamento conforme o N de cada curso (LDA · descritivo · li
    - id 236 (2025): RELATO DE EXPERIÊNCIA COMO BOLSISTA DO PIBID – SUBPROJETO EDUCAÇÃO DO CAMPO
    - id 237 (2025): DEGRADAÇÃO DO IGARAPÉ ARRAIA NA COMUNIDADE INDÍGENA MANOÁ, MUNICÍPIO DE BONFIM-RR
    - id 190 (2026): HISTÓRIA DA ESCOLA ESTADUAL INDÍGENA SIMINIYO’ NA COMUNIDADE INDÍGENA CANTAGALO, MUNICÍPIO DE PACARAIMA-RR
+
+### Artes Visuais, 5 TCCs · listagem (sem análise)
+*N ínfimo (5): qualquer modelagem seria artefato. Apenas identificação.*
+
+   - id 341 (2014): A INSERÇÃO DA PERFORMANCE ART NO CENÁRIO ARTÍSTICO DAS ARTES VISUAIS DE BOA VISTA/RR
+   - id 342 (2014): ANIMAÇÃO EXPERIMENTAL
+   - id 343 (2014): ARTE EDUCAÇÃO: o estudo das inteligências múltiplas nas atividades didático-pedagógicas
+   - id 344 (2014): ENSINO/APRENDIZAGEM DAS ARTES VISUAIS: um olhar para o PIBID e os estágios curriculares supervisionados.
+   - id 345 (2014): O EROTISMO DO CORPO NAS PERFORMANCES DE BERNA REALE
