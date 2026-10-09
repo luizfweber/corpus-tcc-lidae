@@ -1449,9 +1449,11 @@ if secao == "Registros faltantes":
         st.stop()
 
     # 2) ano de saída (colação)
+    # "(todos os anos)" mostra a lista completa do curso, com o ano na tabela.
     anos = sorted(faltantes_g["ano_saida"].dropna().astype(int).unique(), reverse=True)
-    ano = c2.selectbox("Ano de saída (colação)", anos, key="rf_ano")
-    fa = faltantes_g[faltantes_g["ano_saida"] == ano]
+    ano = c2.selectbox("Ano de saída (colação)", ["(todos os anos)"] + anos, key="rf_ano")
+    todos_anos = ano == "(todos os anos)"
+    fa = faltantes_g if todos_anos else faltantes_g[faltantes_g["ano_saida"] == ano]
 
     # 3) semestre
     sems = sorted(fa["sem_saida"].dropna().unique())
@@ -1459,22 +1461,31 @@ if secao == "Registros faltantes":
     if sem != "(todos)":
         fa = fa[fa["sem_saida"] == sem.rstrip("º")]
 
-    rotulo = f"{g} · {ano}" + (f".{sem.rstrip('º')}" if sem != "(todos)" else "")
+    if todos_anos:
+        rotulo = f"{g} · todos os anos" + (f" · {sem} semestre" if sem != "(todos)" else "")
+    else:
+        rotulo = f"{g} · {ano}" + (f".{sem.rstrip('º')}" if sem != "(todos)" else "")
     st.markdown(f"### {len(fa)} egresso(s) sem TCC catalogado, {rotulo}")
 
     fa = fa.copy()
     fa["titulo"] = fa["titulo"].fillna("")   # evita "None" na tabela
-    # Sem coluna "Saída": ano e semestre já vêm dos seletores acima (redundante).
-    show = (fa[["pessoa_nome", "curso_nome", "titulo"]]
-            .rename(columns={"pessoa_nome": "Egresso",
-                             "curso_nome": "Curso/habilitação",
-                             "titulo": "Título no sistema (se houver)"})
-            .sort_values("Egresso").reset_index(drop=True))
+    # Com um ano escolhido, a coluna "Saída" seria redundante com os seletores.
+    # Com todos os anos, ela entra e a lista vem do mais recente ao mais antigo.
+    cols = ["pessoa_nome", "curso_nome", "titulo"]
+    if todos_anos:
+        fa["saida"] = (fa["ano_saida"].astype("Int64").astype(str) + "."
+                       + fa["sem_saida"].fillna("?").astype(str))
+        cols = ["saida"] + cols
+    show = fa[cols].rename(columns={"saida": "Saída", "pessoa_nome": "Egresso",
+                                    "curso_nome": "Curso/habilitação",
+                                    "titulo": "Título no sistema (se houver)"})
+    show = (show.sort_values(["Saída", "Egresso"], ascending=[False, True])
+            if todos_anos else show.sort_values("Egresso")).reset_index(drop=True)
     show.index = show.index + 1
     st.dataframe(show, use_container_width=True)
     st.download_button("⬇️ Baixar esta lista (CSV)",
                        show.to_csv(index=False).encode("utf-8"),
-                       file_name=f"faltantes_{g}_{ano}.csv", mime="text/csv")
+                       file_name=f"faltantes_{g}_{'todos' if todos_anos else ano}.csv", mime="text/csv")
 
     # resumo do curso (todos os anos)
     tot = len(eg); col = int(eg["_coletado"].sum()); falt = tot - col
