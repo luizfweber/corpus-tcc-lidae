@@ -2056,6 +2056,51 @@ TEMATICAS = {
             "Qualidade da água e ambiente": [246, 281],
         },
     },
+    "Matemática": {
+        "arquivo": "analise_tematica_matematica.md",
+        "eixos": {
+            "ASP Discente (Galperin, Talízina e Majmutov)": [120, 121, 122, 123, 124, 125, 126],
+            "ASP fundamentada em Galperin": [1, 2, 4, 18, 128],
+            "Estudos sobre o próprio método": [119, 127],
+            "Educação especial e Libras": [3],
+        },
+    },
+    "LEDUCARR — Ciências Humanas e Sociais": {
+        "arquivo": "analise_tematica_leducarr_humanas.md",
+        "eixos": {
+            # 129 e 186: provável duplicata da fonte, mantida e sinalizada no .md.
+            "Escola do campo: condições, evasão e EJA": [129, 186, 188, 193],
+            "Educação escolar indígena e autonomia": [189, 190],
+            "Formação docente: PIBID e Residência Pedagógica": [19, 191],
+            "Pontuais: Geografia e literatura": [187, 192],
+        },
+    },
+    "LEDUCARR — Ciências da Natureza e Matemática": {
+        "arquivo": "analise_tematica_leducarr_natureza.md",
+        "eixos": {
+            "Ensino de matemática: jogos, lúdico e literatura": [214, 216, 236],
+            "Educação ambiental e ambiente local": [218, 237],
+            "Ensino de ciências em escola indígena": [215],
+        },
+    },
+    "Letras": {
+        "arquivo": "analise_tematica_letras.md",
+        "eixos": {
+            # 12/148 e 14/238: prováveis duplicatas da fonte, sinalizadas no .md.
+            "Linguística: léxico, variação e metáfora": [12, 16, 148, 240],
+            "Literatura, gênero e sociedade": [14, 238],
+            "Ensino de línguas": [13, 239],
+            "Pontuais: tradução e saúde mental": [15, 17],
+        },
+    },
+    "Artes Visuais": {
+        "arquivo": "analise_tematica_artes_visuais.md",
+        "eixos": {
+            "Performance e corpo": [341, 345],
+            "Ensino de artes e formação docente": [343, 344],
+            "Linguagens visuais: animação": [342],
+        },
+    },
 }
 
 if secao == "Análise temática por curso":
@@ -2075,8 +2120,8 @@ if secao == "Análise temática por curso":
         + ", ".join(TEMATICAS.keys()) + ". "
         + (f"Ainda sem análise temática: {', '.join(_sem_tem)} "
            f"({int((~df['id'].isin(_ids_tem)).sum())} TCCs). "
-           if _sem_tem else "")
-        + "Os demais serão acrescentados conforme a leitura for redigida.")
+           "Serão acrescentados conforme a leitura for redigida."
+           if _sem_tem else "Todos os TCCs do corpus estão classificados."))
     info = TEMATICAS[sel_tem]
     _pt = BASE / "outputs" / "analise" / info["arquivo"]
     texto = _pt.read_text(encoding="utf-8") if _pt.exists() else ""
@@ -2099,11 +2144,9 @@ if secao == "Análise temática por curso":
     # Trava de consistência: avisa se os eixos deixarem de refletir o corpus
     # (ex.: chegaram TCCs novos e a leitura ainda não foi atualizada, ou um id
     # ficou em dois eixos). Sem isso o gráfico pode divergir em silêncio.
-    _fonte_curso = {"Insikiran — Ciências da Natureza": "Insikiran – Ciências da Natureza",
-                    "Insikiran — Ciências Sociais": "Insikiran – Ciências Sociais",
-                    "Insikiran — Comunicação e Artes": "Insikiran – Comunicação e Artes"}
-    _n_corpus = int((df["curso_fonte"] == _fonte_curso[sel_tem]).sum()
-                    if sel_tem in _fonte_curso else (df["grupo_tcc"] == sel_tem).sum())
+    # Chave por habilitação (curso_det) quando existe; senão, o grupo inteiro.
+    _col = "curso_det" if (df["curso_det"] == sel_tem).any() else "grupo_tcc"
+    _n_corpus = int((df[_col] == sel_tem).sum())
     _soma = sum(len(v) for v in eixos.values())
     if _soma != n_unicos:
         st.warning(f"⚠️ Inconsistência: a soma dos eixos ({_soma}) difere dos TCCs "
