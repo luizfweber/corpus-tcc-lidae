@@ -645,24 +645,27 @@ st.info("**Análise exploratória, não censitária.** Cada número é indício 
         "poucos TCCs (LEDUCARR, Letras) têm estatísticas instáveis.")
 
 # ── Navegação (menu lateral agrupado, com ícones) ──
-# Seções reais, referenciadas por NOME nas abas (reordenar aqui é seguro).
-SECOES = ["Distribuição", "Cobertura de Coleta", "Registros faltantes",
-          "Explorar TCCs",
-          "Tópicos (LDA)", "Análise temática por curso", "Sub-temas por curso (LDA)",
-          "Palavras-chave", "Menção indígena", "Povos & territórios",
-          "Orientadores", "Bancas", "Orientador × tema"]
-# Itens exibidos no menu, com separadores "---" entre os 4 grupos temáticos.
-# (cada "---" recebe ícone "" para manter o alinhamento com a lista de ícones.)
-_MENU_ITENS = ["Distribuição", "Cobertura de Coleta", "Registros faltantes",
-               "Explorar TCCs", "---",
-               "Tópicos (LDA)", "Análise temática por curso",
-               "Sub-temas por curso (LDA)", "Palavras-chave", "---",
-               "Menção indígena", "Povos & territórios", "---",
-               "Orientadores", "Bancas", "Orientador × tema"]
-_MENU_ICONS = ["bar-chart-line", "graph-up-arrow", "person-x", "search", "",
-               "diagram-3", "journal-text", "mortarboard", "tags", "",
-               "feather", "geo-alt", "",
-               "people", "people-fill", "grid-3x3-gap"]
+# LDA SUSPENSO (decisão de 09/10/2026): o projeto concentra a leitura temática
+# por curso. As abas que dependem dos tópicos do LDA saem do menu, mas o código
+# fica preservado; para reativar, basta LDA_ATIVO = True.
+LDA_ATIVO = False
+_ABAS_LDA = {"Tópicos (LDA)", "Sub-temas por curso (LDA)", "Orientador × tema"}
+
+# (rótulo, ícone); "---" separa os grupos temáticos do menu
+_MENU = [("Distribuição", "bar-chart-line"), ("Cobertura de Coleta", "graph-up-arrow"),
+         ("Registros faltantes", "person-x"), ("Explorar TCCs", "search"), ("---", ""),
+         ("Análise temática por curso", "journal-text"),
+         ("Tópicos (LDA)", "diagram-3"), ("Sub-temas por curso (LDA)", "mortarboard"),
+         ("Palavras-chave", "tags"), ("---", ""),
+         ("Menção indígena", "feather"), ("Povos & territórios", "geo-alt"), ("---", ""),
+         ("Orientadores", "people"), ("Bancas", "people-fill"),
+         ("Orientador × tema", "grid-3x3-gap")]
+if not LDA_ATIVO:
+    _MENU = [(r, i) for r, i in _MENU if r not in _ABAS_LDA]
+_MENU_ITENS = [r for r, _ in _MENU]
+_MENU_ICONS = [i for _, i in _MENU]
+# seções reais, referenciadas por NOME nas abas
+SECOES = [r for r in _MENU_ITENS if r != "---"]
 with st.sidebar:
     secao = option_menu(
         "Navegação", _MENU_ITENS,
@@ -2059,7 +2062,7 @@ if secao == "Análise temática por curso":
     st.subheader("Análise temática por curso")
     st.caption("Leitura temática **qualitativa** (por leitura, não por algoritmo) "
                "dos TCCs de cada curso, a partir de título + resumo + palavras-chave. "
-               "Complementa a aba *Sub-temas por curso (LDA)* (modelagem por camadas).")
+               "É a leitura temática principal do painel. A modelagem LDA está suspensa desde 09/10/2026.")
 
     sel_tem = st.selectbox("Curso / habilitação", list(TEMATICAS.keys()),
                            key="tematica_curso")

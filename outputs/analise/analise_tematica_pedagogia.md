@@ -10,8 +10,8 @@
 ## Como esta análise foi feita (método)
 
 Esta é uma **análise temática qualitativa, por leitura**, não um agrupamento
-automático. Os eixos **não** saíram de um algoritmo (como o LDA ou o k-means do
-restante do painel); emergiram de uma leitura sistemática dos TCCs, apoiada por
+automático. Os eixos **não** saíram de um algoritmo (como o k-means ou o LDA,
+este suspenso desde 09/10/2026); emergiram de uma leitura sistemática dos TCCs, apoiada por
 contagem de termos. O passo a passo:
 
 1. **Reunião do material textual.** Para cada TCC, juntei *título + resumo +
@@ -26,8 +26,8 @@ contagem de termos. O passo a passo:
 5. **Nomeação.** Cada grupo recebeu um nome que resume o foco comum.
 
 **Por que não LDA com N = 29?** Porque é pequeno demais para uma modelagem
-estatística estável (o pipeline trata Pedagogia na camada LDA intra-curso apenas
-com K=2 e estabilidade baixa). Nessa escala a leitura humana é mais confiável, 
+estatística estável (o teste de LDA intra-curso deu só K=2, com estabilidade
+baixa). Nessa escala a leitura humana é mais confiável, 
 mas é **interpretativa**: outro leitor poderia agrupar de forma ligeiramente
 diferente. Daí ser **indício, não classificação fechada** (análise exploratória).
 

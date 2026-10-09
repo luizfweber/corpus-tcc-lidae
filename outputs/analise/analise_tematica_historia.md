@@ -10,8 +10,8 @@
 ## Como esta análise foi feita (método)
 
 Esta é uma análise temática qualitativa, por leitura, não um agrupamento
-automático. Os eixos não saíram de um algoritmo (como o LDA ou o k-means do
-restante do painel); emergiram de uma leitura sistemática dos TCCs, apoiada por
+automático. Os eixos não saíram de um algoritmo (como o k-means ou o LDA,
+este suspenso desde 09/10/2026); emergiram de uma leitura sistemática dos TCCs, apoiada por
 contagem de termos. O passo a passo:
 
 1. Reunião do material textual: título mais resumo mais palavras-chave.
@@ -21,8 +21,8 @@ contagem de termos. O passo a passo:
 4. Agrupamento indutivo: os eixos emergiram do agrupamento.
 5. Nomeação de cada grupo.
 
-Com 130 TCCs, o curso é grande o bastante para a LDA intra-curso (ver aba
-Sub-temas por curso), mas a leitura capta nuances que o modelo dilui. É
+Com 130 TCCs, o curso comportaria uma LDA intra-curso. A leitura humana, porém,
+capta nuances que o modelo dilui. A LDA está suspensa no painel desde 09/10/2026. É
 interpretativa: outro leitor poderia agrupar de forma diferente. Indício, não
 classificação fechada (análise exploratória).
 

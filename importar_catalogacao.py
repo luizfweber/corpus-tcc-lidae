@@ -28,9 +28,10 @@ O que este script faz (parte MECÂNICA, reproduzível):
      conferência manual (fuzzy no limiar, ou sem correspondência na base).
 
 DEPOIS deste script (passos que exigem JULGAMENTO, feitos à parte):
-  - python3 analise_corpus.py        (recalcula tópicos, clusters, menção indígena)
-  - re-curar rótulos em TOPICOS (dashboard.py) a partir dos termos impressos
-  - categorizar cursos novos em analise_por_curso.py (LDA/descritivo/listagem)
+  - python3 analise_corpus.py        (clusters e menção indígena; LDA suspenso)
+  - classificar os novos TCCs nos eixos de TEMATICAS (dashboard.py) e
+    atualizar o texto temático do curso (obrigatório)
+  - categorizar cursos novos em analise_por_curso.py (descritivo/listagem)
     e rodá-lo
   - validar (252==252, sem colunas .1, habilitações sem fallback, 0 residuos),
     reiniciar o dashboard e publicar
@@ -327,7 +328,8 @@ def main():
     pd.concat([con, add], ignore_index=True).to_csv(CONSOLIDADO, index=False)
     print(f"\n✓ Anexados {len(add)} TCCs (ids {next_id}–{next_id+len(add)-1}). "
           f"Backup salvo em outputs/backups/.")
-    print("Próximos passos: rode analise_corpus.py, re-cure os rótulos TOPICOS, "
+    print("Próximos passos: rode analise_corpus.py, classifique os novos TCCs nos eixos "
+          "de TEMATICAS, "
           "rode analise_por_curso.py, valide e publique (ver PROTOCOLO_DADOS.md).")
 
 

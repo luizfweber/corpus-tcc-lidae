@@ -9,8 +9,8 @@
 
 A parte MECÂNICA (detectar duplicatas, limpar nomes, unificar grafias, anexar)
 é automatizada pelo script `importar_catalogacao.py`. A parte que exige
-JULGAMENTO (revisar nomes sinalizados, re-curar rótulos de tópicos, categorizar
-cursos novos) permanece com o pesquisador ou com a IA sob revisão, porque método
+JULGAMENTO (revisar nomes sinalizados, classificar os novos TCCs nos eixos da
+análise temática por curso) permanece com o pesquisador ou com a IA sob revisão, porque método
 é instrumento de leitura, não veredito (CLAUDE.md §4).
 
 ## Passo a passo
@@ -53,21 +53,24 @@ já limpas, com as colunas `banca_membro_1..4` geradas (orientador excluído).
 python3 analise_corpus.py
 ```
 
-Regenera o `corpus_tccs_analisado.csv` (lido pelo dashboard) com tópicos,
-clusters e menção indígena para todo o corpus. Anote os termos dos tópicos que
-o script imprime.
+Regenera o `corpus_tccs_analisado.csv` (lido pelo dashboard) com clusters e
+menção indígena para todo o corpus. A modelagem LDA está suspensa desde
+09/10/2026: o script não recalcula tópicos. Para reativá-la, rode com `--lda`.
 
-### 5. Re-curar os rótulos dos tópicos
+### 5. Classificar os novos TCCs na análise temática (OBRIGATÓRIO)
 
-Como o corpus mudou, os índices dos tópicos do LDA podem trocar. Atualizar o
-dicionário `TOPICOS` no `dashboard.py` a partir dos termos impressos no passo 4.
-Os rótulos são provisórios e pedem leitura qualitativa.
+A análise temática por curso é a leitura principal do painel. Para cada TCC
+novo, ler título, resumo e palavras-chave e atribuí-lo a **um único eixo** do
+seu curso, no dicionário `TEMATICAS` do `dashboard.py`. Atualizar também o
+texto do curso em `outputs/analise/analise_tematica_<curso>.md` (contagens por
+eixo, N e linha de conferência). Se o TCC não couber em nenhum eixo, registrar
+e discutir um eixo novo, sem forçar o encaixe. A trava do painel confere que a
+soma dos eixos é igual ao total do curso.
 
 ### 6. Categorizar cursos novos na análise por curso
 
 Se entrou um curso inédito (ex.: Ciências Biológicas), incluí-lo em
-`analise_por_curso.py` na camada certa (LDA, descritivo ou listagem, conforme o
-N) e rodar:
+`analise_por_curso.py` na camada certa (descritivo ou listagem, conforme o N) e rodar:
 
 ```
 python3 analise_por_curso.py
@@ -80,7 +83,8 @@ python3 analise_por_curso.py
 - Habilitações resolvem sem cair no fallback (LEDUCARR, Insikiran, Letras).
 - Zero nomes de banca suspeitos.
 - Anos plausíveis (o pipeline já descarta fora de 1990 a 2030).
-- Novos TCCs com tópico e cluster preenchidos.
+- Novos TCCs com cluster preenchido e classificados em um eixo temático.
+- Trava temática do painel sem alerta (soma dos eixos igual ao total do curso).
 
 ### 8. Reiniciar o dashboard e publicar
 

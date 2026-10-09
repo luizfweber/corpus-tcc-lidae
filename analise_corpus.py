@@ -2,11 +2,13 @@
 # -*- coding: utf-8 -*-
 """
 Análise exploratória do corpus de TCCs, LIDAE/UFRR
-Protocolo: descritiva → LDA → clustering → redes → temática indígena
+Protocolo: descritiva → [LDA, suspenso; --lda] → clustering → redes → temática indígena
 """
 import csv, re, unicodedata, warnings
 from collections import Counter, defaultdict
 from pathlib import Path
+import sys
+RODAR_LDA = "--lda" in sys.argv  # LDA suspenso por padrão
 
 import matplotlib
 matplotlib.use("Agg")
@@ -192,80 +194,89 @@ if top_orient:
 # ============================================================================
 # 3. LDA: MODELAGEM DE TÓPICOS
 # ============================================================================
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.decomposition import LatentDirichletAllocation
-
-textos = [r["texto"] for r in rows]
-vec = CountVectorizer(max_df=0.6, min_df=2, max_features=800)
-X = vec.fit_transform(textos)
-vocab = vec.get_feature_names_out()
-
-# testa K 4..8 (perplexidade só para registro/comparação)
-perps = {}
-modelos = {}
-for k in range(4, 9):
-    lda = LatentDirichletAllocation(n_components=k, random_state=42,
-                                    max_iter=30, learning_method="batch")
-    lda.fit(X)
-    perps[k] = lda.perplexity(X)
-    modelos[k] = lda
-
-# K FIXADO em 8 por decisão de leitura (granularidade fina: revela nichos como
-# história/gênero e etnobotânica). Perplexidade é INDÍCIO, não veredito (§4):
-# K=8 (498) fica perto do mínimo K=4 (491). Rótulos exigem revisão qualitativa.
-K_LDA = 8
-K_best = K_LDA
-print(f"  Perplexidades LDA: { {k: round(v,1) for k,v in perps.items()} }")
-print(f"  K escolhido (fixado por leitura): {K_best}  "
-      f"(perplexidade {perps[K_best]:.0f}; mínimo seria K={min(perps, key=perps.get)})")
-
-lda_final = modelos[K_best]
-termos_top = {}
-for t_idx, comp in enumerate(lda_final.components_):
-    top10 = [vocab[i] for i in comp.argsort()[-10:][::-1]]
-    termos_top[t_idx] = top10
-
-# rotulos propostos (ajustar manualmente se necessário)
-ROTULOS = {
-    0: "Tópico A", 1: "Tópico B", 2: "Tópico C",
-    3: "Tópico D", 4: "Tópico E", 5: "Tópico F",
-    6: "Tópico G", 7: "Tópico H",
-}
-
-print("\n── Tópicos LDA (rótulos APROXIMADOS, requerem revisão qualitativa) ──")
-for t, terms in termos_top.items():
-    print(f"  [{ROTULOS.get(t,'?')}] {', '.join(terms)}")
-
-# atribui tópico dominante
-doc_topic = lda_final.transform(X)
-for i, r in enumerate(rows):
-    r["topico_dom"] = int(doc_topic[i].argmax())
-    r["topico_prob"] = float(doc_topic[i].max())
-
-# heatmap tópico × grupo
+# LDA SUSPENSO por padrão (decisão de 09/10/2026): o projeto concentra a
+# análise temática por leitura. Para recalcular os tópicos: --lda
+textos = [r["texto"] for r in rows]   # usado pelo LDA e pelo clustering
 grupos_uniq = sorted(set(r["grupo"] for r in rows))
-n_top = lda_final.n_components
-mat = np.zeros((n_top, len(grupos_uniq)))
-for r in rows:
-    gi = grupos_uniq.index(r["grupo"])
-    mat[r["topico_dom"], gi] += 1
+if RODAR_LDA:
+    from sklearn.feature_extraction.text import CountVectorizer
+    from sklearn.decomposition import LatentDirichletAllocation
 
-fig, ax = plt.subplots(figsize=(11, 5))
-im = ax.imshow(mat, aspect="auto", cmap="YlOrRd")
-ax.set_xticks(range(len(grupos_uniq))); ax.set_xticklabels(grupos_uniq, rotation=35, ha="right")
-ax.set_yticks(range(n_top)); ax.set_yticklabels([ROTULOS.get(t,f"T{t}") for t in range(n_top)])
-plt.colorbar(im, ax=ax, label="Nº TCCs")
-ax.set_title(f"Distribuição de tópicos LDA (K={K_best}) por grupo de curso\n"
-             "INDÍCIO exploratório, rótulos requerem revisão qualitativa")
-for i in range(n_top):
-    for j in range(len(grupos_uniq)):
-        if mat[i,j] > 0:
-            ax.text(j, i, int(mat[i,j]), ha="center", va="center", fontsize=8,
-                    color="black" if mat[i,j] < mat.max()*0.6 else "white")
-plt.tight_layout()
-plt.savefig(OUT / "3_lda_topicos.png", dpi=150, bbox_inches="tight")
-plt.close()
-print("✓ 3_lda_topicos.png")
+    vec = CountVectorizer(max_df=0.6, min_df=2, max_features=800)
+    X = vec.fit_transform(textos)
+    vocab = vec.get_feature_names_out()
+
+    # testa K 4..8 (perplexidade só para registro/comparação)
+    perps = {}
+    modelos = {}
+    for k in range(4, 9):
+        lda = LatentDirichletAllocation(n_components=k, random_state=42,
+                                        max_iter=30, learning_method="batch")
+        lda.fit(X)
+        perps[k] = lda.perplexity(X)
+        modelos[k] = lda
+
+    # K FIXADO em 8 por decisão de leitura (granularidade fina: revela nichos como
+    # história/gênero e etnobotânica). Perplexidade é INDÍCIO, não veredito (§4):
+    # K=8 (498) fica perto do mínimo K=4 (491). Rótulos exigem revisão qualitativa.
+    K_LDA = 8
+    K_best = K_LDA
+    print(f"  Perplexidades LDA: { {k: round(v,1) for k,v in perps.items()} }")
+    print(f"  K escolhido (fixado por leitura): {K_best}  "
+          f"(perplexidade {perps[K_best]:.0f}; mínimo seria K={min(perps, key=perps.get)})")
+
+    lda_final = modelos[K_best]
+    termos_top = {}
+    for t_idx, comp in enumerate(lda_final.components_):
+        top10 = [vocab[i] for i in comp.argsort()[-10:][::-1]]
+        termos_top[t_idx] = top10
+
+    # rotulos propostos (ajustar manualmente se necessário)
+    ROTULOS = {
+        0: "Tópico A", 1: "Tópico B", 2: "Tópico C",
+        3: "Tópico D", 4: "Tópico E", 5: "Tópico F",
+        6: "Tópico G", 7: "Tópico H",
+    }
+
+    print("\n── Tópicos LDA (rótulos APROXIMADOS, requerem revisão qualitativa) ──")
+    for t, terms in termos_top.items():
+        print(f"  [{ROTULOS.get(t,'?')}] {', '.join(terms)}")
+
+    # atribui tópico dominante
+    doc_topic = lda_final.transform(X)
+    for i, r in enumerate(rows):
+        r["topico_dom"] = int(doc_topic[i].argmax())
+        r["topico_prob"] = float(doc_topic[i].max())
+
+    # heatmap tópico × grupo
+    n_top = lda_final.n_components
+    mat = np.zeros((n_top, len(grupos_uniq)))
+    for r in rows:
+        gi = grupos_uniq.index(r["grupo"])
+        mat[r["topico_dom"], gi] += 1
+
+    fig, ax = plt.subplots(figsize=(11, 5))
+    im = ax.imshow(mat, aspect="auto", cmap="YlOrRd")
+    ax.set_xticks(range(len(grupos_uniq))); ax.set_xticklabels(grupos_uniq, rotation=35, ha="right")
+    ax.set_yticks(range(n_top)); ax.set_yticklabels([ROTULOS.get(t,f"T{t}") for t in range(n_top)])
+    plt.colorbar(im, ax=ax, label="Nº TCCs")
+    ax.set_title(f"Distribuição de tópicos LDA (K={K_best}) por grupo de curso\n"
+                 "INDÍCIO exploratório, rótulos requerem revisão qualitativa")
+    for i in range(n_top):
+        for j in range(len(grupos_uniq)):
+            if mat[i,j] > 0:
+                ax.text(j, i, int(mat[i,j]), ha="center", va="center", fontsize=8,
+                        color="black" if mat[i,j] < mat.max()*0.6 else "white")
+    plt.tight_layout()
+    plt.savefig(OUT / "3_lda_topicos.png", dpi=150, bbox_inches="tight")
+    plt.close()
+    print("✓ 3_lda_topicos.png")
+else:
+    ROTULOS = {}
+    for r in rows:
+        r["topico_dom"] = ""
+        r["topico_prob"] = ""
+    print("  LDA suspenso: tópicos não recalculados (use --lda para ativar).")
 
 # ============================================================================
 # 4. CLUSTERING (TF-IDF + k-means)
@@ -358,36 +369,37 @@ try:
     print(f"\n  Orientadores com 2+ TCCs: {len(orient_recorrentes)} "
           f"({pct_recorrentes:.0f}% dos TCCs)")
 
-    # grafo orientador → tópico dominante (mais frequente)
-    G_or = nx.Graph()
-    for o, ts in orient_recorrentes.items():
-        top_dom = Counter(ts).most_common(1)[0][0]
-        rot = ROTULOS.get(top_dom, f"T{top_dom}")
-        G_or.add_edge(o, rot, weight=len(ts))
+    if RODAR_LDA:  # a rede liga orientador ao tópico do LDA
+        # grafo orientador → tópico dominante (mais frequente)
+        G_or = nx.Graph()
+        for o, ts in orient_recorrentes.items():
+            top_dom = Counter(ts).most_common(1)[0][0]
+            rot = ROTULOS.get(top_dom, f"T{top_dom}")
+            G_or.add_edge(o, rot, weight=len(ts))
 
-    fig, ax = plt.subplots(figsize=(12, 7))
-    pos = nx.spring_layout(G_or, seed=42, k=2.5)
-    orient_nodes = [n for n in G_or.nodes if n not in ROTULOS.values()]
-    topico_nodes = [n for n in G_or.nodes if n in ROTULOS.values()]
-    nx.draw_networkx_nodes(G_or, pos, nodelist=orient_nodes,
-                           node_color=PALETA[0], node_size=600, ax=ax)
-    nx.draw_networkx_nodes(G_or, pos, nodelist=topico_nodes,
-                           node_color=PALETA[2], node_size=900, ax=ax)
-    nx.draw_networkx_labels(G_or, pos, font_size=7, ax=ax)
-    edges = G_or.edges(data=True)
-    nx.draw_networkx_edges(G_or, pos,
-                           width=[d["weight"]*0.8 for _,_,d in edges],
-                           alpha=0.6, ax=ax)
-    legend = [mpatches.Patch(color=PALETA[0], label="Orientador (2+ TCCs)"),
-              mpatches.Patch(color=PALETA[2], label="Tópico dominante")]
-    ax.legend(handles=legend, loc="upper left", fontsize=8)
-    ax.set_title("Rede orientação → tópico dominante\n"
-                 "Espessura = nº TCCs | INDÍCIO, nomes podem ter variações residuais")
-    ax.axis("off")
-    plt.tight_layout()
-    plt.savefig(OUT / "5a_rede_orientacao.png", dpi=150, bbox_inches="tight")
-    plt.close()
-    print("✓ 5a_rede_orientacao.png")
+        fig, ax = plt.subplots(figsize=(12, 7))
+        pos = nx.spring_layout(G_or, seed=42, k=2.5)
+        orient_nodes = [n for n in G_or.nodes if n not in ROTULOS.values()]
+        topico_nodes = [n for n in G_or.nodes if n in ROTULOS.values()]
+        nx.draw_networkx_nodes(G_or, pos, nodelist=orient_nodes,
+                               node_color=PALETA[0], node_size=600, ax=ax)
+        nx.draw_networkx_nodes(G_or, pos, nodelist=topico_nodes,
+                               node_color=PALETA[2], node_size=900, ax=ax)
+        nx.draw_networkx_labels(G_or, pos, font_size=7, ax=ax)
+        edges = G_or.edges(data=True)
+        nx.draw_networkx_edges(G_or, pos,
+                               width=[d["weight"]*0.8 for _,_,d in edges],
+                               alpha=0.6, ax=ax)
+        legend = [mpatches.Patch(color=PALETA[0], label="Orientador (2+ TCCs)"),
+                  mpatches.Patch(color=PALETA[2], label="Tópico dominante")]
+        ax.legend(handles=legend, loc="upper left", fontsize=8)
+        ax.set_title("Rede orientação → tópico dominante\n"
+                     "Espessura = nº TCCs | INDÍCIO, nomes podem ter variações residuais")
+        ax.axis("off")
+        plt.tight_layout()
+        plt.savefig(OUT / "5a_rede_orientacao.png", dpi=150, bbox_inches="tight")
+        plt.close()
+        print("✓ 5a_rede_orientacao.png")
 
     # 5b. Rede de bancas (co-participação)
     def extrai_membros(campo):
@@ -550,13 +562,16 @@ for g in grupos_ord:
     else:
         relatorio += f"   {g}: sem dados de páginas\n"
 
-relatorio += f"""
+if RODAR_LDA:
+    relatorio += f"""
 3. LDA (K={K_best} tópicos, menor perplexidade)
    Perplexidades testadas: { {k: round(v,1) for k,v in perps.items()} }
    ATENÇÃO: rótulos abaixo são aproximados e requerem revisão qualitativa.
 """
-for t, terms in termos_top.items():
-    relatorio += f"   [{ROTULOS.get(t,'?')}]: {', '.join(terms)}\n"
+    for t, terms in termos_top.items():
+        relatorio += f"   [{ROTULOS.get(t,'?')}]: {', '.join(terms)}\n"
+else:
+    relatorio += "\n3. LDA: suspenso (decisão de 09/10/2026). Ver a análise temática por curso.\n"
 
 relatorio += f"""
 4. CLUSTERING (k={K_clust}, silhueta={silhs[K_clust]:.3f})

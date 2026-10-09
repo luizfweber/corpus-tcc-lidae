@@ -19,17 +19,7 @@ Data: 2026-06-16 | Piloto: 344 TCCs | Natureza: exploratória, não censitária
    Letras: mediana=40 | min=14 | max=61 | n=10
    Artes Visuais: mediana=49 | min=45 | max=77 | n=5
 
-3. LDA (K=8 tópicos, menor perplexidade)
-   Perplexidades testadas: {4: 493.2, 5: 503.5, 6: 491.1, 7: 499.1, 8: 494.5}
-   ATENÇÃO: rótulos abaixo são aproximados e requerem revisão qualitativa.
-   [Tópico A]: educacao, formacao, estagio, pedagogica, roraima, ufrr, experiencia, docente, processo, projeto
-   [Tópico B]: indigena, comunidade, indigenas, educacao, conhecimentos, tradicional, saude, estadual, tambem, plantas
-   [Tópico C]: educacao, musica, musical, escolas, vista, contexto, pratica, alem, tambem, praticas
-   [Tópico D]: decada, artes, analise, guerra, suicidio, artistico, performance, visuais, vista, cenario
-   [Tópico E]: roraima, atividade, problema, territorio, situacoes, acoes, federal, regiao, vista, desenvolvimento
-   [Tópico F]: historia, analise, roraima, vista, branco, processo, mulheres, indigenas, social, seculo
-   [Tópico G]: indigena, matematica, lingua, jogos, estadual, leitura, comunidade, fundamental, proposta, didatico
-   [Tópico H]: educacao, cultura, indigena, escolar, indigenas, comunidade, cultural, roraima, local, artesanato
+3. LDA: suspenso (decisão de 09/10/2026). Ver a análise temática por curso.
 
 4. CLUSTERING (k=5, silhueta=0.034)
    Silhueta baixa é esperada em corpus pequeno e texto curto, indica

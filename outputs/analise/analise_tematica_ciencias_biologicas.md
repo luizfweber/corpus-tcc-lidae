@@ -10,8 +10,8 @@
 ## Como esta análise foi feita (método)
 
 Esta é uma análise temática qualitativa, por leitura, não um agrupamento
-automático. Os eixos não saíram de um algoritmo (como o LDA ou o k-means do
-restante do painel); emergiram de uma leitura sistemática dos TCCs, apoiada por
+automático. Os eixos não saíram de um algoritmo (como o k-means ou o LDA,
+este suspenso desde 09/10/2026); emergiram de uma leitura sistemática dos TCCs, apoiada por
 contagem de termos. O passo a passo:
 
 1. Reunião do material textual: para cada TCC, título mais resumo mais

@@ -5,16 +5,15 @@
 > Fonte: cadastro dos TCCs realizado pelos pesquisadores do NECPF.
 >
 > **Natureza da análise:** com N = 27, não se aplica modelagem estatística
-> de tópicos (o pipeline classifica Música na camada "descritiva", sem LDA
-> intra-curso). O agrupamento abaixo é **por leitura**, é indício e não
+> de tópicos. O agrupamento abaixo é **por leitura**, é indício e não
 > classificação fechada. Cada TCC é contado em **um único eixo** (o foco
 > principal), e as afinidades entre eixos são sinalizadas no texto.
 
 ## Como esta análise foi feita (método)
 
 Esta é uma **análise temática qualitativa, por leitura**, não um agrupamento
-automático. Os 6 eixos **não** saíram de um algoritmo (como o LDA ou o k-means
-usados no resto do painel); emergiram de uma leitura sistemática dos 27 TCCs,
+automático. Os 6 eixos **não** saíram de um algoritmo (como o k-means ou o LDA,
+este suspenso desde 09/10/2026); emergiram de uma leitura sistemática dos 27 TCCs,
 apoiada por contagem de termos. O passo a passo:
 
 1. **Reunião do material textual.** Para cada TCC, juntei *título + resumo +
@@ -33,16 +32,14 @@ apoiada por contagem de termos. O passo a passo:
 5. **Nomeação.** Cada grupo recebeu um nome que resume o foco comum.
 
 **Por que não LDA/clusters aqui?** Porque N = 27 é pequeno demais para uma
-modelagem estatística estável (por isso o pipeline coloca Música na camada
-"descritiva", sem LDA intra-curso). Nessa escala, a leitura humana é mais
+modelagem estatística estável. Nessa escala, a leitura humana é mais
 confiável, mas é **interpretativa**: outro leitor poderia agrupar de forma
 ligeiramente diferente, e há afinidades entre eixos. Daí serem **indício, não
 classificação fechada** (análise exploratória).
 
-> Diferença em relação à aba "Tópicos (LDA)" do painel: lá, os tópicos são
-> gerados por **algoritmo** sobre os 338 TCCs (K fixado em 8); aqui, os eixos
-> são fruto de **leitura** dos 27 TCCs de Música, dois instrumentos distintos,
-> ambos exploratórios.
+> Os eixos são fruto de **leitura** dos 27 TCCs de Música, não de algoritmo.
+> A modelagem LDA, que gerava tópicos para todo o corpus, está suspensa no
+> painel desde 09/10/2026.
 
 ## 1. Panorama
 
