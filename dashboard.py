@@ -2085,6 +2085,7 @@ TEMATICAS = {
             "Formação docente: PIBID e Residência Pedagógica": [19, 191],
             "Pontuais: Geografia e literatura": [187, 192],
         },
+        "duplicatas": [(129, 186)],
     },
     "LEDUCARR — Ciências da Natureza e Matemática": {
         "arquivo": "analise_tematica_leducarr_natureza.md",
@@ -2103,6 +2104,7 @@ TEMATICAS = {
             "Ensino de línguas": [13, 239],
             "Pontuais: tradução e saúde mental": [15, 17],
         },
+        "duplicatas": [(12, 148), (14, 238)],
     },
     "Artes Visuais": {
         "arquivo": "analise_tematica_artes_visuais.md",
@@ -2114,51 +2116,98 @@ TEMATICAS = {
     },
 }
 
+def _n_corpus_tem(chave):
+    """TCCs do corpus no recorte da leitura: habilitação (curso_det) quando a
+    chave é uma habilitação; senão, o grupo inteiro (ex.: Letras)."""
+    col = "curso_det" if (df["curso_det"] == chave).any() else "grupo_tcc"
+    return int((df[col] == chave).sum())
+
+
+def _conferencia_tematica():
+    """Uma linha por curso: corpus × leitura. Calculada a cada carga, para que
+    a aba acuse sozinha quando chegar catalogação nova."""
+    linhas = []
+    for chave, info in TEMATICAS.items():
+        ids = [i for v in info["eixos"].values() for i in v]
+        n_corpus = _n_corpus_tem(chave)
+        n_dup = len(info.get("duplicatas", []))
+        ok = len(ids) == len(set(ids)) == n_corpus
+        linhas.append({
+            "Curso / habilitação": chave,
+            "TCCs no corpus": n_corpus,
+            "TCCs nos eixos": len(set(ids)),
+            "Eixos": len(info["eixos"]),
+            "Prováveis duplicatas": n_dup,
+            "Trabalhos distintos": len(set(ids)) - n_dup,
+            "Confere": "✅" if ok else "⚠️",
+        })
+    return pd.DataFrame(linhas)
+
+
 if secao == "Análise temática por curso":
     st.subheader("Análise temática por curso")
     st.caption("Leitura temática **qualitativa** (por leitura, não por algoritmo) "
                "dos TCCs de cada curso, a partir de título + resumo + palavras-chave. "
                "É a leitura temática principal do painel. A modelagem LDA está suspensa desde 09/10/2026.")
 
+    # ── Conferência geral: corpus × leitura ──
+    conf = _conferencia_tematica()
+    _ids_tem = {i for _c in TEMATICAS.values() for _v in _c["eixos"].values() for i in _v}
+    _fora = df.loc[~df["id"].isin(_ids_tem)]
+    c1, c2, c3 = st.columns(3)
+    c1.metric("TCCs no corpus", N_TOTAL)
+    c2.metric("TCCs classificados em eixos", len(_ids_tem & set(df["id"])))
+    c3.metric("Cursos e habilitações lidos", len(TEMATICAS))
+    if len(_fora):
+        st.warning(f"⚠️ {len(_fora)} TCCs ainda sem eixo temático: "
+                   + ", ".join(sorted(_fora["curso_det"].dropna().unique()))
+                   + ". A leitura precisa ser atualizada.")
+    with st.expander("Conferência: TCCs do corpus × TCCs classificados, por curso",
+                     expanded=bool((conf["Confere"] != "✅").any())):
+        st.dataframe(conf, hide_index=True, use_container_width=True)
+        st.caption("Cada TCC entra em **um único eixo**. *Confere* = sem TCC repetido "
+                   "entre eixos e soma dos eixos igual ao corpus. *Prováveis duplicatas* "
+                   "são registros que parecem o mesmo trabalho cadastrado duas vezes. "
+                   "Eles seguem contados, como estão na fonte, e sinalizados no texto.")
+
+    # ── Curso selecionado ──
+    st.markdown("---")
     sel_tem = st.selectbox("Curso / habilitação", list(TEMATICAS.keys()),
                            key="tematica_curso")
-    # Cobertura da leitura: calculada, para a legenda não envelhecer quando um
-    # curso novo ganhar análise ou quando chegar catalogação de curso ainda sem.
-    _ids_tem = {i for _c in TEMATICAS.values() for _v in _c["eixos"].values() for i in _v}
-    _sem_tem = sorted(df.loc[~df["id"].isin(_ids_tem), "grupo_tcc"].dropna().unique())
-    st.caption(
-        f"Leitura redigida para {len(TEMATICAS)} cursos/habilitações: "
-        + ", ".join(TEMATICAS.keys()) + ". "
-        + (f"Ainda sem análise temática: {', '.join(_sem_tem)} "
-           f"({int((~df['id'].isin(_ids_tem)).sum())} TCCs). "
-           "Serão acrescentados conforme a leitura for redigida."
-           if _sem_tem else "Todos os TCCs do corpus estão classificados."))
     info = TEMATICAS[sel_tem]
     _pt = BASE / "outputs" / "analise" / info["arquivo"]
     texto = _pt.read_text(encoding="utf-8") if _pt.exists() else ""
-
-    # ── Gráfico-resumo dos eixos temáticos ──
     eixos = info["eixos"]
-    de = pd.DataFrame({"Eixo temático": list(eixos.keys()),
-                       "TCCs": [len(v) for v in eixos.values()]}).sort_values("TCCs")
-    fig = px.bar(de, x="TCCs", y="Eixo temático", orientation="h", text="TCCs",
-                 color_discrete_sequence=[PALETA[3]])
-    fig.update_layout(showlegend=False, height=max(320, len(de) * 46),
-                      xaxis_title="Nº de TCCs", yaxis_title="")
-    st.plotly_chart(fig, use_container_width=True)
-    n_unicos = len({i for ids in eixos.values() for i in ids})
-    st.caption(f"{n_unicos} TCCs de {sel_tem}. Cada trabalho entra em **um único "
-               "eixo** (o foco principal do resumo), então a soma das barras é "
-               "igual ao total do curso. Trabalhos que tocam mais de um tema "
-               "estão comentados na análise completa.")
-
-    # Trava de consistência: avisa se os eixos deixarem de refletir o corpus
-    # (ex.: chegaram TCCs novos e a leitura ainda não foi atualizada, ou um id
-    # ficou em dois eixos). Sem isso o gráfico pode divergir em silêncio.
-    # Chave por habilitação (curso_det) quando existe; senão, o grupo inteiro.
-    _col = "curso_det" if (df["curso_det"] == sel_tem).any() else "grupo_tcc"
-    _n_corpus = int((df[_col] == sel_tem).sum())
+    _n_corpus = _n_corpus_tem(sel_tem)
     _soma = sum(len(v) for v in eixos.values())
+    n_unicos = len({i for ids in eixos.values() for i in ids})
+
+    de = pd.DataFrame({"Eixo temático": list(eixos.keys()),
+                       "TCCs": [len(v) for v in eixos.values()]})
+    de["%"] = (100 * de["TCCs"] / max(_soma, 1)).round(1)
+    de["rótulo"] = de.apply(lambda r: f"{r['TCCs']} ({r['%']:.0f}%)".replace(".", ","), axis=1)
+    de = de.sort_values("TCCs")
+    fig = px.bar(de, x="TCCs", y="Eixo temático", orientation="h", text="rótulo",
+                 color_discrete_sequence=[PALETA[3]],
+                 hover_data={"rótulo": False, "%": True})
+    fig.update_traces(textposition="outside", cliponaxis=False)
+    fig.update_layout(showlegend=False, height=max(320, len(de) * 46),
+                      xaxis_title="Nº de TCCs", yaxis_title="",
+                      xaxis_range=[0, de["TCCs"].max() * 1.25],
+                      title=f"{sel_tem}: {_soma} TCCs em {len(eixos)} eixos")
+    st.plotly_chart(fig, use_container_width=True)
+
+    _dups = info.get("duplicatas", [])
+    st.caption(
+        f"Soma das barras: {_soma} TCCs. Corpus de {sel_tem}: {_n_corpus} TCCs. "
+        "Cada trabalho entra em **um único eixo** (o foco principal do resumo). "
+        + (("Há 1 provável duplicata da fonte " if len(_dups) == 1 else
+            f"Há {len(_dups)} prováveis duplicatas da fonte ")
+           + f"(ids {'; '.join(f'{a} e {b}' for a, b in _dups)}): contando cada trabalho "
+           f"uma vez, são {n_unicos - len(_dups)} trabalhos distintos. "
+           if _dups else ""))
+
+    # Trava de consistência: avisa se os eixos deixarem de refletir o corpus.
     if _soma != n_unicos:
         st.warning(f"⚠️ Inconsistência: a soma dos eixos ({_soma}) difere dos TCCs "
                    f"distintos classificados ({n_unicos}). Algum trabalho está em "
@@ -2168,7 +2217,21 @@ if secao == "Análise temática por curso":
                    f"{_n_corpus} em {sel_tem}. A análise temática precisa ser "
                    "atualizada com os trabalhos novos.")
 
-    # ── Metodologia (logo abaixo do gráfico) ──
+    # ── TCCs de cada eixo (lista consultável) ──
+    _lin = [{"id": i, "Eixo temático": e} for e, ids in eixos.items() for i in ids]
+    _tab = pd.DataFrame(_lin).merge(df[["id", "titulo", "autor", "ano_num"]],
+                                    on="id", how="left")
+    _tab["titulo"] = _tab["titulo"].astype(str).str.replace(r"\s+", " ", regex=True)
+    _tab = _tab.rename(columns={"titulo": "Título", "autor": "Autor", "ano_num": "Ano"})
+    _eixo_f = st.selectbox("Ver os TCCs do eixo", ["Todos"] + list(eixos.keys()),
+                           key="tematica_eixo")
+    if _eixo_f != "Todos":
+        _tab = _tab[_tab["Eixo temático"] == _eixo_f]
+    st.dataframe(_tab[["id", "Eixo temático", "Título", "Autor", "Ano"]],
+                 hide_index=True, use_container_width=True,
+                 column_config={"Ano": st.column_config.NumberColumn(format="%d")})
+
+    # ── Metodologia ──
     metodo = _secao_md(texto, "como esta análise foi feita")
     if metodo:
         st.markdown("---")
